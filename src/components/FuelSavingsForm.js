@@ -4,9 +4,8 @@ import FuelSavingsResults from './FuelSavingsResults';
 import FuelSavingsTextInput from './FuelSavingsTextInput';
 import {fuelSavings} from '../types';
 
-const FuelSavingsForm = ({fuelSavings, onSaveClick, onChange}) => (
+const FuelSavingsForm = ({fuelSavings, onClearClick, onSaveClick, onChange}) => (
   <div>
-    <h2>Fuel Savings Analysis</h2>
     <table>
       <tbody>
         <tr>
@@ -35,7 +34,8 @@ const FuelSavingsForm = ({fuelSavings, onSaveClick, onChange}) => (
             <FuelSavingsTextInput
               onChange={onChange}
               name="milesDriven"
-              value={fuelSavings.milesDriven}/>
+              value={fuelSavings.milesDriven}
+            />
             miles per
             <select
               name="milesDrivenTimeframe"
@@ -57,11 +57,14 @@ const FuelSavingsForm = ({fuelSavings, onSaveClick, onChange}) => (
     <hr/>
 
     {fuelSavings.necessaryDataIsProvidedToCalculateSavings && <FuelSavingsResults savings={fuelSavings.savings}/>}
+
     <input type="submit" value="Save" onClick={onSaveClick}/>
+    <input type="button" value="Clear" onClick={onClearClick}/>
   </div>
 );
 
 FuelSavingsForm.propTypes = {
+  onClearClick: func,
   onSaveClick: func.isRequired,
   onChange: func.isRequired,
   fuelSavings: fuelSavings.isRequired

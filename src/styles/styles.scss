@@ -1,7 +1,6 @@
 /* Variables */
-$vin-blue: #5bb7db;
-$vin-green: #60b044;
-$vin-red: #ff0000;
+$font-stack: Helvetica, sans-serif;
+$primary-color: #ff0000;
 
 /* Styles */
 body {
@@ -13,19 +12,52 @@ body {
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
-  font-smoothing: antialiased;
   font-weight: 300;
 }
 
-td {
-	padding: 12px;
-}
+.game-info { font-size: 1.0rem; color: #666; }
+    .game-info span { margin-right: 2.3rem; }
 
-h2 {
-	color: $vin-blue;
-}
+  .play-button {
+    width: 27.0rem;
+    padding: 1.0rem;
+  }
 
-.savings { color: $vin-green; }
-.loss { color: $vin-red; }
-input.small { width: 46px; }
-td.fuel-savings-label { width: 175px; }
+  .vxBtn {
+    display: block;
+    background-color: #fff;
+    border: thin solid #ddd;
+    color: $primary-color;
+    width: 27.0rem;
+    height: 4.3rem;
+    margin: 0rem 0rem 1.0rem 0rem;
+    font-size: 8px;
+  }
+  .vxBtnSel {
+    display: block;
+    background-color: rgb(197, 154, 154);
+    border: thin solid #ddd;
+    color: $primary-color;
+    width: 27.0rem;
+    height: 4.3rem;
+    margin: 0rem 0rem 1.0rem 0rem;
+    font-size: 8px;
+  }
+  .startBtn {
+    display: block;
+    margin: 0rem 0rem 1.0rem 0rem;
+    font-size: 8px;
+  }
+
+  .playbtn-text { font-size: 1.6rem; }
+
+  .vxBtn:focus, .vxBtn:active {
+    outline: none;
+    border: thin solid #ddd;
+  }
+
+  .timer {
+    color: $primary-color;
+    margin-top: 3px;
+    margin-left: 3px;
+  }

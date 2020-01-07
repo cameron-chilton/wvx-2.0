@@ -9,7 +9,8 @@ const FuelSavingsTextInput = ({name, value, placeholder, onChange}) => {
       type="text"
       placeholder={placeholder}
       value={value}
-      onChange={onChange}/>
+      onChange={onChange}
+    />
   );
 };
 

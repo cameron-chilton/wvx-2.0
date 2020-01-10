@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/fuelSavingsActions';
+import * as actions from '../../actions/whovoxActions';
+//import * as actions from '../../actions/fuelSavingsActions';
 import Game from '../Game';
 import FuelSavingsForm from '../FuelSavingsForm';
 
@@ -19,10 +20,16 @@ export class GamePage extends React.Component {
     this.props.actions.clearFuelSavings(this.props.fuelSavings);
   }
 
+  startBtnClick = () => {
+    this.props.actions.startBtnClick(this.props.whovoxGame);
+  }
+
   render() {
     return (
       <>
-        <Game />
+        <Game
+          onStartClick={this.startBtnClick}
+        />
         <FuelSavingsForm
           onClearClick={this.clearFuelSavings}
           onSaveClick={this.saveFuelSavings}

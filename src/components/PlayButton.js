@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PlayButton = props => (
 
 	<div className=''>
-        <button className='play-button' onClick={props.onClick}>
+        <button className='play-button' onClick={props.onStartClick}>
           {props.buttonText}
         </button>
 	</div>
@@ -12,6 +12,7 @@ const PlayButton = props => (
 
 PlayButton.propTypes = {
   buttonText: PropTypes.string,
+  onStartClick: PropTypes.func,
   };
 
 export default PlayButton;

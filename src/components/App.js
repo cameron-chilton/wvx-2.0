@@ -4,7 +4,6 @@ import { NavLink, Route, Switch } from "react-router-dom";
 import AboutPage from "./AboutPage";
 import GamePage from "./containers/GamePage";
 //import HomePage from "./HomePage";
-//import Game from "./Game";
 import NotFoundPage from "./NotFoundPage";
 import PropTypes from "prop-types";
 import React from "react";

@@ -19,3 +19,7 @@ export const savings = shape({
   annual: oneOfType([number,string]),
   threeYear: oneOfType([number,string]),
 });
+
+export const whovoxGame = shape({
+  voxCount: oneOfType([number,string]),
+});

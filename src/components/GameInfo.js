@@ -5,7 +5,7 @@ const GameInfo = props => (
 
 	<div className='game-info'>
     <div>
-      <span>Vox {props.voxCt} of 5</span>
+      <span>Vox {props.voxCount} of 5</span>
       <span>Score: {props.score.toLocaleString() || 0}</span>
       <span>Category: {props.category}</span>
     </div>
@@ -18,7 +18,7 @@ const GameInfo = props => (
 
 GameInfo.propTypes = {
   score: PropTypes.number,
-  voxCt: PropTypes.number
+  voxCount: PropTypes.number
   };
 
 export default GameInfo;

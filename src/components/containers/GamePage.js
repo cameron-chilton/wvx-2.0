@@ -5,9 +5,10 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/whovoxActions';
 //import * as actions from '../../actions/fuelSavingsActions';
 import Game from '../Game';
-import FuelSavingsForm from '../FuelSavingsForm';
+//import FuelSavingsForm from '../FuelSavingsForm';
 
 export class GamePage extends React.Component {
+  /*
   saveFuelSavings = () => {
     this.props.actions.saveFuelSavings(this.props.fuelSavings);
   }
@@ -19,6 +20,7 @@ export class GamePage extends React.Component {
   clearFuelSavings = () => {
     this.props.actions.clearFuelSavings(this.props.fuelSavings);
   }
+  */
 
   startBtnClick = () => {
     this.props.actions.startBtnClick(this.props.whovoxGame);
@@ -30,12 +32,14 @@ export class GamePage extends React.Component {
         <Game
           onStartClick={this.startBtnClick}
         />
+        {/*
         <FuelSavingsForm
           onClearClick={this.clearFuelSavings}
           onSaveClick={this.saveFuelSavings}
           onChange={this.calculateFuelSavings}
           fuelSavings={this.props.fuelSavings}
         />
+        */}
       </>
     );
   }
@@ -43,12 +47,14 @@ export class GamePage extends React.Component {
 
 GamePage.propTypes = {
   actions: PropTypes.object.isRequired,
-  fuelSavings: PropTypes.object.isRequired
+  //fuelSavings: PropTypes.object.isRequired,
+  whovoxGame: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    fuelSavings: state.fuelSavings
+    //fuelSavings: state.fuelSavings,
+    whovoxGame: state.whovoxGame
   };
 }
 

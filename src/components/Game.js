@@ -15,8 +15,8 @@ const Game = ({whovoxGame, onStartClick}) => (
   <>
       <div className="game">
         <div className="startBtn">
-          <GameInfo voxCt={whovoxGame.voxCount}  />
-          <PlayButton onClick={onStartClick} />
+          <GameInfo voxCount={whovoxGame}  />
+          <PlayButton onStartClick={onStartClick} />
         </div>
         {/*
         <div className="btn-holder">
@@ -42,8 +42,8 @@ const Game = ({whovoxGame, onStartClick}) => (
 );
 
   Game.propTypes = {
-    whovoxGame: whovoxGame.isRequired,
-    onStartClick: func.isRequired,
+    whovoxGame: whovoxGame,
+    onStartClick: func,
   };
 
 export default Game;

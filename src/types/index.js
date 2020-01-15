@@ -1,6 +1,10 @@
 // Centralized propType definitions
 import { shape, number, bool, string, oneOfType } from 'prop-types';
 
+export const whovoxGame = shape({
+  voxCount: oneOfType([number,string]),
+});
+
 export const fuelSavings = shape({
   newMpg: oneOfType([number,string]),
   tradeMpg: oneOfType([number,string]),
@@ -20,6 +24,3 @@ export const savings = shape({
   threeYear: oneOfType([number,string]),
 });
 
-export const whovoxGame = shape({
-  voxCount: oneOfType([number,string]),
-});

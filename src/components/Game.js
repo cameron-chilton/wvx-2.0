@@ -3,20 +3,18 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 import {func} from 'prop-types';
 //import VoiceChoices from './VoiceChoices';
-import PlayButton from './PlayButton';
-import GameInfo from './GameInfo';
+//import PlayButton from './PlayButton';
+//import GameInfo from './GameInfo';
 //import { GET_NEWGAME, GET_ANSWERS } from '../constants/DataURLs';
 //import axios from 'axios';
 //import utils from '../utils/math-utils';
 import {whovoxGame} from '../types';
 
-
 const Game = ({whovoxGame, onStartClick}) => (
   <>
       <div className="game">
         <div className="startBtn">
-          <GameInfo voxCount={whovoxGame}  />
-          <PlayButton onStartClick={onStartClick} />
+          <GameInfo voxCount={whovoxGame.voxCount} />
         </div>
         {/*
         <div className="btn-holder">
@@ -42,7 +40,7 @@ const Game = ({whovoxGame, onStartClick}) => (
 );
 
   Game.propTypes = {
-    whovoxGame: whovoxGame,
+    whovoxGame: whovoxGame.isRequired,
     onStartClick: func,
   };
 

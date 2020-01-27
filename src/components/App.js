@@ -1,6 +1,5 @@
 /* eslint-disable import/no-named-as-default */
 import { NavLink, Route, Switch } from "react-router-dom";
-
 import AboutPage from "./AboutPage";
 import GamePage from "./containers/GamePage";
 //import HomePage from "./HomePage";
@@ -15,14 +14,16 @@ import { hot } from "react-hot-loader";
 
 class App extends React.Component {
   render() {
-    const activeStyle = { color: 'blue' };
+    //const activeStyle = { color: 'blue' };
     return (
       <div>
+        {/*
         <div>
           <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
           {' | '}
           <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
         </div>
+        */}
         <Switch>
           <Route path="/" component={GamePage} />
           <Route path="/about" component={AboutPage} />

@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 const PlayButton = props => (
 
 	<div className=''>
-        <button className='play-button' onClick={props.onStartClick}>
-          {props.buttonText}
-        </button>
+      <button className='play-button' onClick={props.onStartClick}>
+        {props.btnTxt}
+      </button>
 	</div>
 );
 
 PlayButton.propTypes = {
-  buttonText: PropTypes.string,
+  btnTxt: PropTypes.string,
   onStartClick: PropTypes.func,
   };
 

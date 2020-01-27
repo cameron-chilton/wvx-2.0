@@ -14,6 +14,7 @@ body {
   -moz-font-smoothing: antialiased;
   font-weight: 300;
 }
+.game, .btn-holder { text-align: center; margin: 1rem auto; }
 
 .game-info { font-size: 1.0rem; color: #666; }
     .game-info span { margin-right: 2.3rem; }
@@ -30,7 +31,7 @@ body {
     color: $primary-color;
     width: 27.0rem;
     height: 4.3rem;
-    margin: 0rem 0rem 1.0rem 0rem;
+    margin: 0.5rem auto;
     font-size: 8px;
   }
   .vxBtnSel {

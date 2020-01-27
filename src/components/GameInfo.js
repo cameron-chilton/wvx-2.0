@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, number, oneOfType } from "prop-types";
 
 const GameInfo = ({voxCount}) => {
   return (
@@ -21,13 +21,8 @@ const GameInfo = ({voxCount}) => {
   );
 };
 
-const { string, func, number, oneOfType } = PropTypes;
-
 GameInfo.propTypes = {
-  voxCount: oneOfType([
-    string,
-    number
-  ])
+  voxCount: oneOfType([string,number])
 };
 
 export default GameInfo;

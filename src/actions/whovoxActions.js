@@ -24,25 +24,41 @@ export function calculateFuelSavings(settings, fieldName, value) {
   };
 }
 
-export function clearFuelSavings(settings) {
+// TIMER ACTIONS
+export function startTimer() {
   return function (dispatch) {
     return dispatch({
-      type: types.CLEAR_FUEL_SAVINGS,
-      dateModified: getFormattedDateTime(),
-      settings
+      type: types.START_TIMER,
+      offset: Date.now()
     });
   };
 }
 
-
-// example of a thunk using the redux-thunk middleware
-export function startBtnClick(settings) {
+export function stopTimer() {
   return function (dispatch) {
     return dispatch({
-      type: types.CLICK_START_BUTTON,
-      settings
+      type: types.STOP_TIMER,
     });
   };
 }
+
+export function tickTimer() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.TICK_TIMER,
+      timer: Date.now()
+    });
+  };
+}
+
+// ANSWER BUTTONS
+export function clickAnswer() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.CLICK_ANSWER,
+    });
+  };
+}
+
 
 

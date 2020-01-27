@@ -1,36 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { string, bool, object, number, oneOfType } from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../actions/whovoxActions';
-//import * as actions from '../../actions/fuelSavingsActions';
-import Game from '../Game';
-//import FuelSavingsForm from '../FuelSavingsForm';
+import Timer from '../Timer';
+import GameInfo from '../GameInfo';
+import AnswerBtns from '../AnswerBtns';
 
-export class GamePage extends React.Component {
-  /*
-  saveFuelSavings = () => {
-    this.props.actions.saveFuelSavings(this.props.fuelSavings);
+let interval = null;
+
+class GamePage extends Component {
+
+  componentDidMount() {
   }
 
-  calculateFuelSavings = e => {
-    this.props.actions.calculateFuelSavings(this.props.fuelSavings, e.target.name, e.target.value);
-  }
-
-  clearFuelSavings = () => {
-    this.props.actions.clearFuelSavings(this.props.fuelSavings);
-  }
-  */
-
-  startBtnClick = () => {
-    this.props.actions.startBtnClick(this.props.whovoxGame);
+  componentDidUpdate() {
+    // timer start
+    if ( (this.props.whovoxGame.timerOn) && (interval === null) ) {
+      interval = setInterval( () => {
+        this.props.actions.tickTimer(this.props.whovoxGame);
+      });
+    }
+    // timer stop
+    if ( (!this.props.whovoxGame.timerOn) && (interval !== null) ) {
+      clearInterval(interval);
+      interval = null;
+    }
   }
 
   render() {
+
     return (
-      <>
-        <Game
-          onStartClick={this.startBtnClick}
+      <div className="game">
+        <GameInfo
+          voxCount={this.props.whovoxGame.voxCount}
+        />
+        <Timer
+          timer={this.props.whovoxGame.timer}
+          timerOn={this.props.whovoxGame.timerOn}
+          interval={interval}
+          btnTxt={this.props.whovoxGame.btnTxt}
+        />
+        <AnswerBtns
+          onAnswerClick={this.onAnswerClick}
         />
         {/*
         <FuelSavingsForm
@@ -40,21 +52,23 @@ export class GamePage extends React.Component {
           fuelSavings={this.props.fuelSavings}
         />
         */}
-      </>
+      </div>
     );
   }
 }
 
 GamePage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  //fuelSavings: PropTypes.object.isRequired,
-  whovoxGame: PropTypes.object
+  actions: object.isRequired,
+  whovoxGame: object,
+  timer: number,
+  timerOn: bool,
+  btnTxt: oneOfType([string, number]),
 };
 
 function mapStateToProps(state) {
   return {
     //fuelSavings: state.fuelSavings,
-    whovoxGame: state.whovoxGame
+    whovoxGame: state.whovoxGame,
   };
 }
 

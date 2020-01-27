@@ -1,4 +1,9 @@
-import {CLICK_START_BUTTON} from '../constants/actionTypes';
+import {
+  START_TIMER,
+  STOP_TIMER,
+  TICK_TIMER,
+  CLICK_ANSWER
+} from '../constants/actionTypes';
 //import {necessaryDataIsProvidedToCalculateSavings, calculateSavings} from '../utils/fuelSavings';
 import objectAssign from 'object-assign';
 import initialState from './initialState';
@@ -15,11 +20,50 @@ export default function whovoxGameReducer(state = initialState.whovoxGame, actio
 
   switch (action.type) {
 
-    case CLICK_START_BUTTON:
-      console.log('start clicked');
+    case START_TIMER:
       newState = objectAssign({}, state);
-      newState[action.voxCount] = state.voxCount + 1;
-      return newState;
+      return {
+        ...state,
+        timerOn: true,
+        offset: action.offset,
+        btnTxt: state.timer
+      };
+
+    case STOP_TIMER:
+      return {
+        ...state,
+        timerOn: false,
+        timer: state.timer,
+        offset: undefined
+      };
+
+    case TICK_TIMER:
+      newState = objectAssign({}, state);
+      return {
+        ...state,
+        timer: (
+          (state.timer > 0) ? (state.timer - (action.timer - state.offset)) : (newState.timer = 0)
+        ),
+        offset: (
+          (state.timer > 0) ? (action.timer) : (undefined)
+        ),
+        timerOn: (
+          (state.timer > 0) ? (newState.timerOn = true) : (newState.timerOn = false)
+        ),
+        btnTxt: (
+          (state.timer > 0) ? (state.timer) : (newState.btnTxt = 'OUT OF TIME')
+        ),
+      };
+
+      case CLICK_ANSWER:
+        newState = objectAssign({}, state);
+        return {
+          ...state,
+          timerOn: false,
+          timer: state.timer,
+          offset: undefined,
+          btnTxt: state.timer
+      };
 
     /*
     case CALCULATE_FUEL_SAVINGS:

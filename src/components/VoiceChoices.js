@@ -1,29 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import { string,  bool, number, func } from "prop-types";
 
 const VoiceChoices = props => (
 
     <button
-      className={!props.isBtnClicked ? 'vxBtn' : 'vxBtnSel'}
-      id={props.id}
-      category={props.category}
-      onClick={ () => props.onClick(props.id) }
-      number={props.number}
-      name={props.firstname + ' ' + props.lastname}
+      className='vxBtn'
+      //className={!props.isBtnClicked ? 'vxBtn' : 'vxBtnSel'}
+      //id={props.id}
+      //category={props.category}
+      onClick={ () => props.clickAnswer }
+      //number={props.number}
+      //name={props.firstname + ' ' + props.lastname}
     >
-      {props.firstname + ' ' + props.lastname}
+      {/*
+      props.firstname + ' ' + props.lastname
+      */}
     </button>
 
   );
 
   VoiceChoices.propTypes = {
-    id: PropTypes.string,
-    category: PropTypes.string,
-    status: PropTypes.string,
-    firstname: PropTypes.string,
-    lastname: PropTypes.string,
-    number: PropTypes.number,
-    isBtnClicked: PropTypes.bool,
+    id: string,
+    category: string,
+    status: string,
+    firstname: string,
+    lastname: string,
+    number: number,
+    isBtnClicked: bool,
+    clickAnswer: func,
   };
 
 export default VoiceChoices;

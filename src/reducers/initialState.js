@@ -16,6 +16,9 @@ export default {
     }
   },
   whovoxGame: {
-    voxCount: 0,
+    voxCount: 1,
+    btnTxt: 'START GAME',
+    timerOn: false,
+    timer: 10000
   }
 };

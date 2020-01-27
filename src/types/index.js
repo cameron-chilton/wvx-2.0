@@ -3,6 +3,10 @@ import { shape, number, bool, string, oneOfType } from 'prop-types';
 
 export const whovoxGame = shape({
   voxCount: oneOfType([number,string]),
+  btnTxt: oneOfType([number,string]),
+  gameState: string,
+  timerOn: bool,
+  timer: number
 });
 
 export const fuelSavings = shape({

@@ -16,9 +16,17 @@ export default {
     }
   },
   whovoxGame: {
+    id: '', // new all_games table (gameID, date, name, location, score)
+    loading: false,
+    score: 0,
     voxCount: 1,
     btnTxt: 'START GAME',
     timerOn: false,
-    timer: 10000
+    timer: 10000,
+    ansRight: 0,
+    ansWrong: 0,
+    ansIDs: [],
+    categories: [],
+    movTvChecked: true
   }
 };

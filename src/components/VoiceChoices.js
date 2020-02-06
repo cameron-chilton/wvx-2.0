@@ -1,33 +1,71 @@
-import React from "react";
-import { string,  bool, number, func } from "prop-types";
+import React, { Component } from 'react';
+import {bool, number, func, string, oneOfType, object} from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../actions/whovoxActions';
 
-const VoiceChoices = props => (
+class VoiceChoices extends Component {
 
-    <button
-      className='vxBtn'
-      //className={!props.isBtnClicked ? 'vxBtn' : 'vxBtnSel'}
-      //id={props.id}
-      //category={props.category}
-      onClick={ () => props.clickAnswer }
-      //number={props.number}
-      //name={props.firstname + ' ' + props.lastname}
-    >
-      {/*
-      props.firstname + ' ' + props.lastname
-      */}
-    </button>
+  componentDidMount() {
+  }
 
-  );
+  componentDidUpdate() {
+  }
+
+  constructor() {
+    super();
+    this.clickAnswer = this.clickAnswer.bind(this);
+    this.state = {clickedBtn: false};
+  }
+
+  clickAnswer = () => {
+    this.props.actions.clickAnswer(this.props.whovoxGame);
+    this.setState({clickedBtn: true});
+  }
+
+  render() {
+
+    const {voxCount, timerOn} = this.props;
+
+    return (
+      <>
+        <button
+          className={!this.state.clickedBtn ? 'vxBtn' : 'vxBtnSel'}
+          //id={number}
+          //category={props.category}
+          onClick={this.clickAnswer}
+          disabled={!timerOn ? true : false}
+          //number={props.number}
+          //name={props.firstname + ' ' + props.lastname}
+        >
+          {voxCount}
+        </button>
+    </>
+    );
+  }
+}
 
   VoiceChoices.propTypes = {
-    id: string,
-    category: string,
-    status: string,
-    firstname: string,
-    lastname: string,
-    number: number,
-    isBtnClicked: bool,
+    actions: object.isRequired,
+    whovoxGame: object,
+    voxCount: oneOfType([string,number]),
     clickAnswer: func,
+    timerOn: bool,
   };
 
-export default VoiceChoices;
+  function mapStateToProps(state) {
+    return {
+      voxCount: state.whovoxGame.voxCount,
+    };
+  }
+
+  function mapDispatchToProps(dispatch) {
+    return {
+      actions: bindActionCreators(actions, dispatch)
+    };
+  }
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(VoiceChoices);

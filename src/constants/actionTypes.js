@@ -1,11 +1,23 @@
+////////////// DATA LOADING ETC ////////////////
+
+// REST call for loading game data
+export const NEW_GAME_LOAD = 'NEW_GAME_LOAD';
+export const LOAD_GAME_DATA = 'LOAD_GAME_DATA';
+export const LOAD_GAME_FAILURE = 'LOAD_GAME_FAILURE';
+export const LOAD_GAME_SUCCESS = 'LOAD_GAME_SUCCESS';
+
+
 // TIMER ACTIONS
 export const START_TIMER = 'START_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
 export const TICK_TIMER = 'TICK_TIMER';
 export const ZERO_TIMER = 'ZERO_TIMER';
+
 // BUTTON GAMEPLAY ACTIONS
 export const CLICK_ANSWER = 'CLICK_ANSWER';
+export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';
 
+// FROM SLINGSHOT
 export const CLEAR_FUEL_SAVINGS = 'CLEAR_FUEL_SAVINGS';
 export const SAVE_FUEL_SAVINGS = 'SAVE_FUEL_SAVINGS';
 export const CALCULATE_FUEL_SAVINGS = 'CALCULATE_FUEL_SAVINGS';

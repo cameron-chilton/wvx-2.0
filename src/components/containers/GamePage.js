@@ -1,18 +1,23 @@
-import React, { Component } from "react";
-import { string, bool, object, number, oneOfType } from "prop-types";
+import React, {Component} from 'react';
+import {string, bool, object, number, oneOfType} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as actions from '../../actions/whovoxActions';
 import Timer from '../Timer';
 import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
+import * as actions from '../../actions/whovoxActions';
+
+/**
+* Whovox Game Props
+*
+* @props -- All should be passed in via Redux wiring.
+*  @param {number} voxCount Is the game timer running or not?
+*  @param {bool} timerOn Is the game timer running or not?
+*/
 
 let interval = null;
 
 class GamePage extends Component {
-
-  componentDidMount() {
-  }
 
   componentDidUpdate() {
     // timer start
@@ -30,19 +35,35 @@ class GamePage extends Component {
 
   render() {
 
+    const {
+      voxCount,
+      timerOn,
+      btnTxt,
+      timer,
+      score,
+      ansRight,
+      ansWrong,
+      movTvChecked
+    } = this.props;
+
     return (
       <div className="game">
         <GameInfo
-          voxCount={this.props.whovoxGame.voxCount}
+          voxCount={voxCount}
+          score={score}
+          ansRight={ansRight}
+          ansWrong={ansWrong}
+          movTvChecked={movTvChecked}
         />
         <Timer
-          timer={this.props.whovoxGame.timer}
-          timerOn={this.props.whovoxGame.timerOn}
+          timer={timer}
+          timerOn={timerOn}
           interval={interval}
-          btnTxt={this.props.whovoxGame.btnTxt}
+          btnTxt={btnTxt}
         />
         <AnswerBtns
           onAnswerClick={this.onAnswerClick}
+          timerOn={timerOn}
         />
         {/*
         <FuelSavingsForm
@@ -58,11 +79,16 @@ class GamePage extends Component {
 }
 
 GamePage.propTypes = {
-  actions: object.isRequired,
   whovoxGame: object,
+  actions: object.isRequired,
+  voxCount: oneOfType([string,number]),
   timer: number,
   timerOn: bool,
   btnTxt: oneOfType([string, number]),
+  score: oneOfType([string, number]),
+  ansRight: oneOfType([string, number]),
+  ansWrong: oneOfType([string, number]),
+  movTvChecked: bool,
 };
 
 function mapStateToProps(state) {
@@ -74,7 +100,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 

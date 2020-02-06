@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { string, bool, object, number, oneOfType } from "prop-types";
+import {string, bool, object, number, oneOfType} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -38,10 +38,11 @@ class Timer extends Component {
   }
 
   render() {
+    const {timerOn, btnTxt} = this.props;
     return (
       <div>
-        <button className='play-button' onClick={!this.props.timerOn ? this.startTimer : undefined}>
-          { typeof this.props.btnTxt == 'number' ? this.format(this.props.btnTxt) : this.props.btnTxt  }
+        <button className='play-button' onClick={!timerOn ? this.startTimer : undefined}>
+          { typeof btnTxt == 'number' ? this.format(btnTxt) : btnTxt  }
         </button>
       </div>
     );
@@ -51,14 +52,14 @@ class Timer extends Component {
 Timer.propTypes = {
   actions: object.isRequired,
   whovoxGame: object,
-  timer: number,
   timerOn: bool,
   btnTxt: oneOfType([string, number]),
 };
 
 function mapStateToProps(state) {
   return {
-    whovoxGame: state.whovoxGame,
+    timerOn: state.whovoxGame.timerOn,
+    btnTxt: state.whovoxGame.btnTxt
   };
 }
 

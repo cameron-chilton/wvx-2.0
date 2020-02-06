@@ -17,7 +17,7 @@ body {
 .game, .btn-holder { text-align: center; margin: 1rem auto; }
 
 .game-info { font-size: 1.0rem; color: #666; }
-    .game-info span { margin-right: 2.3rem; }
+  .game-info span { margin-right: 1.4rem; }
 
   .play-button {
     width: 27.0rem;
@@ -36,12 +36,12 @@ body {
   }
   .vxBtnSel {
     display: block;
-    background-color: rgb(197, 154, 154);
+    background-color: rgb(207, 174, 174);
     border: thin solid #ddd;
     color: $primary-color;
     width: 27.0rem;
     height: 4.3rem;
-    margin: 0rem 0rem 1.0rem 0rem;
+    margin: 0.5rem auto;
     font-size: 8px;
   }
   .startBtn {

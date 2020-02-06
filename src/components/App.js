@@ -1,41 +1,84 @@
 /* eslint-disable import/no-named-as-default */
-import { NavLink, Route, Switch } from "react-router-dom";
-import AboutPage from "./AboutPage";
-import GamePage from "./containers/GamePage";
-//import HomePage from "./HomePage";
-import NotFoundPage from "./NotFoundPage";
-import PropTypes from "prop-types";
 import React from "react";
-import { hot } from "react-hot-loader";
+import {string, func} from 'prop-types';
+import { connect } from 'react-redux';
+//import { NavLink, Route, Switch } from 'react-router-dom';
+//import AboutPage from './AboutPage';
+import GamePage from './containers/GamePage';
+//import HomePage from './HomePage';
+//import NotFoundPage from './NotFoundPage';
+//import { hot } from 'react-hot-loader';
+import {
+  setGameId,
+  startDataLoad,
+} from '../actions';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
 // component at the top-level.
 
 class App extends React.Component {
+
+  componentDidMount() {
+
+    const {gameIdFromUri} = this.props;
+    this.props.setGameId(gameIdFromUri);
+    this.props.startDataLoad(gameIdFromUri);
+
+  }
+
   render() {
-    //const activeStyle = { color: 'blue' };
     return (
-      <div>
+      <div className="App">
+        <GamePage />
         {/*
         <div>
-          <NavLink exact to="/" activeStyle={activeStyle}>Home</NavLink>
+          <NavLink exact to='/'>Home</NavLink>
           {' | '}
-          <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+          <NavLink to='/about'>About</NavLink>
         </div>
-        */}
         <Switch>
-          <Route path="/" component={GamePage} />
-          <Route path="/about" component={AboutPage} />
+          <Route path='/' component={GamePage} gameIdFromUri={gameIdFromUri} />
+          <Route path='/about' component={AboutPage} />
           <Route component={NotFoundPage} />
         </Switch>
+        */}
       </div>
     );
   }
 }
 
 App.propTypes = {
-  children: PropTypes.element
+  gameIdFromUri: string.isRequired,
+  // dispatchFn's
+  setGameId: func,
+  startDataLoad: func,
 };
 
-export default hot(module)(App);
+const mapStateToProps = (state) => ({
+  whovoxGame: state.whovoxGame,
+  //consultInfo: state.ConsultInfo,
+});
+
+export default connect(
+  mapStateToProps,
+  { // dispatch fn's
+    setGameId,
+    startDataLoad,
+  }
+)(App);
+
+
+{/*
+export default hot(module)(connect(
+  mapStateToProps,
+    { // dispatch fn's
+      setGameId,
+      startDataLoad,
+    }
+  )(App));
+  */}
+
+//export default hot(module)(App);
+
+//export default hot(module)(connect()(Test));

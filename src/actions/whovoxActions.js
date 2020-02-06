@@ -60,5 +60,14 @@ export function clickAnswer() {
   };
 }
 
+// CATEGORY SELECTION
+export function catCheckHandler(value) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.TOGGLE_CATEGORY,
+      value
+    });
+  };
+}
 
 

@@ -38,7 +38,7 @@ class VoiceChoices extends Component {
           //number={props.number}
           //name={props.firstname + ' ' + props.lastname}
         >
-          {voxCount}
+          {!timerOn ? '?' : voxCount}
         </button>
     </>
     );

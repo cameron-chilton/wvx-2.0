@@ -13,6 +13,7 @@ import {
   LOAD_VOICES,
   LOAD_VOICES_SUCCESS,
   LOAD_VOICES_FAILURE,
+  RENDER_VOICES,
 } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 
@@ -77,6 +78,11 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         error: action.error
+      };
+
+    case RENDER_VOICES:
+      return {
+        ...state,
       };
 
     // TIMER ACTIONS

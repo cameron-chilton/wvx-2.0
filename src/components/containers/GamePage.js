@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {string, bool, object, number, oneOfType} from 'prop-types';
+import {string, bool, object, number, oneOfType, array} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Timer from '../Timer';
@@ -35,7 +35,7 @@ class GamePage extends Component {
       score,
       ansRight,
       ansWrong,
-      movTvChecked
+      gameVoices,
     } = this.props;
 
     return (
@@ -45,7 +45,6 @@ class GamePage extends Component {
           score={score}
           ansRight={ansRight}
           ansWrong={ansWrong}
-          movTvChecked={movTvChecked}
         />
         <Timer
           timer={timer}
@@ -56,6 +55,7 @@ class GamePage extends Component {
         <AnswerBtns
           onAnswerClick={this.onAnswerClick}
           timerOn={timerOn}
+          gameVoices={gameVoices}
         />
         {/*
         <FuelSavingsForm
@@ -80,7 +80,7 @@ GamePage.propTypes = {
   score: oneOfType([string, number]),
   ansRight: oneOfType([string, number]),
   ansWrong: oneOfType([string, number]),
-  movTvChecked: bool,
+  gameVoices: array,
 };
 
 function mapStateToProps(state) {

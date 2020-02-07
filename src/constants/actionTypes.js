@@ -14,6 +14,7 @@ export const START_TIMER = 'START_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
 export const TICK_TIMER = 'TICK_TIMER';
 export const ZERO_TIMER = 'ZERO_TIMER';
+export const RENDER_VOICES = 'RENDER_VOICES';
 
 // BUTTON GAMEPLAY ACTIONS
 export const CLICK_ANSWER = 'CLICK_ANSWER';

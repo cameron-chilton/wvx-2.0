@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import {bool, number, func, string, oneOfType, object} from "prop-types";
+import {bool, number, func, string, oneOfType, object, array} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
+//import {setGameId,startDataLoad,} from '../actions';
 import utils from '../utils/math-utils';
 import VoiceChoices from './VoiceChoices';
 
@@ -10,7 +11,9 @@ class AnswerBtns extends Component {
 
   render() {
 
-    const {voxCount, timerOn} = this.props;
+    const {voxCount, timerOn, gameVoices} = this.props;
+
+    console.log('ansrBtns gameVoices: ' + JSON.stringify(gameVoices));
 
     return (
       <div className="btn-holder">
@@ -19,7 +22,7 @@ class AnswerBtns extends Component {
           <VoiceChoices
             key={number}
             voxCount={voxCount}
-            //id={voxIDs && voxIDs[number]}
+            id={gameVoices && gameVoices.props.children.id}
             //category={categories && categories[number]}
             number={number}
             onClick={this.clickAnswer}
@@ -41,12 +44,14 @@ AnswerBtns.propTypes = {
   voxCount: oneOfType([string,number]),
   clickAnswer: func,
   timerOn: bool,
+  gameVoices: array,
 };
 
 function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
-    voxCount: state.whovoxGame.voxCount
+    voxCount: state.whovoxGame.voxCount,
+    gameVoices: state.whovoxGame.gameVoices,
   };
 }
 

@@ -52,6 +52,38 @@ export const newGameData = {
 
 // new all_games table: (gameID, date, name, location, score)
 export const gameVoices = {
+  gameVoices: [{
+    voxCount0: [{
+      id: 101,
+      firstname: 'KEVIN',
+      lastname: 'SPACEY',
+      clipname: 'Spacey_Kevin'
+    },{
+      id: 93,
+      firstname: 'NICOLAS',
+      lastname: 'CAGE',
+      clipname: 'Cage_Nicolas'
+    },{
+      id: 7,
+      firstname: 'STEPHEN',
+      lastname: 'COLBERT',
+      clipname: 'Colbert_Stephen'
+    },{
+      id: 2,
+      firstname: 'DAVID',
+      lastname: 'DUCHOVNY',
+      clipname: 'Duchovny_David'
+    },{
+      id: 480,
+      firstname: 'BILL',
+      lastname: 'MAHER',
+      clipname: 'Maher_Bill'
+    }]
+  }]
+
+};
+
+export const gameVoices2 = {
   voxCount0: {
     voiceChoices: [{
       id: 101,

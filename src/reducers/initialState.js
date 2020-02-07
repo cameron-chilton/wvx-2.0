@@ -26,7 +26,7 @@ export default {
     ansRight: 0,
     ansWrong: 0,
     ansIDs: [],
-    gameVoices: {},
+    gameVoices: [],
     categories: [],
     movTvChecked: true,
     musArtsChecked: true,

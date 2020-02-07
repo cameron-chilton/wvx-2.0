@@ -51,6 +51,14 @@ export function tickTimer() {
   };
 }
 
+export function renderVoices() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.RENDER_VOICES,
+    });
+  };
+}
+
 // ANSWER BUTTONS
 export function clickAnswer() {
   return function (dispatch) {

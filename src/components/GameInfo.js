@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {string, number, oneOfType, bool, func, object} from 'prop-types';
+import {string, number, oneOfType, bool, object} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -9,13 +9,10 @@ class GameInfo extends Component {
   constructor() {
     super();
     this.clickCategory = this.clickCategory.bind(this);
-    this.state = {checkBoxValue: this.state.checkboxValue};
   }
 
   clickCategory = () => {
-    console.log('value: ' + this.value)
-    this.props.actions.catCheckHandler(this.value);
-    this.setState({checkBoxValue: !this.state.checkboxValue});
+    this.props.actions.catCheckHandler(event.target.value);
   }
 
   render() {
@@ -26,24 +23,36 @@ class GameInfo extends Component {
       ansRight,
       ansWrong,
       movTvChecked,
+      musArtsChecked,
+      newsPolChecked,
+      sportsChecked,
     } = this.props;
 
     return (
       <div className='game-info'>
         <div>
-          <span>Vox {voxCount} of 5</span>
+          <span>Vox {voxCount + 1} of 5</span>
           <span>Score: {score.toLocaleString()}</span>
           <span>Right: {ansRight}</span>
           <span>Wrong: {ansWrong}</span>
         </div>
         <div>
           <span>
-            <input type="checkbox" id="MoviesTVchk" value={this.state.checkboxValue} onChange={this.clickCategory} checked={movTvChecked} />
-            <label htmlFor="MoviesTVchk">Movies/TV</label>
+            <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onChange={this.clickCategory} checked={movTvChecked} />
+            <label htmlFor="MoviesTvChk">Movies/TV</label>
           </span>
-          <span><input type="checkbox" />Music/Arts</span>
-          <span><input type="checkbox" />News/Politics</span>
-          <span><input type="checkbox" />Sports</span>
+          <span>
+            <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onChange={this.clickCategory} checked={musArtsChecked} />
+            <label htmlFor="MusicArtsChk">Music/Arts</label>
+          </span>
+          <span>
+            <input type="checkbox" id="NewsPolChk" value="News/Politics" onChange={this.clickCategory} checked={newsPolChecked} />
+            <label htmlFor="NewsPolChk">News/Politics</label>
+          </span>
+          <span>
+            <input type="checkbox" id="SportsChk" value="Sports" onChange={this.clickCategory} checked={sportsChecked} />
+            <label htmlFor="SportsChk">Sports</label>
+          </span>
         </div>
       </div>
     );
@@ -57,7 +66,9 @@ GameInfo.propTypes = {
   ansRight: oneOfType([string,number]),
   ansWrong: oneOfType([string,number]),
   movTvChecked: bool,
-  catCheckHandler: func,
+  musArtsChecked: bool,
+  newsPolChecked: bool,
+  sportsChecked: bool,
 };
 
 function mapStateToProps(state) {
@@ -66,7 +77,10 @@ function mapStateToProps(state) {
     score: state.whovoxGame.score,
     ansRight: state.whovoxGame.ansRight,
     ansWrong: state.whovoxGame.ansWrong,
-    movTvChecked: state.whovoxGame.movTvChecked
+    movTvChecked: state.whovoxGame.movTvChecked,
+    musArtsChecked: state.whovoxGame.musArtsChecked,
+    newsPolChecked: state.whovoxGame.newsPolChecked,
+    sportsChecked: state.whovoxGame.sportsChecked,
   };
 }
 

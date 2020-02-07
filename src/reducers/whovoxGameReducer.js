@@ -8,7 +8,11 @@ import {
   TICK_TIMER,
   CLICK_ANSWER,
   TOGGLE_CATEGORY,
-  LOAD_GAME_SUCCESS
+  LOAD_GAME_SUCCESS,
+  LOAD_GAME_FAILURE,
+  LOAD_VOICES,
+  LOAD_VOICES_SUCCESS,
+  LOAD_VOICES_FAILURE,
 } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 
@@ -24,6 +28,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
 
   switch (action.type) {
 
+    // LOAD GAME DATA
     case NEW_GAME_LOAD:
       return {
          ...state,
@@ -32,7 +37,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
 
     case LOAD_GAME_DATA:
       return {
-          ...state,
+        ...state,
         loading: true,
         ansIDs: action.ansIDs
       };
@@ -46,6 +51,35 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       };
     }
 
+    case LOAD_GAME_FAILURE:
+      return {
+        ...state,
+      };
+
+    // LOAD VOICE QUESTIONS FOR GAME
+    case LOAD_VOICES:
+      return {
+        ...state,
+        loading: true,
+        gameVoices: action.gameVoices
+      };
+
+    case LOAD_VOICES_SUCCESS: {
+      const { ...rest } = action.gameVoices;
+      return {
+        ...state,
+        ...rest,
+        loading: false
+      };
+    }
+
+    case LOAD_VOICES_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+
+    // TIMER ACTIONS
     case START_TIMER:
       return {
         ...state,
@@ -62,6 +96,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         offset: undefined
       };
 
+    // TIMER IS TICKED EACH MS
     case TICK_TIMER:
       newState = objectAssign({}, state);
       return {
@@ -80,8 +115,8 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ),
       };
 
+      // ANSWER IS CLICKED
       case CLICK_ANSWER:
-        newState = objectAssign({}, state);
         return {
           ...state,
           timerOn: false,
@@ -90,11 +125,34 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           btnTxt: state.timer
       };
 
-      case TOGGLE_CATEGORY:
-        return {
-          ...state,
-          movTvChecked: state.movTvChecked ? false : true
-      };
+      // CATEGORY SELECTIONS
+      case TOGGLE_CATEGORY: {
+        if (action.value === 'Movies/TV') {
+          newState = {
+            ...state,
+            movTvChecked: state.movTvChecked ? false : true,
+          }
+        }
+        if (action.value === 'Music/Arts') {
+          newState = {
+            ...state,
+            musArtsChecked: state.musArtsChecked ? false : true,
+          }
+        }
+        if (action.value === 'News/Politics') {
+          newState = {
+            ...state,
+            newsPolChecked: state.newsPolChecked ? false : true,
+          }
+        }
+        if (action.value === 'Sports') {
+          newState = {
+            ...state,
+            sportsChecked: state.sportsChecked ? false : true,
+          }
+        }
+        return newState;
+      }
 
     /*
     case CALCULATE_FUEL_SAVINGS:

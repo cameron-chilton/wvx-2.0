@@ -19,14 +19,18 @@ export default {
     id: '', // new all_games table (gameID, date, name, location, score)
     loading: false,
     score: 0,
-    voxCount: 1,
+    voxCount: 0,
     btnTxt: 'START GAME',
     timerOn: false,
     timer: 10000,
     ansRight: 0,
     ansWrong: 0,
     ansIDs: [],
+    gameVoices: {},
     categories: [],
-    movTvChecked: true
+    movTvChecked: true,
+    musArtsChecked: true,
+    newsPolChecked: true,
+    sportsChecked: true,
   }
 };

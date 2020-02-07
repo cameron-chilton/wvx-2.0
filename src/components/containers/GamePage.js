@@ -7,14 +7,6 @@ import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
 import * as actions from '../../actions/whovoxActions';
 
-/**
-* Whovox Game Props
-*
-* @props -- All should be passed in via Redux wiring.
-*  @param {number} voxCount Is the game timer running or not?
-*  @param {bool} timerOn Is the game timer running or not?
-*/
-
 let interval = null;
 
 class GamePage extends Component {

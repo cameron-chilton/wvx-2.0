@@ -7,13 +7,19 @@ import * as actions from '../actions/whovoxActions';
 import utils from '../utils/math-utils';
 import VoiceChoices from './VoiceChoices';
 
+
 class AnswerBtns extends Component {
 
   render() {
 
-    const {voxCount, timerOn, gameVoices} = this.props;
+    const {voxCount, timerOn, answered} = this.props;
 
-    console.log('ansrBtns gameVoices: ' + JSON.stringify(gameVoices));
+    const loadAll = this.props.gameVoices || [];
+    const thisQuestion = loadAll[voxCount] || {};
+    const questionObj = thisQuestion[voxCount] || [];
+    const ansIDs = questionObj.map(questionObj => questionObj.id);
+    const firstnames = questionObj.map(questionObj => questionObj.firstname);
+    const lastnames = questionObj.map(questionObj => questionObj.lastname);
 
     return (
       <div className="btn-holder">
@@ -22,17 +28,16 @@ class AnswerBtns extends Component {
           <VoiceChoices
             key={number}
             voxCount={voxCount}
-            id={gameVoices && gameVoices.props.children.id}
+            id={ansIDs && ansIDs[number]}
             //category={categories && categories[number]}
-            number={number}
             onClick={this.clickAnswer}
             timerOn={timerOn}
-            //firstname={firstnames && firstnames[number]}
-            //lastname={lastnames && lastnames[number]}
+            firstname={firstnames && firstnames[number]}
+            lastname={lastnames && lastnames[number]}
+            answered={answered}
           />
-          ))
+        ))
         }
-
     </div>
     );
   }
@@ -45,6 +50,7 @@ AnswerBtns.propTypes = {
   clickAnswer: func,
   timerOn: bool,
   gameVoices: array,
+  answered: bool,
 };
 
 function mapStateToProps(state) {
@@ -52,6 +58,7 @@ function mapStateToProps(state) {
     timerOn: state.whovoxGame.timerOn,
     voxCount: state.whovoxGame.voxCount,
     gameVoices: state.whovoxGame.gameVoices,
+    answered: state.whovoxGame.answered,
   };
 }
 

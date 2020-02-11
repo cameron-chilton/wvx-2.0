@@ -22,6 +22,7 @@ export default {
     voxCount: 0,
     btnTxt: 'START GAME',
     timerOn: false,
+    answered: false,
     timer: 10000,
     ansRight: 0,
     ansWrong: 0,

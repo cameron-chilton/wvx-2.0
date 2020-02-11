@@ -36,6 +36,7 @@ class GamePage extends Component {
       ansRight,
       ansWrong,
       gameVoices,
+      answered,
     } = this.props;
 
     return (
@@ -56,6 +57,7 @@ class GamePage extends Component {
           onAnswerClick={this.onAnswerClick}
           timerOn={timerOn}
           gameVoices={gameVoices}
+          answered={answered}
         />
         {/*
         <FuelSavingsForm
@@ -81,6 +83,7 @@ GamePage.propTypes = {
   ansRight: oneOfType([string, number]),
   ansWrong: oneOfType([string, number]),
   gameVoices: array,
+  answered: bool,
 };
 
 function mapStateToProps(state) {

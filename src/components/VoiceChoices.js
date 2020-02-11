@@ -25,7 +25,7 @@ class VoiceChoices extends Component {
 
   render() {
 
-    const {voxCount, timerOn} = this.props;
+    const {answered, timerOn, firstname, lastname} = this.props;
 
     return (
       <>
@@ -38,7 +38,11 @@ class VoiceChoices extends Component {
           //number={props.number}
           //name={props.firstname + ' ' + props.lastname}
         >
-          {!timerOn ? '?' : voxCount}
+          {
+            (!timerOn && !answered) ?
+              '?' :
+              (timerOn && !answered) ? (firstname + ' ' + lastname) : (firstname + ' ' + lastname)
+          }
         </button>
     </>
     );
@@ -50,7 +54,10 @@ class VoiceChoices extends Component {
     whovoxGame: object,
     voxCount: oneOfType([string,number]),
     clickAnswer: func,
+    answered: bool,
     timerOn: bool,
+    firstname: string,
+    lastname: string,
   };
 
   function mapStateToProps(state) {

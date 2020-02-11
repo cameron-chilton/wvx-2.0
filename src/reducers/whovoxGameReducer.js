@@ -40,6 +40,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         loading: true,
+        btnTxt: 'LOADING...',
         ansIDs: action.ansIDs
       };
 
@@ -48,7 +49,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         ...rest,
-        loading: false
+        loading: false,
       };
     }
 
@@ -62,6 +63,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         loading: true,
+        btnTxt: 'LOADING...',
         gameVoices: action.gameVoices
       };
 
@@ -70,7 +72,8 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         ...rest,
-        loading: false
+        loading: false,
+        btnTxt: 'STARTVOX',
       };
     }
 
@@ -128,7 +131,8 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           timerOn: false,
           timer: state.timer,
           offset: undefined,
-          btnTxt: state.timer
+          btnTxt: state.timer,
+          answered: true,
       };
 
       // CATEGORY SELECTIONS

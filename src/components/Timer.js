@@ -43,7 +43,7 @@ class Timer extends Component {
     return (
       <div>
         <button className='play-button' onClick={!timerOn ? this.startTimer : undefined}>
-          { typeof btnTxt == 'number' ? this.format(btnTxt) : btnTxt  }
+          {typeof btnTxt == 'number' ? this.format(btnTxt) : btnTxt}
         </button>
       </div>
     );

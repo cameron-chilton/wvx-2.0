@@ -60,6 +60,7 @@ export const getVoices = async (ansIDs, dispatch) => {
       return;
     }
     dispatch({ type: action.LOAD_VOICES_SUCCESS, gameVoices });
+    dispatch({ type: action.SHUFFLE_CHOICES, gameVoices });
   }
   catch (error) {
     dispatch({ type: action.LOAD_VOICES_FAILURE, error });
@@ -72,6 +73,7 @@ export const getVoices = async (ansIDs, dispatch) => {
 /*-------------------------------------------------------------------*/
 /*********************** End of REST Chain ***************************/
 /*-------------------------------------------------------------------*/
+
 
 
 

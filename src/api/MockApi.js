@@ -47,7 +47,22 @@ class MockApi {
 export const gameID = '12345678';
 
 export const newGameData = {
-  ansIDs: [101,102,103,104,105]
+  ansIDs: [{
+    id: 101,
+    category: 'Movies/TV'
+  },{
+    id: 102,
+    category: 'Movies/TV'
+  },{
+    id: 103,
+    category: 'Movies/TV'
+  },{
+    id: 104,
+    category: 'Movies/TV'
+  },{
+    id: 105,
+    category: 'Movies/TV'
+  }]
 };
 
 // new all_games table: (gameID, date, name, location, score)

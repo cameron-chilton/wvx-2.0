@@ -6,13 +6,21 @@ import * as actions from '../actions/whovoxActions';
 
 class GameInfo extends Component {
 
+  componentDidUpdate() {
+  }
+
   constructor() {
     super();
     this.clickCategory = this.clickCategory.bind(this);
+    this.clickReset = this.clickReset.bind(this);
   }
 
   clickCategory = () => {
     this.props.actions.catCheckHandler(event.target.value);
+  }
+
+  clickReset = () => {
+    window.location.reload(false);
   }
 
   render() {
@@ -25,7 +33,7 @@ class GameInfo extends Component {
       movTvChecked,
       musArtsChecked,
       newsPolChecked,
-      sportsChecked,
+      sportsChecked
     } = this.props;
 
     return (
@@ -35,6 +43,9 @@ class GameInfo extends Component {
           <span>Score: {score.toLocaleString()}</span>
           <span>Right: {ansRight}</span>
           <span>Wrong: {ansWrong}</span>
+          <span>
+            <input type="button" value="Reset" onClick={this.clickReset}/>
+          </span>
         </div>
         <div>
           <span>

@@ -51,10 +51,10 @@ export function tickTimer() {
   };
 }
 
-export function renderVoices() {
+export function shuffleVoices() {
   return function (dispatch) {
     return dispatch({
-      type: types.RENDER_VOICES,
+      type: types.SHUFFLE_CHOICES,
     });
   };
 }
@@ -68,6 +68,15 @@ export function clickAnswer() {
   };
 }
 
+export function checkAnswer(id) {
+  return function (dispatch) {
+    return dispatch({
+      type: types.CHECK_ANSWER,
+      id
+    });
+  };
+}
+
 // CATEGORY SELECTION
 export function catCheckHandler(value) {
   return function (dispatch) {
@@ -77,5 +86,6 @@ export function catCheckHandler(value) {
     });
   };
 }
+
 
 

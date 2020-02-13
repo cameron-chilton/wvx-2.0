@@ -7,14 +7,16 @@ import {
   STOP_TIMER,
   TICK_TIMER,
   CLICK_ANSWER,
+  CHECK_ANSWER,
   TOGGLE_CATEGORY,
   LOAD_GAME_SUCCESS,
   LOAD_GAME_FAILURE,
   LOAD_VOICES,
   LOAD_VOICES_SUCCESS,
   LOAD_VOICES_FAILURE,
-  RENDER_VOICES,
+  SHUFFLE_CHOICES
 } from '../constants/actionTypes';
+import utils from '../utils/math-utils';
 import objectAssign from 'object-assign';
 
 // IMPORTANT: Note that with Redux, state should NEVER be changed.
@@ -83,10 +85,18 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         error: action.error
       };
 
-    case RENDER_VOICES:
-      return {
+    case SHUFFLE_CHOICES: {
+      newState = objectAssign({}, state);
+      newState.gameVoices = state.gameVoices || {};
+      const voiceQ = newState.gameVoices[state.voxCount] || {};
+      newState.questionVoices = utils.shuffle(voiceQ[state.voxCount]);
+      newState = {
         ...state,
-      };
+        gameVoices: newState.gameVoices,
+        questionVoices: newState.questionVoices,
+      }
+      return newState;
+    }
 
     // TIMER ACTIONS
     case START_TIMER:
@@ -122,6 +132,9 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         btnTxt: (
           (state.timer > 0) ? (state.timer) : (newState.btnTxt = 'OUT OF TIME')
         ),
+        outOfTime: (
+          (state.timer > 0) ? false : true
+        )
       };
 
       // ANSWER IS CLICKED
@@ -134,6 +147,33 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           btnTxt: state.timer,
           answered: true,
       };
+
+      case CHECK_ANSWER: {
+        newState = objectAssign({}, state);
+        const voxScore = Math.round(state.timer / 10);
+        const answeredRight = (action.id === state.ansIDs[state.voxCount]);
+        console.log('clicked ID: ' + JSON.stringify(action.id));
+        console.log('ansID' + state.voxCount + ': ' + state.ansIDs[state.voxCount]);
+        console.log('answeredRight: ' + answeredRight);
+        answeredRight ? (
+          newState = {
+            ...state,
+            btnTxt: 'RIGHT!',
+            score: state.score + voxScore,
+            ansRight: state.ansRight + 1,
+          }
+        ) : (
+          newState = {
+            ...state,
+            btnTxt: 'WRONG!',
+            //btnTxt: (setTimeout( () => {this.props.actions.checkAnswer()}, 1200)),
+            score: (state.score - 250),
+            ansWrong: state.ansWrong + 1,
+          }
+        )
+        return newState;
+    }
+
 
       // CATEGORY SELECTIONS
       case TOGGLE_CATEGORY: {
@@ -163,6 +203,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         }
         return newState;
       }
+
 
     /*
     case CALCULATE_FUEL_SAVINGS:

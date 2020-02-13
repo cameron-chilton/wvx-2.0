@@ -27,10 +27,14 @@ class App extends React.Component {
 
   }
 
+  componentDidUpdate() {
+
+  }
+
   render() {
     return (
       <div className="App">
-        <GamePage />
+        <GamePage  />
         {/*
         <div>
           <NavLink exact to='/'>Home</NavLink>
@@ -57,7 +61,6 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   whovoxGame: state.whovoxGame,
-  //consultInfo: state.ConsultInfo,
 });
 
 export default connect(

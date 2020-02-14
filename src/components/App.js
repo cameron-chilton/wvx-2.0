@@ -20,15 +20,12 @@ import {
 class App extends React.Component {
 
   componentDidMount() {
-
     const {gameIdFromUri} = this.props;
     this.props.setGameId(gameIdFromUri);
     this.props.startDataLoad(gameIdFromUri);
-
   }
 
   componentDidUpdate() {
-
   }
 
   render() {

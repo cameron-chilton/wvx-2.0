@@ -10,13 +10,14 @@ import {func} from 'prop-types';
 //import utils from '../utils/math-utils';
 import {whovoxGame} from '../types';
 
-const Game = ({whovoxGame, onStartClick}) => (
+const Game = () => (
   <>
       <div className="game">
+        {/*
         <div className="startBtn">
           <GameInfo voxCount={whovoxGame.voxCount} />
         </div>
-        {/*
+
         <div className="btn-holder">
           {
             utils.range(0, 4).map(number => (

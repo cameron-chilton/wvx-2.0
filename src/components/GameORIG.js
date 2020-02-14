@@ -1,30 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import VoiceChoices from './VoiceChoices';
-import PlayButton from './PlayButton';
-import GameInfo from './GameInfo';
-import { GET_NEWGAME, GET_ANSWERS } from '../constants/DataURLs';
-import axios from 'axios';
-import utils from '../utils/math-utils';
+//import React, {useState, useEffect} from 'react';
+//import PropTypes from 'prop-types';
+//import VoiceChoices from './VoiceChoices';
+//import PlayButton from './PlayButton';
+//import GameInfo from './GameInfo';
+//import { GET_NEWGAME, GET_ANSWERS } from '../constants/DataURLs';
+//import axios from 'axios';
+//import utils from '../utils/math-utils';
 
 // GAME STATUS: loading, start, timeon, answered, noanswer, gameover,
-let gameStatus = 'start';
+//let gameStatus = 'start';
 
 // GAME VARS: voxCount, score, right, wrong, etc.
-let voxGameCount = 0, gameScore = 0, ansRight = 0, ansWrong = 0;
+//let voxGameCount = 0, gameScore = 0, ansRight = 0, ansWrong = 0;
 
 // BUTTON TEXT: secsLeft, Nextvox, Right!, Wrong!, Out of Time!
-let btnTxt;
+//let btnTxt;
 
 // REQUEST VAR
-let response;
+//let response;
 
 // GAME VARS
-let voxAnswers, ansIDs, ansCats, ansGndr, ansAcnt, ansRace, ansDob;
+//let voxAnswers, ansIDs, ansCats, ansGndr, ansAcnt, ansRace, ansDob;
 
 ////////////////// START NEW GAME //////////////////
-
-const getNextGame = async () => {
+{/*
+  const getNextGame = async () => {
   return response = await axios.get(GET_NEWGAME).then(response => {
     return response.data
   })
@@ -48,6 +48,7 @@ const getNextGameData = () => {
     console.log('Game Answer IDs: ' + ansIDs);
   })
 }
+
 
 ////////////////// GET VOX CHOICES //////////////////
 
@@ -278,3 +279,5 @@ const Game = props => {
   };
 
 export default Game;
+
+*/}

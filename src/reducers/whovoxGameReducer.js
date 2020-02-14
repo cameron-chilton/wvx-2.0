@@ -151,9 +151,9 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       case CHECK_ANSWER: {
         newState = objectAssign({}, state);
         const voxScore = Math.round(state.timer / 10);
-        const answeredRight = (action.id === state.ansIDs[state.voxCount]);
+        const answeredRight = (action.id === state.ansIDs[state.voxCount].id);
         console.log('clicked ID: ' + JSON.stringify(action.id));
-        console.log('ansID' + state.voxCount + ': ' + state.ansIDs[state.voxCount]);
+        console.log('ansID' + state.voxCount + ': ' + state.ansIDs[state.voxCount].id);
         console.log('answeredRight: ' + answeredRight);
         answeredRight ? (
           newState = {

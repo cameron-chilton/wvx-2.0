@@ -20,7 +20,6 @@ class Timer extends Component {
 
   startTimer = () => {
     this.props.actions.startTimer(this.props.whovoxGame);
-    //this.props.actions.shuffleVoices(this.props.whovoxGame);
   }
 
   format(time) {

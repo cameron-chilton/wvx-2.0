@@ -1,5 +1,5 @@
-import api from "../api";
-import * as action from "../constants/actionTypes";
+import api from '../api';
+import * as action from '../constants/actionTypes';
 
 export const setGameId = (gameID) => ({
   type: action.NEW_GAME_LOAD, gameID

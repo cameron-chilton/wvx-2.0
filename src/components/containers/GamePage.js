@@ -37,7 +37,6 @@ class GamePage extends Component {
       ansWrong,
       questionVoices,
       answered,
-      gameIdFromUri,
     } = this.props;
 
     return (
@@ -47,7 +46,6 @@ class GamePage extends Component {
           score={score}
           ansRight={ansRight}
           ansWrong={ansWrong}
-          gameIdFromUri={gameIdFromUri}
         />
         <Timer
           timer={timer}

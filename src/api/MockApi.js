@@ -8,6 +8,7 @@ class MockApi {
    * @param {string} gameID whovox game ID
    */
   static getNewGame(gameID) {
+    console.log('mock api, gameID:' + gameID);
     return new Promise( (resolve, reject) => {
       if (gameID && gameID.length > 1) {
         setTimeout( () => {

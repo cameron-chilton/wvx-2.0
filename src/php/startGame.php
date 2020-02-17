@@ -24,12 +24,22 @@
   // send result to encoder
   //$json = json_readable_encode($data);
 
-  //echo $json;
-
   $json = $data[0]['id'];
 
+  //echo $json;
+
+  $url="http://localhost:4002/?gameID=";
+  $query = parse_url($url, PHP_URL_QUERY);
+  // Returns a string if the URL has parameters or NULL if not
+  if ($query) {
+    $url .= $json;
+    //header('Location: ' . $url);
+    echo $url;
+  }
+
+
   // send ID of new game
-  echo $json;
+  //echo $json;
 
   // close db conn
   $DB = null;

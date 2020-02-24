@@ -44,7 +44,7 @@ class VoiceChoices extends Component {
           ) : (
             (firstname + ' ' + lastname)
           )
-        }</button>
+          }</button>
     </>
     );
   }

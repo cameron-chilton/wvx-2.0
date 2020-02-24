@@ -4,7 +4,7 @@
   require 'connect.php';
 
   // json encoder
-  //require 'json_readable_encode.php';
+  require 'json_readable_encode.php';
 
   // query
   $sql = "INSERT INTO all_games () VALUES (null, now(), 'Player Name', 'Earth', 0)";
@@ -15,31 +15,36 @@
   $stmt->execute();
 
   // query 2
-  $sql2 = "SELECT id, date FROM all_games ORDER BY date DESC,id DESC LIMIT 1";
+  //$sql2 = "SELECT id, date FROM all_games ORDER BY date DESC,id DESC LIMIT 1";
+  //$stmt2 = $DB->prepare($sql2);
+  //$stmt2->execute();
+
+  //$data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+  // send result to encoder
+  //$json = json_readable_encode($data);
+
+  // new game ID val
+  //$json = $data[0]['id'];
+
+  // send ID of new game
+  //echo $json;
+
+  /* get 5 answers from DB */
+
+  $sql2 = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB FROM voices WHERE CATEGORY='Movies/TV' ORDER BY RAND() LIMIT 5";
+
+  $data = Array();
   $stmt2 = $DB->prepare($sql2);
   $stmt2->execute();
-
   $data = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
   // send result to encoder
   //$json = json_readable_encode($data);
 
-  $json = $data[0]['id'];
-
-  //echo $json;
-
-  $url="http://localhost:4002/?gameID=";
-  $query = parse_url($url, PHP_URL_QUERY);
-  // Returns a string if the URL has parameters or NULL if not
-  if ($query) {
-    $url .= $json;
-    //header('Location: ' . $url);
-    echo $url;
-  }
-
-
-  // send ID of new game
-  //echo $json;
+  // return array to api action
+  $json = json_encode($data);
+  echo $json;
 
   // close db conn
   $DB = null;

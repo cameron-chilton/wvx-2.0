@@ -43,7 +43,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ...state,
         loading: true,
         btnTxt: 'LOADING...',
-        ansIDs: action.ansIDs
+        newGameData: action.newGameData
       };
 
     case LOAD_GAME_SUCCESS: {
@@ -66,11 +66,11 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ...state,
         loading: true,
         btnTxt: 'LOADING...',
-        gameVoices: action.gameVoices
+        voiceQuestion: action.voiceQuestion
       };
 
     case LOAD_VOICES_SUCCESS: {
-      const { ...rest } = action.gameVoices;
+      const { ...rest } = action.voiceQuestion;
       return {
         ...state,
         ...rest,
@@ -87,13 +87,12 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
 
     case SHUFFLE_CHOICES: {
       newState = objectAssign({}, state);
-      newState.gameVoices = state.gameVoices || {};
-      const voiceQ = newState.gameVoices[state.voxCount] || {};
-      newState.questionVoices = utils.shuffle(voiceQ[state.voxCount]);
+      newState.voiceQuestion = state.voiceQuestion || [];
+      //const voiceQ = newState.voiceQuestion[state.voxCount] || [];
+      newState.voiceQuestion = utils.shuffle(newState.voiceQuestion);
       newState = {
         ...state,
-        gameVoices: newState.gameVoices,
-        questionVoices: newState.questionVoices,
+        voiceQuestion: newState.voiceQuestion,
       }
       return newState;
     }
@@ -151,9 +150,9 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       case CHECK_ANSWER: {
         newState = objectAssign({}, state);
         const voxScore = Math.round(state.timer / 10);
-        const answeredRight = (action.id === state.ansIDs[state.voxCount].id);
-        console.log('clicked ID: ' + JSON.stringify(action.id));
-        console.log('ansID' + state.voxCount + ': ' + state.ansIDs[state.voxCount].id);
+        const answeredRight = (action.id === state.newGameData[state.voxCount].ID);
+        console.log('clicked ID: ' + action.id);
+        console.log('ansID' + state.voxCount + ': ' + state.newGameData[state.voxCount].ID);
         console.log('answeredRight: ' + answeredRight);
         answeredRight ? (
           newState = {

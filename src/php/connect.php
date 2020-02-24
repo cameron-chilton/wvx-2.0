@@ -6,8 +6,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 // PDO connect
 $servername = 'localhost:3306';
-$username = 'cc_dev_user';
-$password = '77*Chevy';
+$username = 'root';
+$password = '91*Stanza';
 
 try {
     $DB = new PDO("mysql:host=$servername;dbname=whovox_db", $username, $password);
@@ -17,7 +17,7 @@ try {
     }
 catch(PDOException $e)
     {
-    //echo "Connection failed: " . $e->getMessage();
+    echo "Connection failed: " . $e->getMessage();
     }
 
 

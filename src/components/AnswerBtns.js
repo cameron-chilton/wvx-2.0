@@ -3,7 +3,6 @@ import {bool, func, object, array} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
-//import {setGameId,startDataLoad,} from '../actions';
 import utils from '../utils/math-utils';
 import VoiceChoices from './VoiceChoices';
 
@@ -13,12 +12,12 @@ class AnswerBtns extends Component {
   render() {
 
     const {timerOn, answered} = this.props;
-    const questionVoices = this.props.questionVoices || [];
-    //console.log('questionVoices: ' + JSON.stringify(questionVoices));
-    const ansIDs = questionVoices.map(questionVoices => questionVoices.id);
-    //console.log('ansIDs: ' + ansIDs);
-    const firstnames = questionVoices.map(questionVoices => questionVoices.firstname);
-    const lastnames = questionVoices.map(questionVoices => questionVoices.lastname);
+    const voiceQuestion = this.props.voiceQuestion || [];
+    //console.log('voiceQuestion AnswerBtns: ' + JSON.stringify(voiceQuestion));
+    const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.id);
+    //console.log('voxIDs: ' + voxIDs);
+    const firstnames = voiceQuestion.map(voiceQuestion => voiceQuestion.firstname);
+    const lastnames = voiceQuestion.map(voiceQuestion => voiceQuestion.lastname);
 
     return (
       <div className="btn-holder">
@@ -26,8 +25,7 @@ class AnswerBtns extends Component {
           utils.range(0,4).map(number => (
             <VoiceChoices
               key={number}
-              id={ansIDs && ansIDs[number]}
-              voxid={ansIDs && ansIDs[number]}
+              voxid={voxIDs && voxIDs[number]}
               onClick={this.clickAnswer}
               timerOn={timerOn}
               firstname={firstnames && firstnames[number]}
@@ -35,7 +33,7 @@ class AnswerBtns extends Component {
               answered={answered}
             />
           ))
-        }
+          }
     </div>
     );
   }
@@ -46,14 +44,14 @@ AnswerBtns.propTypes = {
   whovoxGame: object,
   clickAnswer: func,
   timerOn: bool,
-  questionVoices: array,
+  voiceQuestion: array,
   answered: bool,
 };
 
 function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
-    questionVoices: state.whovoxGame.questionVoices,
+    voiceQuestion: state.whovoxGame.voiceQuestion,
     answered: state.whovoxGame.answered,
   };
 }

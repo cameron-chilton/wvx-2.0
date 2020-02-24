@@ -11,7 +11,6 @@ export const setGameId = (gameID) => ({
  * category selections.
  *
  * @param {number} gameID ID of current whovox game
- * @param {number} answerID ID of current whovox game
  * @param {function} dispatch Redux's dispatch function
  */
 export const startDataLoad = (gameID) => {
@@ -46,21 +45,21 @@ export const startDataLoad = (gameID) => {
  *
  * (Export only intended for unit testing)
  *
- * @param {string} ansIDs The answer IDs to query against for options for all 5 Q's
+ * @param {string} newGameData The answer IDs and other data to query against for options for all 5 Q's
  * @param {function} dispatch Redux's dispatch function
  */
-export const getVoices = async (ansIDs, dispatch) => {
+export const getVoices = async (newGameData, dispatch) => {
   dispatch({ type: action.LOAD_VOICES });
 
   try {
-    let gameVoices = await api.loadGameVoices(ansIDs);
+    let voiceQuestion = await api.loadVoiceQuestion(newGameData);
     // Something went wrong server-side
-    if (gameVoices.errored) {
-      dispatch({ type: action.LOAD_VOICES_FAILURE, error: "Server-side error on 'getVoices'." });
+    if (voiceQuestion.errored) {
+      dispatch({ type: action.LOAD_VOICES_FAILURE, error: "Server-side error on 'loadVoiceQuestion'." });
       return;
     }
-    dispatch({ type: action.LOAD_VOICES_SUCCESS, gameVoices });
-    dispatch({ type: action.SHUFFLE_CHOICES, gameVoices });
+    dispatch({ type: action.LOAD_VOICES_SUCCESS, voiceQuestion });
+    dispatch({ type: action.SHUFFLE_CHOICES, voiceQuestion });
   }
   catch (error) {
     dispatch({ type: action.LOAD_VOICES_FAILURE, error });

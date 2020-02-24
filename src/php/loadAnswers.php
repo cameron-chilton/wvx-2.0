@@ -16,7 +16,7 @@ require 'json_readable_encode.php';
 
 // query
 
-$sql = "SELECT ID FROM voices
+$sql = "SELECT ID, CATEGORY, GENDER, ACCENT, RACE, DOB FROM voices
   WHERE (category = 'Movies/TV')
   OR (category = 'Music/Arts')
   OR (category = 'News/Politics')

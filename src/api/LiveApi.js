@@ -7,9 +7,6 @@ export const instance = axios.create({
   baseURL: window.apiUrl ? window.apiUrl : "http://localhost/WVX-2.0/src/php/",
 });
 
-
-export const gameID = '12345678';
-
 class LiveApi {
 
   /**
@@ -46,7 +43,7 @@ class LiveApi {
    *
    * @param {string} ansIDs whovox game IDs for querying all 5 q's
    */
-  static loadGameVoices(ansIDs) {
+  static loadVoiceQuestion(ansIDs) {
     return new Promise( (resolve, reject) => {
       if (ansIDs) {
         instance.get('loadAnswers.php')
@@ -69,7 +66,4 @@ class LiveApi {
 
 }
 
-
 export default LiveApi;
-
-

@@ -1,4 +1,8 @@
-import delay from "./delay";
+import axios from "axios";
+
+export const instance = axios.create({
+  baseURL: window.apiUrl ? window.apiUrl : "http://localhost/WVX-2.0/src/php/",
+});
 
 class MockApi {
 
@@ -8,13 +12,22 @@ class MockApi {
    * @param {string} gameID whovox game ID
    */
   static getNewGame(gameID) {
-    console.log('mock api, gameID:' + gameID);
     return new Promise( (resolve, reject) => {
       if (gameID && gameID.length > 1) {
-        setTimeout( () => {
-          resolve({ ...newGameData });
-          //reject('MOCK TEST ERROR -- getNewGame');
-        }, delay);
+        instance.get('startGame.php')
+          .then( (response) => {
+            if (response.data) {
+              const retObj = {newGameData: response.data} // put returned data into parent object
+              //console.log('getNewGame retObj: ' + JSON.stringify(retObj));
+              resolve(retObj);
+              //return response.data;
+            } else {
+              reject();
+            }
+          })
+          .catch( (error) => {
+            reject(error);
+          });
       } else {
         reject('Error communicating with the server! Check error message.');
       }
@@ -24,20 +37,55 @@ class MockApi {
   /**
    * Get all 5 for a voice question with query using IDs
    *
-   * @param {string} ansIDs whovox game IDs for querying all 5 q's
+   * @param {string} newGameData whovox game IDs for querying all 5 q's
    */
-  static loadGameVoices(ansIDs) {
+  static loadVoiceQuestion(newGameData) {
+    const gameAnswers = Object.values(newGameData);
+    console.log('gameAnswers:' + JSON.stringify(gameAnswers));
+    const questionArray = gameAnswers[0];
+    const ansID = questionArray[0].ID;
+    console.log('ansID:' + JSON.stringify(ansID));
+    const frstNm = questionArray[0].FIRSTNAME;
+    const lastNm = questionArray[0].LASTNAME;
+    const ctgy = questionArray[0].CATEGORY;
+    const gndr = questionArray[0].GENDER;
+    const acnt = questionArray[0].ACCENT;
+    const race = questionArray[0].RACE;
+    const dob = questionArray[0].DOB;
     return new Promise( (resolve, reject) => {
-      if (ansIDs) {
-        setTimeout( () => {
-          resolve({ ...gameVoices });
-          //reject('MOCK TEST ERROR -- loadGameVoices');
-        }, delay);
+      if (newGameData) {
+        instance.get('getVoiceQuestion.php?ansID=' + ansID + '&frstNm=' + frstNm + '&lastNm=' + lastNm + '&ctgy=' + ctgy
+         + '&gndr=' + gndr + '&acnt=' + acnt + '&race=' + race + '&dob=' + dob)
+        .then( (response) => {
+          if (response.data) {
+            const retObj = {voiceQuestion: response.data}
+            resolve(retObj);
+            //console.log('loadVoiceQuestion retObj: ' + JSON.stringify(retObj));
+            //return response.data;
+          } else {
+            reject();
+          }
+        })
+        .catch( (error) => {
+          reject(error);
+        });
       } else {
         reject('Error communicating with the server!!! Check error message.');
       }
     });
   }
+
+  //static loadVoiceQuestion(newGameData) {
+  //  return new Promise( (resolve, reject) => {
+  //    if (newGameData) {
+  //        resolve({ ...voiceQuestion });
+  //        //reject('MOCK TEST ERROR -- loadVoiceQuestion');
+  //    } else {
+  //      reject('Error communicating with the server!!! Check error message.');
+  //    }
+  //  });
+  //}
+
 
 }
 
@@ -45,147 +93,126 @@ class MockApi {
 /*                     Mock Data                           */
 /***********************************************************/
 
-export const gameID = '12345678';
+//export const gameID = '12345678';
 
-export const newGameData = {
-  ansIDs: [{
-    id: 101,
-    category: 'Movies/TV'
-  },{
-    id: 102,
-    category: 'Movies/TV'
-  },{
-    id: 103,
-    category: 'Movies/TV'
-  },{
-    id: 104,
-    category: 'Movies/TV'
-  },{
-    id: 105,
-    category: 'Movies/TV'
-  }]
-};
-
-// new all_games table: (gameID, date, name, location, score)
-export const gameVoices = {
-  gameVoices: [
-    {0: [
-        {
-          id: 101,
-          firstname: 'KEVIN',
-          lastname: 'SPACEY',
-          clipname: 'Spacey_Kevin'
-        },{
-          id: 93,
-          firstname: 'NICOLAS',
-          lastname: 'CAGE',
-          clipname: 'Cage_Nicolas'
-        },{
-          id: 7,
-          firstname: 'STEPHEN',
-          lastname: 'COLBERT',
-          clipname: 'Colbert_Stephen'
-        },{
-          id: 2,
-          firstname: 'DAVID',
-          lastname: 'DUCHOVNY',
-          clipname: 'Duchovny_David'
-        },{
-          id: 480,
-          firstname: 'BILL',
-          lastname: 'MAHER',
-          clipname: 'Maher_Bill'
-        }
-      ]
-    },{
-    1: [
-        {
-          id: 102,
-          firstname: 'EDWARD',
-          lastname: 'NORTON',
-          clipname: 'Norton_Edward'
-        },{
-          id: 397,
-          firstname: 'TY',
-          lastname: 'BURRELL',
-          clipname: 'Burrell_Ty'
-        },{
-          id: 436,
-          firstname: 'COREY',
-          lastname: 'HAIM',
-          clipname: 'Colbert_Stephen'
-        },{
-          id: 494,
-          firstname: 'RIVER',
-          lastname: 'PHOENIX',
-          clipname: 'Phoenix_River'
-        },{
-          id: 476,
-          firstname: 'ED',
-          lastname: 'HELMS',
-          clipname: 'Helms_Ed'
-        }
-      ]
+export const newGameDataOLD = {
+  newGameData: {
+    "0":
+    {
+      "ID": "642",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "RACE": "White",
+      "TIMES_ASKED": "0",
+      "TIMES_RIGHT": "0",
+      "DOB": "1946-1964"
+    },
+    "1":
+    {
+      "ID": "1050",
+      "CATEGORY": "News/Politics",
+      "GENDER": "Female",
+      "ACCENT": "US",
+      "RACE": "Other",
+      "TIMES_ASKED": "0",
+      "TIMES_RIGHT": "0",
+      "DOB": "1900-1945"
+    },
+    "2":
+    {
+      "ID": "386",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "RACE": "White",
+      "TIMES_ASKED": "2",
+      "TIMES_RIGHT": "1",
+      "DOB": "1946-1964"
+    },
+    "3":
+    {
+      "ID": "615",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Female",
+      "ACCENT": "US",
+      "RACE": "White",
+      "TIMES_ASKED": "4",
+      "TIMES_RIGHT": "3",
+      "DOB": "1965-1980"
+    },
+    "4":
+    {
+      "ID": "1027",
+      "CATEGORY": "Music/Arts",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "RACE": "White",
+      "TIMES_ASKED": "5",
+      "TIMES_RIGHT": "3",
+      "DOB": "1900-1945"
     }
-  ]};
-
-export const gameVoices2 = {
-  gameVoices: {
-    voxCount0: [{
-      id: 101,
-      firstname: 'KEVIN',
-      lastname: 'SPACEY',
-      clipname: 'Spacey_Kevin'
-    },{
-      id: 93,
-      firstname: 'NICOLAS',
-      lastname: 'CAGE',
-      clipname: 'Cage_Nicolas'
-    },{
-      id: 7,
-      firstname: 'STEPHEN',
-      lastname: 'COLBERT',
-      clipname: 'Colbert_Stephen'
-    },{
-      id: 2,
-      firstname: 'DAVID',
-      lastname: 'DUCHOVNY',
-      clipname: 'Duchovny_David'
-    },{
-      id: 480,
-      firstname: 'BILL',
-      lastname: 'MAHER',
-      clipname: 'Maher_Bill'
-    }],
-    voxCount1: [{
-      id: 102,
-      firstname: 'EDWARD',
-      lastname: 'NORTON',
-      clipname: 'Norton_Edward'
-    },{
-      id: 397,
-      firstname: 'TY',
-      lastname: 'BURRELL',
-      clipname: 'Burrell_Ty'
-    },{
-      id: 436,
-      firstname: 'COREY',
-      lastname: 'HAIM',
-      clipname: 'Colbert_Stephen'
-    },{
-      id: 494,
-      firstname: 'RIVER',
-      lastname: 'PHOENIX',
-      clipname: 'Phoenix_River'
-    },{
-      id: 476,
-      firstname: 'ED',
-      lastname: 'HELMS',
-      clipname: 'Helms_Ed'
-    }]
   }
 };
 
-
+export const voiceQuestion = {
+  voiceQuestion: {
+    "0":
+    {
+      "ID": "506",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "FIRSTNAME": "MICHAEL",
+      "LASTNAME": "RICHARDS",
+      "RACE": "White",
+      "DOB": "1946-1964"
+    },
+    "1":
+    {
+      "ID": "723",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "FIRSTNAME": "ANDY",
+      "LASTNAME": "KAUFMAN",
+      "RACE": "Other",
+      "DOB": "1946-1964"
+    },
+    "2":
+    {
+      "ID": "811",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "FIRSTNAME": "STEVE",
+      "LASTNAME": "BUSCEMI",
+      "RACE": "White",
+      "DOB": "1946-1964"
+    },
+    "3":
+    {
+      "ID": "545",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "FIRSTNAME": "JOE",
+      "LASTNAME": "PESCI",
+      "RACE": "White",
+      "DOB": "1946-1964"
+    },
+    "4":
+    {
+      "ID": "642",
+      "CATEGORY": "Movies/TV",
+      "GENDER": "Male",
+      "ACCENT": "US",
+      "FIRSTNAME": "PAULY",
+      "LASTNAME": "SHORE",
+      "RACE": "White",
+      "DOB": "1946-1964"
+    }
+  }
+};
 
 export default MockApi;

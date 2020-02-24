@@ -35,7 +35,7 @@ class GamePage extends Component {
       score,
       ansRight,
       ansWrong,
-      questionVoices,
+      voiceQuestion,
       answered,
     } = this.props;
 
@@ -56,7 +56,7 @@ class GamePage extends Component {
         <AnswerBtns
           onAnswerClick={this.onAnswerClick}
           timerOn={timerOn}
-          questionVoices={questionVoices}
+          voiceQuestion={voiceQuestion}
           answered={answered}
         />
         {/*
@@ -82,9 +82,8 @@ GamePage.propTypes = {
   score: oneOfType([string, number]),
   ansRight: oneOfType([string, number]),
   ansWrong: oneOfType([string, number]),
-  questionVoices: array,
+  voiceQuestion: array,
   answered: bool,
-  gameIdFromUri: string,
 };
 
 function mapStateToProps(state) {

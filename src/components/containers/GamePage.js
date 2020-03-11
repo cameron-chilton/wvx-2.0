@@ -29,14 +29,18 @@ class GamePage extends Component {
 
     const {
       voxCount,
+      ansCount,
       timerOn,
       btnTxt,
       timer,
       score,
       ansRight,
       ansWrong,
+      nextQuestion,
       voiceQuestion,
       answered,
+      gameIdFromUri,
+      newGameData
     } = this.props;
 
     return (
@@ -46,18 +50,24 @@ class GamePage extends Component {
           score={score}
           ansRight={ansRight}
           ansWrong={ansWrong}
+          timerOn={timerOn}
         />
         <Timer
           timer={timer}
           timerOn={timerOn}
           interval={interval}
           btnTxt={btnTxt}
+          voxCount={voxCount}
+          score={score}
+          gameIdFromUri={gameIdFromUri}
         />
         <AnswerBtns
           onAnswerClick={this.onAnswerClick}
           timerOn={timerOn}
           voiceQuestion={voiceQuestion}
           answered={answered}
+          newGameData={newGameData}
+          ansCount={ansCount}
         />
         {/*
         <FuelSavingsForm
@@ -73,9 +83,12 @@ class GamePage extends Component {
 }
 
 GamePage.propTypes = {
+  gameIdFromUri: string,
   whovoxGame: object,
+  newGameData: array,
   actions: object.isRequired,
   voxCount: oneOfType([string,number]),
+  ansCount: oneOfType([string,number]),
   timer: number,
   timerOn: bool,
   btnTxt: oneOfType([string, number]),

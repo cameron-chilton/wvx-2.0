@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {bool, number, func, string, object, oneOfType} from 'prop-types';
+import React, {Component} from 'react';
+import {bool, number, func, string, object, oneOfType, array} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -10,6 +10,7 @@ class VoiceChoices extends Component {
   }
 
   componentDidUpdate() {
+    //this.props.loadVoicesAllGame(this.props.newGameData);
   }
 
   constructor() {
@@ -21,14 +22,14 @@ class VoiceChoices extends Component {
   clickAnswer = (voxid) => {
     this.props.actions.clickAnswer(this.props.whovoxGame);
     this.setState({clickedBtn: true});
-    setTimeout( () => {
-      this.props.actions.checkAnswer(voxid);
-    }, 1200);
+    setTimeout( () => { this.props.actions.checkAnswer(voxid); }, 1500);
+    setTimeout( () => { this.props.actions.prepNextQuestion(); }, 3250);
+    setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 2000);
   }
 
   render() {
 
-    const {answered, timerOn, outOfTime, firstname, lastname, voxid} = this.props;
+    const {answered, timerOn, outOfTime, firstname, lastname, voxid, newGameData, ansCount} = this.props;
 
     return (
       <>
@@ -37,6 +38,8 @@ class VoiceChoices extends Component {
           voxid={voxid}
           onClick={ () => this.clickAnswer(voxid) }
           disabled={!timerOn ? true : false}
+          newgamedata={newGameData}
+          anscount={ansCount}
         >{
           (!outOfTime) ? (
             (timerOn) ? (firstname + ' ' + lastname) :
@@ -53,7 +56,9 @@ class VoiceChoices extends Component {
   VoiceChoices.propTypes = {
     actions: object.isRequired,
     voxid: oneOfType([string,number]),
+    ansCount: oneOfType([string,number]),
     whovoxGame: object,
+    newGameData: array,
     clickAnswer: func,
     answered: bool,
     timerOn: bool,
@@ -65,12 +70,13 @@ class VoiceChoices extends Component {
   function mapStateToProps(state) {
     return {
       outOfTime: state.whovoxGame.outOfTime,
+      newGameData: state.whovoxGame.newGameData,
     };
   }
 
   function mapDispatchToProps(dispatch) {
     return {
-      actions: bindActionCreators(actions, dispatch)
+      actions: bindActionCreators(actions, dispatch),
     };
   }
 

@@ -66,6 +66,57 @@ export const getVoices = async (newGameData, dispatch) => {
   }
 };
 
+/**
+ * Get voice questions 1-4
+ *
+ * @param {string} newGameData The answer IDs and other data to query against for options for all 5 Q's
+ * @param {function} dispatch Redux's dispatch function
+
+
+export const loadVoicesAllGame = async (newGameData, ansCount) => {
+  //dispatch({ type: action.LOAD_VOICES_ALL_GAME });
+
+  try {
+    let voiceQuestion = await api.getNextQuestion(newGameData, ansCount);
+    // Something went wrong server-side
+    if (voiceQuestion.errored) {
+      //dispatch({ type: action.LOAD_VOICES_ALL_GAME_FAILURE, error: "Server-side error on 'loadVoiceQuestion'." });
+      return;
+    }
+    //dispatch({ type: action.LOAD_VOICES_ALL_GAME_SUCCESS, voiceQuestion });
+    //dispatch({ type: action.SHUFFLE_CHOICES, voiceQuestion });
+  }
+  catch (error) {
+    //dispatch({ type: action.LOAD_VOICES_FAILURE, error });
+  }
+};
+*/
+
+export const loadVoicesAllGameXXX = (newGameData, ansCount) => {
+
+  return (dispatch) => {
+
+    dispatch({ type: action.LOAD_VOICES_ALL_GAME });
+
+    return api.getNextQuestion(newGameData, ansCount)
+      .then(newGameData => {
+        // Something went wrong server-side
+        if (newGameData.errored) {
+          dispatch({ type: action.LOAD_VOICES_ALL_GAME_FAILURE, error: "Server-side error on 'loadVoicesAllGame'." });
+          return;
+        }
+        dispatch({ type: action.LOAD_VOICES_ALL_GAME_SUCCESS, newGameData });
+        //return getVoices(newGameData, dispatch);
+      })
+      .catch( error => {
+       dispatch({ type: action.LOAD_VOICES_ALL_GAME_FAILURE, error });
+      });
+  };
+
+};
+
+
+
 
 
 

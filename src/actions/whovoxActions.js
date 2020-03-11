@@ -1,3 +1,4 @@
+import api from '../api';
 import * as types from '../constants/actionTypes';
 import {getFormattedDateTime} from '../utils/dates';
 
@@ -51,14 +52,6 @@ export function tickTimer() {
   };
 }
 
-export function shuffleVoices() {
-  return function (dispatch) {
-    return dispatch({
-      type: types.SHUFFLE_CHOICES,
-    });
-  };
-}
-
 // ANSWER BUTTONS
 export function clickAnswer() {
   return function (dispatch) {
@@ -76,6 +69,44 @@ export function checkAnswer(id) {
     });
   };
 }
+
+export function prepNextQuestion() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.PREP_NEXT_QUESTION,
+    });
+  };
+}
+
+export function loadVoicesAllGame(newGameData, ansCount) {
+  return function (dispatch) {
+
+    dispatch({ type: types.LOAD_VOICES_ALL_GAME });
+    return api.getNextQuestion(newGameData, ansCount)
+      .then(nextQuestion => {
+        // Something went wrong server-side
+        if (nextQuestion.errored) {
+          dispatch({ type: types.LOAD_VOICES_ALL_GAME_FAILURE, error: "Server-side error on 'loadVoicesAllGame'." });
+          return;
+        }
+        dispatch({ type: types.LOAD_VOICES_ALL_GAME_SUCCESS, nextQuestion });
+        dispatch({ type: types.SHUFFLE_CHOICES_ALL_GAME, nextQuestion });
+      })
+      .catch( error => {
+        dispatch({ type: types.LOAD_VOICES_ALL_GAME_FAILURE, error });
+      });
+
+  };
+}
+
+//export function loadVoicesAllGame(newGameData) {
+  //return function (dispatch) {
+    //return dispatch({
+    //  type: types.LOAD_VOICES_ALL_GAME,
+    //  newGameData
+    //});
+  //};
+//}
 
 // CATEGORY SELECTION
 export function catCheckHandler(value) {

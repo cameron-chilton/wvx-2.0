@@ -75,6 +75,44 @@ class MockApi {
     });
   }
 
+///////////// GET NEXT QUESTION AFTER 0 ////////////////
+
+  static getNextQuestion(newGameData, ansCount) {
+    const gameAnswers = Object.values(newGameData);
+    console.log('getNextQuestion ansCount:' + ansCount);
+    console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
+    const questionArray = gameAnswers[ansCount];
+    console.log('getNextQuestion questionArray:' + JSON.stringify(questionArray));
+    const ansID = questionArray.ID;
+    console.log('getNextQuestion ansID:' + JSON.stringify(ansID));
+    const frstNm = questionArray.FIRSTNAME;
+    const lastNm = questionArray.LASTNAME;
+    const ctgy = questionArray.CATEGORY;
+    const gndr = questionArray.GENDER;
+    const acnt = questionArray.ACCENT;
+    const race = questionArray.RACE;
+    const dob = questionArray.DOB;
+    return new Promise( (resolve, reject) => {
+      if (newGameData) {
+        instance.get('getVoiceQuestion.php?ansID=' + ansID + '&frstNm=' + frstNm + '&lastNm=' + lastNm + '&ctgy=' + ctgy
+         + '&gndr=' + gndr + '&acnt=' + acnt + '&race=' + race + '&dob=' + dob)
+        .then( (response) => {
+          if (response.data) {
+            const retObj = {nextQuestion: response.data}
+            resolve(retObj);
+          } else {
+            reject();
+          }
+        })
+        .catch( (error) => {
+          reject(error);
+        });
+      } else {
+        reject('Error communicating with the server!!! Check error message.');
+      }
+    });
+  }
+
   //static loadVoiceQuestion(newGameData) {
   //  return new Promise( (resolve, reject) => {
   //    if (newGameData) {

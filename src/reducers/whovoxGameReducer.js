@@ -3,20 +3,26 @@ import initialState from './initialState';
 import {
   NEW_GAME_LOAD,
   LOAD_GAME_DATA,
+  LOAD_GAME_SUCCESS,
+  LOAD_GAME_FAILURE,
   START_TIMER,
   STOP_TIMER,
   TICK_TIMER,
   CLICK_ANSWER,
   CHECK_ANSWER,
   TOGGLE_CATEGORY,
-  LOAD_GAME_SUCCESS,
-  LOAD_GAME_FAILURE,
   LOAD_VOICES,
   LOAD_VOICES_SUCCESS,
   LOAD_VOICES_FAILURE,
-  SHUFFLE_CHOICES
+  SHUFFLE_CHOICES,
+  LOAD_VOICES_ALL_GAME,
+  LOAD_VOICES_ALL_GAME_SUCCESS,
+  LOAD_VOICES_ALL_GAME_FAILURE,
+  SHUFFLE_CHOICES_ALL_GAME,
+  PREP_NEXT_QUESTION,
 } from '../constants/actionTypes';
 import utils from '../utils/math-utils';
+import whovoxUtils from '../utils/whovox-utils';
 import objectAssign from 'object-assign';
 
 // IMPORTANT: Note that with Redux, state should NEVER be changed.
@@ -31,81 +37,32 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
 
   switch (action.type) {
 
-    // LOAD GAME DATA
-    case NEW_GAME_LOAD:
-      return {
-         ...state,
-        id: action.gameID
-      };
-
-    case LOAD_GAME_DATA:
-      return {
-        ...state,
-        loading: true,
-        btnTxt: 'LOADING...',
-        newGameData: action.newGameData
-      };
-
-    case LOAD_GAME_SUCCESS: {
-      const { ...rest } = action.newGameData;
-      return {
-        ...state,
-        ...rest,
-        loading: false,
-      };
-    }
-
-    case LOAD_GAME_FAILURE:
-      return {
-        ...state,
-      };
-
-    // LOAD VOICE QUESTIONS FOR GAME
-    case LOAD_VOICES:
-      return {
-        ...state,
-        loading: true,
-        btnTxt: 'LOADING...',
-        voiceQuestion: action.voiceQuestion
-      };
-
-    case LOAD_VOICES_SUCCESS: {
-      const { ...rest } = action.voiceQuestion;
-      return {
-        ...state,
-        ...rest,
-        loading: false,
-        btnTxt: 'STARTVOX',
-      };
-    }
-
-    case LOAD_VOICES_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-
-    case SHUFFLE_CHOICES: {
-      newState = objectAssign({}, state);
-      newState.voiceQuestion = state.voiceQuestion || [];
-      //const voiceQ = newState.voiceQuestion[state.voxCount] || [];
-      newState.voiceQuestion = utils.shuffle(newState.voiceQuestion);
-      newState = {
-        ...state,
-        voiceQuestion: newState.voiceQuestion,
-      }
-      return newState;
-    }
-
-    // TIMER ACTIONS
+    //////////////////////// TIMER ACTIONS ////////////////////
     case START_TIMER:
+      newState = objectAssign({}, state);
       return {
         ...state,
-        timerOn: true,
+        timerOn: (
+          (state.voxCount !== 4) && true
+        ),
         offset: action.offset,
-        btnTxt: state.timer
+        btnTxt: state.timer,
+        voxCount: (
+          (state.voxCount !== 4)
+            ? (state.score === 0) ? (0) : (state.voxCount + 1)
+            : (state.voxCount)
+        ),
+        timer: (
+          (state.voxCount !== 4)
+            ? 10000
+            : 0
+        ),
+        voiceQuestion: (
+          (state.voxCount === 0)
+            ? state.voiceQuestion
+            : newState.voiceQuestion = state.nextQuestion
+        )
       };
-
     case STOP_TIMER:
       return {
         ...state,
@@ -136,72 +93,198 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         )
       };
 
-      // ANSWER IS CLICKED
-      case CLICK_ANSWER:
-        return {
-          ...state,
-          timerOn: false,
-          timer: state.timer,
-          offset: undefined,
-          btnTxt: state.timer,
-          answered: true,
+    /////////////////// LOAD GAME DATA /////////////////////////
+
+    case NEW_GAME_LOAD:
+      return {
+         ...state,
+        id: action.gameID
+      };
+    case LOAD_GAME_DATA:
+      return {
+        ...state,
+        loading: true,
+        btnTxt: 'LOADING...',
+        newGameData: action.newGameData
+      };
+    case LOAD_GAME_SUCCESS: {
+      const { ...rest } = action.newGameData;
+      return {
+        ...state,
+        ...rest,
+        loading: false,
+      };
+    }
+    case LOAD_GAME_FAILURE:
+      return {
+        ...state,
       };
 
-      case CHECK_ANSWER: {
-        newState = objectAssign({}, state);
-        const voxScore = Math.round(state.timer / 10);
-        const answeredRight = (action.id === state.newGameData[state.voxCount].ID);
-        console.log('clicked ID: ' + action.id);
-        console.log('ansID' + state.voxCount + ': ' + state.newGameData[state.voxCount].ID);
-        console.log('answeredRight: ' + answeredRight);
-        answeredRight ? (
-          newState = {
-            ...state,
-            btnTxt: 'RIGHT!',
-            score: state.score + voxScore,
-            ansRight: state.ansRight + 1,
-          }
-        ) : (
-          newState = {
-            ...state,
-            btnTxt: 'WRONG!',
-            //btnTxt: (setTimeout( () => {this.props.actions.checkAnswer()}, 1200)),
-            score: (state.score - 250),
-            ansWrong: state.ansWrong + 1,
-          }
-        )
-        return newState;
+    ///////////////// INITAL LOAD VOICE QUESTIONS FOR GAME //////////////////////
+
+    case LOAD_VOICES:
+      return {
+        ...state,
+        loading: true,
+        btnTxt: 'LOADING...',
+        voiceQuestion: action.voiceQuestion
+      };
+    case LOAD_VOICES_SUCCESS: {
+      const { ...rest } = action.voiceQuestion;
+      return {
+        ...state,
+        ...rest,
+        loading: false,
+        btnTxt: 'STARTVOX',
+      };
+    }
+    case LOAD_VOICES_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    // SHUFFLE QUESTION ARRAY
+    case SHUFFLE_CHOICES: {
+      newState = objectAssign({}, state);
+      newState.voiceQuestion = state.voiceQuestion || [];
+      newState = {
+        ...state,
+        voiceQuestion: utils.shuffle(newState.voiceQuestion),
+      }
+      return newState;
+    }
+
+    //////////////// LOAD FINAL 4 QUESTIONS FOR GAME /////////////////
+
+    case LOAD_VOICES_ALL_GAME:
+      return {
+        ...state,
+        loading: true,
+        nextQuestion: action.nextQuestion
+      };
+    case LOAD_VOICES_ALL_GAME_SUCCESS: {
+      console.log('LOAD_VOICES_ALL_GAME_SUCCESS: ' + JSON.stringify(action.nextQuestion));
+      const { ...rest } = action.nextQuestion;
+      return {
+        ...state,
+        ...rest,
+        loading: false,
+      };
+    }
+    case LOAD_VOICES_ALL_GAME_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    // SHUFFLE QUESTION ARRAY
+    case SHUFFLE_CHOICES_ALL_GAME: {
+      newState = objectAssign({}, state);
+      newState.nextQuestion = state.nextQuestion || [];
+      newState = {
+        ...state,
+        nextQuestion: utils.shuffle(newState.nextQuestion),
+      }
+      return newState;
     }
 
 
-      // CATEGORY SELECTIONS
-      case TOGGLE_CATEGORY: {
-        if (action.value === 'Movies/TV') {
-          newState = {
-            ...state,
-            movTvChecked: state.movTvChecked ? false : true,
-          }
+    // ANSWER IS CLICKED
+    case CLICK_ANSWER:
+      return {
+        ...state,
+        timerOn: false,
+        timer: state.timer,
+        offset: undefined,
+        btnTxt: state.timer,
+        answered: true,
+        ansCount: state.ansCount + 1,
+    };
+
+    case CHECK_ANSWER: {
+      newState = objectAssign({}, state);
+      const voxScore = Math.round(state.timer / 10);
+      const answeredRight = (action.id === state.newGameData[state.voxCount].ID);
+      console.log('clicked ID: ' + action.id);
+      console.log('ansID' + state.voxCount + ': ' + state.newGameData[state.voxCount].ID);
+      console.log('answeredRight: ' + answeredRight);
+      answeredRight ? (
+        newState = {
+          ...state,
+          btnTxt: 'RIGHT! +' + voxScore,
+          score: state.score + voxScore,
+          ansRight: state.ansRight + 1,
         }
-        if (action.value === 'Music/Arts') {
-          newState = {
-            ...state,
-            musArtsChecked: state.musArtsChecked ? false : true,
-          }
+      ) : (
+        newState = {
+          ...state,
+          btnTxt: 'WRONG! -250',
+          score: (state.score - 250),
+          ansWrong: state.ansWrong + 1,
         }
-        if (action.value === 'News/Politics') {
-          newState = {
-            ...state,
-            newsPolChecked: state.newsPolChecked ? false : true,
-          }
+      )
+      return newState;
+    }
+
+    case PREP_NEXT_QUESTION:
+        return {
+          ...state,
+          btnTxt: (
+            (state.voxCount !== 4)
+              ? 'NEXTVOX'
+              : 'GAME OVER'
+          )
+    };
+
+
+    // CATEGORY SELECTIONS
+    case TOGGLE_CATEGORY: {
+
+      if (action.value === 'Movies/TV') {
+        newState = {
+          ...state,
+          movTvChecked: state.movTvChecked ? false : true,
+          categories: (
+            (state.movTvChecked)
+              ? whovoxUtils.arrayRemove(state.categories, action.value)
+              : [...state.categories, action.value]
+          ),
         }
-        if (action.value === 'Sports') {
-          newState = {
-            ...state,
-            sportsChecked: state.sportsChecked ? false : true,
-          }
-        }
-        return newState;
       }
+      if (action.value === 'Music/Arts') {
+        newState = {
+          ...state,
+          musArtsChecked: state.musArtsChecked ? false : true,
+          categories: (
+            (state.musArtsChecked)
+              ? whovoxUtils.arrayRemove(state.categories, action.value)
+              : [...state.categories, action.value]
+          ),
+        }
+      }
+      if (action.value === 'News/Politics') {
+        newState = {
+          ...state,
+          newsPolChecked: state.newsPolChecked ? false : true,
+          categories: (
+            (state.newsPolChecked)
+              ? whovoxUtils.arrayRemove(state.categories, action.value)
+              : [...state.categories, action.value]
+          ),
+        }
+      }
+      if (action.value === 'Sports') {
+        newState = {
+          ...state,
+          sportsChecked: state.sportsChecked ? false : true,
+          categories: (
+            (state.sportsChecked)
+              ? whovoxUtils.arrayRemove(state.categories, action.value)
+              : [...state.categories, action.value]
+          ),
+        }
+      }
+      return newState;
+    }
 
 
     /*

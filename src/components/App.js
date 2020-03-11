@@ -1,17 +1,14 @@
 /* eslint-disable import/no-named-as-default */
 import React from "react";
 import {string, func} from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 //import { NavLink, Route, Switch } from 'react-router-dom';
 //import AboutPage from './AboutPage';
 import GamePage from './containers/GamePage';
 //import HomePage from './HomePage';
 //import NotFoundPage from './NotFoundPage';
 //import { hot } from 'react-hot-loader';
-import {
-  setGameId,
-  startDataLoad,
-} from '../actions';
+import {setGameId, startDataLoad} from '../actions';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -31,7 +28,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <GamePage  />
+        <GamePage />
         {/*
         <div>
           <NavLink exact to='/'>Home</NavLink>

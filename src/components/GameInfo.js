@@ -27,6 +27,7 @@ class GameInfo extends Component {
 
     const {
       voxCount,
+      timerOn,
       score,
       ansRight,
       ansWrong,
@@ -73,6 +74,7 @@ class GameInfo extends Component {
 GameInfo.propTypes = {
   actions: object.isRequired,
   voxCount: oneOfType([string,number]),
+  timerOn: bool,
   score: oneOfType([string,number]),
   ansRight: oneOfType([string,number]),
   ansWrong: oneOfType([string,number]),

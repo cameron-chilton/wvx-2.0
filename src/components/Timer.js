@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {string, bool, object, number, oneOfType} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -29,11 +29,9 @@ class Timer extends Component {
       }
       return time;
     }
-
     time = new Date(time);
     let s = time.getSeconds().toString();
     let ms = pad((time.getMilliseconds() / 10).toFixed(0), 2);
-
     return `${s}.${ms}`;
   }
 
@@ -50,26 +48,31 @@ class Timer extends Component {
 }
 
 Timer.propTypes = {
-  actions: object.isRequired,
+  gameIdFromUri: string,
+  actions: object,
   whovoxGame: object,
   timerOn: bool,
+  voxCount: oneOfType([string,number]),
   btnTxt: oneOfType([string, number]),
+  score: oneOfType([string, number]),
 };
 
 function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
-    btnTxt: state.whovoxGame.btnTxt
-  };
+    btnTxt: state.whovoxGame.btnTxt,
+    voxCount: state.whovoxGame.voxCount,
+    score: state.whovoxGame.score,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Timer);

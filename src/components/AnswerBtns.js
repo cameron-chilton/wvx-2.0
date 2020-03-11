@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {bool, func, object, array} from "prop-types";
+import {bool, func, object, array, number, oneOfType, string} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -11,7 +11,7 @@ class AnswerBtns extends Component {
 
   render() {
 
-    const {timerOn, answered} = this.props;
+    const {timerOn, answered, newGameData, ansCount} = this.props;
     const voiceQuestion = this.props.voiceQuestion || [];
     //console.log('voiceQuestion AnswerBtns: ' + JSON.stringify(voiceQuestion));
     const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.id);
@@ -31,6 +31,8 @@ class AnswerBtns extends Component {
               firstname={firstnames && firstnames[number]}
               lastname={lastnames && lastnames[number]}
               answered={answered}
+              newGameData={newGameData}
+              ansCount={ansCount}
             />
           ))
           }
@@ -42,9 +44,11 @@ class AnswerBtns extends Component {
 AnswerBtns.propTypes = {
   actions: object.isRequired,
   whovoxGame: object,
+  ansCount: oneOfType([string,number]),
   clickAnswer: func,
   timerOn: bool,
   voiceQuestion: array,
+  newGameData: array,
   answered: bool,
 };
 
@@ -53,6 +57,7 @@ function mapStateToProps(state) {
     timerOn: state.whovoxGame.timerOn,
     voiceQuestion: state.whovoxGame.voiceQuestion,
     answered: state.whovoxGame.answered,
+    ansCount: state.whovoxGame.ansCount,
   };
 }
 

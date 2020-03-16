@@ -11,7 +11,12 @@ class AnswerBtns extends Component {
 
   render() {
 
-    const {timerOn, answered, newGameData, ansCount} = this.props;
+    const {timerOn, answered, ansCount, newGameData} = this.props;
+    const ansID3 = newGameData || [];
+    const ansID2 = ansID3[0] || {};
+    const ansID = ansID2.ID || '';
+    console.log('answerBtns ansID: ' + ansID);
+
     const voiceQuestion = this.props.voiceQuestion || [];
     //console.log('voiceQuestion AnswerBtns: ' + JSON.stringify(voiceQuestion));
     const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.id);
@@ -33,6 +38,7 @@ class AnswerBtns extends Component {
               answered={answered}
               newGameData={newGameData}
               ansCount={ansCount}
+              ansID={ansID}
             />
           ))
           }
@@ -45,6 +51,7 @@ AnswerBtns.propTypes = {
   actions: object.isRequired,
   whovoxGame: object,
   ansCount: oneOfType([string,number]),
+  voxCount: oneOfType([string,number]),
   clickAnswer: func,
   timerOn: bool,
   voiceQuestion: array,
@@ -56,6 +63,7 @@ function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
     voiceQuestion: state.whovoxGame.voiceQuestion,
+    newGameData: state.whovoxGame.newGameData,
     answered: state.whovoxGame.answered,
     ansCount: state.whovoxGame.ansCount,
   };

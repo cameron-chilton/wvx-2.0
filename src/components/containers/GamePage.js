@@ -36,7 +36,6 @@ class GamePage extends Component {
       score,
       ansRight,
       ansWrong,
-      nextQuestion,
       voiceQuestion,
       answered,
       gameIdFromUri,
@@ -68,6 +67,7 @@ class GamePage extends Component {
           answered={answered}
           newGameData={newGameData}
           ansCount={ansCount}
+          voxCount={voxCount}
         />
         {/*
         <FuelSavingsForm

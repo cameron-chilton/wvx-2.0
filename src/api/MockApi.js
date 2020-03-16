@@ -41,10 +41,10 @@ class MockApi {
    */
   static loadVoiceQuestion(newGameData) {
     const gameAnswers = Object.values(newGameData);
-    console.log('gameAnswers:' + JSON.stringify(gameAnswers));
+    console.log('loadVoiceQuestion gameAnswers:' + JSON.stringify(gameAnswers));
     const questionArray = gameAnswers[0];
     const ansID = questionArray[0].ID;
-    console.log('ansID:' + JSON.stringify(ansID));
+    console.log('loadVoiceQuestion ansID:' + JSON.stringify(ansID));
     const frstNm = questionArray[0].FIRSTNAME;
     const lastNm = questionArray[0].LASTNAME;
     const ctgy = questionArray[0].CATEGORY;

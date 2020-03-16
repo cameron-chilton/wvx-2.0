@@ -40,7 +40,8 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
     //////////////////////// TIMER ACTIONS ////////////////////
     case START_TIMER:
       newState = objectAssign({}, state);
-      return {
+      newState.voiceQuestion = (state.ansCount === 0) ? state.voiceQuestion : state.nextQuestion;
+      newState = {
         ...state,
         timerOn: (
           (state.voxCount !== 4) && true
@@ -57,12 +58,10 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
             ? 10000
             : 0
         ),
-        voiceQuestion: (
-          (state.voxCount === 0)
-            ? state.voiceQuestion
-            : newState.voiceQuestion = state.nextQuestion
-        )
-      };
+        voiceQuestion: newState.voiceQuestion
+      }
+    return newState;
+
     case STOP_TIMER:
       return {
         ...state,
@@ -163,7 +162,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         nextQuestion: action.nextQuestion
       };
     case LOAD_VOICES_ALL_GAME_SUCCESS: {
-      console.log('LOAD_VOICES_ALL_GAME_SUCCESS: ' + JSON.stringify(action.nextQuestion));
+      //console.log('LOAD_VOICES_ALL_GAME_SUCCESS: ' + JSON.stringify(action.nextQuestion));
       const { ...rest } = action.nextQuestion;
       return {
         ...state,
@@ -176,7 +175,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ...state,
         error: action.error
       };
-    // SHUFFLE QUESTION ARRAY
+    // SHUFFLE QUESTION ARRAY ALL GAME
     case SHUFFLE_CHOICES_ALL_GAME: {
       newState = objectAssign({}, state);
       newState.nextQuestion = state.nextQuestion || [];
@@ -188,7 +187,8 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
     }
 
 
-    // ANSWER IS CLICKED
+    /////////////////// CHECK ANSWER WHEN CLICKED ///////////////////
+
     case CLICK_ANSWER:
       return {
         ...state,
@@ -199,14 +199,13 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         answered: true,
         ansCount: state.ansCount + 1,
     };
-
     case CHECK_ANSWER: {
       newState = objectAssign({}, state);
       const voxScore = Math.round(state.timer / 10);
       const answeredRight = (action.id === state.newGameData[state.voxCount].ID);
-      console.log('clicked ID: ' + action.id);
-      console.log('ansID' + state.voxCount + ': ' + state.newGameData[state.voxCount].ID);
-      console.log('answeredRight: ' + answeredRight);
+      //console.log('clicked ID: ' + action.id);
+      //console.log('ansID' + state.voxCount + ': ' + state.newGameData[state.voxCount].ID);
+      //console.log('answeredRight: ' + answeredRight);
       answeredRight ? (
         newState = {
           ...state,
@@ -224,7 +223,6 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       )
       return newState;
     }
-
     case PREP_NEXT_QUESTION:
         return {
           ...state,
@@ -234,7 +232,6 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
               : 'GAME OVER'
           )
     };
-
 
     // CATEGORY SELECTIONS
     case TOGGLE_CATEGORY: {

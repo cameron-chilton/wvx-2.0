@@ -10,36 +10,48 @@ class VoiceChoices extends Component {
   }
 
   componentDidUpdate() {
-    //this.props.loadVoicesAllGame(this.props.newGameData);
   }
 
   constructor() {
     super();
     this.clickAnswer = this.clickAnswer.bind(this);
     this.state = {clickedBtn: false};
+    this.state = {isRightAnswer: false};
   }
 
   clickAnswer = (voxid) => {
     this.props.actions.clickAnswer(this.props.whovoxGame);
     this.setState({clickedBtn: true});
-    setTimeout( () => { this.props.actions.checkAnswer(voxid); }, 1500);
+    //const ansID = this.props.newGameData[this.props.ansCount].ID;
+
+    setTimeout( () => {
+      this.props.actions.checkAnswer(voxid);
+      //this.setState({
+        //isRightAnswer: (ansID === voxid) ? true : false
+      //})
+    }, 1500);
     setTimeout( () => { this.props.actions.prepNextQuestion(); }, 3250);
     setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 2000);
   }
 
   render() {
 
-    const {answered, timerOn, outOfTime, firstname, lastname, voxid, newGameData, ansCount} = this.props;
-
+    const {answered, timerOn, outOfTime, firstname, lastname, voxid, newGameData, ansCount, ansID} = this.props;
     return (
       <>
         <button
-          className={!this.state.clickedBtn ? 'vxBtn' : 'vxBtnSel'}
+          //className={
+            //!this.state.clickedBtn ? 'vxBtn' : 'vxBtnSel'
+          //}
+          className={
+             ansID !== voxid ? 'vxBtn' : 'vxBtnRight'
+          }
           voxid={voxid}
           onClick={ () => this.clickAnswer(voxid) }
           disabled={!timerOn ? true : false}
           newgamedata={newGameData}
           anscount={ansCount}
+          ansid={ansID}
         >{
           (!outOfTime) ? (
             (timerOn) ? (firstname + ' ' + lastname) :
@@ -47,8 +59,8 @@ class VoiceChoices extends Component {
           ) : (
             (firstname + ' ' + lastname)
           )
-          }</button>
-    </>
+        }</button>
+      </>
     );
   }
 }
@@ -56,6 +68,7 @@ class VoiceChoices extends Component {
   VoiceChoices.propTypes = {
     actions: object.isRequired,
     voxid: oneOfType([string,number]),
+    ansID: oneOfType([string,number]),
     ansCount: oneOfType([string,number]),
     whovoxGame: object,
     newGameData: array,

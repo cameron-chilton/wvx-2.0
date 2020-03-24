@@ -1,26 +1,57 @@
-import React, { Component } from "react";
-import {bool, func, object, array, number, oneOfType, string} from "prop-types";
+import React, {Component} from 'react';
+import {bool, object, array, number, oneOfType, string} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
 import utils from '../utils/math-utils';
 import VoiceChoices from './VoiceChoices';
 
-
 class AnswerBtns extends Component {
 
+  componentDidUpdate() {
+
+    // reset button when nextvox is clicked
+    if (this.props.timerOn && !this.props.answered && this.state.showRightAnswer) {
+      this.setState({showRightAnswer: false});
+      this.setState({isOutOfTime: false});
+    }
+
+    // show right answer when time runs out
+    if (this.props.outOfTime && !this.state.isOutOfTime) {
+        setTimeout( () => {
+          this.setState({showRightAnswer: true});
+          this.props.actions.outOfTime();
+          setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 1000);
+        }, 700);
+        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1800);
+        this.setState({isOutOfTime: true});
+    }
+
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      showRightAnswer: false,
+      isOutOfTime: false,
+    };
+  }
+
+  updateBtns = () => {
+    setTimeout( () => {
+      this.setState({showRightAnswer: true});
+    }, 1300);
+  }
   render() {
 
-    const {timerOn, answered, ansCount, newGameData} = this.props;
+    const {timerOn, answered, ansCount, newGameData, voxCount} = this.props;
+    // get answer ID from newGameData
     const ansID3 = newGameData || [];
-    const ansID2 = ansID3[0] || {};
+    const ansID2 = ansID3[voxCount] || {};
     const ansID = ansID2.ID || '';
-    console.log('answerBtns ansID: ' + ansID);
-
+    // map IDs and names
     const voiceQuestion = this.props.voiceQuestion || [];
-    //console.log('voiceQuestion AnswerBtns: ' + JSON.stringify(voiceQuestion));
     const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.id);
-    //console.log('voxIDs: ' + voxIDs);
     const firstnames = voiceQuestion.map(voiceQuestion => voiceQuestion.firstname);
     const lastnames = voiceQuestion.map(voiceQuestion => voiceQuestion.lastname);
 
@@ -31,7 +62,13 @@ class AnswerBtns extends Component {
             <VoiceChoices
               key={number}
               voxid={voxIDs && voxIDs[number]}
-              onClick={this.clickAnswer}
+              btnClass={
+                (!this.state.showRightAnswer) ? (
+                  'vxBtn'
+                ) : (
+                  (ansID === voxIDs[number]) ? 'vxBtnRight' : 'vxBtn'
+                )
+              }
               timerOn={timerOn}
               firstname={firstnames && firstnames[number]}
               lastname={lastnames && lastnames[number]}
@@ -39,6 +76,8 @@ class AnswerBtns extends Component {
               newGameData={newGameData}
               ansCount={ansCount}
               ansID={ansID}
+              isRightAnswer={(ansID === voxIDs[number]) ? 'true' : 'false'}
+              updateBtns={this.updateBtns}
             />
           ))
           }
@@ -52,20 +91,24 @@ AnswerBtns.propTypes = {
   whovoxGame: object,
   ansCount: oneOfType([string,number]),
   voxCount: oneOfType([string,number]),
-  clickAnswer: func,
+  ansID: oneOfType([string,number]),
   timerOn: bool,
+  outOfTime: bool,
   voiceQuestion: array,
   newGameData: array,
   answered: bool,
+  isRightAnswer: string,
 };
 
 function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
+    outOfTime: state.whovoxGame.outOfTime,
     voiceQuestion: state.whovoxGame.voiceQuestion,
     newGameData: state.whovoxGame.newGameData,
     answered: state.whovoxGame.answered,
     ansCount: state.whovoxGame.ansCount,
+    voxCount: state.whovoxGame.voxCount,
   };
 }
 
@@ -79,7 +122,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AnswerBtns);
-
-
-
-

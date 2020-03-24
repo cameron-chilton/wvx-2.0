@@ -55,6 +55,19 @@ const whovoxUtils = {
       return arr.filter(function(ele){
         return ele != value;
       });
+    },
+
+    formatTime: (time) => {
+      const pad = (time, length) => {
+        while (time.length < length) {
+          time = '0' + time;
+        }
+        return time;
+      }
+      time = new Date(time);
+      let s = time.getSeconds().toString();
+      let ms = pad((time.getMilliseconds() / 10).toFixed(0), 2);
+      return `${s}.${ms}`;
     }
 
   };

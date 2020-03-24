@@ -38,8 +38,8 @@ class GamePage extends Component {
       ansWrong,
       voiceQuestion,
       answered,
-      gameIdFromUri,
-      newGameData
+      newGameData,
+      outOfTime
     } = this.props;
 
     return (
@@ -58,16 +58,16 @@ class GamePage extends Component {
           btnTxt={btnTxt}
           voxCount={voxCount}
           score={score}
-          gameIdFromUri={gameIdFromUri}
+          answered={answered}
         />
         <AnswerBtns
-          onAnswerClick={this.onAnswerClick}
           timerOn={timerOn}
           voiceQuestion={voiceQuestion}
           answered={answered}
           newGameData={newGameData}
           ansCount={ansCount}
           voxCount={voxCount}
+          outOfTime={outOfTime}
         />
         {/*
         <FuelSavingsForm
@@ -83,7 +83,6 @@ class GamePage extends Component {
 }
 
 GamePage.propTypes = {
-  gameIdFromUri: string,
   whovoxGame: object,
   newGameData: array,
   actions: object.isRequired,
@@ -91,6 +90,7 @@ GamePage.propTypes = {
   ansCount: oneOfType([string,number]),
   timer: number,
   timerOn: bool,
+  outOfTime: bool,
   btnTxt: oneOfType([string, number]),
   score: oneOfType([string, number]),
   ansRight: oneOfType([string, number]),

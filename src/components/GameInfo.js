@@ -12,22 +12,17 @@ class GameInfo extends Component {
   constructor() {
     super();
     this.clickCategory = this.clickCategory.bind(this);
-    this.clickReset = this.clickReset.bind(this);
   }
 
   clickCategory = () => {
     this.props.actions.catCheckHandler(event.target.value);
   }
 
-  clickReset = () => {
-    window.location.reload(false);
-  }
-
   render() {
 
     const {
       voxCount,
-      timerOn,
+      gameOver,
       score,
       ansRight,
       ansWrong,
@@ -44,25 +39,22 @@ class GameInfo extends Component {
           <span>Score: {score.toLocaleString()}</span>
           <span>Right: {ansRight}</span>
           <span>Wrong: {ansWrong}</span>
-          <span>
-            <input type="button" value="Reset" onClick={this.clickReset}/>
-          </span>
         </div>
         <div>
           <span>
-            <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onChange={this.clickCategory} checked={movTvChecked} />
+            <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onChange={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
             <label htmlFor="MoviesTvChk">Movies/TV</label>
           </span>
           <span>
-            <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onChange={this.clickCategory} checked={musArtsChecked} />
+            <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onChange={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
             <label htmlFor="MusicArtsChk">Music/Arts</label>
           </span>
           <span>
-            <input type="checkbox" id="NewsPolChk" value="News/Politics" onChange={this.clickCategory} checked={newsPolChecked} />
+            <input type="checkbox" id="NewsPolChk" value="News/Politics" onChange={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
             <label htmlFor="NewsPolChk">News/Politics</label>
           </span>
           <span>
-            <input type="checkbox" id="SportsChk" value="Sports" onChange={this.clickCategory} checked={sportsChecked} />
+            <input type="checkbox" id="SportsChk" value="Sports" onChange={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
             <label htmlFor="SportsChk">Sports</label>
           </span>
         </div>
@@ -74,7 +66,6 @@ class GameInfo extends Component {
 GameInfo.propTypes = {
   actions: object.isRequired,
   voxCount: oneOfType([string,number]),
-  timerOn: bool,
   score: oneOfType([string,number]),
   ansRight: oneOfType([string,number]),
   ansWrong: oneOfType([string,number]),
@@ -82,6 +73,7 @@ GameInfo.propTypes = {
   musArtsChecked: bool,
   newsPolChecked: bool,
   sportsChecked: bool,
+  gameOver: bool,
 };
 
 function mapStateToProps(state) {
@@ -94,6 +86,7 @@ function mapStateToProps(state) {
     musArtsChecked: state.whovoxGame.musArtsChecked,
     newsPolChecked: state.whovoxGame.newsPolChecked,
     sportsChecked: state.whovoxGame.sportsChecked,
+    gameOver: state.whovoxGame.gameOver,
   };
 }
 

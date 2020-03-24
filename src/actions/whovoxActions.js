@@ -25,7 +25,8 @@ export function calculateFuelSavings(settings, fieldName, value) {
   };
 }
 
-// TIMER ACTIONS
+////////////////// TIMER ACTIONS ///////////////////
+
 export function startTimer() {
   return function (dispatch) {
     return dispatch({
@@ -52,7 +53,18 @@ export function tickTimer() {
   };
 }
 
-// ANSWER BUTTONS
+//////////////// NO ANSWER, OUT OF TIME //////////////
+
+export function outOfTime() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.OUT_OF_TIME
+    });
+  };
+}
+
+//////////////// ANSWER BUTTONS ARE CLICKED /////////////
+
 export function clickAnswer() {
   return function (dispatch) {
     return dispatch({
@@ -70,6 +82,8 @@ export function checkAnswer(id) {
   };
 }
 
+///////////////// PREP NEXT QUESTION FOR PLAYER /////////////
+
 export function prepNextQuestion() {
   return function (dispatch) {
     return dispatch({
@@ -77,6 +91,18 @@ export function prepNextQuestion() {
     });
   };
 }
+
+/////////////////////////// GAME OVER ////////////////////////
+
+export function gameOver() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.GAME_OVER,
+    });
+  };
+}
+
+///////////////// GET EACH QUESTION 1-4 AFTER INITAL LOAD //////////////
 
 export function loadVoicesAllGame(newGameData, ansCount) {
   return function (dispatch) {
@@ -99,16 +125,8 @@ export function loadVoicesAllGame(newGameData, ansCount) {
   };
 }
 
-//export function loadVoicesAllGame(newGameData) {
-  //return function (dispatch) {
-    //return dispatch({
-    //  type: types.LOAD_VOICES_ALL_GAME,
-    //  newGameData
-    //});
-  //};
-//}
+/////////////// CATEGORY SELECTION ///////////////////
 
-// CATEGORY SELECTION
 export function catCheckHandler(value) {
   return function (dispatch) {
     return dispatch({

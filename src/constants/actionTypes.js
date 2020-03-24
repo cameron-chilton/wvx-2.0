@@ -19,12 +19,13 @@ export const START_TIMER = 'START_TIMER';
 export const STOP_TIMER = 'STOP_TIMER';
 export const TICK_TIMER = 'TICK_TIMER';
 export const ZERO_TIMER = 'ZERO_TIMER';
-export const RENDER_VOICES = 'RENDER_VOICES';
+export const OUT_OF_TIME = 'OUT_OF_TIME';
 
 // BUTTON GAMEPLAY ACTIONS
 export const CLICK_ANSWER = 'CLICK_ANSWER';
 export const CHECK_ANSWER = 'CHECK_ANSWER';
 export const PREP_NEXT_QUESTION = 'PREP_NEXT_QUESTION';
+export const GAME_OVER = 'GAME_OVER';
 export const TOGGLE_CATEGORY = 'TOGGLE_CATEGORY';
 
 // FROM SLINGSHOT

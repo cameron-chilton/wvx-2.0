@@ -23,6 +23,11 @@ body {
     width: 27.0rem;
     padding: 1.0rem;
   }
+    .play-button:disabled {
+      color: #2b2b2b;
+      border: 1px solid #afafaf;
+      background-image: linear-gradient(#e3e3e3, #f7f7f7);
+    }
 
   .vxBtn {
     display: block;
@@ -54,13 +59,6 @@ body {
     margin: 0.5rem auto;
     font-size: 8px;
   }
-  .startBtn {
-    display: block;
-    margin: 0rem 0rem 1.0rem 0rem;
-    font-size: 8px;
-  }
-
-  .playbtn-text { font-size: 1.6rem; }
 
   .vxBtn:focus, .vxBtn:active {
     outline: none;

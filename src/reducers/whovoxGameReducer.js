@@ -8,6 +8,7 @@ import {
   START_TIMER,
   STOP_TIMER,
   TICK_TIMER,
+  OUT_OF_TIME,
   CLICK_ANSWER,
   CHECK_ANSWER,
   TOGGLE_CATEGORY,
@@ -20,6 +21,7 @@ import {
   LOAD_VOICES_ALL_GAME_FAILURE,
   SHUFFLE_CHOICES_ALL_GAME,
   PREP_NEXT_QUESTION,
+  GAME_OVER,
 } from '../constants/actionTypes';
 import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
@@ -37,29 +39,43 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
 
   switch (action.type) {
 
-    //////////////////////// TIMER ACTIONS ////////////////////
+    //////////////////////// TIMER ACTIONS /////////////////////////
+
     case START_TIMER:
       newState = objectAssign({}, state);
       newState.voiceQuestion = (state.ansCount === 0) ? state.voiceQuestion : state.nextQuestion;
-      newState = {
-        ...state,
-        timerOn: (
-          (state.voxCount !== 4) && true
-        ),
-        offset: action.offset,
-        btnTxt: state.timer,
-        voxCount: (
-          (state.voxCount !== 4)
-            ? (state.score === 0) ? (0) : (state.voxCount + 1)
-            : (state.voxCount)
-        ),
-        timer: (
-          (state.voxCount !== 4)
-            ? 10000
-            : 0
-        ),
-        voiceQuestion: newState.voiceQuestion
-      }
+      (state.voxCount !== 4) ? (
+        newState = {
+          ...state,
+          timerOn: true,
+          offset: action.offset,
+          btnTxt: state.timer,
+          voxCount: (state.score === 0) ? (0) : (state.voxCount + 1),
+          timer: 10000,
+          voiceQuestion: newState.voiceQuestion,
+          outOfTime: false,
+          answered: false,
+        }
+      ) : (
+        newState = {
+          loading: false,
+          score: 0,
+          voxCount: 0,
+          ansCount: 0,
+          btnTxt: 'START GAME',
+          timerOn: false,
+          answered: false,
+          outOfTime: false,
+          gameOver: false,
+          timer: 10000,
+          ansRight: 0,
+          ansWrong: 0,
+          newGameData: [],
+          nextQuestion: [],
+          voiceQuestion: [],
+        }
+      )
+
     return newState;
 
     case STOP_TIMER:
@@ -70,7 +86,18 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         offset: undefined
       };
 
-    // TIMER IS TICKED EACH MS
+    ////////// NO ANSWER, OUT OF TIME ///////////
+
+    case OUT_OF_TIME:
+      return {
+        ...state,
+        score: (state.score - 250),
+        ansWrong: state.ansWrong + 1,
+        ansCount: state.ansCount + 1,
+      };
+
+    ////////// TIMER IS TICKED EACH MS ///////////
+
     case TICK_TIMER:
       newState = objectAssign({}, state);
       return {
@@ -85,7 +112,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           (state.timer > 0) ? (newState.timerOn = true) : (newState.timerOn = false)
         ),
         btnTxt: (
-          (state.timer > 0) ? (state.timer) : (newState.btnTxt = 'OUT OF TIME')
+          (state.timer > 0) ? (state.timer) : (newState.btnTxt = 'OUT OF TIME! -250')
         ),
         outOfTime: (
           (state.timer > 0) ? false : true
@@ -99,6 +126,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
          ...state,
         id: action.gameID
       };
+
     case LOAD_GAME_DATA:
       return {
         ...state,
@@ -106,6 +134,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         btnTxt: 'LOADING...',
         newGameData: action.newGameData
       };
+
     case LOAD_GAME_SUCCESS: {
       const { ...rest } = action.newGameData;
       return {
@@ -114,6 +143,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         loading: false,
       };
     }
+
     case LOAD_GAME_FAILURE:
       return {
         ...state,
@@ -128,6 +158,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         btnTxt: 'LOADING...',
         voiceQuestion: action.voiceQuestion
       };
+
     case LOAD_VOICES_SUCCESS: {
       const { ...rest } = action.voiceQuestion;
       return {
@@ -137,11 +168,13 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         btnTxt: 'STARTVOX',
       };
     }
+
     case LOAD_VOICES_FAILURE:
       return {
         ...state,
         error: action.error
       };
+
     // SHUFFLE QUESTION ARRAY
     case SHUFFLE_CHOICES: {
       newState = objectAssign({}, state);
@@ -161,20 +194,22 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         loading: true,
         nextQuestion: action.nextQuestion
       };
+
     case LOAD_VOICES_ALL_GAME_SUCCESS: {
       //console.log('LOAD_VOICES_ALL_GAME_SUCCESS: ' + JSON.stringify(action.nextQuestion));
       const { ...rest } = action.nextQuestion;
       return {
         ...state,
         ...rest,
-        loading: false,
       };
     }
+
     case LOAD_VOICES_ALL_GAME_FAILURE:
       return {
         ...state,
         error: action.error
       };
+
     // SHUFFLE QUESTION ARRAY ALL GAME
     case SHUFFLE_CHOICES_ALL_GAME: {
       newState = objectAssign({}, state);
@@ -186,7 +221,6 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return newState;
     }
 
-
     /////////////////// CHECK ANSWER WHEN CLICKED ///////////////////
 
     case CLICK_ANSWER:
@@ -195,10 +229,12 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         timerOn: false,
         timer: state.timer,
         offset: undefined,
-        btnTxt: state.timer,
+        btnTxt: whovoxUtils.formatTime(state.timer),
         answered: true,
         ansCount: state.ansCount + 1,
+        loading: true,
     };
+
     case CHECK_ANSWER: {
       newState = objectAssign({}, state);
       const voxScore = Math.round(state.timer / 10);
@@ -223,14 +259,20 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       )
       return newState;
     }
+
     case PREP_NEXT_QUESTION:
         return {
           ...state,
-          btnTxt: (
-            (state.voxCount !== 4)
-              ? 'NEXTVOX'
-              : 'GAME OVER'
-          )
+          btnTxt: 'NEXTVOX',
+          loading: false,
+    };
+
+    case GAME_OVER:
+        return {
+          ...state,
+          btnTxt: 'GAME OVER',
+          loading: false,
+          gameOver: true,
     };
 
     // CATEGORY SELECTIONS

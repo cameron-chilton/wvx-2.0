@@ -8,7 +8,8 @@ import GamePage from './containers/GamePage';
 //import HomePage from './HomePage';
 //import NotFoundPage from './NotFoundPage';
 //import { hot } from 'react-hot-loader';
-import {setGameId, startDataLoad} from '../actions';
+//import {setGameId, startDataLoad} from '../actions';
+import {getGameID} from '../actions';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -17,9 +18,11 @@ import {setGameId, startDataLoad} from '../actions';
 class App extends React.Component {
 
   componentDidMount() {
-    const {gameIdFromUri} = this.props;
-    this.props.setGameId(gameIdFromUri);
-    this.props.startDataLoad(gameIdFromUri);
+    this.props.getGameID();
+    //const {gameIdFromUri} = this.props;
+    //this.props.setGameId(gameIdFromUri);
+    //this.props.startDataLoad(gameIdFromUri);
+    //this.props.getDataLoad();
   }
 
   componentDidUpdate() {
@@ -47,10 +50,11 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  gameIdFromUri: string.isRequired,
+  //gameIdFromUri: string.isRequired,
   // dispatchFn's
-  setGameId: func,
-  startDataLoad: func,
+  getGameID: func,
+  //setGameId: func,
+  //startDataLoad: func,
 };
 
 const mapStateToProps = (state) => ({
@@ -60,8 +64,9 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   { // dispatch fn's
-    setGameId,
-    startDataLoad,
+    getGameID,
+    //setGameId,
+    //startDataLoad,
   }
 )(App);
 

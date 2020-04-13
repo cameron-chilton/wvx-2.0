@@ -14,6 +14,7 @@ body {
   -moz-font-smoothing: antialiased;
   font-weight: 300;
 }
+label.gameOverForm {display: block}
 .game, .btn-holder { text-align: center; margin: 1rem auto; }
 
 .game-info { font-size: 1.0rem; color: #666; }

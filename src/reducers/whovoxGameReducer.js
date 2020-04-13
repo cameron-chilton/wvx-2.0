@@ -2,9 +2,12 @@
 import initialState from './initialState';
 import {
   NEW_GAME_LOAD,
+  NEW_GAME_ID_LOAD,
   LOAD_GAME_DATA,
   LOAD_GAME_SUCCESS,
   LOAD_GAME_FAILURE,
+  LOAD_GAME_ID_SUCCESS,
+  LOAD_GAME_ID_FAILURE,
   START_TIMER,
   STOP_TIMER,
   TICK_TIMER,
@@ -22,6 +25,9 @@ import {
   SHUFFLE_CHOICES_ALL_GAME,
   PREP_NEXT_QUESTION,
   GAME_OVER,
+  START_NEXT_GAME,
+  LOAD_NEXT_GAME_ID_SUCCESS,
+  LOAD_NEXT_GAME_ID_FAILURE,
 } from '../constants/actionTypes';
 import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
@@ -38,6 +44,99 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
   let newState;
 
   switch (action.type) {
+
+      /////////////////// LOAD GAME DATA II /////////////////////////
+
+      case NEW_GAME_ID_LOAD:
+        return {
+          ...state,
+          id: action.id,
+          btnTxt: 'LOADING...',
+          loading: true,
+        };
+
+      case LOAD_GAME_ID_SUCCESS: {
+        const {...rest} = action.id;
+        return {
+          ...state,
+          ...rest,
+          loading: true,
+        };
+      }
+
+      case LOAD_GAME_ID_FAILURE:
+        return {
+          ...state,
+          error: action.error
+        };
+
+      case LOAD_GAME_DATA:
+        return {
+          ...state,
+          loading: true,
+          btnTxt: 'LOADING...',
+          newGameData: action.newGameData
+        };
+
+        /////////////////// LOAD GAME DATA /////////////////////////
+
+        case NEW_GAME_LOAD:
+          return {
+             ...state,
+            id: action.gameID
+          };
+
+        case LOAD_GAME_SUCCESS: {
+          const { ...rest } = action.newGameData;
+          return {
+            ...state,
+            ...rest,
+            loading: false,
+          };
+        }
+
+        case LOAD_GAME_FAILURE:
+          return {
+            ...state,
+            error: action.error
+          };
+
+        ///////////////// INITAL LOAD VOICE QUESTIONS FOR GAME //////////////////////
+
+        case LOAD_VOICES:
+          return {
+            ...state,
+            loading: true,
+            btnTxt: 'LOADING...',
+            voiceQuestion: action.voiceQuestion
+          };
+
+        case LOAD_VOICES_SUCCESS: {
+          const { ...rest } = action.voiceQuestion;
+          return {
+            ...state,
+            ...rest,
+            loading: false,
+            btnTxt: 'STARTVOX',
+          };
+        }
+
+        case LOAD_VOICES_FAILURE:
+          return {
+            ...state,
+            error: action.error
+          };
+
+        // SHUFFLE QUESTION ARRAY
+        case SHUFFLE_CHOICES: {
+          newState = objectAssign({}, state);
+          newState.voiceQuestion = state.voiceQuestion || [];
+          newState = {
+            ...state,
+            voiceQuestion: utils.shuffle(newState.voiceQuestion),
+          }
+          return newState;
+        }
 
     //////////////////////// TIMER ACTIONS /////////////////////////
 
@@ -119,72 +218,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         )
       };
 
-    /////////////////// LOAD GAME DATA /////////////////////////
 
-    case NEW_GAME_LOAD:
-      return {
-         ...state,
-        id: action.gameID
-      };
-
-    case LOAD_GAME_DATA:
-      return {
-        ...state,
-        loading: true,
-        btnTxt: 'LOADING...',
-        newGameData: action.newGameData
-      };
-
-    case LOAD_GAME_SUCCESS: {
-      const { ...rest } = action.newGameData;
-      return {
-        ...state,
-        ...rest,
-        loading: false,
-      };
-    }
-
-    case LOAD_GAME_FAILURE:
-      return {
-        ...state,
-      };
-
-    ///////////////// INITAL LOAD VOICE QUESTIONS FOR GAME //////////////////////
-
-    case LOAD_VOICES:
-      return {
-        ...state,
-        loading: true,
-        btnTxt: 'LOADING...',
-        voiceQuestion: action.voiceQuestion
-      };
-
-    case LOAD_VOICES_SUCCESS: {
-      const { ...rest } = action.voiceQuestion;
-      return {
-        ...state,
-        ...rest,
-        loading: false,
-        btnTxt: 'STARTVOX',
-      };
-    }
-
-    case LOAD_VOICES_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-
-    // SHUFFLE QUESTION ARRAY
-    case SHUFFLE_CHOICES: {
-      newState = objectAssign({}, state);
-      newState.voiceQuestion = state.voiceQuestion || [];
-      newState = {
-        ...state,
-        voiceQuestion: utils.shuffle(newState.voiceQuestion),
-      }
-      return newState;
-    }
 
     //////////////// LOAD FINAL 4 QUESTIONS FOR GAME /////////////////
 
@@ -274,6 +308,29 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           loading: false,
           gameOver: true,
     };
+
+    //////////////// START NEXT GAME /////////////////
+
+    case START_NEXT_GAME:
+      return {
+        ...state,
+        loading: true,
+        id: action.id
+      };
+
+    case LOAD_NEXT_GAME_ID_SUCCESS: {
+      const { ...rest } = action.id;
+      return {
+        ...state,
+        ...rest,
+      };
+    }
+
+    case LOAD_NEXT_GAME_ID_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
 
     // CATEGORY SELECTIONS
     case TOGGLE_CATEGORY: {

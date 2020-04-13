@@ -34,7 +34,7 @@ class VoiceChoices extends Component {
       this.props.actions.checkAnswer(voxid);
       this.setState({showRightAnswer: true});
       if (this.props.ansCount <= 4) {
-        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1500);
+        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1200);
         setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 500);
       }
       if (this.props.ansCount === 5) {
@@ -47,7 +47,6 @@ class VoiceChoices extends Component {
 
     const {answered, timerOn, outOfTime, firstname, lastname, voxid, newGameData, ansCount, btnClass, isRightAnswer} = this.props;
     return (
-      <>
         <button
           className={
             !timerOn ? (
@@ -72,7 +71,6 @@ class VoiceChoices extends Component {
             (firstname + ' ' + lastname)
           )
         }</button>
-      </>
     );
   }
 }
@@ -82,6 +80,7 @@ class VoiceChoices extends Component {
     voxid: oneOfType([string,number]),
     ansCount: oneOfType([string,number]),
     whovoxGame: object,
+    score: number,
     newGameData: array,
     clickAnswer: func,
     updateBtns: func,
@@ -100,6 +99,7 @@ class VoiceChoices extends Component {
       newGameData: state.whovoxGame.newGameData,
       timerOn: state.whovoxGame.timerOn,
       ansCount: state.whovoxGame.ansCount,
+      score: state.whovoxGame.score,
     };
   }
 

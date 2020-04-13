@@ -33,32 +33,35 @@ class GameInfo extends Component {
     } = this.props;
 
     return (
-      <div className='game-info'>
-        <div>
-          <span>Vox {voxCount + 1} of 5</span>
-          <span>Score: {score.toLocaleString()}</span>
-          <span>Right: {ansRight}</span>
-          <span>Wrong: {ansWrong}</span>
+      <>
+        <h1>WHOVOX</h1>
+        <div className='game-info'>
+          <div>
+            <span>Vox {voxCount + 1} of 5</span>
+            <span>Score: {score.toLocaleString()}</span>
+            <span>Right: {ansRight}</span>
+            <span>Wrong: {ansWrong}</span>
+          </div>
+          <div>
+            <span>
+              <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onChange={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
+              <label htmlFor="MoviesTvChk">Movies/TV</label>
+            </span>
+            <span>
+              <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onChange={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
+              <label htmlFor="MusicArtsChk">Music/Arts</label>
+            </span>
+            <span>
+              <input type="checkbox" id="NewsPolChk" value="News/Politics" onChange={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
+              <label htmlFor="NewsPolChk">News/Politics</label>
+            </span>
+            <span>
+              <input type="checkbox" id="SportsChk" value="Sports" onChange={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
+              <label htmlFor="SportsChk">Sports</label>
+            </span>
+          </div>
         </div>
-        <div>
-          <span>
-            <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onChange={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
-            <label htmlFor="MoviesTvChk">Movies/TV</label>
-          </span>
-          <span>
-            <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onChange={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
-            <label htmlFor="MusicArtsChk">Music/Arts</label>
-          </span>
-          <span>
-            <input type="checkbox" id="NewsPolChk" value="News/Politics" onChange={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
-            <label htmlFor="NewsPolChk">News/Politics</label>
-          </span>
-          <span>
-            <input type="checkbox" id="SportsChk" value="Sports" onChange={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
-            <label htmlFor="SportsChk">Sports</label>
-          </span>
-        </div>
-      </div>
+      </>
     );
   }
 }

@@ -25,7 +25,7 @@ export function calculateFuelSavings(settings, fieldName, value) {
   };
 }
 
-////////////////// TIMER ACTIONS ///////////////////
+/////////////////// TIMER ACTIONS /////////////////////
 
 export function startTimer() {
   return function (dispatch) {
@@ -53,7 +53,7 @@ export function tickTimer() {
   };
 }
 
-//////////////// NO ANSWER, OUT OF TIME //////////////
+//////////////// NO ANSWER, OUT OF TIME ////////////////
 
 export function outOfTime() {
   return function (dispatch) {
@@ -63,7 +63,7 @@ export function outOfTime() {
   };
 }
 
-//////////////// ANSWER BUTTONS ARE CLICKED /////////////
+//////////////// ANSWER BUTTONS ARE CLICKED ////////////////
 
 export function clickAnswer() {
   return function (dispatch) {
@@ -82,7 +82,7 @@ export function checkAnswer(id) {
   };
 }
 
-///////////////// PREP NEXT QUESTION FOR PLAYER /////////////
+///////////////// PREP NEXT QUESTION FOR PLAYER //////////////
 
 export function prepNextQuestion() {
   return function (dispatch) {
@@ -92,7 +92,7 @@ export function prepNextQuestion() {
   };
 }
 
-/////////////////////////// GAME OVER ////////////////////////
+//////////////////////// GAME OVER, SAVE GAME ///////////////////////////
 
 export function gameOver() {
   return function (dispatch) {
@@ -102,7 +102,48 @@ export function gameOver() {
   };
 }
 
-///////////////// GET EACH QUESTION 1-4 AFTER INITAL LOAD //////////////
+export function saveGame(gameData) {
+  return function (dispatch) {
+
+    dispatch({ type: types.SAVE_GAME });
+    return api.saveFinishedGame(gameData)
+      .then(gameRank => {
+        // Something went wrong server-side
+        if (gameRank.errored) {
+          dispatch({ type: types.SAVE_GAME_FAILURE, error: "Server-side error on 'saveGame'." });
+          return;
+        }
+        dispatch({ type: types.SAVE_GAME_SUCCESS, gameRank });
+      })
+      .catch( error => {
+        dispatch({ type: types.SAVE_GAME_FAILURE, error });
+      });
+  };
+}
+
+/////////////////////// START NEXT GAME ////////////////////////
+
+export function startNextGame() {
+  return function (dispatch) {
+
+    dispatch({ type: types.START_NEXT_GAME });
+    return api.getNextGameID()
+      .then(id => {
+        // Something went wrong server-side
+        if (id.errored) {
+          dispatch({ type: types.LOAD_NEXT_GAME_ID_FAILURE, error: "Server-side error on 'getNextGameID'." });
+          return;
+        }
+        dispatch({ type: types.LOAD_NEXT_GAME_ID_SUCCESS, id });
+      })
+      .catch( error => {
+        dispatch({ type: types.LOAD_NEXT_GAME_ID_FAILURE, error });
+      });
+
+  };
+}
+
+/////////// GET EACH QUESTION 1-4 AFTER INITAL LOAD ///////////
 
 export function loadVoicesAllGame(newGameData, ansCount) {
   return function (dispatch) {
@@ -135,6 +176,3 @@ export function catCheckHandler(value) {
     });
   };
 }
-
-
-

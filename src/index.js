@@ -12,10 +12,10 @@ require("./favicon.ico"); // Tell webpack to load favicon.ico
 
 const store = configureStore();
 
-const getGameIdFromUri = () => {
-  const parsedUrl = new URL(window.location.href);
-  return parsedUrl.searchParams.get("gameID");
-};
+//const getGameIdFromUri = () => {
+  //const parsedUrl = new URL(window.location.href);
+  //return parsedUrl.searchParams.get("gameID");
+//};
 
 {/*
 
@@ -42,7 +42,8 @@ if (module.hot) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Root history={history} gameIdFromUri={getGameIdFromUri()} />
+    <Root history={history} />
+    {/* <Root history={history} gameIdFromUri={getGameIdFromUri()} /> */}
   </Provider>,
   document.getElementById("app")
 );

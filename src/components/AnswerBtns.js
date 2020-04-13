@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
 import utils from '../utils/math-utils';
 import VoiceChoices from './VoiceChoices';
+import GameOver from './GameOver';
 
 class AnswerBtns extends Component {
 
@@ -23,7 +24,7 @@ class AnswerBtns extends Component {
           this.props.actions.outOfTime();
           setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 1000);
         }, 700);
-        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1800);
+        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1500);
         this.setState({isOutOfTime: true});
     }
 
@@ -44,7 +45,7 @@ class AnswerBtns extends Component {
   }
   render() {
 
-    const {timerOn, answered, ansCount, newGameData, voxCount} = this.props;
+    const {timerOn, answered, ansCount, newGameData, voxCount, gameOver} = this.props;
     // get answer ID from newGameData
     const ansID3 = newGameData || [];
     const ansID2 = ansID3[voxCount] || {};
@@ -57,30 +58,35 @@ class AnswerBtns extends Component {
 
     return (
       <div className="btn-holder">
+
         {
-          utils.range(0,4).map(number => (
-            <VoiceChoices
-              key={number}
-              voxid={voxIDs && voxIDs[number]}
-              btnClass={
-                (!this.state.showRightAnswer) ? (
-                  'vxBtn'
-                ) : (
-                  (ansID === voxIDs[number]) ? 'vxBtnRight' : 'vxBtn'
-                )
-              }
-              timerOn={timerOn}
-              firstname={firstnames && firstnames[number]}
-              lastname={lastnames && lastnames[number]}
-              answered={answered}
-              newGameData={newGameData}
-              ansCount={ansCount}
-              ansID={ansID}
-              isRightAnswer={(ansID === voxIDs[number]) ? 'true' : 'false'}
-              updateBtns={this.updateBtns}
-            />
-          ))
-          }
+          !gameOver ? (
+            utils.range(0,4).map(number => (
+              <VoiceChoices
+                key={number}
+                voxid={voxIDs && voxIDs[number]}
+                btnClass={
+                  (!this.state.showRightAnswer) ? (
+                    'vxBtn'
+                  ) : (
+                    (ansID === voxIDs[number]) ? 'vxBtnRight' : 'vxBtn'
+                  )
+                }
+                timerOn={timerOn}
+                firstname={firstnames && firstnames[number]}
+                lastname={lastnames && lastnames[number]}
+                answered={answered}
+                newGameData={newGameData}
+                ansCount={ansCount}
+                ansID={ansID}
+                isRightAnswer={(ansID === voxIDs[number]) ? 'true' : 'false'}
+                updateBtns={this.updateBtns}
+              />
+            ))
+          ) : (
+            <GameOver />
+          )
+        }
     </div>
     );
   }
@@ -94,6 +100,7 @@ AnswerBtns.propTypes = {
   ansID: oneOfType([string,number]),
   timerOn: bool,
   outOfTime: bool,
+  gameOver: bool,
   voiceQuestion: array,
   newGameData: array,
   answered: bool,
@@ -109,6 +116,7 @@ function mapStateToProps(state) {
     answered: state.whovoxGame.answered,
     ansCount: state.whovoxGame.ansCount,
     voxCount: state.whovoxGame.voxCount,
+    gameOver: state.whovoxGame.gameOver,
   };
 }
 

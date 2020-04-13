@@ -25,7 +25,7 @@ class Timer extends Component {
       this.setState({isAnswered: true});
       this.timeout = setTimeout( () => {
         this.toggleText();
-      }, 2600);
+      }, 2300);
     }
 
   }

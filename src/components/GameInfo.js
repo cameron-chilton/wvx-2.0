@@ -35,7 +35,7 @@ class GameInfo extends Component {
     return (
       <>
         <h1>WHOVOX</h1>
-        <div className='game-info'>
+        <div className="game-info">
           <div>
             <span>Vox {voxCount + 1} of 5</span>
             <span>Score: {score.toLocaleString()}</span>

@@ -193,6 +193,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         score: (state.score - 250),
         ansWrong: state.ansWrong + 1,
         ansCount: state.ansCount + 1,
+        answered: true,
       };
 
     ////////// TIMER IS TICKED EACH MS ///////////
@@ -218,8 +219,6 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         )
       };
 
-
-
     //////////////// LOAD FINAL 4 QUESTIONS FOR GAME /////////////////
 
     case LOAD_VOICES_ALL_GAME:
@@ -235,6 +234,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return {
         ...state,
         ...rest,
+        loading: false,
       };
     }
 

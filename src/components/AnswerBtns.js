@@ -22,9 +22,14 @@ class AnswerBtns extends Component {
         setTimeout( () => {
           this.setState({showRightAnswer: true});
           this.props.actions.outOfTime();
-          setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 1000);
-        }, 700);
-        setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1500);
+          if (this.props.ansCount !== 5) {
+            setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 1000);
+            setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1800);
+          }
+          else {
+            setTimeout( () => { this.props.actions.gameOver(); }, 2000);
+          }
+        }, 1200);
         this.setState({isOutOfTime: true});
     }
 

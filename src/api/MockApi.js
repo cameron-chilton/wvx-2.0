@@ -152,7 +152,7 @@ class MockApi {
     });
   }
 
-  ///////////// SAVE GAME DATA  ////////////////
+  //////////////////// SAVE GAME DATA ///////////////////////
 
   static saveFinishedGame(gameData) {
     console.log('saveFinishedGame gameData:' + JSON.stringify(gameData));

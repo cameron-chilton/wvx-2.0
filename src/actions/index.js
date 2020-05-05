@@ -1,10 +1,6 @@
 import api from '../api';
 import * as action from '../constants/actionTypes';
 
-export const setGameId = (gameID) => ({
-  type: action.NEW_GAME_LOAD, gameID
-});
-
 export const getGameID = () => {
   return (dispatch) => {
     dispatch({ type: action.NEW_GAME_ID_LOAD });

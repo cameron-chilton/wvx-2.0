@@ -5,18 +5,13 @@
   // json encoder
   require 'json_readable_encode.php';
 
-  // query
-  $sql = "INSERT INTO all_games () VALUES (null, now())";
-
-  //$data = Array();
-
-  $stmt = $DB->prepare($sql);
-  $stmt->execute();
-
-
   /* get 5 answers from DB */
 
-  $sql2 = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB FROM voices WHERE CATEGORY='Movies/TV' ORDER BY RAND() LIMIT 5";
+  $sql2 = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB
+    FROM voices
+    WHERE CATEGORY='Movies/TV' OR (category = 'Music/Arts') OR (category = 'News/Politics') OR (category = 'Sports')
+    ORDER BY RAND()
+    LIMIT 5";
 
   $data = Array();
   $stmt2 = $DB->prepare($sql2);

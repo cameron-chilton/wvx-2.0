@@ -1,6 +1,6 @@
 ////////////// DATA LOADING ETC ////////////////
 
-// REST call for loading game data
+// REST calls for loading game data
 export const NEW_GAME_LOAD = 'NEW_GAME_LOAD';
 export const NEW_GAME_ID_LOAD = 'NEW_GAME_ID_LOAD';
 export const LOAD_GAME_DATA = 'LOAD_GAME_DATA';

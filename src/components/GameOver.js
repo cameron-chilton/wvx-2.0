@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {string, bool, object, number, oneOfType} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import HallOfFame from './HallOfFame';
 import * as actions from '../actions/whovoxActions';
 
 class GameOver extends Component {
@@ -18,7 +19,8 @@ class GameOver extends Component {
     this.state = {
       playerName: '',
       playerLocation: '',
-      isValid: true
+      isValid: true,
+      gameSaved: false
     };
     this.nameRef = React.createRef();
     this.locRef = React.createRef();
@@ -53,6 +55,7 @@ class GameOver extends Component {
     else {
       this.setState({isValid: true});
       this.props.actions.saveGame(gameObj);
+      this.setState({gameSaved: true});
     }
 
   }
@@ -61,11 +64,13 @@ class GameOver extends Component {
     const {score, ansRight} = this.props;
     return (
       <div className="">
-          <h3>THANKS FOR PLAYING!</h3>
-          {
+        {
+          (!this.state.gameSaved) ? (
+
             (score > 0) ? (
               <>
-                <p>You scored of {score.toLocaleString()} with {ansRight} out of 5 voices correct.</p>
+                <h3>THANKS FOR PLAYING!</h3>
+                <p>You scored {score.toLocaleString()} with {ansRight} out of 5 voices correct.</p>
                 <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
 
                 {!this.state.isValid && <p className="errorMsg">Player Name and Player Location input is required to save game.</p>}
@@ -82,10 +87,18 @@ class GameOver extends Component {
                   <button className="save-button" onClick={this.saveGame}>Save Game</button>
                 </div>
               </>
+
             ) : (
-              <p>Your score of {score} is too low for the Hall of Fame. Try again!</p>
+              <>
+                <h3>THANKS FOR PLAYING!</h3>
+                <p>Your score is too low for the Hall of Fame. Try again!</p>
+              </>
             )
-          }
+
+          ) : (
+            <HallOfFame />
+          )
+        }
       </div>
     );
   }

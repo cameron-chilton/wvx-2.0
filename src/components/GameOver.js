@@ -8,6 +8,7 @@ import * as actions from '../actions/whovoxActions';
 class GameOver extends Component {
 
   componentDidMount() {
+    (this.props.score > 0) && this.nameRef.current.focus();
   }
 
   componentDidUpdate() {
@@ -77,11 +78,11 @@ class GameOver extends Component {
 
                 <div>
                   <label htmlFor="player_name" className="gameOverForm">Name</label>
-                  <input id="player_name" type="text" placeholder="Player Name" value={this.state.playerName} onChange={this.handleName} ref={this.nameRef} />
+                  <input id="player_name" type="text" placeholder="Player Name" value={this.state.playerName} onChange={this.handleName} ref={this.nameRef} maxLength="27" />
                 </div>
                 <div>
                   <label htmlFor="player_location" className="gameOverForm">Location</label>
-                  <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} />
+                  <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} maxLength="27" />
                 </div>
                 <div>
                   <button className="save-button" onClick={this.saveGame}>Save Game</button>
@@ -96,7 +97,7 @@ class GameOver extends Component {
             )
 
           ) : (
-            <HallOfFame />
+            <HallOfFame gameID={this.props.id} />
           )
         }
       </div>

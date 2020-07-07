@@ -68,6 +68,13 @@ const whovoxUtils = {
       let s = time.getSeconds().toString();
       let ms = pad((time.getMilliseconds() / 10).toFixed(0), 2);
       return `${s}.${ms}`;
+    },
+
+    mysqlDate: (date) => {
+      const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+      const jsDate = new Date(date);
+      const jsDate2 = jsDate.toLocaleDateString("en-US", options);
+      return jsDate2.toString();
     }
 
   };

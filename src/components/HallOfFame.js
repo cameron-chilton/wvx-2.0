@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {object} from 'prop-types';
+import {string, number, oneOfType} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import utils from '../utils/math-utils';
@@ -14,6 +14,11 @@ class HallOfFame extends Component {
     this.state = {
       tableData: {}
     };
+    this.myRef = React.createRef();
+  }
+
+  handleScrollToElement() {
+      window.scrollTo(0, this.myRef.current.scrollIntoView());
   }
 
   componentDidMount() {
@@ -22,54 +27,69 @@ class HallOfFame extends Component {
         .then(response => response.json())
         .then(data => this.setState({tableData: data}));
     }, 700);
+    setTimeout( () => {
+        this.handleScrollToElement();
+    }, 800);
   }
 
   componentDidUpdate() {
   }
 
+
+
   render() {
+
+    const gameID = this.props;
     const tdata = this.state.tableData || {};
     const lastOne = Object.keys(tdata).length - 1 || null;
+
     return (
       <div>
         <h3>HALL OF FAME</h3>
-        <table className="">
-          <thead>
-            <tr role="row">
-              <th scope="col" role="columnheader">Rank</th>
-              <th scope="col" role="columnheader">Score</th>
-              <th scope="col" role="columnheader">Name</th>
-              <th scope="col" role="columnheader">Location</th>
-              <th scope="col" role="columnheader">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-          (tdata !== null) &&
-            utils.range(0,lastOne).map(number => (
-              <tr key={number}>
-                <td>{number + 1}</td>
-                <td>{parseFloat(tdata[number].score).toLocaleString('en')}</td>
-                <td>{tdata[number].name}</td>
-                <td>{tdata[number].location}</td>
-                <td>{tdata[number].date}</td>
+
+          <table className="HOF-table">
+            <thead>
+              <tr role="row">
+                <th scope="col" role="columnheader" className="hd1">Rank</th>
+                <th scope="col" role="columnheader" className="hd2">Score</th>
+                <th scope="col" role="columnheader" className="hd3">Name</th>
+                <th scope="col" role="columnheader" className="hd4">Location</th>
+                <th scope="col" role="columnheader" className="hd5">Date</th>
               </tr>
-            )
-          )}
-          </tbody>
-        </table>
+            </thead>
+          </table>
+          <div className="scrollbox">
+            <table className="HOF-table">
+              <tbody>
+              {
+              (tdata !== null) &&
+                utils.range(0,lastOne).map(number => (
+                  <tr key={number} ref={(gameID.id == tdata[number].id) ? this.myRef : ''}>
+                    <td className="col1"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{number + 1}</span></td>
+                    <td className="col2"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{parseFloat(tdata[number].score).toLocaleString('en')}</span></td>
+                    <td className="col3"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'}>{tdata[number].name}</span></td>
+                    <td className="col4"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'}>{tdata[number].location}</span></td>
+                    <td className="col5"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{whovoxUtils.mysqlDate(tdata[number].date)}</span></td>
+                  </tr>
+                )
+              )}
+              </tbody>
+            </table>
+          </div>
       </div>
     );
+
   }
+
 }
 
 HallOfFame.propTypes = {
-  actions: object.isRequired,
+  id: oneOfType([string, number]),
 };
 
 function mapStateToProps(state) {
   return {
-    gameOver: state.whovoxGame.gameOver,
+    id: state.whovoxGame.id,
   };
 }
 

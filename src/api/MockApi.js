@@ -9,7 +9,7 @@ class MockApi {
   ///////////// LOAD 5 ANSWERS FOR FIRST SESSION GAME ////////////////
 
   static getNewGame(gameID) {
-    console.log('getNewGame id: ' + gameID)
+    console.log('getNewGame id: ' + gameID.id)
     const gameID2 = gameID.toString();
     return new Promise( (resolve, reject) => {
       if (gameID2 && gameID2.length > 1) {
@@ -119,7 +119,7 @@ class MockApi {
   static getNextQuestion(newGameData, ansCount) {
     const gameAnswers = Object.values(newGameData);
     //console.log('getNextQuestion ansCount:' + ansCount);
-    //console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
+    console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
     const questionArray = gameAnswers[ansCount];
     //console.log('getNextQuestion questionArray:' + JSON.stringify(questionArray));
     const ansID = questionArray.ID;

@@ -62,17 +62,20 @@ label.gameOverForm {display: block}
     margin: 0.5rem auto;
     font-size: 8px;
   }
-
   .vxBtn:focus, .vxBtn:active {
     outline: none;
     border: thin solid #ddd;
   }
+  .ansPic {float: left;}
+  .catName {float: right;}
 
   .timer {
     color: $primary-color;
     margin-top: 3px;
     margin-left: 3px;
   }
+
+  /* HOF styles */
   .HOF-table {
     width: 98%;
     font-size: 0.85rem;

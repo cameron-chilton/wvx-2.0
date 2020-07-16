@@ -46,7 +46,7 @@ class HallOfFame extends Component {
     return (
       <div>
         <h3>HALL OF FAME</h3>
-
+        <h4>{parseFloat(lastOne) + 1 || '--'} Games Played</h4>
           <table className="HOF-table">
             <thead>
               <tr role="row">

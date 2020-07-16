@@ -55,11 +55,14 @@ class AnswerBtns extends Component {
     const ansID3 = newGameData || [];
     const ansID2 = ansID3[voxCount] || {};
     const ansID = ansID2.ID || '';
+    const category = ansID2.CATEGORY || '';
     // map IDs and names
     const voiceQuestion = this.props.voiceQuestion || [];
-    const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.id);
-    const firstnames = voiceQuestion.map(voiceQuestion => voiceQuestion.firstname);
-    const lastnames = voiceQuestion.map(voiceQuestion => voiceQuestion.lastname);
+    //console.log('answrBtns VQ: ' + JSON.stringify(voiceQuestion));
+    const voxIDs = voiceQuestion.map(voiceQuestion => voiceQuestion.ID);
+    const firstnames = voiceQuestion.map(voiceQuestion => voiceQuestion.FIRSTNAME);
+    const lastnames = voiceQuestion.map(voiceQuestion => voiceQuestion.LASTNAME);
+    const pics = voiceQuestion.map(voiceQuestion => voiceQuestion.PIC);
 
     return (
       <div className="btn-holder">
@@ -80,10 +83,12 @@ class AnswerBtns extends Component {
                 timerOn={timerOn}
                 firstname={firstnames && firstnames[number]}
                 lastname={lastnames && lastnames[number]}
+                ansID={ansID}
+                category={category}
                 answered={answered}
                 newGameData={newGameData}
                 ansCount={ansCount}
-                ansID={ansID}
+                pic={pics && pics[number]}
                 isRightAnswer={(ansID === voxIDs[number]) ? 'true' : 'false'}
                 updateBtns={this.updateBtns}
               />

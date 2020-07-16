@@ -45,7 +45,7 @@ class VoiceChoices extends Component {
 
   render() {
 
-    const {answered, timerOn, outOfTime, firstname, lastname, voxid, newGameData, ansCount, btnClass, isRightAnswer} = this.props;
+    const {answered, timerOn, outOfTime, firstname, lastname, pic, voxid, newGameData, ansCount, btnClass, isRightAnswer, category} = this.props;
     return (
         <button
           className={
@@ -66,9 +66,9 @@ class VoiceChoices extends Component {
           anscount={ansCount}
         >{
           (!outOfTime) ? (
-            (timerOn) ? (firstname + ' ' + lastname) : (!answered) ? '?' : (firstname + ' ' + lastname)
+            (timerOn) ? ( (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>) ) : (!answered) ? '?' : (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>)
           ) : (
-            (firstname + ' ' + lastname)
+            (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>)
           )
         }</button>
     );
@@ -90,6 +90,8 @@ class VoiceChoices extends Component {
     isRightAnswer: string,
     firstname: string,
     lastname: string,
+    pic: string,
+    category: string,
     btnClass: string,
   };
 

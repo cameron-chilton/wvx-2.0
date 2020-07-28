@@ -20,6 +20,8 @@ label.gameOverForm {display: block}
 .game-info { font-size: 1.0rem; color: #666; }
   .game-info span { margin-right: 1.4rem; }
 
+  /* ////////////////// BUTTON STYLES /////////////////// */
+
   .play-button {
     width: 27.0rem;
     padding: 1.0rem;
@@ -38,7 +40,7 @@ label.gameOverForm {display: block}
     border: thin solid #ddd;
     color: $primary-color;
     width: 27.0rem;
-    height: 4.3rem;
+    min-height: 80px;
     margin: 0.5rem auto;
     font-size: 8px;
   }
@@ -48,7 +50,7 @@ label.gameOverForm {display: block}
     border: thin solid #ddd;
     color: $primary-color;
     width: 27.0rem;
-    height: 4.3rem;
+    min-height: 80px;
     margin: 0.5rem auto;
     font-size: 8px;
   }
@@ -58,7 +60,7 @@ label.gameOverForm {display: block}
     border: thin solid #ddd;
     color: $primary-color;
     width: 27.0rem;
-    height: 4.3rem;
+    min-height: 80px;
     margin: 0.5rem auto;
     font-size: 8px;
   }
@@ -75,7 +77,8 @@ label.gameOverForm {display: block}
     margin-left: 3px;
   }
 
-  /* HOF styles */
+  /* ////////////////// HOF styles ///////////////////*/
+
   .HOF-table {
     width: 98%;
     font-size: 0.85rem;

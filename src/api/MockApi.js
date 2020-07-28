@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+import getStore from '../index';
 
 export const instance = axios.create({
   baseURL: window.apiUrl ? window.apiUrl : "http://localhost/WVX-2.0/src/php/",
@@ -9,14 +10,30 @@ class MockApi {
   ///////////// LOAD 5 ANSWERS FOR FIRST SESSION GAME ////////////////
 
   static getNewGame(gameID) {
-    console.log('getNewGame id: ' + gameID.id)
+
+    const store = getStore();
+    const storeVals = store.getState();
+
+    const mtvTF = storeVals.whovoxGame.movTvChecked;
+    const maTF = storeVals.whovoxGame.musArtsChecked;
+    const npTF = storeVals.whovoxGame.newsPolChecked;
+    const spTF = storeVals.whovoxGame.sportsChecked;
+
+    const ctgyMovies = mtvTF ? 'Movies/TV' : '';
+    const ctgyMusic = maTF ? 'Music/Arts' : '';
+    const ctgyNews = npTF ? 'News/Politics' : '';
+    const ctgySports = spTF ? 'Sports' : '';
+
+    console.log('getNewGame id: ' + gameID.id);
+
     const gameID2 = gameID.toString();
     return new Promise( (resolve, reject) => {
       if (gameID2 && gameID2.length > 1) {
-        instance.get('startGame.php')
+        instance.get('startGame.php?ctgyMovies=' + ctgyMovies + '&ctgyMusic=' + ctgyMusic + '&ctgyNews=' + ctgyNews + '&ctgySports=' + ctgySports)
           .then( (response) => {
             if (response.data) {
               const retObj = {newGameData: response.data} // put returned data into parent object
+              console.log(JSON.stringify(retObj));
               resolve(retObj);
             } else {
               reject();
@@ -35,10 +52,9 @@ class MockApi {
 
   static loadVoiceQuestion(newGameData) {
     const gameAnswers = Object.values(newGameData);
-    console.log('loadVoiceQuestion gameAnswers:' + JSON.stringify(gameAnswers));
+    //console.log('loadVoiceQuestion gameAnswers:' + JSON.stringify(gameAnswers));
     const questionArray = gameAnswers[0];
     const ansID = questionArray[0].ID;
-    //console.log('loadVoiceQuestion ansID:' + JSON.stringify(ansID));
     const frstNm = questionArray[0].FIRSTNAME;
     const lastNm = questionArray[0].LASTNAME;
     const ctgy = questionArray[0].CATEGORY;
@@ -118,12 +134,9 @@ class MockApi {
 
   static getNextQuestion(newGameData, ansCount) {
     const gameAnswers = Object.values(newGameData);
-    //console.log('getNextQuestion ansCount:' + ansCount);
-    console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
+    //console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
     const questionArray = gameAnswers[ansCount];
-    //console.log('getNextQuestion questionArray:' + JSON.stringify(questionArray));
     const ansID = questionArray.ID;
-    //console.log('getNextQuestion ansID:' + JSON.stringify(ansID));
     const frstNm = questionArray.FIRSTNAME;
     const lastNm = questionArray.LASTNAME;
     const ctgy = questionArray.CATEGORY;
@@ -166,8 +179,7 @@ class MockApi {
         instance.get('saveFinishedGame.php?id=' + id + '&score=' + score + '&name=' + name + '&location=' + location)
         .then( (response) => {
           if (response.data) {
-            //const retObj = {gameRank: response.data}
-            //resolve(retObj);
+            resolve(response.data);
           } else {
             reject();
           }

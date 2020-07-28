@@ -77,7 +77,7 @@ class AnswerBtns extends Component {
                   (!this.state.showRightAnswer) ? (
                     'vxBtn'
                   ) : (
-                    (ansID === voxIDs[number]) ? 'vxBtnRight' : 'vxBtn'
+                    (ansID === voxIDs[number]) && (ansCount !== 0) ? 'vxBtnRight' : 'vxBtn'
                   )
                 }
                 timerOn={timerOn}
@@ -89,7 +89,7 @@ class AnswerBtns extends Component {
                 newGameData={newGameData}
                 ansCount={ansCount}
                 pic={pics && pics[number]}
-                isRightAnswer={(ansID === voxIDs[number]) ? 'true' : 'false'}
+                isRightAnswer={(ansID === voxIDs[number]) ? true : false}
                 updateBtns={this.updateBtns}
               />
             ))
@@ -114,7 +114,7 @@ AnswerBtns.propTypes = {
   voiceQuestion: array,
   newGameData: array,
   answered: bool,
-  isRightAnswer: string,
+  isRightAnswer: bool,
 };
 
 function mapStateToProps(state) {

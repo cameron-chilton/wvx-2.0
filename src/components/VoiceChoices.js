@@ -38,7 +38,11 @@ class VoiceChoices extends Component {
         setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 500);
       }
       if (this.props.ansCount === 5) {
-        setTimeout( () => { this.props.actions.gameOver(); }, 1500);
+        setTimeout( () => {
+          this.setState({clickedBtn: false});
+          this.setState({showRightAnswer: false});
+          this.props.actions.gameOver();
+        }, 1500);
       }
     }, 1300);
   }
@@ -53,7 +57,7 @@ class VoiceChoices extends Component {
               !this.state.showRightAnswer ? (
                 !this.state.clickedBtn ? btnClass : 'vxBtnSel'
               ) : (
-                !this.state.clickedBtn ? btnClass : (isRightAnswer === 'true' ? 'vxBtnRight' : 'vxBtnSel')
+                !this.state.clickedBtn ? btnClass : (isRightAnswer === true ? 'vxBtnRight' : 'vxBtnSel')
               )
             ) : (
               'vxBtn'
@@ -87,7 +91,7 @@ class VoiceChoices extends Component {
     answered: bool,
     timerOn: bool,
     outOfTime: bool,
-    isRightAnswer: string,
+    isRightAnswer: bool,
     firstname: string,
     lastname: string,
     pic: string,

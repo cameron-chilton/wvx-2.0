@@ -5,11 +5,17 @@
   // json encoder
   require 'json_readable_encode.php';
 
+  /* passed params */
+  $ctgyMovies = $_GET['ctgyMovies'];
+  $ctgyMusic = $_GET['ctgyMusic'];
+  $ctgyNews = $_GET['ctgyNews'];
+  $ctgySports = $_GET['ctgySports'];
+
   /* get 5 answers from DB */
 
   $sql = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB
     FROM voices
-    WHERE CATEGORY='Movies/TV' OR (category = 'Music/Arts') OR (category = 'News/Politics') OR (category = 'Sports')
+    WHERE CATEGORY='$ctgyMovies' OR (category = '$ctgyMusic') OR (category = '$ctgyNews') OR (category = '$ctgySports')
     ORDER BY RAND()
     LIMIT 5";
 

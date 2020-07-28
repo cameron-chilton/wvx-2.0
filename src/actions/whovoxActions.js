@@ -1,6 +1,7 @@
 import api from '../api';
 import * as types from '../constants/actionTypes';
 import {getFormattedDateTime} from '../utils/dates';
+import {startDataLoad} from './index.js';
 
 // example of a thunk using the redux-thunk middleware
 export function saveFuelSavings(settings) {
@@ -135,6 +136,7 @@ export function startNextGame() {
           return;
         }
         dispatch({ type: types.LOAD_NEXT_GAME_ID_SUCCESS, id });
+        return startDataLoad(id, dispatch);
       })
       .catch( error => {
         dispatch({ type: types.LOAD_NEXT_GAME_ID_FAILURE, error });

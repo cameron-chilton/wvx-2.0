@@ -11,7 +11,6 @@ export const getGameID = () => {
           dispatch({ type: action.LOAD_GAME_ID_FAILURE, error: "Server-side error on 'getGameID'." });
           return;
         }
-        //const id2 = id.parseInt();
         dispatch({ type: action.LOAD_GAME_ID_SUCCESS, id });
         return startDataLoad(id, dispatch);
       })

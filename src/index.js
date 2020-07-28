@@ -11,6 +11,10 @@ require("./favicon.ico"); // Tell webpack to load favicon.ico
 
 const store = configureStore();
 
+export default function getStore() {
+  return store;
+}
+
 //const getGameIdFromUri = () => {
   //const parsedUrl = new URL(window.location.href);
   //return parsedUrl.searchParams.get("gameID");

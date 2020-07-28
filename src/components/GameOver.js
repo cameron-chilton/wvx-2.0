@@ -18,10 +18,10 @@ class GameOver extends Component {
     super();
     this.saveGame = this.saveGame.bind(this);
     this.state = {
-      playerName: '',
-      playerLocation: '',
+      playerName: localStorage[name] || '',
+      playerLocation: localStorage[location] || '',
       isValid: true,
-      gameSaved: false
+      gameSaved: false,
     };
     this.nameRef = React.createRef();
     this.locRef = React.createRef();
@@ -29,10 +29,12 @@ class GameOver extends Component {
 
   handleName = (event) => {
     this.setState({playerName: event.target.value});
+    localStorage[name] = this.state.playerName;
   }
 
   handleLocation = (event) => {
     this.setState({playerLocation: event.target.value});
+    localStorage[location] = this.state.playerLocation;
   }
 
   saveGame = () => {
@@ -57,6 +59,8 @@ class GameOver extends Component {
       this.setState({isValid: true});
       this.props.actions.saveGame(gameObj);
       this.setState({gameSaved: true});
+      this.setState({playerName: this.state.playerName});
+      this.setState({playerLocation: this.state.playerLocation});
     }
 
   }
@@ -73,6 +77,7 @@ class GameOver extends Component {
                 <h3>THANKS FOR PLAYING!</h3>
                 <p>You scored {score.toLocaleString()} with {ansRight} out of 5 voices correct.</p>
                 <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
+                <p>Select different categories above to test your ears on voices you know best!</p>
 
                 {!this.state.isValid && <p className="errorMsg">Player Name and Player Location input is required to save game.</p>}
 
@@ -93,6 +98,7 @@ class GameOver extends Component {
               <>
                 <h3>THANKS FOR PLAYING!</h3>
                 <p>Your score is too low for the Hall of Fame. Try again!</p>
+                <p>Select different categories above to test your ears on voices you know best!</p>
               </>
             )
 

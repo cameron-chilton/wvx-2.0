@@ -7,6 +7,27 @@ export const instance = axios.create({
 
 class MockApi {
 
+  //////////////////// GET ID FOR EACH GAME //////////////////////
+
+  static getNextGameID() {
+    return new Promise( (resolve, reject) => {
+
+        instance.get('getNextGameID.php')
+          .then( (response) => {
+            if (response.data) {
+              const retID = {id: response.data}; // return ID as object
+              resolve(retID);
+            } else {
+              reject();
+            }
+          })
+          .catch( (error) => {
+            reject('Error in getNextGameID. Check error message: ' + error);
+          });
+
+    });
+  }
+
   ///////////// LOAD 5 ANSWERS FOR FIRST SESSION GAME ////////////////
 
   static getNewGame(gameID) {
@@ -24,7 +45,7 @@ class MockApi {
     const ctgyNews = npTF ? 'News/Politics' : '';
     const ctgySports = spTF ? 'Sports' : '';
 
-    console.log('getNewGame id: ' + gameID.id);
+    //console.log('getNewGame id: ' + gameID.id);
 
     const gameID2 = gameID.toString();
     return new Promise( (resolve, reject) => {
@@ -33,7 +54,7 @@ class MockApi {
           .then( (response) => {
             if (response.data) {
               const retObj = {newGameData: response.data} // put returned data into parent object
-              console.log(JSON.stringify(retObj));
+              //console.log(JSON.stringify(retObj));
               resolve(retObj);
             } else {
               reject();
@@ -46,6 +67,88 @@ class MockApi {
         reject('Error in getNewGame. Check error message.');
       }
     });
+  }
+
+  ///////////// PRELOAD VOICE & SFX CLIPS ////////////////
+
+  static getGameClips(newGameData) {
+
+    const gameClips = Object.values(newGameData);
+    // convert object to array
+    const allClips = gameClips[0];
+    // each clip name in separate var
+    const clip0 = allClips[0].CLIP_NAME;
+    const clip1 = allClips[1].CLIP_NAME;
+    const clip2 = allClips[2].CLIP_NAME;
+    const clip3 = allClips[3].CLIP_NAME;
+    const clip4 = allClips[4].CLIP_NAME;
+    // put clips into array
+    const clipArray = [clip0, clip1, clip2, clip3, clip4];
+    let i;
+    // loop through and create audio
+    for (i = 0; i <= 4; i++) {
+
+      const nmFrst = clipArray[i].substr(0,1) || '';
+      let dir;
+
+      if(nmFrst == 'A' || nmFrst == 'B') {dir = 'AB';}
+      if(nmFrst == 'C' || nmFrst == 'D') {dir = 'CD';}
+      if(nmFrst == 'E' || nmFrst == 'F') {dir = 'EF';}
+      if(nmFrst == 'G' || nmFrst == 'H') {dir = 'GH';}
+      if(nmFrst == 'I' || nmFrst == 'J') {dir = 'IJ';}
+      if(nmFrst == 'K' || nmFrst == 'L') {dir = 'KL';}
+      if(nmFrst == 'M' || nmFrst == 'N') {dir = 'MN';}
+      if(nmFrst == 'O' || nmFrst == 'P') {dir = 'OP';}
+      if(nmFrst == 'Q' || nmFrst == 'R') {dir = 'QR';}
+      if(nmFrst == 'S' || nmFrst == 'T') {dir = 'ST';}
+      if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
+      if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
+      if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
+
+      this.audio = new Audio();
+
+      // can play ogg or mp3
+			if (this.audio.canPlayType) {
+				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          this.url = 'audio/' + dir + '/' + clipArray[i] + '.ogg';
+          this.audio = new Audio(this.url);
+					}
+				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+          this.url = 'audio/' + dir + '/' + clipArray[i] + '.mp3';
+          this.audio = new Audio(this.url);
+					}
+				}
+      else {alert('No Audio Support');}
+    }
+
+    // load sfx files
+    const Answer_Right = 'Answer_Right';
+    const Answer_Wrong = 'Answer_Wrong';
+    const Game_Over = 'Game_Over';
+    const Intro_Collage = 'Intro_Collage';
+    const Cheer = 'Cheer';
+
+    const sfxArray = [Answer_Right, Answer_Wrong, Game_Over, Intro_Collage, Cheer]
+    let j;
+    // loop through and create audio
+    for (j = 0; j <= 4; j++) {
+      this.audio = new Audio();
+      // can play ogg or mp3
+			if (this.audio.canPlayType) {
+				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          this.url = 'audio/_sfx/' + sfxArray[j] + '.ogg';
+          this.audio = new Audio(this.url);
+					}
+				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+          this.url = 'audio/_sfx/' + sfxArray[j] + '.mp3';
+          this.audio = new Audio(this.url);
+					}
+				}
+      else {alert('No Audio Support');}
+    }
+
+    return clipArray, sfxArray;
+
   }
 
   ///////////// GET FIRST VOICE QUESTION ////////////////
@@ -79,50 +182,6 @@ class MockApi {
         .catch( (error) => {
           reject(error);
         });
-      } else {
-        reject('Error communicating with the server! Check error message.');
-      }
-    });
-  }
-
-  //////////////////// GET ID FOR EACH GAME //////////////////////
-
-  static getNextGameID() {
-    return new Promise( (resolve, reject) => {
-
-        instance.get('getNextGameID.php')
-          .then( (response) => {
-            if (response.data) {
-              const retID = {id: response.data}; // return ID as object
-              resolve(retID);
-            } else {
-              reject();
-            }
-          })
-          .catch( (error) => {
-            reject('Error in getNextGameID. Check error message: ' + error);
-          });
-
-    });
-  }
-
-  ///////////// LOAD 5 ANSWERS FOR GAMES AFTER FIRST ////////////////
-
-  static getNextGame(gameID) {
-    return new Promise( (resolve, reject) => {
-      if (gameID && gameID.length > 1) {
-        instance.get('startGame.php')
-          .then( (response) => {
-            if (response.data) {
-              const retObj = {newGameData: response.data} // put returned data into parent object
-              resolve(retObj);
-            } else {
-              reject();
-            }
-          })
-          .catch( (error) => {
-            reject(error);
-          });
       } else {
         reject('Error communicating with the server! Check error message.');
       }
@@ -168,7 +227,7 @@ class MockApi {
   //////////////////// SAVE GAME DATA ///////////////////////
 
   static saveFinishedGame(gameData) {
-    console.log('saveFinishedGame gameData:' + JSON.stringify(gameData));
+    //console.log('saveFinishedGame gameData:' + JSON.stringify(gameData));
     const id = gameData.id;
     const score = gameData.score;
     const name = gameData.name;

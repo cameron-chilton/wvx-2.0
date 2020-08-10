@@ -33,10 +33,30 @@ export const startDataLoad = async (id, dispatch) => {
       return;
     }
     dispatch({ type: action.LOAD_GAME_SUCCESS, newGameData });
-    return getFirstQuestion(newGameData, dispatch);
+    return loadGameClips(newGameData, dispatch);
   }
   catch (error) {
     dispatch({ type: action.LOAD_GAME_FAILURE, error });
+  }
+};
+
+/////////////////// PRELOAD VOICE CLIPS  /////////////////////
+
+export const loadGameClips = async (newGameData, dispatch) => {
+  dispatch({ type: action.LOAD_GAME_CLIPS });
+
+  try {
+    let newGameClips = await api.getGameClips(newGameData);
+    // Something went wrong server-side
+    if (newGameClips.errored) {
+      dispatch({ type: action.LOAD_CLIPS_FAILURE, error: "Server-side error on 'loadGameClips'." });
+      return;
+    }
+    dispatch({ type: action.LOAD_CLIPS_SUCCESS, newGameClips });
+    return getFirstQuestion(newGameData, dispatch);
+  }
+  catch (error) {
+    dispatch({ type: action.LOAD_CLIPS_FAILURE, error });
   }
 };
 

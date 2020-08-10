@@ -3,10 +3,18 @@ import {bool, number, func, string, object, oneOfType, array} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
+import VoiceChoiceContent from './VoiceChoiceContent';
+import VoiceChoiceWhosThis from './VoiceChoiceWhosThis';
 
 class VoiceChoices extends Component {
 
-  componentDidMount() {
+  constructor() {
+    super();
+    this.clickAnswer = this.clickAnswer.bind(this);
+    this.state = {
+      clickedBtn: false,
+      showRightAnswer: false,
+    };
   }
 
   componentDidUpdate() {
@@ -18,20 +26,39 @@ class VoiceChoices extends Component {
 
   }
 
-  constructor() {
-    super();
-    this.clickAnswer = this.clickAnswer.bind(this);
-    this.state = {
-      clickedBtn: false,
-      showRightAnswer: false,
-    };
-  }
-
   clickAnswer = (voxid) => {
     this.props.actions.clickAnswer();
     this.setState({clickedBtn: true});
     setTimeout( () => {
       this.props.actions.checkAnswer(voxid);
+      // play right/wrong sounds
+      const answeredRight = (voxid === this.props.newGameData[this.props.voxCount].ID);
+      this.audio = new Audio();
+      // can play ogg or mp3
+			if (this.audio.canPlayType) {
+        if(answeredRight) {
+          if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+            this.url = 'audio/_sfx/Answer_Right.ogg';
+            this.audio = new Audio(this.url);
+            }
+          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+            this.url = 'audio/_sfx/Answer_Right.mp3';
+            this.audio = new Audio(this.url);
+            }
+          this.audio.play();
+        }
+        else {
+          if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+            this.url = 'audio/_sfx/Answer_Wrong.ogg';
+            this.audio = new Audio(this.url);
+            }
+          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+            this.url = 'audio/_sfx/Answer_Wrong.mp3';
+            this.audio = new Audio(this.url);
+            }
+          this.audio.play();
+        }
+      }
       this.setState({showRightAnswer: true});
       if (this.props.ansCount <= 4) {
         setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1200);
@@ -49,7 +76,8 @@ class VoiceChoices extends Component {
 
   render() {
 
-    const {answered, timerOn, outOfTime, firstname, lastname, pic, voxid, newGameData, ansCount, btnClass, isRightAnswer, category} = this.props;
+    const {answered, timerOn, outOfTime, firstname, lastname, pic, voxid, newGameData, ansCount, btnClass, isRightAnswer} = this.props;
+
     return (
         <button
           className={
@@ -70,9 +98,19 @@ class VoiceChoices extends Component {
           anscount={ansCount}
         >{
           (!outOfTime) ? (
-            (timerOn) ? ( (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>) ) : (!answered) ? '?' : (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>)
+            (timerOn) ?
+              <VoiceChoiceContent pic={pic} firstname={firstname} lastname={lastname} /> :
+              (!answered) ?
+                <VoiceChoiceContent pic={pic} firstname={firstname} lastname={lastname} timerOn={timerOn} answered={answered} /> :
+                <>
+                  <VoiceChoiceContent pic={pic} firstname={firstname} lastname={lastname} timerOn={timerOn} answered={answered} />
+                  <VoiceChoiceWhosThis firstname={firstname} lastname={lastname} />
+                </>
           ) : (
-            (<div><span className="ansPic"><img src={`data:image/jpeg;base64,${pic}`}></img></span><span className="ansName">{firstname + ' ' + lastname}</span><span className="catName">{category}</span></div>)
+            <>
+              <VoiceChoiceContent pic={pic} firstname={firstname} lastname={lastname} />
+              <VoiceChoiceWhosThis firstname={firstname} lastname={lastname} />
+            </>
           )
         }</button>
     );
@@ -83,6 +121,7 @@ class VoiceChoices extends Component {
     actions: object.isRequired,
     voxid: oneOfType([string,number]),
     ansCount: oneOfType([string,number]),
+    voxCount: oneOfType([string,number]),
     whovoxGame: object,
     score: number,
     newGameData: array,
@@ -95,7 +134,6 @@ class VoiceChoices extends Component {
     firstname: string,
     lastname: string,
     pic: string,
-    category: string,
     btnClass: string,
   };
 

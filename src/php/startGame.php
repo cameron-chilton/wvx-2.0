@@ -13,7 +13,7 @@
 
   /* get 5 answers from DB */
 
-  $sql = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB
+  $sql = "SELECT ID, FIRSTNAME, LASTNAME, CATEGORY, GENDER, ACCENT, RACE, DOB, CLIP_NAME
     FROM voices
     WHERE CATEGORY='$ctgyMovies' OR (category = '$ctgyMusic') OR (category = '$ctgyNews') OR (category = '$ctgySports')
     ORDER BY RAND()

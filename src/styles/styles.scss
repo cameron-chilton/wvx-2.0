@@ -1,111 +1,274 @@
+/* font imports */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+
+// Font Variables
+$nunito: 'Nunito', sans-serif;
+
 /* Variables */
-$font-stack: Helvetica, sans-serif;
-$primary-color: #ff0000;
+$color-blue-bg: #1a314d;
+$color-blue-bg2: #274c7a;
+$color-blue-med: #2c61bf;
+$color-blue-med-brite: #1286d7;
+$color-blue-med2: #80aaf4;
+$color-blue-med-lite: #8fcdfb;
+$color-blue-brite: #00aeff;
+$color-blue-lite: #d4eaf9;
+$color-blue-lite2: #bcd8ec;
+$color-yellow-litest: #fefdd6;
+$color-yellow-lite: #fffca8;
+$color-yellow: #fbfb45;
+$color-orange: #ff9c00;
+$color-red: #ff0000;
+$color-green-brite: #05ea50;
+$color-green-lite: #e5f3dd;
+$color-green-med: #b7d2a7;
+$color-green: #c9ecb6;
+$color-green-dark: #0e995c;
+$color-green-darkest: #027a2f;
 
-/* Styles */
+/* Global Styles */
 body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: $nunito;
   line-height: 1.4em;
-  color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
+  background: radial-gradient($color-blue-bg2, $color-blue-bg 76%);
+  min-width: 24rem;
+  max-width: 32rem;
   margin: 0 auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  font-weight: 300;
+  width: 32.0rem;
 }
-label.gameOverForm {display: block}
-.game, .btn-holder { text-align: center; margin: 1rem auto; }
+div, h1, button {margin: 0; padding: 0;}
+.bold {font-weight: 900;}
+.toUpper {text-transform: uppercase;}
 
-.game-info { font-size: 1.0rem; color: #666; }
-  .game-info span { margin-right: 1.4rem; }
+/* ///////////////////// GAME CONTAINER STYLES ////////////////// */
 
-  /* ////////////////// BUTTON STYLES /////////////////// */
+.adBox {height: 100px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
+.game {margin: 1rem auto;}
+  .game h1 {
+    font-size: 4.5rem;
+    letter-spacing: 0.2rem;
+    color: $color-blue-med-brite;
+    margin: 2.5rem 0 0.7rem 0;
+    text-shadow: 0px 0px 4px #707055;
+    font-weight: 900;
+  }
+  .voiceCount {
+    float: right;
+    letter-spacing: 0.03rem;
+    color: $color-blue-med-brite;
+    font-weight: 900;
+    margin: -1.9rem 0.4rem 0 0;
+    text-align: right;
+    line-height: 1.1rem;
+    text-shadow: 0px 0px 1px #707055;
+  }
+    .voiceCount .voiceNum {font-size: 1.4rem;}
+  .outerContainer {
+    width: 32.3rem;
+    box-shadow: 0px 0px 4px #707055;
+    border-radius: 21px;
+    min-height: 32rem;
+  }
+  .topContainer {
+    background-color: $color-blue-lite;
+    border: 12px solid $color-blue-med-brite;
+    border-radius: 21px;
+    margin: 0;
+    padding: 0.5rem 0.0rem 0.01rem 0.0rem;
+    width: 30.8rem;
+    text-align: center;
+    color: $color-blue-bg;
+    background-image: url(../imgs/bg-boxes.png);
+    box-shadow: 0px 0px 8px 0px #333 inset;
+    min-height: 32rem;
+  }
+
+/* ////////////////// GAME INFO STYLES /////////////////// */
+
+.gameInfo {display: flex; flex-wrap: wrap; align-items: stretch;}
+  .catCount {text-align: left; padding: 0 0.0rem 0 1.0rem; flex-grow: 1; width: 5.4rem; line-height: 1.3rem;}
+  .scoreBox {text-align: center; flex-grow: 3; }
+    .scoreNum {font-weight: 900; font-size: 1.9rem;}
+  .rightWrong {text-align: right; padding: 0 1.0rem 0 0.0rem; flex-grow: 1; line-height: 1.3rem;}
+.catChecks {margin: 0;}
+  .catChecks span.catSpans {display: inline-block; margin: 0 0.9rem 0 0.9rem;}
+  .catChecks span.catSpans input[type=checkbox] {vertical-align: middle; display: inline-block; margin: 0.0rem 0.2rem 0.0rem 0.0rem;}
+  .catLabel {font-size: 0.7rem; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; display: inline-block; letter-spacing: 0.03rem; cursor: pointer;}
+  .catLabelPulse {transform: scale(1); animation: pulse 1.5s infinite; border-radius: 4px;}
+
+/* ////////////////// START BUTTON STYLES /////////////////// */
 
   .play-button {
-    width: 27.0rem;
-    padding: 1.0rem;
-    border: 1px solid #afafaf;
-    background-image: linear-gradient(#e3e3e3, #f7f7f7);
+    width: 34.4rem;
+    padding: 0.5rem;
+    margin: 0 0 0.0rem -1.9rem;
+    color: $color-yellow;
+    border: 12px solid $color-blue-brite;
+    border-radius: 16px;
+    background-image: linear-gradient($color-blue-med, $color-blue-bg);
+    font-family: $nunito;
+    font-weight: 900;
+    font-size: 2.1rem;
+    letter-spacing: 0.16rem;
+    box-shadow: 0px 3px 8px #444;
+    cursor: pointer;
   }
     .play-button:disabled {
-      color: #2b2b2b;
-      border: 1px solid #afafaf;
-      background-image: linear-gradient(#e3e3e3, #f7f7f7);
+      color: $color-yellow;
+      border: 12px solid $color-blue-brite;
+      background-image: linear-gradient($color-blue-med, $color-blue-bg);
+      cursor: default;
     }
+    .play-button:focus, .play-button:active {
+      outline: none;
+      border: 12px solid $color-blue-brite;
+    }
+    .btnGreen {color: $color-green-brite; text-shadow: 2px 2px 0px #000;}
+    .btnYellow {color: $color-yellow; text-shadow: 2px 2px 0px #000;}
+    .btnRed {color: $color-red; text-shadow: 2px 2px 0px #000;}
+    .btnOrange {color: $color-orange; text-shadow: 2px 2px 0px #000;}
 
+/* ////////////////// VOICE BUTTON STYLES /////////////////// */
+
+.btn-holder {text-align: center; margin: 0.6rem auto;}
+  .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.3rem auto; width: 29.0rem;}
+  .ansName {
+    display: block;
+    font-family: $nunito;
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 0.04rem;
+    margin-top: 1.5rem;
+  }
   .vxBtn {
-    display: block;
-    background-color: #fff;
-    border: thin solid #ddd;
-    color: $primary-color;
-    width: 27.0rem;
-    min-height: 80px;
-    margin: 0.5rem auto;
-    font-size: 8px;
+    background-image: linear-gradient($color-blue-lite, $color-blue-lite2);
+    border: 2px solid $color-blue-med2;
+    cursor: pointer;
   }
+    .vxBtn .ansName {color: $color-blue-bg2; text-shadow: 1px 1px 2px #bbb;}
   .vxBtnSel {
-    display: block;
-    background-color: rgb(207, 174, 174);
-    border: thin solid #ddd;
-    color: $primary-color;
-    width: 27.0rem;
-    min-height: 80px;
-    margin: 0.5rem auto;
-    font-size: 8px;
+    background-image: linear-gradient($color-blue-med-lite, $color-blue-med2);
+    border: 2px solid $color-blue-med;
   }
+    .vxBtnSel .ansName {color: $color-blue-bg; text-shadow: 1px 1px 2px #aaa;}
   .vxBtnRight {
-    display: block;
-    background-color: #9cb576;
-    border: thin solid #ddd;
-    color: $primary-color;
-    width: 27.0rem;
-    min-height: 80px;
-    margin: 0.5rem auto;
-    font-size: 8px;
+    background-image: linear-gradient($color-green, $color-green-med);
+    border: 2px solid $color-green-dark;
   }
-  .vxBtn:focus, .vxBtn:active {
-    outline: none;
-    border: thin solid #ddd;
+    .vxBtnRight .ansName {color: $color-green-darkest; text-shadow: 1px 1px 2px #bbb;}
+  .ansQ {
+    font-size: 2.9rem;
+    margin: -1.0rem 0 0 0.3rem;
+    display: inline-block;
+		color: $color-blue-bg2;
+		background: gradient(linear, left top, right top, from($color-blue-med), to($color-blue-brite), color-stop(0.5, #fff));
+		background-size: 125px 100%;
+		background-clip: text;
+		animation-name: shimmer;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-color: $color-blue-bg;
   }
-  .ansPic {float: left;}
-  .catName {float: right;}
-
-  .timer {
-    color: $primary-color;
-    margin-top: 3px;
-    margin-left: 3px;
+  @keyframes shimmer {
+		0% {
+				background-position: top left;
+		}
+		100% {
+				background-position: top right;
+		}
+}
+  .ansPic {float: left; margin: 0.0rem 0.6rem -0.18rem 0.0rem;}
+    .ansPic img {border-radius: 7% 0% 0% 7%; border-right: 1px solid $color-blue-med2; }
+  .ansWhosThis {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    background-color: $color-yellow-lite;
+    padding: 0.1rem 0.3rem 0.0rem 0.3rem;
+    border-radius: 4px;
+    border: 1px solid #9fb1bf;
+    box-shadow: 0px 0px 2px #999;
   }
+    .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.02rem; font-family: $nunito; font-weight: 900; font-size: 0.7rem;}
+    .ansWhosThis a:hover {text-decoration: underline;}
 
-  /* ////////////////// HOF styles ///////////////////*/
+/* ////////////////// GAME OVER STYLES ///////////////////*/
 
-  .HOF-table {
-    width: 98%;
-    font-size: 0.85rem;
-    margin: 0 auto;
-    border-spacing: 0px;
-  }
-    .HOF-table th {font-size: 0.7rem;}
-    .HOF-table .hd1 {width: 1.7rem; text-align: center; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .hd2 {width: 2.7rem; text-align: center; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .hd3 {width: 6.5rem; text-align: left; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .hd4 {width: 6.5rem; text-align: left; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .hd5 {width: 6.3rem; text-align: left; border-bottom: thin solid #ddd; padding: 0.3rem;}
+h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4rem;}
+.inHOF p, .tooLow p {font-size: 1.2rem; line-height: 1.5rem; margin: 1.3rem 1.2rem; font-weight: 700;}
+.gameOverForm label {display: block; font-size: 0.9rem; letter-spacing: 0.02rem; font-weight: 900;}
+.gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
+.gameOverForm .button {margin-top: 0.6rem; text-align: center;}
+.gameOverForm .button button {
+  width: 9rem;
+  text-align: center;
+  padding: 0.6rem;
+  margin: 0 auto;
+  color: $color-yellow;
+  border: 3px solid $color-blue-brite;
+  border-radius: 8px;
+  background-image: linear-gradient($color-blue-med, $color-blue-bg);
+  font-family: $nunito;
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: 0.02rem;
+  box-shadow: 2px 2px 3px #aaa;
+  cursor: pointer;
+}
+.gameOverForm .button button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med); box-shadow: 2px 2px 3px #777; border: 3px solid $color-blue-med2;}
+.inHOF input[type=text] {border: 2px solid $color-blue-med; padding: 0.4rem; font-family: $nunito; font-weight: 700; font-size: 1.1rem; border-radius: 4px; width: 12rem;}
 
-    .HOF-table .col1 {width: 1.75rem; text-align: center; border-right: thin solid #ddd; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .col2 {width: 3.1rem; text-align: center; border-right: thin solid #ddd; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .col3 {width: 7.3em; text-align: left; border-right: thin solid #ddd; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .col4 {width: 7.3rem; text-align: left; border-right: thin solid #ddd; border-bottom: thin solid #ddd; padding: 0.3rem;}
-    .HOF-table .col5 {width: 6.0rem; text-align: left; border-bottom: thin solid #ddd; padding: 0.3rem;}
+/* ////////////////// HOF STYLES ///////////////////*/
+.hallOfFame h3 {font-weight: 900; margin: 0.4rem 0 0.5rem 0.9rem; float: left; font-size: 1.4rem;}
+  .gameCt {margin: 0.4rem 1.0rem 0 0; font-weight: 700; float: right;}
+  .HOF-table {width: 99%; margin: 0 auto; border-spacing: 0px;}
+  .HOF-table tr:nth-child(even) {background: #d7e2ec}
 
-    .HOF-highlight {font-weight: bold; }
-    .HOF-nameloc {font-weight: bold; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 7.3rem; display: block; }
+    .HOF-table th {font-size: 0.6rem; letter-spacing: 0.02rem; font-weight: 900; padding: 0.2rem; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;}
+    .HOF-table .hd1 {width: 0.5rem; text-align: center; padding-left: 0; }
+    .HOF-table .hd2 {width: 1.5rem; text-align: left; padding-left: 0.1rem;}
+    .HOF-table .hd3 {width: 6.9rem; text-align: left;}
+    .HOF-table .hd4 {width: 7.1rem; text-align: left;}
+    .HOF-table .hd5 {width: 7.6rem; text-align: left;}
+
+    .HOF-table td {font-size: 0.8rem; letter-spacing: 0.02rem; padding: 0.2rem; font-weight: 700;}
+    .HOF-table .col1 {width: 1.65rem; text-align: center; border-right: 1px solid #ccc;}
+    .HOF-table .col2 {width: 2.2rem; text-align: center; border-right: 1px solid #ccc;}
+    .HOF-table .col3 {width: 6.7em; text-align: left; border-right: 1px solid #ccc;}
+    .HOF-table .col4 {width: 6.7rem; text-align: left; border-right: 1px solid #ccc;}
+    .HOF-table .col5 {width: 7.3rem; text-align: left;}
+
+    .HOF-nameloc {
+      font-weight: 900;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 7.3rem;
+      transform: scale(1);
+      animation: pulse 1.5s infinite;
+      border-radius: 4px;
+      display: block;
+    }
+    .HOF-highlight {
+      font-weight: 900;
+      border-radius: 4px;
+      transform: scale(1);
+	    animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% {transform: scale(1); box-shadow: 0 0 0 0 $color-orange;}
+      70% {transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);}
+      100% {transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);}
+    }
     .HOF-regname {overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 7.3rem; display: block; }
 
   .scrollbox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 36rem;
-    width: 98%;
+    height: 23rem;
+    width: 99%;
     margin: 0 auto;
   }

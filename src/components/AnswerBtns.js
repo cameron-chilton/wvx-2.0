@@ -9,6 +9,14 @@ import GameOver from './GameOver';
 
 class AnswerBtns extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      showRightAnswer: false,
+      isOutOfTime: false,
+    };
+  }
+
   componentDidUpdate() {
 
     // reset button when nextvox is clicked
@@ -22,6 +30,17 @@ class AnswerBtns extends Component {
         setTimeout( () => {
           this.setState({showRightAnswer: true});
           this.props.actions.outOfTime();
+          // play wrong sound
+          this.audio = new Audio();
+          if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+            this.url = 'audio/_sfx/Answer_Wrong.ogg';
+            this.audio = new Audio(this.url);
+            }
+          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+            this.url = 'audio/_sfx/Answer_Wrong.mp3';
+            this.audio = new Audio(this.url);
+            }
+          this.audio.play();
           if (this.props.ansCount !== 5) {
             setTimeout( () => { this.props.actions.loadVoicesAllGame(this.props.newGameData, this.props.ansCount); }, 1000);
             setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1800);
@@ -29,18 +48,10 @@ class AnswerBtns extends Component {
           else {
             setTimeout( () => { this.props.actions.gameOver(); }, 2000);
           }
-        }, 1200);
+        }, 1);
         this.setState({isOutOfTime: true});
     }
 
-  }
-
-  constructor() {
-    super();
-    this.state = {
-      showRightAnswer: false,
-      isOutOfTime: false,
-    };
   }
 
   updateBtns = () => {
@@ -55,7 +66,6 @@ class AnswerBtns extends Component {
     const ansID3 = newGameData || [];
     const ansID2 = ansID3[voxCount] || {};
     const ansID = ansID2.ID || '';
-    const category = ansID2.CATEGORY || '';
     // map IDs and names
     const voiceQuestion = this.props.voiceQuestion || [];
     //console.log('answrBtns VQ: ' + JSON.stringify(voiceQuestion));
@@ -84,10 +94,10 @@ class AnswerBtns extends Component {
                 firstname={firstnames && firstnames[number]}
                 lastname={lastnames && lastnames[number]}
                 ansID={ansID}
-                category={category}
                 answered={answered}
                 newGameData={newGameData}
                 ansCount={ansCount}
+                voxCount={voxCount}
                 pic={pics && pics[number]}
                 isRightAnswer={(ansID === voxIDs[number]) ? true : false}
                 updateBtns={this.updateBtns}

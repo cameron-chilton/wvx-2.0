@@ -6,7 +6,6 @@ import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
 import * as actions from '../actions/whovoxActions';
 
-// React Component to display the timer
 class HallOfFame extends Component {
 
   constructor() {
@@ -15,10 +14,17 @@ class HallOfFame extends Component {
       tableData: {}
     };
     this.myRef = React.createRef();
-  }
-
-  handleScrollToElement() {
-      window.scrollTo(0, this.myRef.current.scrollIntoView());
+    this.audio = new Audio();
+    // can play ogg or mp3
+    if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+      this.url = 'audio/_sfx/Cheer.ogg';
+      this.audio = new Audio(this.url);
+      }
+    if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+      this.url = 'audio/_sfx/Cheer.mp3';
+      this.audio = new Audio(this.url);
+      }
+    this.audio.play();
   }
 
   componentDidMount() {
@@ -29,32 +35,36 @@ class HallOfFame extends Component {
     }, 700);
     setTimeout( () => {
         this.handleScrollToElement();
-    }, 800);
+    }, 2000);
+  }
+
+  handleScrollToElement() {
+      window.scrollTo(0, this.myRef.current.scrollIntoView());
   }
 
   componentDidUpdate() {
   }
 
-
-
   render() {
 
-    const gameID = this.props;
+    const gameID = this.props || null;
     const tdata = this.state.tableData || {};
     const lastOne = Object.keys(tdata).length - 1 || null;
 
     return (
       <div>
-        <h3>HALL OF FAME</h3>
-        <h4>{parseFloat(lastOne) + 1 || '--'} Games Played</h4>
+        <div className="hallOfFame">
+          <h3>HALL OF FAME</h3>
+          <div className="gameCt">{parseFloat(lastOne.toLocaleString()) + 1 || '--'} Games</div>
+        </div>
           <table className="HOF-table">
             <thead>
               <tr role="row">
-                <th scope="col" role="columnheader" className="hd1">Rank</th>
-                <th scope="col" role="columnheader" className="hd2">Score</th>
-                <th scope="col" role="columnheader" className="hd3">Name</th>
-                <th scope="col" role="columnheader" className="hd4">Location</th>
-                <th scope="col" role="columnheader" className="hd5">Date</th>
+                <th scope="col" role="columnheader" className="hd1">RANK</th>
+                <th scope="col" role="columnheader" className="hd2">SCORE</th>
+                <th scope="col" role="columnheader" className="hd3">NAME</th>
+                <th scope="col" role="columnheader" className="hd4">LOCATION</th>
+                <th scope="col" role="columnheader" className="hd5">DATE</th>
               </tr>
             </thead>
           </table>

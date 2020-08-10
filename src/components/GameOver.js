@@ -9,6 +9,17 @@ class GameOver extends Component {
 
   componentDidMount() {
     (this.props.score > 0) && this.nameRef.current.focus();
+    this.audio = new Audio();
+    // can play ogg or mp3
+    if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+      this.url = 'audio/_sfx/Game_Over.ogg';
+      this.audio = new Audio(this.url);
+      }
+    if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+      this.url = 'audio/_sfx/Game_Over.mp3';
+      this.audio = new Audio(this.url);
+      }
+    this.audio.play();
   }
 
   componentDidUpdate() {
@@ -28,13 +39,18 @@ class GameOver extends Component {
   }
 
   handleName = (event) => {
-    this.setState({playerName: event.target.value});
-    localStorage[name] = this.state.playerName;
+    if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
+      this.setState({playerName: event.target.value});
+      localStorage[name] = this.state.playerName;
+    }
+
   }
 
   handleLocation = (event) => {
-    this.setState({playerLocation: event.target.value});
-    localStorage[location] = this.state.playerLocation;
+    if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
+      this.setState({playerLocation: event.target.value});
+      localStorage[location] = this.state.playerLocation;
+    }
   }
 
   saveGame = () => {
@@ -72,34 +88,38 @@ class GameOver extends Component {
         {
           (!this.state.gameSaved) ? (
 
-            (score > 0) ? (
-              <>
-                <h3>THANKS FOR PLAYING!</h3>
-                <p>You scored {score.toLocaleString()} with {ansRight} out of 5 voices correct.</p>
+            (score > 499) ? (
+              <div className="inHOF">
+                <h2>THANKS FOR PLAYING!</h2>
+                <p>You scored <span className="bold">{score.toLocaleString()}</span> with <span className="bold">{ansRight}</span> out of <span className="bold">5</span> voices correct.</p>
                 <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
-                <p>Select different categories above to test your ears on voices you know best!</p>
+                <p>Select different categories to test your ears on voices you know best!</p>
 
                 {!this.state.isValid && <p className="errorMsg">Player Name and Player Location input is required to save game.</p>}
 
-                <div>
-                  <label htmlFor="player_name" className="gameOverForm">Name</label>
-                  <input id="player_name" type="text" placeholder="Player Name" value={this.state.playerName} onChange={this.handleName} ref={this.nameRef} maxLength="27" />
+                <div className="gameOverForm">
+                  <div className="field">
+                    <label htmlFor="player_name">PLAYER NAME</label>
+                    <input id="player_name" type="text" placeholder="Player Name" value={this.state.playerName} onChange={this.handleName} ref={this.nameRef} maxLength="32" />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="player_location">LOCATION</label>
+                    <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} maxLength="32" />
+                  </div>
+                  <div className="button">
+                    <button className="save-button" onClick={this.saveGame}>SAVE GAME</button>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="player_location" className="gameOverForm">Location</label>
-                  <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} maxLength="27" />
-                </div>
-                <div>
-                  <button className="save-button" onClick={this.saveGame}>Save Game</button>
-                </div>
-              </>
+
+              </div>
 
             ) : (
-              <>
-                <h3>THANKS FOR PLAYING!</h3>
-                <p>Your score is too low for the Hall of Fame. Try again!</p>
-                <p>Select different categories above to test your ears on voices you know best!</p>
-              </>
+              <div className="tooLow">
+                <h2>THANKS FOR PLAYING!</h2>
+                <p>Your score is too low for the Hall of Fame.</p>
+                <h3><span className="bold">TRY AGAIN!</span></h3>
+                <p>Select different categories to test your ears on voices you know best!</p>
+              </div>
             )
 
           ) : (

@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {string, number, oneOfType, bool, object} from 'prop-types';
+import {string, number, oneOfType, bool, object, array} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
 
 class GameInfo extends Component {
-
-  componentDidUpdate() {
-  }
 
   constructor() {
     super();
@@ -47,37 +44,48 @@ class GameInfo extends Component {
       movTvChecked,
       musArtsChecked,
       newsPolChecked,
-      sportsChecked
+      sportsChecked,
+      newGameData
     } = this.props;
+
+    // get category from newGameData
+    const ansID3 = newGameData || [];
+    const ansID2 = ansID3[voxCount] || {};
+    const category = ansID2.CATEGORY || '';
 
     return (
       <>
-        <h1>WHOVOX</h1>
-        <div className="game-info">
-          <div>
-            <span>Vox {voxCount + 1} of 5</span>
-            <span>Score: {score.toLocaleString()}</span>
-            <span>Right: {ansRight}</span>
-            <span>Wrong: {ansWrong}</span>
-          </div>
-          <div>
-            <span>
-              <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onClick={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
-              <label htmlFor="MoviesTvChk">Movies/TV</label>
-            </span>
-            <span>
-              <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onClick={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
-              <label htmlFor="MusicArtsChk">Music/Arts</label>
-            </span>
-            <span>
-              <input type="checkbox" id="NewsPolChk" value="News/Politics" onClick={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
-              <label htmlFor="NewsPolChk">News/Politics</label>
-            </span>
-            <span>
-              <input type="checkbox" id="SportsChk" value="Sports" onClick={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
-              <label htmlFor="SportsChk">Sports</label>
-            </span>
-          </div>
+        <div className="gameInfo">
+            <div className="catCount">
+              <div>VOX <span className="bold">{voxCount + 1}</span> OF <span className="bold">5</span></div>
+              <div className="toUpper">{category}</div>
+            </div>
+            <div className="scoreBox">
+              <div className="scoreNum">{score.toLocaleString()}</div>
+              <div>SCORE</div>
+            </div>
+            <div className="rightWrong">
+              <div>RIGHT: <span className="bold">{ansRight}</span></div>
+              <div>WRONG: <span className="bold">{ansWrong}</span></div>
+            </div>
+        </div>
+        <div className="catChecks">
+          <span className="catSpans">
+            <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onClick={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
+            <label htmlFor="MoviesTvChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MOVIES/TV</span></label>
+          </span>
+          <span className="catSpans">
+            <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onClick={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
+            <label htmlFor="MusicArtsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MUSIC/ARTS</span></label>
+          </span>
+          <span className="catSpans">
+            <input type="checkbox" id="NewsPolChk" value="News/Politics" onClick={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
+            <label htmlFor="NewsPolChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>NEWS/POLITICS</span></label>
+          </span>
+          <span className="catSpans">
+            <input type="checkbox" id="SportsChk" value="Sports" onClick={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
+            <label htmlFor="SportsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>SPORTS</span></label>
+          </span>
         </div>
       </>
     );
@@ -95,6 +103,7 @@ GameInfo.propTypes = {
   newsPolChecked: bool,
   sportsChecked: bool,
   gameOver: bool,
+  newGameData: array,
 };
 
 function mapStateToProps(state) {
@@ -108,6 +117,7 @@ function mapStateToProps(state) {
     newsPolChecked: state.whovoxGame.newsPolChecked,
     sportsChecked: state.whovoxGame.sportsChecked,
     gameOver: state.whovoxGame.gameOver,
+    newGameData: state.whovoxGame.newGameData,
   };
 }
 

@@ -8,11 +8,16 @@ import whovoxUtils from '../utils/whovox-utils';
 // React Component to display the timer
 class Timer extends Component {
 
-  componentDidMount() {
+  constructor() {
+    super();
+    this.startTimer = this.startTimer.bind(this);
+    this.state = {
+      isAnswered: false,
+      toggleTextVal: false,
+    };
   }
 
   componentDidUpdate() {
-
     // clear local state
     if (this.props.timerOn && !this.props.answered && this.state.isAnswered) {
       this.setState({isAnswered: false});
@@ -27,16 +32,6 @@ class Timer extends Component {
         this.toggleText();
       }, 2300);
     }
-
-  }
-
-  constructor() {
-    super();
-    this.startTimer = this.startTimer.bind(this);
-    this.state = {
-      isAnswered: false,
-      toggleTextVal: false,
-    };
   }
 
   toggleText = () => {
@@ -60,9 +55,9 @@ class Timer extends Component {
         <button className='play-button' onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true}>
           {
             !this.state.isAnswered ? (
-              typeof btnTxt == 'number' ? whovoxUtils.formatTime(btnTxt) : btnTxt
+              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)
             ) : (
-              !this.state.toggleTextVal ? btnTxt : (!gameOver ? ('VOX ' + (voxCount + 1) + ' OF 5') : 'PLAY AGAIN')
+              !this.state.toggleTextVal ? <><span className="btnOrange">{btnTxt}</span></> : (!gameOver ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) : <><span className="btnYellow">PLAY AGAIN</span></>)
             )
           }
         </button>

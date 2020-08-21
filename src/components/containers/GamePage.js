@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import Timer from '../Timer';
 import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
+import GameFirstDialog from '../GameFirstDialog';
 import * as actions from '../../actions/whovoxActions';
 
 let interval = null;
@@ -14,7 +15,8 @@ class GamePage extends Component {
   constructor() {
     super();
     this.state = {
-      voiceCount: ''
+      voiceCount: '',
+      isFirstGame: localStorage.getItem('First Game') || true,
     };
   }
 
@@ -79,6 +81,13 @@ class GamePage extends Component {
 
   }
 
+  isFirstGame = () => {
+    console.log('hit fg');
+      this.setState({ isFirstGame: false }, () => {
+        localStorage.setItem('First Game', this.state.isFirstGame);
+      })
+  }
+
   render() {
     const vxCt = this.state.voiceCount || '';
     const {
@@ -98,7 +107,7 @@ class GamePage extends Component {
 
     return (
       <>
-
+        {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
         <div className="adBox"></div>
         <div className="game">
           <h1>WHOVOX</h1>

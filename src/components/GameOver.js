@@ -93,7 +93,7 @@ class GameOver extends Component {
                 <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
                 <p>Select different categories to test your ears on voices you know best!</p>
 
-                {!this.state.isValid && <p className="errorMsg">Player Name and Player Location input is required to save game.</p>}
+                {!this.state.isValid && <div className="errorMsg">Name and Location is required to save game.</div>}
 
                 <div className="gameOverForm">
                   <div className="field">

@@ -40,9 +40,27 @@ body {
 div, h1, button {margin: 0; padding: 0;}
 .bold {font-weight: 900;}
 .toUpper {text-transform: uppercase;}
+/* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
+.overlay {position: absolute; background-color: #000; opacity: 0.35; top: 0; left: 0; z-index: 99;}
+  .overlayContainer {position: relative; width: inherit; z-index: 999;}
+    .overlayContent {
+      position: absolute;
+      z-index: 9999;
+      top: 5rem;
+      left: auto;
+      background-color: $color-blue-lite;
+      padding: 1.0rem;
+      border: 12px solid $color-blue-med-brite;
+      border-radius: 21px;
+      margin: 0;
+      width: 27rem;
+      color: $color-blue-bg;
+      background-image: url(../imgs/bg-boxes.png);
+      box-shadow: 0px 0px 8px 0px #333 inset;
+      text-align: center;
+    }
 
 /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-
 .adBox {height: 100px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
 .game {margin: 1rem auto;}
   .game h1 {
@@ -148,29 +166,7 @@ div, h1, button {margin: 0; padding: 0;}
     border: 2px solid $color-green-dark;
   }
     .vxBtnRight .ansName {color: $color-green-darkest; text-shadow: 1px 1px 2px #bbb;}
-  .ansQ {
-    font-size: 2.9rem;
-    margin: -1.0rem 0 0 0.3rem;
-    display: inline-block;
-		color: $color-blue-bg2;
-		background: gradient(linear, left top, right top, from($color-blue-med), to($color-blue-brite), color-stop(0.5, #fff));
-		background-size: 125px 100%;
-		background-clip: text;
-		animation-name: shimmer;
-		animation-duration: 1s;
-		animation-iteration-count: infinite;
-		background-repeat: no-repeat;
-		background-position: 0 0;
-		background-color: $color-blue-bg;
-  }
-  @keyframes shimmer {
-		0% {
-				background-position: top left;
-		}
-		100% {
-				background-position: top right;
-		}
-}
+  .ansQ {font-size: 2.9rem; margin: -1.0rem 0 0 0.3rem; display: inline-block; color: $color-blue-bg2;}
   .ansPic {float: left; margin: 0.0rem 0.6rem -0.18rem 0.0rem;}
     .ansPic img {border-radius: 7% 0% 0% 7%; border-right: 1px solid $color-blue-med2; }
   .ansWhosThis {
@@ -187,13 +183,12 @@ div, h1, button {margin: 0; padding: 0;}
     .ansWhosThis a:hover {text-decoration: underline;}
 
 /* ////////////////// GAME OVER STYLES ///////////////////*/
-
 h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4rem;}
 .inHOF p, .tooLow p {font-size: 1.2rem; line-height: 1.5rem; margin: 1.3rem 1.2rem; font-weight: 700;}
 .gameOverForm label {display: block; font-size: 0.9rem; letter-spacing: 0.02rem; font-weight: 900;}
 .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
 .gameOverForm .button {margin-top: 0.6rem; text-align: center;}
-.gameOverForm .button button {
+.save-button {
   width: 9rem;
   text-align: center;
   padding: 0.6rem;
@@ -209,8 +204,10 @@ h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4r
   box-shadow: 2px 2px 3px #aaa;
   cursor: pointer;
 }
-.gameOverForm .button button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med); box-shadow: 2px 2px 3px #777; border: 3px solid $color-blue-med2;}
+.save-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med); box-shadow: 2px 2px 3px #777; border: 3px solid $color-blue-med2;}
 .inHOF input[type=text] {border: 2px solid $color-blue-med; padding: 0.4rem; font-family: $nunito; font-weight: 700; font-size: 1.1rem; border-radius: 4px; width: 12rem;}
+.button .save-button {width: 9rem;}
+.errorMsg {font-size: 0.9rem; line-height: 0.9rem; color: $color-red; margin: 0.4rem 0.1rem;}
 
 /* ////////////////// HOF STYLES ///////////////////*/
 .hallOfFame h3 {font-weight: 900; margin: 0.4rem 0 0.5rem 0.9rem; float: left; font-size: 1.4rem;}

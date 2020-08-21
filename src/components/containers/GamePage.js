@@ -98,6 +98,7 @@ class GamePage extends Component {
 
     return (
       <>
+
         <div className="adBox"></div>
         <div className="game">
           <h1>WHOVOX</h1>
@@ -105,35 +106,33 @@ class GamePage extends Component {
             <div className="voiceNum">{vxCt.toLocaleString()}</div>
             <div>VOICES</div>
           </div>
-          <div className="outerContainer">
-            <div className="topContainer">
-              <GameInfo
-                voxCount={voxCount}
-                score={score}
-                ansRight={ansRight}
-                ansWrong={ansWrong}
-                timerOn={timerOn}
-                newGameData={newGameData}
-              />
-              <Timer
-                timer={timer}
-                timerOn={timerOn}
-                interval={interval}
-                btnTxt={btnTxt}
-                voxCount={voxCount}
-                score={score}
-                answered={answered}
-              />
-              <AnswerBtns
-                timerOn={timerOn}
-                voiceQuestion={voiceQuestion}
-                answered={answered}
-                newGameData={newGameData}
-                ansCount={ansCount}
-                voxCount={voxCount}
-                outOfTime={outOfTime}
-              />
-            </div>
+          <div className="topContainer">
+            <GameInfo
+              voxCount={voxCount}
+              score={score}
+              ansRight={ansRight}
+              ansWrong={ansWrong}
+              timerOn={timerOn}
+              newGameData={newGameData}
+            />
+            <Timer
+              timer={timer}
+              timerOn={timerOn}
+              interval={interval}
+              btnTxt={btnTxt}
+              voxCount={voxCount}
+              score={score}
+              answered={answered}
+            />
+            <AnswerBtns
+              timerOn={timerOn}
+              voiceQuestion={voiceQuestion}
+              answered={answered}
+              newGameData={newGameData}
+              ansCount={ansCount}
+              voxCount={voxCount}
+              outOfTime={outOfTime}
+            />
           </div>
         </div>
       </>

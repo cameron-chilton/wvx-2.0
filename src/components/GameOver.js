@@ -7,6 +7,19 @@ import * as actions from '../actions/whovoxActions';
 
 class GameOver extends Component {
 
+  constructor() {
+    super();
+    this.saveGame = this.saveGame.bind(this);
+    this.state = {
+      playerName: localStorage[name] || '',
+      playerLocation: localStorage[location] || '',
+      isValid: true,
+      gameSaved: false,
+    };
+    this.nameRef = React.createRef();
+    this.locRef = React.createRef();
+  }
+
   componentDidMount() {
     (this.props.score > 0) && this.nameRef.current.focus();
     this.audio = new Audio();
@@ -22,34 +35,19 @@ class GameOver extends Component {
     this.audio.play();
   }
 
-  componentDidUpdate() {
-  }
-
-  constructor() {
-    super();
-    this.saveGame = this.saveGame.bind(this);
-    this.state = {
-      playerName: localStorage[name] || '',
-      playerLocation: localStorage[location] || '',
-      isValid: true,
-      gameSaved: false,
-    };
-    this.nameRef = React.createRef();
-    this.locRef = React.createRef();
-  }
-
   handleName = (event) => {
     if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
-      this.setState({playerName: event.target.value});
-      localStorage[name] = this.state.playerName;
+      this.setState({ playerName: event.target.value }, () => {
+        localStorage.setItem('Player Name', this.state.playerName);
+      })
     }
-
   }
 
   handleLocation = (event) => {
     if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
-      this.setState({playerLocation: event.target.value});
-      localStorage[location] = this.state.playerLocation;
+      this.setState({ playerLocation: event.target.value }, () => {
+        localStorage.setItem('Player Location', this.state.playerLocation);
+      })
     }
   }
 

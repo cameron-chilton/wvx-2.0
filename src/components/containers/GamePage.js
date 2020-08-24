@@ -16,7 +16,7 @@ class GamePage extends Component {
     super();
     this.state = {
       voiceCount: '',
-      isFirstGame: localStorage.getItem('First Game') || true,
+      isFirstGame: localStorage.getItem('First Game', false) ? false : true,
     };
   }
 
@@ -110,10 +110,22 @@ class GamePage extends Component {
         {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
         <div className="adBox"></div>
         <div className="game">
-          <h1>WHOVOX</h1>
-          <div className="voiceCount">
-            <div className="voiceNum">{vxCt.toLocaleString()}</div>
-            <div>VOICES</div>
+          <div className="topLine">
+            <div className="voiceCount">
+              <div className="voiceNum">{vxCt.toLocaleString()}</div>
+              <div>VOICES</div>
+            </div>
+            <h1>
+              <span>W</span>
+              <span>H</span>
+              <span>O</span>
+              <span>V</span>
+              <span>O</span>
+              <span>X</span>
+            </h1>
+            <div className="earLogo">
+              <img className="logo-dot" src="../../imgs/logo-dot.svg" />
+            </div>
           </div>
           <div className="topContainer">
             <GameInfo

@@ -25,6 +25,19 @@ class HallOfFame extends Component {
       this.audio = new Audio(this.url);
       }
     this.audio.play();
+    setTimeout( () => {
+      this.audio2 = new Audio();
+      // can play ogg or mp3
+      if (this.audio2.canPlayType('audio/ogg; codecs="vorbis"')) {
+        this.url2 = 'audio/_sfx/Answer_Right.ogg';
+        this.audio2 = new Audio(this.url);
+        }
+      if (this.audio2.canPlayType('audio/mp3; codecs="mp3"')) {
+        this.url2 = 'audio/_sfx/Answer_Right.mp3';
+        this.audio2 = new Audio(this.url2);
+        }
+      this.audio2.play();
+  }, 2000);
   }
 
   componentDidMount() {

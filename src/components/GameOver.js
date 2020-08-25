@@ -11,8 +11,8 @@ class GameOver extends Component {
     super();
     this.saveGame = this.saveGame.bind(this);
     this.state = {
-      playerName: localStorage[name] || '',
-      playerLocation: localStorage[location] || '',
+      playerName: localStorage.getItem('Player Name') || '',
+      playerLocation: localStorage.getItem('Player Location') || '',
       isValid: true,
       gameSaved: false,
     };
@@ -36,7 +36,7 @@ class GameOver extends Component {
   }
 
   handleName = (event) => {
-    if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
+    if(event.target.value.match("^[a-zA-Z- ]*$")!=null) {
       this.setState({ playerName: event.target.value }, () => {
         localStorage.setItem('Player Name', this.state.playerName);
       })
@@ -44,7 +44,7 @@ class GameOver extends Component {
   }
 
   handleLocation = (event) => {
-    if(event.target.value.match("^[a-zA-Z ]*$")!=null) {
+    if(event.target.value.match("^[a-zA-Z, ]*$")!=null) {
       this.setState({ playerLocation: event.target.value }, () => {
         localStorage.setItem('Player Location', this.state.playerLocation);
       })

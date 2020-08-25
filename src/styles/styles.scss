@@ -64,41 +64,49 @@ div, h1, button {margin: 0; padding: 0;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
 .adBox {height: 100px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
-.game {margin: 1rem auto;}
-    .topLine {width: 32.0rem; vertical-align: bottom; }
-      .topLine h1 {
-        font-size: 4.5rem;
-        letter-spacing: 0.2rem;
-        color: $color-blue-med-brite;
-        margin: 2.5rem 0 0.7rem 0;
-        text-shadow: 0px 0px 4px #707055;
-        font-weight: 900;
-        float: left;
-      }
-      .earLogo {
-        width: 4.5rem;
-        height: 5.1rem;
-        position: relative;
-        float: left;
-        border: 1px solid red;
-      }
+.game {width: 32.0rem;}
+    .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
+      .topLine h1 {font-size: 4.5rem; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900;display: inline-block;}
+      .name1 {animation: flicker 2.0s infinite;}
+      .name2 {animation: flicker 2.4s infinite;}
+      .name3 {animation: flicker 2.8s infinite;}
+      .name4 {animation: flicker 3.2s infinite;}
+      .name5 {animation: flicker 2.7s infinite;}
+      .name6 {animation: flicker 2.4s infinite;}
+      .earLogo {width: 3.8rem; height: 4.1rem; position: relative; display: inline-block; margin: 0 0.4rem 0 -0.3rem;}
         .earLogo img {position: absolute;}
-        .logo-dot {top: 1.2rem; left: 0.4rem; width: 1.1rem; height: 01.1rem;}
+        .logo-dot {top: 3.20rem; left: 0.78rem; width: 1.18rem; animation: flicker 3.6s infinite;}
+        .logo-outer {top: 0.32rem; left: 0.52rem; width: 2.74rem; animation: flicker 3.6s infinite;}
+        .logo-inner1 {top: 1.56rem; left: 0.78rem; width: 0.96rem; animation: flicker2 1.8s infinite;}
+        .logo-inner2 {top: 1.20rem; left: 1.04rem; width: 1.08rem; animation: flicker2 2.4s infinite;}
+        .logo-inner3 {top: 0.80rem; left: 1.32rem; width: 1.32rem; animation: flicker2 3.0s infinite;}
+        @keyframes flicker {
+          0%   {opacity: 1.0;}
+          50%  {opacity: 0.78;}
+          100% {opacity: 1.0;}
+        }
+        @keyframes flicker2 {
+          0%   {opacity: 1.0;}
+          50%  {opacity: 0.50;}
+          100% {opacity: 1.0;}
+        }
       .voiceCount {
-        float: right;
-        letter-spacing: 0.03rem;
+        letter-spacing: 0.06rem;
         color: $color-blue-med-brite;
         font-weight: 900;
-        margin: -1.9rem 0.4rem 0 0;
-        text-align: right;
-        line-height: 1.1rem;
-        text-shadow: 0px 0px 1px #707055;
+        margin-left: 0.2rem;
+        line-height: 1.2rem;
+        text-shadow: 0px 0px 2px #707055;
+        display: inline-block;
+        text-align: center;
       }
-        .voiceCount .voiceNum {font-size: 1.4rem;}
+        .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
+        .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
+
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {
     background-color: $color-blue-lite;
-    border: 12px solid $color-blue-med-brite;
+    border: 9px solid $color-blue-med-brite;
     border-radius: 21px;
     margin: 0;
     padding: 0.5rem 0.0rem 0.01rem 0.0rem;
@@ -126,10 +134,10 @@ div, h1, button {margin: 0; padding: 0;}
 /* ////////////////// START BUTTON STYLES /////////////////// */
   .play-button {
     width: 34.4rem;
-    padding: 0.5rem;
+    padding: 0.3rem 0.5rem;
     margin: 0 0 0.0rem -1.9rem;
     color: $color-yellow;
-    border: 12px solid $color-blue-brite;
+    border: 10px solid $color-blue-brite;
     border-radius: 16px;
     background-image: linear-gradient($color-blue-med, $color-blue-bg);
     font-family: $nunito;
@@ -141,13 +149,13 @@ div, h1, button {margin: 0; padding: 0;}
   }
     .play-button:disabled {
       color: $color-yellow;
-      border: 12px solid $color-blue-brite;
+      border: 10px solid $color-blue-brite;
       background-image: linear-gradient($color-blue-med, $color-blue-bg);
       cursor: default;
     }
     .play-button:focus, .play-button:active {
       outline: none;
-      border: 12px solid $color-blue-brite;
+      border: 10px solid $color-blue-brite;
     }
     .btnGreen {color: $color-green-brite; text-shadow: 2px 2px 0px #000;}
     .btnYellow {color: $color-yellow; text-shadow: 2px 2px 0px #000;}
@@ -156,7 +164,7 @@ div, h1, button {margin: 0; padding: 0;}
 
 /* ////////////////// VOICE BUTTON STYLES /////////////////// */
 .btn-holder {text-align: center; margin: 0.6rem auto;}
-  .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.3rem auto; width: 29.0rem;}
+  .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.2rem auto; width: 29.0rem;}
   .ansName {
     display: block;
     font-family: $nunito;
@@ -167,18 +175,18 @@ div, h1, button {margin: 0; padding: 0;}
   }
   .vxBtn {
     background-image: linear-gradient($color-blue-lite, $color-blue-lite2);
-    border: 2px solid $color-blue-med2;
+    border: 1px solid $color-blue-med2;
     cursor: pointer;
   }
     .vxBtn .ansName {color: $color-blue-bg2; text-shadow: 1px 1px 2px #bbb;}
   .vxBtnSel {
     background-image: linear-gradient($color-blue-med-lite, $color-blue-med2);
-    border: 2px solid $color-blue-med;
+    border: 1px solid $color-blue-med;
   }
     .vxBtnSel .ansName {color: $color-blue-bg; text-shadow: 1px 1px 2px #aaa;}
   .vxBtnRight {
     background-image: linear-gradient($color-green, $color-green-med);
-    border: 2px solid $color-green-dark;
+    border: 1px solid $color-green-dark;
   }
     .vxBtnRight .ansName {color: $color-green-darkest; text-shadow: 1px 1px 2px #bbb;}
   .ansQ {font-size: 2.9rem; margin: -1.0rem 0 0 0.3rem; display: inline-block; color: $color-blue-bg2;}
@@ -271,7 +279,7 @@ h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4r
   .scrollbox {
     overflow-y: auto;
     overflow-x: hidden;
-    height: 23rem;
+    height: 21rem;
     width: 99%;
     margin: 0 auto;
   }

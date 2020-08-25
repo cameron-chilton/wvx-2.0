@@ -82,10 +82,20 @@ class GamePage extends Component {
   }
 
   isFirstGame = () => {
-    console.log('hit fg');
-      this.setState({ isFirstGame: false }, () => {
-        localStorage.setItem('First Game', this.state.isFirstGame);
-      })
+    this.setState({ isFirstGame: false }, () => {
+      localStorage.setItem('First Game', this.state.isFirstGame);
+      this.audio = new Audio();
+      // can play ogg or mp3
+      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+        this.url = 'audio/_sfx/Intro_Collage.ogg';
+        this.audio = new Audio(this.url);
+        }
+      if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+        this.url = 'audio/_sfx/Intro_Collage.mp3';
+        this.audio = new Audio(this.url);
+        }
+      this.audio.play();
+    })
   }
 
   render() {
@@ -111,20 +121,24 @@ class GamePage extends Component {
         <div className="adBox"></div>
         <div className="game">
           <div className="topLine">
-            <div className="voiceCount">
-              <div className="voiceNum">{vxCt.toLocaleString()}</div>
-              <div>VOICES</div>
-            </div>
             <h1>
-              <span>W</span>
-              <span>H</span>
-              <span>O</span>
-              <span>V</span>
-              <span>O</span>
-              <span>X</span>
+              <span className="name1">W</span>
+              <span className="name2">H</span>
+              <span className="name3">O</span>
+              <span className="name4">V</span>
+              <span className="name5">O</span>
+              <span className="name6">X</span>
             </h1>
             <div className="earLogo">
               <img className="logo-dot" src="../../imgs/logo-dot.svg" />
+              <img className="logo-outer" src="../../imgs/logo-outer.svg" />
+              <img className="logo-inner1" src="../../imgs/logo-inner1.svg" />
+              <img className="logo-inner2" src="../../imgs/logo-inner2.svg" />
+              <img className="logo-inner3" src="../../imgs/logo-inner3.svg" />
+            </div>
+            <div className="voiceCount">
+              <div className="voiceNum">{vxCt.toLocaleString()}</div>
+              <div className="voiceTxt">VOICES</div>
             </div>
           </div>
           <div className="topContainer">

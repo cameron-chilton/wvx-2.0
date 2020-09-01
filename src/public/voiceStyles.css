@@ -1,0 +1,189 @@
+/* font imports */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
+
+/* Global Styles */
+body {
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.4em;
+  background: radial-gradient(#274c7a, #1a314d 76%);
+  min-width: 24rem;
+  max-width: 32rem;
+  margin: 0 auto;
+  width: 32.0rem;
+}
+div, h1, button, span {margin: 0; padding: 0;}
+.bold {font-weight: 900;}
+.toUpper {text-transform: uppercase;}
+
+/* ////////////////// TOP LOGO LINE ////////////////// */
+.adBox {height: 80px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
+.game {width: 32.0rem;}
+    .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
+      .topLine h1 {font-size: 4.5rem; letter-spacing: -0.6rem; color: #1286d7; text-shadow: 0px 0px 6px #707055; font-weight: 900; display: inline-block;}
+      .name1 {animation: flicker 2.0s infinite;}
+      .name2 {animation: flicker 2.4s infinite;}
+      .name3 {animation: flicker 2.8s infinite;}
+      .name4 {animation: flicker 3.2s infinite;}
+      .name5 {animation: flicker 2.7s infinite;}
+      .name6 {animation: flicker 2.4s infinite;}
+      .earLogo {width: 3.8rem; height: 4.1rem; position: relative; display: inline-block; margin: 0 0.4rem 0 -0.3rem;}
+        .earLogo img {position: absolute;}
+        .logo-dot {top: 3.20rem; left: 0.78rem; width: 1.18rem; animation: flicker 3.6s infinite;}
+        .logo-outer {top: 0.32rem; left: 0.52rem; width: 2.74rem; animation: flicker 3.6s infinite;}
+        .logo-inner1 {top: 1.56rem; left: 0.78rem; width: 0.96rem; animation: flicker2 1.8s infinite;}
+        .logo-inner2 {top: 1.20rem; left: 1.04rem; width: 1.08rem; animation: flicker2 2.4s infinite;}
+        .logo-inner3 {top: 0.80rem; left: 1.32rem; width: 1.32rem; animation: flicker2 3.0s infinite;}
+        @keyframes flicker {
+          0%   {opacity: 1.0;}
+          50%  {opacity: 0.80;}
+          100% {opacity: 1.0;}
+        }
+        @keyframes flicker2 {
+          0%   {opacity: 1.0;}
+          50%  {opacity: 0.50;}
+          100% {opacity: 1.0;}
+        }
+      .voiceCount {
+        letter-spacing: 0.06rem;
+        color: #1286d7;
+        font-weight: 900;
+        margin-left: 1.2rem;
+        line-height: 1.2rem;
+        text-shadow: 0px 0px 2px #707055;
+        display: inline-block;
+        text-align: center;
+      }
+      .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
+      .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
+      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto;}
+        .links {float: left;}
+          .links a {margin-right: 1.9rem; font-family: 'Nunito', sans-serif; color: #00aeff; text-decoration: none; letter-spacing: 0.02rem;}
+        .copy {float: right; color: #2c61bf; font-family: 'Nunito', sans-serif;}
+
+  /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
+  .topContainer {
+    background-color: #d4eaf9;
+    border: 9px solid #1286d7;
+    border-radius: 21px;
+    margin: 0;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    width: 30.8rem;
+    color: #1a314d;
+    background-image: url(../imgs/bg-boxes.png);
+    box-shadow: 0px 0px 8px 0px #333 inset;
+    min-height: 32rem;
+  }
+
+/* ////////////////// GAME INFO STYLES /////////////////// */
+.gameInfo {text-align: center;}
+.gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0;}
+h2#tmplMsg.errorMsg {color: #ff0000;}
+.save-button {
+  width: auto;
+  text-align: center;
+  padding: 0.3rem;
+  margin: 0 0.3rem 0 0;
+  color: #fbfb45;
+  border: 2px solid #00aeff;
+  border-radius: 7px;
+  background-image: linear-gradient(#2c61bf, #1a314d);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 0.02rem;
+  box-shadow: 2px 2px 3px #aaa;
+  cursor: pointer;
+}
+.save-button:hover {background-image: linear-gradient(#1a314d, #2c61bf); box-shadow: 2px 2px 3px #777; border: 2px solid #80aaf4;}
+.save-button:focus {outline: none; }
+.save-button:active {outline: none; background: #1a314d;}
+input[type=text] {border: 2px solid #2c61bf; padding: 0.4rem; margin-right: 0.4rem; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1.1rem; border-radius: 4px; width: 14rem;}
+#tmplSrch {margin: 0.8rem auto;}
+
+/* ////////////////// START BUTTON STYLES /////////////////// */
+  .play-button {
+    width: 33.2rem;
+    padding: 0.3rem 0.5rem;
+    margin: 0 0 0.0rem -1.2rem;
+    color: #fbfb45;
+    border: 10px solid #00aeff;
+    border-radius: 16px;
+    background-image: linear-gradient(#2c61bf, #1a314d);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.9rem;
+    letter-spacing: 0.20rem;
+    box-shadow: 0px 3px 8px #444;
+    text-shadow: 2px 2px 0px #000;
+    cursor: pointer;
+  }
+  .play-button:hover {background-image: linear-gradient(#1a314d, #2c61bf);}
+  .play-button:disabled {color: #fbfb45; border: 10px solid #00aeff; background-image: linear-gradient(#2c61bf, #1a314d); cursor: default;}
+    .play-button:focus, .play-button:active {outline: none; border: 10px solid #00aeff;}
+    .btnOrange {color: #ff9c00; text-shadow: 2px 2px 0px #000;}
+
+/* ////////////////// VOICE BUTTON STYLES /////////////////// */
+  .vxBtn {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 29.4rem; height: 72px;}
+  .ansName {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 0.06rem;
+    margin-top: 1.7rem;
+  }
+  .vxBtn {background-image: linear-gradient(#d4eaf9, #bcd8ec); border: 1px solid #80aaf4; cursor: pointer;}
+    .vxBtn .ansName {color: #274c7a; text-shadow: 1px 1px 2px #bbb;}
+  .ansQ {font-size: 1.8rem; margin: 1.0rem 0 0 0; font-family: 'Nunito', sans-serif; font-weight: 900; color: #1286d7; letter-spacing: 0.04rem; display: block;}
+  .ansPic {float: left; margin: 0.0rem 0.8rem -0.21rem 0.0rem;}
+    .ansPic img {border-radius: 7% 0% 0% 7%; border-right: 1px solid #80aaf4; width: 72px; height: 72px;}
+  .ansWhosThis {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    background-color: #fffca8;
+    padding: 0.0rem 0.3rem;
+    border-radius: 4px;
+    border: 1px solid #9fb1bf;
+    box-shadow: 0px 0px 2px #999;
+  }
+    .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.02rem; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.7rem; line-height: 0.7rem;}
+    .ansWhosThis a:hover {text-decoration: underline;}
+  .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem;}
+  .voiceText {margin: 1.0rem;}
+    #wikiTxt {margin-top: 1.0rem;}
+    #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 2px 2px 4px #999;}
+
+
+/* ################################################ */
+/* ################################################ */
+/* ########## MOBILE 320 X 480 PORTRAIT ########## */
+/* ################################################ */
+/* ################################################ */
+
+@media only screen
+and (min-device-width: 0.1rem)
+and (max-device-width: 30rem)
+and (orientation: portrait) {
+
+
+
+/* ########## END PORTRAIT ########## */
+}
+
+/* ################################################ */
+/* ################################################ */
+/* ########## MOBILE 320 X 480 LANDSCAPE ########## */
+/* ################################################ */
+/* ################################################ */
+
+@media only screen
+and (min-device-width: 1rem)
+and (max-device-width: 60rem)
+and (orientation: landscape) {
+
+
+
+/* ########## END LANDSCAPE ########## */
+}

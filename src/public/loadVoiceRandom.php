@@ -1,14 +1,6 @@
 <?php
-	// PDO connect
-	$Username = 'thinkagain';
-	$Password = '89*Stanza';
-	try {
-	    $DB = new PDO('mysql:host=localhost;dbname=whovox_db', $Username, $Password);
-	    $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	    }
-	    catch(PDOException $e) {
-		    echo 'ERROR: ' . $e->getMessage();
-		    }
+	// connect script
+  require 'connect.php';
 	/* voice question row */
 	$stmt1 = $DB->query("SELECT * FROM voices ORDER BY RAND() LIMIT 1");
 	$qRow = $stmt1->fetch();

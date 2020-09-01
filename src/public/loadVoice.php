@@ -1,14 +1,6 @@
 <?php
-	// PDO connect
-	$Username = 'thinkagain';
-	$Password = '89*Stanza';
-	try {
-	    $DB = new PDO('mysql:host=localhost;dbname=whovox_db', $Username, $Password);
-	    $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	    }
-	    catch(PDOException $e) {
-		    echo 'ERROR: ' . $e->getMessage();
-		    }
+	// connect script
+  require 'connect.php';
 	// ID to search against
 	$frstNm = $_GET['firstname'];
 	$lastNm = $_GET['lastname'];

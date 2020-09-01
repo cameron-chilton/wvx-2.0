@@ -48,7 +48,7 @@ class HallOfFame extends Component {
     }, 700);
     setTimeout( () => {
         this.handleScrollToElement();
-    }, 2000);
+    }, 1200);
   }
 
   handleScrollToElement() {

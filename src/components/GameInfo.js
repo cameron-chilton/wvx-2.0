@@ -62,7 +62,7 @@ class GameInfo extends Component {
             </div>
             <div className="scoreBox">
               <div className="scoreNum">{score.toLocaleString()}</div>
-              <div>SCORE</div>
+              <div className="scoreTxt">SCORE</div>
             </div>
             <div className="rightWrong">
               <div>RIGHT: <span className="bold">{ansRight}</span></div>

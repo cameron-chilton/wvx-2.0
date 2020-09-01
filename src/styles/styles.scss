@@ -25,7 +25,7 @@ $color-green-lite: #e5f3dd;
 $color-green-med: #b7d2a7;
 $color-green: #c9ecb6;
 $color-green-dark: #0e995c;
-$color-green-darkest: #027a2f;
+$color-green-darkest: #006a28;
 
 /* Global Styles */
 body {
@@ -40,6 +40,7 @@ body {
 div, h1, button {margin: 0; padding: 0;}
 .bold {font-weight: 900;}
 .toUpper {text-transform: uppercase;}
+
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
 .overlay {position: absolute; background-color: #000; opacity: 0.35; top: 0; left: 0; z-index: 99; width: 100%; height: 100%;}
   .overlayContainer {position: relative; width: inherit; z-index: 999;}
@@ -47,26 +48,28 @@ div, h1, button {margin: 0; padding: 0;}
       position: absolute;
       z-index: 9999;
       top: 27vh;
-      left: auto;
+      left: 50%;
+      transform: translate(-50%, 0);
       background-color: $color-blue-lite;
       padding: 1.0rem;
       border: 12px solid $color-blue-med-brite;
       border-radius: 21px;
       margin: 0;
-      width: auto;
+      width: 24rem;
       color: $color-blue-bg;
       background-image: url(../imgs/bg-boxes.png);
-      box-shadow: 0px 0px 8px 0px #333 inset;
+      box-shadow: 0px 0px 18px #333, inset 0px 0px 8px 0px #333;
       text-align: center;
     }
-    .overlayContent h1 {font-size: 2.9rem; font-weight: 900; color: $color-blue-med; margin: 0.9rem 0;}
-    .overlayContent p {font-size: 1.2rem; line-height: 1.5rem; color: $color-blue-bg2; margin: 1.9rem 0;}
+    .overlayContent h1 {font-size: 2.9rem; font-weight: 900; color: $color-blue-med; margin: 0.9rem 0 1.6rem 0;}
+    .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; color: $color-blue-bg; margin: 1.2rem 0;}
+    .overlayContent h2 {font-size: 1.8rem; font-weight: 900; color: $color-blue-med; margin: 0.2rem 0 1.2rem 0;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-.adBox {height: 100px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
+.adBox {height: 80px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
 .game {width: 32.0rem;}
     .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
-      .topLine h1 {font-size: 4.5rem; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900;display: inline-block;}
+      .topLine h1 {font-size: 4.5rem; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900; display: inline-block;}
       .name1 {animation: flicker 2.0s infinite;}
       .name2 {animation: flicker 2.4s infinite;}
       .name3 {animation: flicker 2.8s infinite;}
@@ -82,7 +85,7 @@ div, h1, button {margin: 0; padding: 0;}
         .logo-inner3 {top: 0.80rem; left: 1.32rem; width: 1.32rem; animation: flicker2 3.0s infinite;}
         @keyframes flicker {
           0%   {opacity: 1.0;}
-          50%  {opacity: 0.78;}
+          50%  {opacity: 0.80;}
           100% {opacity: 1.0;}
         }
         @keyframes flicker2 {
@@ -100,8 +103,12 @@ div, h1, button {margin: 0; padding: 0;}
         display: inline-block;
         text-align: center;
       }
-        .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
-        .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
+      .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
+      .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
+      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto;}
+        .links {float: left; font-weight: 700;}
+          .links a {margin-right: 1.9rem; font-family: $nunito; color: $color-blue-brite; text-decoration: none; letter-spacing: 0.02rem;}
+        .copy {float: right; color: $color-blue-med; font-family: $nunito;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {
@@ -116,47 +123,40 @@ div, h1, button {margin: 0; padding: 0;}
     background-image: url(../imgs/bg-boxes.png);
     box-shadow: 0px 0px 8px 0px #333 inset;
     min-height: 32rem;
-    clear: both;
   }
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
 .gameInfo {display: flex; flex-wrap: wrap; align-items: stretch;}
-  .catCount {text-align: left; padding: 0 0.0rem 0 1.0rem; flex-grow: 1; width: 5.4rem; line-height: 1.3rem;}
-  .scoreBox {text-align: center; flex-grow: 3; }
-    .scoreNum {font-weight: 900; font-size: 1.9rem;}
-  .rightWrong {text-align: right; padding: 0 1.0rem 0 0.0rem; flex-grow: 1; line-height: 1.3rem;}
-.catChecks {margin: 0;}
-  .catChecks span.catSpans {display: inline-block; margin: 0 0.9rem 0 0.9rem;}
-  .catChecks span.catSpans input[type=checkbox] {vertical-align: middle; display: inline-block; margin: 0.0rem 0.2rem 0.0rem 0.0rem;}
-  .catLabel {font-size: 0.7rem; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; display: inline-block; letter-spacing: 0.03rem; cursor: pointer;}
-  .catLabelPulse {transform: scale(1); animation: pulse 1.5s infinite; border-radius: 4px;}
+  .catCount {text-align: left; padding-left: 0.7rem; flex-grow: 1; width: 5.4rem; line-height: 1.3rem;}
+  .scoreBox {text-align: center; flex-grow: 3;}
+    .scoreNum {font-weight: 900; font-size: 2.1rem;}
+    .scoreTxt {font-weight: 700; font-size: 0.8rem;}
+  .rightWrong {text-align: right; padding-right: 0.7rem; flex-grow: 1; line-height: 1.3rem;}
+.catChecks {display: flex;}
+  .catChecks span.catSpans {flex-grow: 1;}
+  .catChecks span.catSpans input[type=checkbox] {vertical-align: middle; margin: 0.0rem 0.2rem 0.0rem 0.0rem;}
+  .catLabel {font-size: 0.7rem; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; letter-spacing: 0.03rem; cursor: pointer;}
+  .catLabelPulse {transform: scale(1); animation: pulse 1.8s infinite; border-radius: 4px;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
   .play-button {
-    width: 34.4rem;
+    width: 33.2rem;
     padding: 0.3rem 0.5rem;
-    margin: 0 0 0.0rem -1.9rem;
+    margin: 0 0 0.0rem -1.2rem;
     color: $color-yellow;
     border: 10px solid $color-blue-brite;
     border-radius: 16px;
     background-image: linear-gradient($color-blue-med, $color-blue-bg);
     font-family: $nunito;
     font-weight: 900;
-    font-size: 2.1rem;
-    letter-spacing: 0.16rem;
+    font-size: 1.9rem;
+    letter-spacing: 0.20rem;
     box-shadow: 0px 3px 8px #444;
     cursor: pointer;
   }
-    .play-button:disabled {
-      color: $color-yellow;
-      border: 10px solid $color-blue-brite;
-      background-image: linear-gradient($color-blue-med, $color-blue-bg);
-      cursor: default;
-    }
-    .play-button:focus, .play-button:active {
-      outline: none;
-      border: 10px solid $color-blue-brite;
-    }
+  .play-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med);}
+  .play-button:disabled {color: $color-yellow; border: 10px solid $color-blue-brite; background-image: linear-gradient($color-blue-med, $color-blue-bg); cursor: default;}
+    .play-button:focus, .play-button:active {outline: none; border: 10px solid $color-blue-brite;}
     .btnGreen {color: $color-green-brite; text-shadow: 2px 2px 0px #000;}
     .btnYellow {color: $color-yellow; text-shadow: 2px 2px 0px #000;}
     .btnRed {color: $color-red; text-shadow: 2px 2px 0px #000;}
@@ -164,34 +164,24 @@ div, h1, button {margin: 0; padding: 0;}
 
 /* ////////////////// VOICE BUTTON STYLES /////////////////// */
 .btn-holder {text-align: center; margin: 0.6rem auto;}
-  .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.2rem auto; width: 29.0rem;}
+  .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 29.4rem;}
   .ansName {
     display: block;
     font-family: $nunito;
     font-weight: 900;
     font-size: 1.2rem;
-    letter-spacing: 0.04rem;
+    letter-spacing: 0.06rem;
     margin-top: 1.5rem;
   }
-  .vxBtn {
-    background-image: linear-gradient($color-blue-lite, $color-blue-lite2);
-    border: 1px solid $color-blue-med2;
-    cursor: pointer;
-  }
+  .vxBtn {background-image: linear-gradient($color-blue-lite, $color-blue-lite2); border: 1px solid $color-blue-med2; cursor: pointer;}
     .vxBtn .ansName {color: $color-blue-bg2; text-shadow: 1px 1px 2px #bbb;}
-  .vxBtnSel {
-    background-image: linear-gradient($color-blue-med-lite, $color-blue-med2);
-    border: 1px solid $color-blue-med;
-  }
+  .vxBtnSel {background-image: linear-gradient($color-blue-med-lite, $color-blue-med2); border: 1px solid $color-blue-med;}
     .vxBtnSel .ansName {color: $color-blue-bg; text-shadow: 1px 1px 2px #aaa;}
-  .vxBtnRight {
-    background-image: linear-gradient($color-green, $color-green-med);
-    border: 1px solid $color-green-dark;
-  }
+  .vxBtnRight {background-image: linear-gradient($color-green, $color-green-med); border: 1px solid $color-green-dark;}
     .vxBtnRight .ansName {color: $color-green-darkest; text-shadow: 1px 1px 2px #bbb;}
   .ansQ {font-size: 2.9rem; margin: -1.0rem 0 0 0.3rem; display: inline-block; color: $color-blue-bg2;}
-  .ansPic {float: left; margin: 0.0rem 0.6rem -0.18rem 0.0rem;}
-    .ansPic img {border-radius: 7% 0% 0% 7%; border-right: 1px solid $color-blue-med2; }
+  .ansPic {float: left; margin: 0.0rem 0.6rem -0.21rem 0.0rem;}
+    .ansPic img {border-radius: 7% 0% 0% 7%; border-right: 1px solid $color-blue-med2; width: 72px; height: 72px;}
   .ansWhosThis {
     position: absolute;
     top: 0.2rem;
@@ -206,8 +196,9 @@ div, h1, button {margin: 0; padding: 0;}
     .ansWhosThis a:hover {text-decoration: underline;}
 
 /* ////////////////// GAME OVER STYLES ///////////////////*/
-h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4rem;}
-.inHOF p, .tooLow p {font-size: 1.2rem; line-height: 1.5rem; margin: 1.3rem 1.2rem; font-weight: 700;}
+.inHOF p, .tooLow p {font-size: 1.2rem; line-height: 1.5rem; margin: 1.0rem 1.2rem; font-weight: 700;}
+.inHOF h2, .tooLow h2 {font-size: 1.9rem; color: $color-blue-med; font-weight: 900; margin-top: 1.4rem;}
+.inHOF h3, .tooLow h3 {font-size: 2.4rem; color: $color-blue-med-brite;}
 .gameOverForm label {display: block; font-size: 0.9rem; letter-spacing: 0.02rem; font-weight: 900;}
 .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
 .gameOverForm .button {margin-top: 0.6rem; text-align: center;}
@@ -259,27 +250,175 @@ h2 {font-weight: 900; color: $color-blue-bg; font-size: 1.9rem; margin-top: 1.4r
       text-overflow: ellipsis;
       width: 7.3rem;
       transform: scale(1);
-      animation: pulse 1.5s infinite;
+      animation: pulse 1.8s infinite;
       border-radius: 4px;
       display: block;
     }
-    .HOF-highlight {
-      font-weight: 900;
-      border-radius: 4px;
-      transform: scale(1);
-	    animation: pulse 1.5s infinite;
-    }
+    .HOF-highlight {font-weight: 900; border-radius: 4px; transform: scale(1); animation: pulse 1.8s infinite;}
     @keyframes pulse {
       0% {transform: scale(1); box-shadow: 0 0 0 0 $color-orange;}
-      70% {transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);}
+      70% {transform: scale(1); box-shadow: 0 0 0 16px rgba(0, 0, 0, 0);}
       100% {transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);}
     }
     .HOF-regname {overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 7.3rem; display: block; }
+  .scrollbox {overflow-y: auto; overflow-x: hidden; height: 21rem; width: 99%; margin: 0 auto;}
 
-  .scrollbox {
-    overflow-y: auto;
-    overflow-x: hidden;
-    height: 21rem;
-    width: 99%;
-    margin: 0 auto;
-  }
+/* ################################################ */
+/* ################################################ */
+/* ########## MOBILE 320 X 480 PORTRAIT ########## */
+/* ################################################ */
+/* ################################################ */
+
+@media only screen
+and (min-device-width: 0.1rem)
+and (max-device-width: 30rem)
+and (orientation: portrait) {
+
+  body {width: 100vw; margin: 0 auto;}
+
+  /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
+  .overlay {width: 110vw; height: 110vh;}
+    .overlayContainer {position: relative; width: 100vw; z-index: 999;}
+      .overlayContent {top: 27vh; width: 76vw; left: 50%; transform: translate(-50%, 0);}
+      .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
+      .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
+      .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
+
+  /* ////////////////// TOP LOGO LINE ////////////////// */
+  .adBox {height: 80px; width: 94vw; margin: 0.3rem auto; }
+  .game {width: 96vw; margin: 0 auto;}
+    .topLine {width: 96vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
+      .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
+      .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}
+        .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
+        .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.20rem;}
+        .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
+        .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
+        .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
+      .voiceCount {display: none;}
+
+  /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 90vw; min-height: auto;}
+
+  /* ////////////////// GAME INFO STYLES /////////////////// */
+    .catCount {font-size: 0.84rem; line-height: 1.2rem;}
+      .scoreNum {font-size: 1.7rem;}
+      .scoreTxt {font-size: 0.7rem;}
+    .rightWrong {font-size: 0.84rem; line-height: 1.2rem;}
+    .catLabel {font-size: 0.56rem;}
+
+  /* ////////////////// START BUTTON STYLES /////////////////// */
+  .play-button {width: 94vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button:disabled {border: 8px solid $color-blue-brite;}
+    .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
+
+  /* ////////////////// VOICE BUTTON STYLES /////////////////// */
+  .btn-holder {text-align: center; margin: 0.6rem auto;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 86vw;}
+    .ansName {display: block; font-size: 0.96rem; letter-spacing: 0.04rem; margin-top: 1.4rem;}
+    .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
+    .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
+      .ansPic img {width: 64px; height: 64px;}
+    .ansWhosThis {padding: 0.0rem 0.2rem 0.0rem 0.2rem;}
+      .ansWhosThis a {font-size: 0.56rem;}
+
+  /* ////////////////// GAME OVER STYLES ///////////////////*/
+  .inHOF p, .tooLow p {font-size: 1.0rem; line-height: 1.3rem; margin: 0.8rem 0.5rem;}
+  .inHOF h2, .tooLow h2 {font-size: 1.4rem;}
+  .inHOF h3, .tooLow h3 {font-size: 1.4rem; color: $color-blue-med-brite;}
+  .gameOverForm label {display: block; font-size: 0.9rem; letter-spacing: 0.02rem; font-weight: 900;}
+  .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
+  .gameOverForm .button {margin-top: 0.6rem; text-align: center;}
+  .save-button {padding: 0.4rem; font-size: 1.0rem;}
+  .inHOF input[type=text] {border: 1px solid $color-blue-med; padding: 0.3rem; font-size: 0.8rem;}
+  .button .save-button {text-align: center;}
+  .errorMsg {font-size: 0.9rem; line-height: 0.9rem; color: $color-red; margin: 0.4rem 0.1rem;}
+
+  /* ////////////////// HOF STYLES ///////////////////*/
+  .hallOfFame h3 {font-size: 1.3rem;}
+    .HOF-table .hd5 {display: none;}
+    .HOF-table .col5 {display: none;}
+    .scrollbox {overflow-y: scroll; height: 38vh;}
+
+/* ########## END PORTRAIT ########## */
+}
+
+/* ################################################ */
+/* ################################################ */
+/* ########## MOBILE 320 X 480 LANDSCAPE ########## */
+/* ################################################ */
+/* ################################################ */
+
+@media only screen
+and (min-device-width: 1rem)
+and (max-device-width: 60rem)
+and (orientation: landscape) {
+
+  body {width: 100vw; margin: 0 auto;}
+
+  /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
+  .overlay {width: 100vw; height: 100vh;}
+    .overlayContainer {width: 60vw; z-index: 999;}
+      .overlayContent {top: 8vh; width: 60vw; left: 50%; transform: translate(-50%, 0);}
+      .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
+      .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
+      .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
+
+  /* ////////////////// TOP LOGO LINE ////////////////// */
+  .adBox {height: 80px; width: 60vw; margin: 0.3rem auto; }
+  .game {width: 60vw; margin: 0 auto;}
+      .topLine {width: 60vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
+        .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
+        .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}
+          .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
+          .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.20rem;}
+          .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
+          .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
+          .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
+        .voiceCount {float: right; margin-top: 0.4rem;}
+
+  /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 60vw; min-height: auto;}
+
+  /* ////////////////// GAME INFO STYLES /////////////////// */
+    .catCount {font-size: 0.84rem; line-height: 1.2rem;}
+      .scoreNum {font-size: 1.7rem;}
+      .scoreTxt {font-size: 0.7rem;}
+    .rightWrong {font-size: 0.84rem; line-height: 1.2rem;}
+    .catLabel {font-size: 0.56rem;}
+
+  /* ////////////////// START BUTTON STYLES /////////////////// */
+  .play-button {width: 61.5vw; margin: 0 0 0.0rem -0.5rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button:disabled {border: 8px solid $color-blue-brite;}
+    .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
+
+  /* ////////////////// VOICE BUTTON STYLES /////////////////// */
+  .btn-holder {text-align: center; margin: 0.6rem auto;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 58vw;}
+    .ansName {display: block; font-size: 0.96rem; letter-spacing: 0.04rem; margin-top: 1.4rem;}
+    .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
+    .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
+      .ansPic img {width: 64px; height: 64px;}
+    .ansWhosThis {padding: 0.0rem 0.2rem 0.0rem 0.2rem;}
+      .ansWhosThis a {font-size: 0.56rem;}
+
+  /* ////////////////// GAME OVER STYLES ///////////////////*/
+  .inHOF p, .tooLow p {font-size: 1.0rem; line-height: 1.3rem; margin: 0.8rem 0.5rem;}
+  .inHOF h2, .tooLow h2 {font-size: 1.4rem;}
+  .inHOF h3, .tooLow h3 {font-size: 1.4rem; color: $color-blue-med-brite;}
+  .gameOverForm label {display: block; font-size: 0.9rem; letter-spacing: 0.02rem; font-weight: 900;}
+  .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
+  .gameOverForm .button {margin-top: 0.6rem; text-align: center;}
+  .save-button {padding: 0.4rem; font-size: 1.0rem;}
+  .inHOF input[type=text] {border: 1px solid $color-blue-med; padding: 0.3rem; font-size: 0.8rem;}
+  .button .save-button {text-align: center;}
+  .errorMsg {font-size: 0.9rem; line-height: 0.9rem; color: $color-red; margin: 0.4rem 0.1rem;}
+
+  /* ////////////////// HOF STYLES ///////////////////*/
+  .hallOfFame h3 {font-size: 1.3rem;}
+    .HOF-table .hd5 {display: none;}
+    .HOF-table .col5 {display: none;}
+    .scrollbox {overflow-y: scroll; height: 38vh;}
+
+/* ########## END LANDSCAPE ########## */
+}

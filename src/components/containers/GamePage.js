@@ -169,6 +169,13 @@ class GamePage extends Component {
               outOfTime={outOfTime}
             />
           </div>
+          <div className="bottomLinks">
+            <span className="links">
+              <a href="http://localhost/WVX-2.0/src/public/voiceOf.php">VOICE OF?</a>
+              <a href="http://localhost/WVX-2.0/src/public/privacy-policy.html">PRIVACY POLICY</a>
+            </span>
+            <span className="copy">&copy;2020 THINKAGAIN</span>
+          </div>
         </div>
       </>
     );

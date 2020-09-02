@@ -167,6 +167,47 @@ and (min-device-width: 0.1rem)
 and (max-device-width: 30rem)
 and (orientation: portrait) {
 
+  /* Global Styles */
+  body {width: 100vw; margin: 0 auto;}
+
+  /* ////////////////// TOP LOGO LINE ////////////////// */
+  .adBox {width: 94vw;}
+  .game {width: 96vw; margin: 0 auto;}
+      .topLine {width: 99vw;}
+        .topLine h1 {font-size: 2.8rem; letter-spacing: -0.4rem;}
+        .earLogo {width: 3.8rem; height: 4.1rem; margin: 0 0.4rem 0 -0.3rem;}
+        .voiceCount {margin-left: 0.2rem;line-height: 1.0rem;}
+        .voiceNum {font-size: 1.1rem;}
+        .voiceTxt {font-size: 0.8rem;}
+        .bottomLinks {width: 96vw; font-size: 0.8rem; margin: 0.4rem auto;}
+
+    /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
+    .topContainer {width: 88vw; padding: 0.3rem;}
+
+  /* ////////////////// GAME INFO STYLES /////////////////// */
+  .gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0;}
+  h2#tmplMsg.errorMsg {color: #ff0000;}
+  .save-button {
+    padding: 0.2rem;
+    margin: 0 0.3rem 0 0;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    letter-spacing: 0.01rem;
+  }
+  input[type=text] {width: 9rem; padding: 0.2rem;}
+
+  /* ////////////////// START BUTTON STYLES /////////////////// */
+    .play-button {width: 96.5vw;}
+
+  /* ////////////////// VOICE BUTTON STYLES /////////////////// */
+    .vxBtn {width: 88vw;}
+    .ansName {font-size: 1.2rem;letter-spacing: 0.06rem;margin-top: 1.7rem;}
+    .ansQ {font-size: 1.5rem;}
+    .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem;}
+    .voiceText {margin: 1.0rem;}
+      #wikiTxt {margin-top: 1.0rem;}
+      #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 2px 2px 4px #999;}
+
 
 
 /* ########## END PORTRAIT ########## */

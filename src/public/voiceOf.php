@@ -124,7 +124,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
       <div class="voiceText">
         <img id="wikiImg" src="../imgs/noVox.png" width="115" />
         <p id="wikiText">
-          <span class="ansQ">SEARCHING...</span>
+          <span class="ansQ">LOADING...</span>
         </p>
       </div>
 
@@ -294,7 +294,7 @@ var charCode = e.charCode || e.keyCode || e.which;
 
  function loadVoiceRandom() {
   $('#srchVoicesTxt').val('');
-  $('#wikiText').html('<span class="ansQ">SEARCHING...</span>');
+  $('#wikiText').html('<span class="ansQ">LOADING...</span>');
 	$('#tmplMsg').removeClass('errorMsg').text('VOICE OF?').fadeIn('fast');
 	$.ajax({
 		type: 'GET',
@@ -320,7 +320,7 @@ function searchVoices() {
 		complete: function(data) {
       var resp = data.responseText.trim();
 			if (resp !== 'no') {
-        $('#wikiText').html('<span class="ansQ">SEARCHING...</span>');
+        $('#wikiText').html('<span class="ansQ">LOADING...</span>');
         $('#tmplMsg').removeClass('errorMsg').text('VOICE OF?').fadeIn('fast');
 				loadVoice(n1, n2);
 				}

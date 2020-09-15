@@ -1,5 +1,9 @@
-// Get 5 IDs for new game with category selections
-export const GET_NEWGAME = 'getNewGame.php';
+// Get number of voices in DB
+export const GET_VOICE_COUNT = 'http://www.whovox.com/php/getVoiceCount.php';
 
-// Get 5 answers for each question
-export const GET_ANSWERS = 'getAnswers.php';
+// URL for voice of page
+export const VOICE_OF_URL = 'http://www.whovox.com/php/voiceOf.php';
+
+// URL for Privacy Policy Page
+export const PRIVACY_POLICY_URL = 'http://www.whovox.com/php/voiceOf.php';
+

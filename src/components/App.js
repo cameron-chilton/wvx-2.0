@@ -19,10 +19,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.getGameID();
-    //const {gameIdFromUri} = this.props;
-    //this.props.setGameId(gameIdFromUri);
-    //this.props.startDataLoad(gameIdFromUri);
-    //this.props.getDataLoad();
   }
 
   componentDidUpdate() {
@@ -32,29 +28,14 @@ class App extends React.Component {
     return (
       <div className="App">
         <GamePage />
-        {/*
-        <div>
-          <NavLink exact to='/'>Home</NavLink>
-          {' | '}
-          <NavLink to='/about'>About</NavLink>
-        </div>
-        <Switch>
-          <Route path='/' component={GamePage} gameIdFromUri={gameIdFromUri} />
-          <Route path='/about' component={AboutPage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-        */}
       </div>
     );
   }
 }
 
 App.propTypes = {
-  //gameIdFromUri: string.isRequired,
   // dispatchFn's
   getGameID: func,
-  //setGameId: func,
-  //startDataLoad: func,
 };
 
 const mapStateToProps = (state) => ({
@@ -65,22 +46,6 @@ export default connect(
   mapStateToProps,
   { // dispatch fn's
     getGameID,
-    //setGameId,
-    //startDataLoad,
   }
 )(App);
 
-
-{/*
-export default hot(module)(connect(
-  mapStateToProps,
-    { // dispatch fn's
-      setGameId,
-      startDataLoad,
-    }
-  )(App));
-  */}
-
-//export default hot(module)(App);
-
-//export default hot(module)(connect()(Test));

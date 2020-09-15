@@ -43,7 +43,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>WHOVOX: Voice Of? <?php echo ucwords($first).' '.ucwords($last); ?></title>
 	<meta name="description" content="WHOVOX - Voice Of?: Play a sample of a famous person's voice from the game WHOVOX.">
-	<!--link rel="shortcut icon" href="http://www.whovox.com/imgs/siteIcon.ico" -->
+	<link rel="shortcut icon" href="http://www.whovox.com/imgs/siteIcon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<link href="voiceStyles.css" rel="stylesheet" type="text/css" media="screen">
 </head>
@@ -118,7 +118,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
       </div>
 
       <div>
-        <button class="play-button" onclick="location.href='http://localhost:3000'">PLAY WHOVOX</button>
+        <button class="play-button" onclick="location.href='http://www.whovox.com'">PLAY WHOVOX</button>
       </div>
 
       <div class="voiceText">
@@ -131,7 +131,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
     </div>
     <div class="bottomLinks">
       <span class="links">
-        <a href="http://localhost/WVX-2.0/src/public/privacy-policy.html">PRIVACY POLICY</a>
+        <a href="privacy-policy.html">PRIVACY POLICY</a>
       </span>
       <span class="copy">&copy;2020 THINKAGAIN</span>
     </div>

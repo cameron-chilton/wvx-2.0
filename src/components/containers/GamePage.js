@@ -7,6 +7,7 @@ import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
 import GameFirstDialog from '../GameFirstDialog';
 import * as actions from '../../actions/whovoxActions';
+import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants/DataURLs';
 
 let interval = null;
 
@@ -22,7 +23,7 @@ class GamePage extends Component {
 
   componentDidMount() {
     setTimeout( () => {
-      fetch('http://localhost/WVX-2.0/src/php/getVoiceCount.php')
+      fetch(GET_VOICE_COUNT)
         .then(response => response.json())
         .then(data => this.setState({voiceCount: data}));
     }, 1);
@@ -171,8 +172,8 @@ class GamePage extends Component {
           </div>
           <div className="bottomLinks">
             <span className="links">
-              <a href="http://localhost/WVX-2.0/src/public/voiceOf.php">VOICE OF?</a>
-              <a href="http://localhost/WVX-2.0/src/public/privacy-policy.html">PRIVACY POLICY</a>
+              <a href={VOICE_OF_URL}>VOICE OF?</a>
+              <a href={PRIVACY_POLICY_URL}>PRIVACY POLICY</a>
             </span>
             <span className="copy">&copy;2020 THINKAGAIN</span>
           </div>

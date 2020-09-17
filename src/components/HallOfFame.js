@@ -42,11 +42,9 @@ class HallOfFame extends Component {
   }
 
   componentDidMount() {
-    setTimeout( () => {
-      fetch({GET_HOF_URL})
-        .then(response => response.json())
-        .then(data => this.setState({tableData: data}));
-    }, 100);
+    fetch('https://whovox.com/php/getHallOfFameData.php')
+      .then(response => response.json())
+      .then(data => this.setState({tableData: data}));
     setTimeout( () => {
         this.handleScrollToElement();
     }, 2500);

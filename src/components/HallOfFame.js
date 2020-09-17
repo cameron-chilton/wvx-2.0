@@ -46,10 +46,10 @@ class HallOfFame extends Component {
       fetch({GET_HOF_URL})
         .then(response => response.json())
         .then(data => this.setState({tableData: data}));
-    }, 700);
+    }, 100);
     setTimeout( () => {
         this.handleScrollToElement();
-    }, 1200);
+    }, 2500);
   }
 
   handleScrollToElement() {

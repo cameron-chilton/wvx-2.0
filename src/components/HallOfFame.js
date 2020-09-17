@@ -5,7 +5,6 @@ import {bindActionCreators} from 'redux';
 import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
 import * as actions from '../actions/whovoxActions';
-import {GET_HOF_URL} from '../constants/DataURLs';
 
 class HallOfFame extends Component {
 

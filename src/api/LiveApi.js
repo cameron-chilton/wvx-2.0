@@ -2,7 +2,7 @@ import axios from 'axios';
 import getStore from '../index';
 
 export const instance = axios.create({
-  baseURL: window.apiUrl ? window.apiUrl : "https://www.whovox.com/php/",
+  baseURL: window.apiUrl ? window.apiUrl : "https://whovox.com/php/",
 });
 
 class MockApi {

@@ -66,7 +66,6 @@ div, h1, button {margin: 0; padding: 0;}
     .overlayContent h2 {font-size: 1.8rem; font-weight: 900; color: $color-blue-med; margin: 0.2rem 0 1.2rem 0;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-.adBox {height: 80px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
 .game {width: 32.0rem;}
     .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
       .topLine h1 {font-size: 4.5rem; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900; display: inline-block;}
@@ -105,7 +104,7 @@ div, h1, button {margin: 0; padding: 0;}
       }
       .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
       .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
-      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto;}
+      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto; height: 2rem;}
         .links {float: left; font-weight: 700;}
           .links a {margin-right: 1.9rem; font-family: $nunito; color: $color-blue-brite; text-decoration: none; letter-spacing: 0.02rem;}
         .copy {float: right; color: $color-blue-med; font-family: $nunito;}
@@ -285,20 +284,28 @@ and (orientation: portrait) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .adBox {height: 80px; width: 94vw; margin: 0.3rem auto; }
-  .game {width: 96vw; margin: 0 auto;}
-    .topLine {width: 96vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
-      .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
-      .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}
+  .game {width: 96vw; margin: 0.6rem auto 0.6rem auto;}
+    .topLine {width: 96vw; white-space: nowrap;}
+      .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem;}
+      .earLogo {width: 2.3rem; height: 2.6rem; margin-left: -0.6rem;}
         .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
         .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.20rem;}
         .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
         .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
         .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
-      .voiceCount {display: none;}
+        .voiceCount {
+          letter-spacing: 0.06rem;
+          line-height: 1.0rem;
+        }
+        .voiceNum {font-size: 1.0rem;}
+        .voiceTxt {font-size: 0.7rem;}
+      .bottomLinks {width: 96vw; height: 4rem; font-size: 0.8rem; margin: 0.6rem;}
+        .links {float: left;}
+          .links a {margin-right: 1.9rem; font-size: 0.9rem;}
+        .copy {float: right; margin-right: 0.6rem; font-size: 0.7rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 90vw; min-height: auto;}
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 92vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
     .catCount {font-size: 0.84rem; line-height: 1.2rem;}
@@ -308,7 +315,7 @@ and (orientation: portrait) {
     .catLabel {font-size: 0.56rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-  .play-button {width: 94vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button {width: 96vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
   .play-button:disabled {border: 8px solid $color-blue-brite;}
     .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
 
@@ -358,16 +365,15 @@ and (orientation: landscape) {
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
   .overlay {width: 100vw; height: 100vh;}
-    .overlayContainer {width: 60vw; z-index: 999;}
-      .overlayContent {top: 8vh; width: 60vw; left: 50%; transform: translate(-50%, 0);}
+    .overlayContainer {width: 66vw; z-index: 999;}
+      .overlayContent {top: 8vh; width: 66vw; left: 50%; transform: translate(-50%, 0);}
       .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
       .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .adBox {height: 80px; width: 60vw; margin: 0.3rem auto; }
-  .game {width: 60vw; margin: 0 auto;}
-      .topLine {width: 60vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
+  .game {width: 66vw; margin: 0.8rem auto;}
+      .topLine {width: 65vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
         .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
         .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}
           .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
@@ -375,10 +381,19 @@ and (orientation: landscape) {
           .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
           .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
           .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
-        .voiceCount {float: right; margin-top: 0.4rem;}
+          .voiceCount {
+            margin: 0 0.6rem 0 0;
+            line-height: 0.9rem;
+          }
+          .voiceNum {font-size: 1.1rem;}
+          .voiceTxt {font-size: 0.7rem;}
+      .bottomLinks {width: 66vw; padding-top: 0.4rem;}
+        .links {float: left; margin-left: 0.4rem;}
+          .links a {font-size: 0.8rem;}
+        .copy {margin-right: 0.0rem; font-size: 0.7rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 60vw; min-height: auto;}
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 66vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
     .catCount {font-size: 0.84rem; line-height: 1.2rem;}
@@ -388,13 +403,13 @@ and (orientation: landscape) {
     .catLabel {font-size: 0.56rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-  .play-button {width: 61.5vw; margin: 0 0 0.0rem -0.5rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button {width: 67.5vw; margin: 0 0 0.0rem -0.5rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
   .play-button:disabled {border: 8px solid $color-blue-brite;}
     .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
 
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
-    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 58vw;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 64vw;}
     .ansName {display: block; font-size: 0.96rem; letter-spacing: 0.04rem; margin-top: 1.4rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}

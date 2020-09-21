@@ -66,9 +66,6 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 ?>
 </span>
 
-  <!-- ad holders -->
-  <div class="adBox"></div>
-
   <div class="game">
 
     <div class="topLine">

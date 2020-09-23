@@ -110,11 +110,11 @@ class MockApi {
       // can play ogg or mp3
 			if (this.audio.canPlayType) {
 				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'audio/' + dir + '/' + clipArray[i] + '.ogg';
+          this.url = 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.ogg';
           this.audio = new Audio(this.url);
 					}
 				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-          this.url = 'audio/' + dir + '/' + clipArray[i] + '.mp3';
+          this.url = 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.mp3';
           this.audio = new Audio(this.url);
 					}
 				}
@@ -136,11 +136,11 @@ class MockApi {
       // can play ogg or mp3
 			if (this.audio.canPlayType) {
 				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'audio/_sfx/' + sfxArray[j] + '.ogg';
+          this.url = 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.ogg';
           this.audio = new Audio(this.url);
 					}
 				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-          this.url = 'audio/_sfx/' + sfxArray[j] + '.mp3';
+          this.url = 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.mp3';
           this.audio = new Audio(this.url);
 					}
 				}

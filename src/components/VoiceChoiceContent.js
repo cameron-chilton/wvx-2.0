@@ -9,7 +9,7 @@ const VoiceChoiceContent = ({firstname, lastname, pic, timerOn, answered}) => {
   return (
     <>
       <span className="ansPic">
-          <img src={(!timerOn && !answered) ? '../imgs/noVox.png' : (!timerOn && answered) ? `data:image/jpeg;base64,${pic}` : `data:image/jpeg;base64,${pic}`}></img>
+          <img src={(!timerOn && !answered) ? 'https://whovox.com/imgs/noVox.png' : (!timerOn && answered) ? `data:image/jpeg;base64,${pic}` : `data:image/jpeg;base64,${pic}`}></img>
       </span>
       <span className="ansName">{(!timerOn && !answered) ? <span className="ansQ">?</span> : firstname + ' ' + lastname}</span>
     </>

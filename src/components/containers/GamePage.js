@@ -60,11 +60,11 @@ class GamePage extends Component {
       // can play ogg or mp3
 			if (this.audio.canPlayType) {
 				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'audio/' + dir + '/' + clip + '.ogg';
+          this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.ogg';
           this.audio = new Audio(this.url);
 					}
 				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-          this.url = 'audio/' + dir + '/' + clip + '.mp3';
+          this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.mp3';
           this.audio = new Audio(this.url);
 					}
         }
@@ -88,11 +88,11 @@ class GamePage extends Component {
       this.audio = new Audio();
       // can play ogg or mp3
       if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        this.url = 'audio/_sfx/Intro_Collage.ogg';
+        this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.ogg';
         this.audio = new Audio(this.url);
         }
       if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-        this.url = 'audio/_sfx/Intro_Collage.mp3';
+        this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.mp3';
         this.audio = new Audio(this.url);
         }
       this.audio.play();
@@ -130,11 +130,11 @@ class GamePage extends Component {
               <span className="name6">X</span>
             </h1>
             <div className="earLogo">
-              <img className="logo-dot" src="../../imgs/logo-dot.svg" />
-              <img className="logo-outer" src="../../imgs/logo-outer.svg" />
-              <img className="logo-inner1" src="../../imgs/logo-inner1.svg" />
-              <img className="logo-inner2" src="../../imgs/logo-inner2.svg" />
-              <img className="logo-inner3" src="../../imgs/logo-inner3.svg" />
+              <img className="logo-dot" src="https://whovox.com/imgs/logo-dot.svg" />
+              <img className="logo-outer" src="https://whovox.com/imgs/logo-outer.svg" />
+              <img className="logo-inner1" src="https://whovox.com/logo-inner1.svg" />
+              <img className="logo-inner2" src="https://whovox.com/logo-inner2.svg" />
+              <img className="logo-inner3" src="https://whovox.com/logo-inner3.svg" />
             </div>
             <div className="voiceCount">
               <div className="voiceNum">{vxCt.toLocaleString()}</div>

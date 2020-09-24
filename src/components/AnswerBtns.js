@@ -33,11 +33,11 @@ class AnswerBtns extends Component {
           // play wrong sound
           this.audio = new Audio();
           if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-            this.url = 'audio/_sfx/Answer_Wrong.ogg';
+            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg';
             this.audio = new Audio(this.url);
             }
           if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-            this.url = 'audio/_sfx/Answer_Wrong.mp3';
+            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3';
             this.audio = new Audio(this.url);
             }
           this.audio.play();

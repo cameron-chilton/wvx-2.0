@@ -25,11 +25,11 @@ class GameOver extends Component {
     this.audio = new Audio();
     // can play ogg or mp3
     if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-      this.url = 'audio/_sfx/Game_Over.ogg';
+      this.url = 'https://whovox.com/audio/_sfx/Game_Over.ogg';
       this.audio = new Audio(this.url);
       }
     if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-      this.url = 'audio/_sfx/Game_Over.mp3';
+      this.url = 'https://whovox.com/audio/_sfx/Game_Over.mp3';
       this.audio = new Audio(this.url);
       }
     this.audio.play();

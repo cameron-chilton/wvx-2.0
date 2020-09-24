@@ -132,9 +132,9 @@ class GamePage extends Component {
             <div className="earLogo">
               <img className="logo-dot" src="https://whovox.com/imgs/logo-dot.svg" />
               <img className="logo-outer" src="https://whovox.com/imgs/logo-outer.svg" />
-              <img className="logo-inner1" src="https://whovox.com/logo-inner1.svg" />
-              <img className="logo-inner2" src="https://whovox.com/logo-inner2.svg" />
-              <img className="logo-inner3" src="https://whovox.com/logo-inner3.svg" />
+              <img className="logo-inner1" src="https://whovox.com/imgs/logo-inner1.svg" />
+              <img className="logo-inner2" src="https://whovox.com/imgs/logo-inner2.svg" />
+              <img className="logo-inner3" src="https://whovox.com/imgs/logo-inner3.svg" />
             </div>
             <div className="voiceCount">
               <div className="voiceNum">{vxCt.toLocaleString()}</div>

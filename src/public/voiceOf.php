@@ -45,7 +45,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 	<meta name="description" content="WHOVOX - Voice Of?: Play a sample of a famous person's voice from the game WHOVOX.">
 	<link rel="shortcut icon" href="https://whovox.com/imgs/favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<link href="voiceStyles.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="https://whovox.com/public/voiceStyles.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 
 <body onload='loadFirstVoice("<?php echo $first; ?>", "<?php echo $last; ?>"); getVoiceCount();'>

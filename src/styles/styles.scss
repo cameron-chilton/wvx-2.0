@@ -276,7 +276,7 @@ and (orientation: portrait) {
   body {width: 100vw; margin: 0 auto;}
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-  .overlay {width: 110vw; height: 110vh;}
+  .overlay {width: 100vw; height: 100vh;}
     .overlayContainer {position: relative; width: 100vw; z-index: 999;}
       .overlayContent {top: 27vh; width: 76vw; left: 50%; transform: translate(-50%, 0);}
       .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
@@ -284,7 +284,7 @@ and (orientation: portrait) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 96vw; margin: 0.6rem auto 0.6rem auto;}
+  .game {width: 96vw; margin: 3.0rem auto 0.6rem auto;}
     .topLine {width: 96vw; white-space: nowrap;}
       .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem;}
       .earLogo {width: 2.3rem; height: 2.6rem; margin-left: -0.6rem;}
@@ -305,7 +305,7 @@ and (orientation: portrait) {
         .copy {float: right; margin-right: 0.6rem; font-size: 0.7rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 92vw; min-height: auto;}
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 88vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
     .catCount {font-size: 0.84rem; line-height: 1.2rem;}
@@ -315,7 +315,7 @@ and (orientation: portrait) {
     .catLabel {font-size: 0.56rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-  .play-button {width: 96vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button {width: 93vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
   .play-button:disabled {border: 8px solid $color-blue-brite;}
     .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
 
@@ -372,7 +372,7 @@ and (orientation: landscape) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 66vw; margin: 0.8rem auto;}
+  .game {width: 66vw; margin: 3.0rem auto;}
       .topLine {width: 65vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
         .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
         .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}

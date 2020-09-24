@@ -171,7 +171,6 @@ and (orientation: portrait) {
   body {width: 100vw; margin: 0 auto;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .adBox {width: 94vw;}
   .game {width: 96vw; margin: 0 auto;}
       .topLine {width: 99vw;}
         .topLine h1 {font-size: 2.8rem; letter-spacing: -0.4rem;}

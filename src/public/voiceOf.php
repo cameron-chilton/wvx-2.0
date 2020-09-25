@@ -40,11 +40,12 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.70">
 	<title>WHOVOX: Voice Of? <?php echo ucwords($first).' '.ucwords($last); ?></title>
 	<meta name="description" content="WHOVOX - Voice Of?: Play a sample of a famous person's voice from the game WHOVOX.">
-	<link rel="shortcut icon" href="https://whovox.com/imgs/favicon.ico">
+	<link rel="shortcut icon" href="https://whovox.com/favicon.ico">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script data-ad-client="ca-pub-8335048929933055" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<link href="https://whovox.com/public/voiceStyles.css" rel="stylesheet" type="text/css" media="screen">
 </head>
 
@@ -65,7 +66,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 */
 ?>
 </span>
-
+	
   <div class="game">
 
     <div class="topLine">
@@ -78,11 +79,11 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
         <span class="name6">X</span>
       </h1>
       <div class="earLogo">
-        <img class="logo-dot" src="../imgs/logo-dot.svg" />
-        <img class="logo-outer" src="../imgs/logo-outer.svg" />
-        <img class="logo-inner1" src="../imgs/logo-inner1.svg" />
-        <img class="logo-inner2" src="../imgs/logo-inner2.svg" />
-        <img class="logo-inner3" src="../imgs/logo-inner3.svg" />
+        <img class="logo-dot" src="https://whovox.com/imgs/logo-dot.svg" />
+        <img class="logo-outer" src="https://whovox.com/imgs/logo-outer.svg" />
+        <img class="logo-inner1" src="https://whovox.com/imgs/logo-inner1.svg" />
+        <img class="logo-inner2" src="https://whovox.com/imgs/logo-inner2.svg" />
+        <img class="logo-inner3" src="https://whovox.com/imgs/logo-inner3.svg" />
       </div>
       <div class="voiceCount">
         <div class="voiceNum">--</div>
@@ -97,19 +98,20 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
         <div id="tmplSrch">
           <h2 id="tmplMsg">VOX SAMPLE</h2>
           <input id="srchVoicesTxt" type="text" placeholder="Search Voices" maxlength="21" onclick="this.value = '';" onkeypress="isEnterVoiceOf(event);">
-          <input type="button" class="save-button" value="SEARCH" onClick="searchVoices();">
-          <input type="button" class="save-button" value="RANDOM" onClick="loadVoiceRandom();">
+			<button class="save-button" onClick="searchVoices();">SEARCH</button>
+          	<button class="save-button" onClick="loadVoiceRandom();">RANDOM</button>
         </div>
         <div class="vxBtn" id="vxOfBox">
           <span class="tmplCategory"></span>
-          <span class="ansPic"><img src="../imgs/noVox.png" id="tmplPic" /></span>
+          <span class="ansPic"><img src="https://whovox.com/public/imgs/noVox.png" id="tmplPic" /></span>
           <span class="ansName">
             <span id="vx1stNm">-</span>&nbsp;<span id="vxLstNm">-</span>
           </span>
           <span class="ansWhosThis"><a href="https://en.wikipedia.org/wiki/" target="_blank" rel="noopener noreferrer" id="wikiLink">WHO&#39;S THIS?</a></span>
         </div>
         <div class="tmplPlayer">
-          <audio id="tmplAudioEl" src="" controls></audio>
+          	<audio id="tmplAudioEl" controls src="">
+			</audio>
         </div>
 
       </div>
@@ -119,7 +121,6 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
       </div>
 
       <div class="voiceText">
-        <img id="wikiImg" src="../imgs/noVox.png" width="115" />
         <p id="wikiText">
           <span class="ansQ">LOADING...</span>
         </p>
@@ -128,7 +129,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
     </div>
     <div class="bottomLinks">
       <span class="links">
-        <a href="privacy-policy.html">PRIVACY POLICY</a>
+        <a href="https://whovox.com/public/privacy-policy.html">PRIVACY POLICY</a>
       </span>
       <span class="copy">&copy;2020 THINKAGAIN</span>
     </div>
@@ -143,10 +144,10 @@ var vox;
 function loadVoice(nameFirst, nameLast) {
 	$.ajax({
 		type: 'GET',
-		url: 'loadVoice.php?firstname=' + nameFirst + '&lastname=' + nameLast,
+		url: 'https://whovox.com/public/loadVoice.php?firstname=' + nameFirst + '&lastname=' + nameLast,
 		complete: function(data) {
 			var retArr = data.responseText.split('||');
-			getWikiInfo( toTitleCase(nameFirst), toTitleCase(nameLast) ); // call wiki function
+			getWikiInfoNew( toTitleCase(nameFirst), toTitleCase(nameLast) ); // call wiki function
 			// category
 			$('.tmplCategory').hide().empty();
 			$('.tmplCategory').text(retArr[1]);
@@ -159,7 +160,7 @@ function loadVoice(nameFirst, nameLast) {
 			// pics
 			$('#tmplPic').hide();
 			$('#tmplPic').attr('src', 'data:image/jpeg;base64,' + retArr[6] );
-      $('#tmplPic').fadeIn('fast');
+			$('#tmplPic').fadeIn('fast');
       // wiki link
       $('#wikiLink').attr('href','https://en.wikipedia.org/wiki/' + toTitleCase(retArr[4]) + '_' + toTitleCase(retArr[5]));
 			// assign answer voice clip
@@ -183,10 +184,13 @@ function loadVoice(nameFirst, nameLast) {
 			if (tmplClip.canPlayType) {
 				if ( "" != tmplClip.canPlayType('audio/ogg; codecs="vorbis"')) {
 					// assign dir and type
-					tmplClip.src = "../audio/" + dir + "/" + vox + ".ogg";
+					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".ogg";
+					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".ogg");
+					
 					}
 				if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
-					tmplClip.src = "../audio/" + dir + "/" + vox + ".mp3";
+					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
+					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".mp3");
 					}
 				}
 				else {alert("No Audio Support");}
@@ -195,27 +199,26 @@ function loadVoice(nameFirst, nameLast) {
 
 } // end load voice function
 
-
-
-// GET WIKIPEDIA TEXT IF VOICE FOUND
-function getWikiInfo(nameFirst, nameLast) {
-	$('#wikiImg').attr('src', 'imgs/noVox.png');
+// GET WIKIPEDIA TEXT IF VOICE FOUND NEW
+function getWikiInfoNew(nameFirst, nameLast) {
+	//$('#wikiImg').attr('src', 'imgs/noVox.png');
 	var wikiSrchName = !nameLast ?  nameFirst : nameFirst + ' ' + nameLast;
 	// get wikipedia text & pic
 	$.ajax({
-		url: 'scrape.php',
+		url: 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' + wikiSrchName,
 		method: 'POST',
-		data: JSON.stringify({'term': wikiSrchName }),
-		headers: {
-			'Content-Type': 'application/json',
-			'Accept': 'application/json'
-		}
+		crossDomain: true,
+   		dataType: 'jsonp',
 	}).done(function(data) {
-		var prse = JSON.parse(data);
-		if (prse) {
+		var articleID, extract1, extract2;
+		for (var key in data.query.pages) {
+			articleID = key;
+		}
+		extract1 = data.query.pages[articleID];
+		extract2 = extract1.extract;
+		if (data) {
 			$('#wikiText').empty().scrollTop();
-			$('#wikiText').text( (!prse.description) ? 'No text' : prse.description );
-			$('#wikiImg').attr('src', (!prse.imageurl) ? 'imgs/noVox.png' : prse.imageurl );
+			$('#wikiText').text( (!extract2) ? 'No text' : extract2 );
 		}
 		else {
 			console.log('WIKIPEDIA no results');
@@ -226,6 +229,7 @@ function getWikiInfo(nameFirst, nameLast) {
 
 }
 
+
 // convert to title case
 function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -235,7 +239,7 @@ function loadFirstVoice (first, last) {
 	if (first) {
 		$.ajax({
 			type: 'GET',
-			url: 'loadVoiceCheck.php?firstname=' + first + '&lastname=' + last,
+			url: 'https://whovox.com/public/loadVoiceCheck.php?firstname=' + first + '&lastname=' + last,
 			complete: function(data) {
 				if (data.responseText) {
 					$('#tmplMsg').removeClass('errorMsg').text('VOICE OF?').fadeIn('fast');
@@ -257,7 +261,7 @@ function getVoiceCount() {
 
 $.ajax({
   type: 'GET',
-  url: 'getVoiceCount.php',
+  url: 'https://whovox.com/public/getVoiceCount.php',
   complete: function(data) {
     if (data.responseText) {
       var num = parseInt(data.responseText);
@@ -295,7 +299,7 @@ var charCode = e.charCode || e.keyCode || e.which;
 	$('#tmplMsg').removeClass('errorMsg').text('VOICE OF?').fadeIn('fast');
 	$.ajax({
 		type: 'GET',
-		url: 'loadVoiceRandom.php',
+		url: 'https://whovox.com/public/loadVoiceRandom.php',
 		complete: function(data) {
 			var retArr = data.responseText.split('||');
 			loadVoice(retArr[4], retArr[5]);
@@ -313,7 +317,7 @@ function searchVoices() {
   }
 	$.ajax({
 		type: 'GET',
-		url: 'loadVoiceCheck.php?firstname=' + n1 + '&lastname=' + n2,
+		url: 'https://whovox.com/public/loadVoiceCheck.php?firstname=' + n1 + '&lastname=' + n2,
 		complete: function(data) {
       var resp = data.responseText.trim();
 			if (resp !== 'no') {

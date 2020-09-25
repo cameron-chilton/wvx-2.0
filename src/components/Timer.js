@@ -52,7 +52,7 @@ class Timer extends Component {
     const {timerOn, btnTxt, gameOver, loading, voxCount} = this.props;
     return (
       <div>
-        <button className='play-button' onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true}>
+        <button className='play-button' onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true} id="startvoxBtn">
           {
             !this.state.isAnswered ? (
               typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)

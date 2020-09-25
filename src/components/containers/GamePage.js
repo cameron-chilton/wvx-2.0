@@ -55,6 +55,7 @@ class GamePage extends Component {
       if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
       if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
 
+
       this.audio = new Audio();
 
       // can play ogg or mp3
@@ -68,6 +69,10 @@ class GamePage extends Component {
           this.audio = new Audio(this.url);
 					}
         }
+      const button = document.getElementById('startvoxBtn');
+      button.addEventListener('click',function(){
+        this.audio.play();
+      });
       this.audio.play();
       interval = setInterval( () => {
         this.props.actions.tickTimer(this.props.whovoxGame);

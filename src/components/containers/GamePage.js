@@ -59,20 +59,18 @@ class GamePage extends Component {
       this.audio = new Audio();
 
       // can play ogg or mp3
-			if (this.audio.canPlayType) {
-				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.ogg';
-          this.audio = new Audio(this.url);
-					}
-				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-          this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.mp3';
-          this.audio = new Audio(this.url);
-					}
+      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+        this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.ogg';
+        this.audio = new Audio(this.url);
         }
-      const button = document.getElementById('startvoxBtn');
-      button.addEventListener('click',function(){
-        this.audio.play();
-      });
+      else {
+        this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.mp3';
+        this.audio = new Audio(this.url);
+        }
+      //const button = document.getElementById('startvoxBtn');
+      //button.addEventListener('click',function(){
+        //this.audio.play();
+      //});
       this.audio.play();
       interval = setInterval( () => {
         this.props.actions.tickTimer(this.props.whovoxGame);
@@ -96,7 +94,7 @@ class GamePage extends Component {
         this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.ogg';
         this.audio = new Audio(this.url);
         }
-      if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+      else {
         this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.mp3';
         this.audio = new Audio(this.url);
         }

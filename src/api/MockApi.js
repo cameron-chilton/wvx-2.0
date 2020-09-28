@@ -108,17 +108,14 @@ class MockApi {
       this.audio = new Audio();
 
       // can play ogg or mp3
-			if (this.audio.canPlayType) {
 				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
           this.url = 'audio/' + dir + '/' + clipArray[i] + '.ogg';
           this.audio = new Audio(this.url);
 					}
-				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+				else {
           this.url = 'audio/' + dir + '/' + clipArray[i] + '.mp3';
           this.audio = new Audio(this.url);
 					}
-				}
-      else {alert('No Audio Support');}
     }
 
     // load sfx files
@@ -134,17 +131,14 @@ class MockApi {
     for (j = 0; j <= 4; j++) {
       this.audio = new Audio();
       // can play ogg or mp3
-			if (this.audio.canPlayType) {
-				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'audio/_sfx/' + sfxArray[j] + '.ogg';
-          this.audio = new Audio(this.url);
-					}
-				if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
-          this.url = 'audio/_sfx/' + sfxArray[j] + '.mp3';
-          this.audio = new Audio(this.url);
-					}
-				}
-      else {alert('No Audio Support');}
+      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+        this.url = 'audio/_sfx/' + sfxArray[j] + '.ogg';
+        this.audio = new Audio(this.url);
+        }
+      else {
+        this.url = 'audio/_sfx/' + sfxArray[j] + '.mp3';
+        this.audio = new Audio(this.url);
+        }
     }
 
     return clipArray, sfxArray;

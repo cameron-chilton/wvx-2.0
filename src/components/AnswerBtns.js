@@ -36,7 +36,7 @@ class AnswerBtns extends Component {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg';
             this.audio = new Audio(this.url);
             }
-          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+          else {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3';
             this.audio = new Audio(this.url);
             }

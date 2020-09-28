@@ -35,13 +35,12 @@ class VoiceChoices extends Component {
       const answeredRight = (voxid === this.props.newGameData[this.props.voxCount].ID);
       this.audio = new Audio();
       // can play ogg or mp3
-			if (this.audio.canPlayType) {
         if(answeredRight) {
           if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Right.ogg';
             this.audio = new Audio(this.url);
             }
-          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+          else {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Right.mp3';
             this.audio = new Audio(this.url);
             }
@@ -52,13 +51,12 @@ class VoiceChoices extends Component {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg';
             this.audio = new Audio(this.url);
             }
-          if (this.audio.canPlayType('audio/mp3; codecs="mp3"')) {
+          else {
             this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3';
             this.audio = new Audio(this.url);
             }
           this.audio.play();
         }
-      }
       this.setState({showRightAnswer: true});
       if (this.props.ansCount <= 4) {
         setTimeout( () => { this.props.actions.prepNextQuestion(); }, 1200);

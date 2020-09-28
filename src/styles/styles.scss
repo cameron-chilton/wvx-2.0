@@ -104,10 +104,10 @@ div, h1, button {margin: 0; padding: 0;}
       }
       .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
       .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
-      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto; height: 2rem;}
-        .links {float: left; font-weight: 700;}
-          .links a {margin-right: 1.9rem; font-family: $nunito; color: $color-blue-brite; text-decoration: none; letter-spacing: 0.02rem;}
-        .copy {float: right; color: $color-blue-med; font-family: $nunito;}
+      .bottomLinks {width: 31rem; margin: 0.4rem auto; height: 2rem; font-weight: 700;}
+        .links {float: left;}
+          .links a {font-size: 1.2rem; margin-right: 1.9rem; font-family: $nunito; color: $color-blue-brite; text-decoration: none; letter-spacing: 0.02rem;}
+        .copy {float: right; color: $color-blue-med; font-family: $nunito; font-size: 0.8rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {
@@ -273,7 +273,12 @@ and (min-device-width: 0.1rem)
 and (max-device-width: 30rem)
 and (orientation: portrait) {
 
-  body {width: 100vw; margin: 0 auto;}
+  body {
+    min-width: 100vw;
+    max-width: 100vw;
+    margin: 0 auto;
+    width: 100vw;
+  }
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
   .overlay {width: 100vw; height: 100vh;}
@@ -284,35 +289,36 @@ and (orientation: portrait) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 96vw; margin: 3.0rem auto 0.6rem auto;}
+  .game {width: 96vw; margin: 3.6rem auto 0.6rem auto;}
     .topLine {width: 96vw; white-space: nowrap;}
-      .topLine h1 {font-size: 3.8rem; letter-spacing: 0.1rem;}
-      .earLogo {width: 2.3rem; height: 2.6rem; margin-left: 2.6rem;}
+      .topLine h1 {font-size: 4.0rem; letter-spacing: 0.1rem; margin: 0 -0.4rem 0 0.5rem;}
+      .earLogo {width: 2.5rem; height: 2.8rem; margin-left: 0.0rem;}
         .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
-        .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.20rem;}
-        .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
-        .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
-        .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
+        .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.21rem;}
+        .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.79rem;}
+        .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.85rem;}
+        .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.07rem;}
         .voiceCount {
           letter-spacing: 0.06rem;
-          line-height: 1.0rem;
+          line-height: 1.3rem;
         }
         .voiceNum {font-size: 1.3rem;}
         .voiceTxt {font-size: 1.0rem;}
-      .bottomLinks {width: 94vw; height: 3rem; padding: 0.9rem 0.4rem;}
-        .links {float: left;}
-          .links a {margin-right: 1.9rem; font-size: 1.6rem;}
-        .copy {float: right; margin-right: 0.6rem; font-size: 1.2rem;}
+      .bottomLinks {width: 90vw; height: 3rem; padding: 1.5rem;}
+        .links {display: block;}
+          .links a {font-size: 1.0rem; display: block; margin-bottom: 1.4rem;}
+          .links a.voiceLink {font-size: 2.0rem; display: block; margin-bottom: 1.4rem; text-decoration: underline; font-weight: 900;}
+        .copy {display: block; font-size: 1.2rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 88vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
-    .catCount {font-size: 0.84rem; line-height: 1.2rem;}
-      .scoreNum {font-size: 1.7rem;}
-      .scoreTxt {font-size: 0.7rem;}
-    .rightWrong {font-size: 0.84rem; line-height: 1.2rem;}
-    .catLabel {font-size: 0.56rem;}
+    .catCount {font-size: 0.92rem; line-height: 1.3rem;}
+      .scoreNum {font-size: 2.2rem;}
+      .scoreTxt {font-size: 0.9rem;}
+    .rightWrong {font-size: 0.92rem; line-height: 1.3rem;}
+    .catLabel {font-size: 0.84rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
   .play-button {width: 93vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
@@ -322,12 +328,12 @@ and (orientation: portrait) {
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
     .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 86vw;}
-    .ansName {display: block; font-size: 0.96rem; letter-spacing: 0.04rem; margin-top: 1.4rem;}
+    .ansName {display: block; font-size: 1.02rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
-      .ansPic img {width: 64px; height: 64px;}
+      .ansPic img {width: 72px; height: 72px;}
     .ansWhosThis {padding: 0.0rem 0.2rem 0.0rem 0.2rem;}
-      .ansWhosThis a {font-size: 0.56rem;}
+      .ansWhosThis a {font-size: 0.76rem; letter-spacing: 0.05rem;}
 
   /* ////////////////// GAME OVER STYLES ///////////////////*/
   .inHOF p, .tooLow p {font-size: 1.0rem; line-height: 1.3rem; margin: 0.8rem 0.5rem;}
@@ -361,61 +367,67 @@ and (min-device-width: 1rem)
 and (max-device-width: 60rem)
 and (orientation: landscape) {
 
-  body {width: 100vw; margin: 0 auto;}
+  body {
+    min-width: 100vw;
+    max-width: 100vw;
+    margin: 0 auto;
+    width: 100vw;
+  }
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
   .overlay {width: 100vw; height: 100vh;}
-    .overlayContainer {width: 66vw; z-index: 999;}
-      .overlayContent {top: 8vh; width: 66vw; left: 50%; transform: translate(-50%, 0);}
+    .overlayContainer {width: 50vw; z-index: 999;}
+      .overlayContent {top: 8vh; width: 50vw; left: 50%; transform: translate(-50%, 0);}
       .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
       .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 66vw; margin: 3.0rem auto;}
-      .topLine {width: 65vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
-        .topLine h1 {font-size: 3.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
-        .earLogo {width: 2.3rem; height: 2.6rem; margin: 0 1.0rem 0 -0.6rem;}
-          .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
+  .game {width: 60vw; margin: 3.6rem auto;}
+      .topLine {width: 60vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
+        .topLine h1 {font-size: 4.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
+        .earLogo {width: 2.7rem; height: 3.0rem; margin: 0 1.0rem 0 -0.6rem;}
+          .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.92rem;}
           .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.20rem;}
-          .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.78rem;}
-          .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.84rem;}
-          .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.06rem;}
+          .logo-inner1 {top: 0.64rem; left: 0.86rem; width: 0.84rem;}
+          .logo-inner2 {top: 0.32rem; left: 1.12rem; width: 0.90rem;}
+          .logo-inner3 {top: -0.02rem; left: 1.26rem; width: 1.12rem;}
           .voiceCount {
             margin: 0 0.6rem 0 0;
             line-height: 0.9rem;
           }
           .voiceNum {font-size: 1.1rem;}
           .voiceTxt {font-size: 0.7rem;}
-      .bottomLinks {width: 66vw; padding-top: 0.4rem;}
-        .links {float: left; margin-left: 0.4rem;}
-          .links a {font-size: 0.8rem;}
-        .copy {margin-right: 0.0rem; font-size: 0.7rem;}
+        .bottomLinks {width: 58vw; height: 3rem; padding: 1.5rem;}
+          .links {display: block;}
+            .links a {font-size: 1.0rem; display: block; margin-bottom: 1.4rem;}
+            .links a.voiceLink {font-size: 2.0rem; display: block; margin-bottom: 1.4rem; text-decoration: underline; font-weight: 900;}
+          .copy {display: block; font-size: 1.2rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 66vw; min-height: auto;}
+  .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 60vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
-    .catCount {font-size: 0.84rem; line-height: 1.2rem;}
-      .scoreNum {font-size: 1.7rem;}
-      .scoreTxt {font-size: 0.7rem;}
-    .rightWrong {font-size: 0.84rem; line-height: 1.2rem;}
-    .catLabel {font-size: 0.56rem;}
+    .catCount {font-size: 0.96rem; line-height: 1.2rem;}
+      .scoreNum {font-size: 2.3rem;}
+      .scoreTxt {font-size: 1.0rem;}
+    .rightWrong {font-size: 0.96rem; line-height: 1.2rem;}
+    .catLabel {font-size: 0.84rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-  .play-button {width: 67.5vw; margin: 0 0 0.0rem -0.5rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button {width: 61.5vw; margin: 0 0 0.0rem -0.5rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.8rem;}
   .play-button:disabled {border: 8px solid $color-blue-brite;}
     .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
 
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
-    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 64vw;}
-    .ansName {display: block; font-size: 0.96rem; letter-spacing: 0.04rem; margin-top: 1.4rem;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 58vw;}
+    .ansName {display: block; font-size: 1.04rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
-      .ansPic img {width: 64px; height: 64px;}
+      .ansPic img {width: 72px; height: 72px;}
     .ansWhosThis {padding: 0.0rem 0.2rem 0.0rem 0.2rem;}
-      .ansWhosThis a {font-size: 0.56rem;}
+      .ansWhosThis a {font-size: 0.80rem;}
 
   /* ////////////////// GAME OVER STYLES ///////////////////*/
   .inHOF p, .tooLow p {font-size: 1.0rem; line-height: 1.3rem; margin: 0.8rem 0.5rem;}

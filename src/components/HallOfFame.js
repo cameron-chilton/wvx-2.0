@@ -13,7 +13,7 @@ class HallOfFame extends Component {
     this.state = {
       tableData: {}
     };
-    this.myRef = React.createRef();
+    this.myRef = React.createRef() || '';
     this.audio = new Audio();
     // can play ogg or mp3
     if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
@@ -48,7 +48,7 @@ class HallOfFame extends Component {
     }, 1500);
     setTimeout( () => {
         this.handleScrollToElement();
-    }, 2500);
+    }, 3200);
   }
 
   handleScrollToElement() {

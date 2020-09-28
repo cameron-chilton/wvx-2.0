@@ -115,7 +115,7 @@ class GameOver extends Component {
               <div className="tooLow">
                 <h2>THANKS FOR PLAYING!</h2>
                 <p>Your score is too low for the Hall of Fame.</p>
-                <h3><span className="bold">TRY AGAIN!</span></h3>
+                <h3><span className="bold"><a href="https://whovox.com">TRY AGAIN!</a></span></h3>
                 <p>Select different categories to test your ears on voices you know best!</p>
               </div>
             )

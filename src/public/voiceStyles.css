@@ -17,8 +17,7 @@ div, h1, button, span {margin: 0; padding: 0;}
 .toUpper {text-transform: uppercase;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-.adBox {height: 80px; width: auto; border: 1px solid grey; margin: 0.4rem auto;}
-.game {width: 32.0rem;}
+.game {width: 32.0rem; margin: 1.0rem auto;}
     .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
       .topLine h1 {font-size: 4.5rem; letter-spacing: -0.6rem; color: #1286d7; text-shadow: 0px 0px 6px #707055; font-weight: 900; display: inline-block;}
       .name1 {animation: flicker 2.0s infinite;}
@@ -48,7 +47,7 @@ div, h1, button, span {margin: 0; padding: 0;}
         letter-spacing: 0.06rem;
         color: #1286d7;
         font-weight: 900;
-        margin-left: 1.2rem;
+        margin: 0 0 -0.4rem 1.2rem;
         line-height: 1.2rem;
         text-shadow: 0px 0px 2px #707055;
         display: inline-block;
@@ -56,9 +55,9 @@ div, h1, button, span {margin: 0; padding: 0;}
       }
       .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
       .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
-      .bottomLinks {width: 31rem; font-size: 0.8rem; margin: 0.4rem auto;}
+      .bottomLinks {width: 31rem; margin: 0.9rem auto; height: 3rem;}
         .links {float: left;}
-          .links a {margin-right: 1.9rem; font-family: 'Nunito', sans-serif; color: #00aeff; text-decoration: none; letter-spacing: 0.02rem;}
+          .links a {font-size: 1.3rem; margin-right: 1.9rem; font-family: 'Nunito', sans-serif; color: #00aeff; text-decoration: none; letter-spacing: 0.02rem;}
         .copy {float: right; color: #2c61bf; font-family: 'Nunito', sans-serif;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
@@ -70,7 +69,7 @@ div, h1, button, span {margin: 0; padding: 0;}
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     width: 30.8rem;
     color: #1a314d;
-    background-image: url(../imgs/bg-boxes.png);
+    background-image: url(https://whovox.com/imgs/bg-boxes.png);
     box-shadow: 0px 0px 8px 0px #333 inset;
     min-height: 32rem;
   }
@@ -100,6 +99,7 @@ h2#tmplMsg.errorMsg {color: #ff0000;}
 .save-button:active {outline: none; background: #1a314d;}
 input[type=text] {border: 2px solid #2c61bf; padding: 0.4rem; margin-right: 0.4rem; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1.1rem; border-radius: 4px; width: 14rem;}
 #tmplSrch {margin: 0.8rem auto;}
+.tmplPlayer {height: 3.8rem;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
   .play-button {
@@ -151,7 +151,7 @@ input[type=text] {border: 2px solid #2c61bf; padding: 0.4rem; margin-right: 0.4r
     .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.02rem; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.7rem; line-height: 0.7rem;}
     .ansWhosThis a:hover {text-decoration: underline;}
   .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem;}
-  .voiceText {margin: 1.0rem;}
+  .voiceText {margin: 1.0rem; font-size: 1.1rem; line-height: 1.7rem;}
     #wikiTxt {margin-top: 1.0rem;}
     #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 2px 2px 4px #999;}
 
@@ -171,14 +171,17 @@ and (orientation: portrait) {
   body {width: 100vw; margin: 0 auto;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 96vw; margin: 0 auto;}
+  .game {width: 96vw; margin: 1.0rem auto;}
       .topLine {width: 99vw;}
-        .topLine h1 {font-size: 2.8rem; letter-spacing: -0.4rem;}
+        .topLine h1 {font-size: 3.8rem; letter-spacing: -0.4rem;}
         .earLogo {width: 3.8rem; height: 4.1rem; margin: 0 0.4rem 0 -0.3rem;}
-        .voiceCount {margin-left: 0.2rem;line-height: 1.0rem;}
-        .voiceNum {font-size: 1.1rem;}
-        .voiceTxt {font-size: 0.8rem;}
-        .bottomLinks {width: 96vw; font-size: 0.8rem; margin: 0.4rem auto;}
+        .voiceCount {margin: 0 0 0.8rem 2.7rem; line-height: 1.4rem;}
+        .voiceNum {font-size: 1.5rem;}
+        .voiceTxt {font-size: 1.2rem;}
+        .bottomLinks {width: 94vw; padding: 0.9rem 0.4rem; height: 3rem;}
+        .links {float: left;}
+          .links a {font-size: 1.6rem; margin-right: 1.6rem; font-family: 'Nunito', sans-serif; color: #00aeff; text-decoration: none; letter-spacing: 0.02rem;}
+        .copy {float: right; color: #2c61bf; font-family: 'Nunito', sans-serif; font-size: 1.2rem; }
 
     /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
     .topContainer {width: 88vw; padding: 0.3rem;}
@@ -187,25 +190,25 @@ and (orientation: portrait) {
   .gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0;}
   h2#tmplMsg.errorMsg {color: #ff0000;}
   .save-button {
-    padding: 0.2rem;
+    padding: 0.4rem;
     margin: 0 0.3rem 0 0;
     border-radius: 5px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     letter-spacing: 0.01rem;
   }
-  input[type=text] {width: 9rem; padding: 0.2rem;}
+  input[type=text] {width: 11rem; padding: 0.4rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-    .play-button {width: 96.5vw;}
+    .play-button {width: 95vw;}
 
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
-    .vxBtn {width: 88vw;}
-    .ansName {font-size: 1.2rem;letter-spacing: 0.06rem;margin-top: 1.7rem;}
+    .vxBtn {width: 86vw;}
+    .ansName {font-size: 1.55rem; letter-spacing: 0.06rem; margin-top: 1.9rem;}
     .ansQ {font-size: 1.5rem;}
-    .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem;}
-    .voiceText {margin: 1.0rem;}
+    .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02rem;}
+    .voiceText {margin: 1.0rem; font-size: 1.6rem; line-height: 2.2rem;}
       #wikiTxt {margin-top: 1.0rem;}
-      #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 2px 2px 4px #999;}
+	.ansWhosThis a {font-size: 1.0rem;}
 
 
 

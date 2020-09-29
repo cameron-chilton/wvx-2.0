@@ -67,7 +67,7 @@ class VoiceChoices extends Component {
           this.setState({clickedBtn: false});
           this.setState({showRightAnswer: false});
           this.props.actions.gameOver();
-        }, 1500);
+        }, 2000);
       }
     }, 1300);
   }

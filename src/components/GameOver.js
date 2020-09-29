@@ -16,8 +16,8 @@ class GameOver extends Component {
       isValid: true,
       gameSaved: false,
     };
-    this.nameRef = React.createRef();
-    this.locRef = React.createRef();
+    this.nameRef = React.createRef() || '';
+    this.locRef = React.createRef() || '';
   }
 
   componentDidMount() {
@@ -92,6 +92,7 @@ class GameOver extends Component {
                 <p>You scored <span className="bold">{score.toLocaleString()}</span> with <span className="bold">{ansRight}</span> out of <span className="bold">5</span> voices correct.</p>
                 <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
                 <p>Select different categories to test your ears on voices you know best!</p>
+                <h3><span className="bold"><a href="https://whovox.com">PLAY AGAIN!</a></span></h3>
 
                 {!this.state.isValid && <div className="errorMsg">Name and Location is required to save game.</div>}
 

@@ -289,9 +289,9 @@ and (orientation: portrait) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 96vw; margin: 3.6rem auto 0.6rem auto;}
+  .game {width: 96vw; margin: 4.2rem auto 0.6rem auto;}
     .topLine {width: 96vw; white-space: nowrap;}
-      .topLine h1 {font-size: 4.0rem; letter-spacing: 0.1rem; margin: 0 -0.4rem 0 0.5rem;}
+      .topLine h1 {font-size: 4.3rem; letter-spacing: 0.1rem; margin: 0 -0.4rem 0 0.5rem;}
       .earLogo {width: 2.5rem; height: 2.8rem; margin-left: 0.0rem;}
         .logo-dot {top: 1.92rem; left: 0.88rem; width: 0.86rem;}
         .logo-outer {top: -0.36rem; left: 0.58rem; width: 2.21rem;}
@@ -314,21 +314,21 @@ and (orientation: portrait) {
   .topContainer {border: 6px solid $color-blue-med-brite; border-radius: 14px; margin: 0 auto; width: 88vw; min-height: auto;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
-    .catCount {font-size: 0.92rem; line-height: 1.3rem;}
+    .catCount {font-size: 1.04rem; line-height: 1.3rem;}
       .scoreNum {font-size: 2.2rem;}
       .scoreTxt {font-size: 0.9rem;}
-    .rightWrong {font-size: 0.92rem; line-height: 1.3rem;}
+    .rightWrong {font-size: 1.04rem; line-height: 1.3rem;}
     .catLabel {font-size: 0.84rem;}
 
   /* ////////////////// START BUTTON STYLES /////////////////// */
-  .play-button {width: 93vw; margin: 0 0 0.0rem -0.60rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.6rem;}
+  .play-button {width: 92vw; margin: 0 0 0.0rem -0.66rem; border: 8px solid $color-blue-brite; border-radius: 14px; font-size: 1.9rem;}
   .play-button:disabled {border: 8px solid $color-blue-brite;}
     .play-button:focus, .play-button:active {border: 8px solid $color-blue-brite;}
 
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
-    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 86vw;}
-    .ansName {display: block; font-size: 1.02rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.25rem auto 0.50rem auto; width: 86vw;}
+    .ansName {display: block; font-size: 1.12rem; letter-spacing: 0.08rem; margin-top: 1.5rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
       .ansPic img {width: 72px; height: 72px;}
@@ -421,7 +421,7 @@ and (orientation: landscape) {
 
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
-    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.0rem auto 0.26rem auto; width: 58vw;}
+    .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.25rem auto 0.25rem auto; width: 58vw;}
     .ansName {display: block; font-size: 1.04rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}

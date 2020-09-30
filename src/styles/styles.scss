@@ -66,7 +66,7 @@ div, h1, button {margin: 0; padding: 0;}
     .overlayContent h2 {font-size: 1.8rem; font-weight: 900; color: $color-blue-med; margin: 0.2rem 0 1.2rem 0;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-.game {width: 32.0rem; margin: 1.6rem auto;}
+.game {width: 32.0rem; margin: 0.6rem auto;}
     .topLine {width: 32.0rem; margin: 0 0 -0.4rem 0; }
       .topLine h1 {font-size: 4.5rem; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900; display: inline-block;}
       .name1 {animation: flicker 2.0s infinite;}
@@ -104,9 +104,9 @@ div, h1, button {margin: 0; padding: 0;}
       }
       .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
       .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
-      .bottomLinks {width: 31rem; margin: 0.4rem auto; height: 2rem; font-weight: 700;}
-        .links {float: left;}
-          .links a {font-size: 1.2rem; margin-right: 1.9rem; font-family: $nunito; color: $color-blue-brite; text-decoration: none; letter-spacing: 0.02rem;}
+      .bottomLinks {width: 31rem; margin: 1.2rem auto; height: 2rem;}
+        .links a {font-size: 1.0rem; display: block; margin-bottom: 1.4rem;}
+        .links a.voiceLink {font-size: 2.0rem; display: block; text-decoration: underline; font-weight: 900;}
         .copy {float: right; color: $color-blue-med; font-family: $nunito; font-size: 0.8rem;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
@@ -289,7 +289,7 @@ and (orientation: portrait) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 96vw; margin: 4.2rem auto 0.6rem auto;}
+  .game {width: 96vw; margin: 0.6rem auto 0.6rem auto;}
     .topLine {width: 96vw; white-space: nowrap;}
       .topLine h1 {font-size: 4.3rem; letter-spacing: 0.1rem; margin: 0 -0.4rem 0 0.5rem;}
       .earLogo {width: 2.5rem; height: 2.8rem; margin-left: 0.0rem;}
@@ -383,7 +383,7 @@ and (orientation: landscape) {
       .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {width: 60vw; margin: 3.6rem auto;}
+  .game {width: 60vw; margin: 0.6rem auto;}
       .topLine {width: 60vw; margin: 0 0 -0.4rem 0; white-space: nowrap;}
         .topLine h1 {font-size: 4.3rem; letter-spacing: 0.1rem; margin-left: 0.4rem;}
         .earLogo {width: 2.7rem; height: 3.0rem; margin: 0 1.0rem 0 -0.6rem;}

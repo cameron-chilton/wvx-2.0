@@ -16,10 +16,10 @@ export default {
     newGameData: [],
     nextQuestion: [],
     voiceQuestion: [],
-    categories: ['Movies/TV','Music/Arts','News/Politics','Sports'],
+    categories: ['Movies/TV'],
     movTvChecked: true,
-    musArtsChecked: true,
-    newsPolChecked: true,
-    sportsChecked: true,
+    musArtsChecked: false,
+    newsPolChecked: false,
+    sportsChecked: false,
   }
 };

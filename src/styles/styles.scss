@@ -42,28 +42,23 @@ div, h1, button {margin: 0; padding: 0;}
 .toUpper {text-transform: uppercase;}
 
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-.overlay {position: absolute; background-color: #000; opacity: 0.35; top: 0; left: 0; z-index: 99; width: 100%; height: 100%;}
-  .overlayContainer {position: relative; width: inherit; z-index: 999;}
     .overlayContent {
       position: absolute;
       z-index: 9999;
-      top: 27vh;
+      top: 16vh;
       left: 50%;
       transform: translate(-50%, 0);
-      background-color: $color-blue-lite;
+      background-color: $color-yellow-lite;
       padding: 1.0rem;
-      border: 12px solid $color-blue-med-brite;
-      border-radius: 21px;
+      border: 5px solid $color-orange;
+      border-radius: 12px;
       margin: 0;
-      width: 24rem;
+      width: 21rem;
       color: $color-blue-bg;
-      background-image: url(../imgs/bg-boxes.png);
-      box-shadow: 0px 0px 18px #333, inset 0px 0px 8px 0px #333;
+      box-shadow: 1px 1px 24px #000;
       text-align: center;
     }
-    .overlayContent h1 {font-size: 2.9rem; font-weight: 900; color: $color-blue-med; margin: 0.9rem 0 1.6rem 0;}
-    .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; color: $color-blue-bg; margin: 1.2rem 0;}
-    .overlayContent h2 {font-size: 1.8rem; font-weight: 900; color: $color-blue-med; margin: 0.2rem 0 1.2rem 0;}
+    .overlayContent p {font-size: 1.3rem; font-weight: 900; color: $color-blue-bg; margin: 1.2rem 0;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
 .game {width: 32.0rem; margin: 0.6rem auto;}
@@ -281,12 +276,7 @@ and (orientation: portrait) {
   }
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-  .overlay {width: 100vw; height: 100vh;}
-    .overlayContainer {position: relative; width: 100vw; z-index: 999;}
-      .overlayContent {top: 27vh; width: 76vw; left: 50%; transform: translate(-50%, 0);}
-      .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
-      .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
-      .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
+  .overlayContent {top: 10vh;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
   .game {width: 96vw; margin: 0.6rem auto 0.6rem auto;}
@@ -375,12 +365,7 @@ and (orientation: landscape) {
   }
 
   /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-  .overlay {width: 100vw; height: 100vh;}
-    .overlayContainer {width: 50vw; z-index: 999;}
-      .overlayContent {top: 8vh; width: 50vw; left: 50%; transform: translate(-50%, 0);}
-      .overlayContent h1 {font-size: 2.9rem; margin: 0.9rem 0 1.6rem 0;}
-      .overlayContent p {font-size: 1.2rem; line-height: 1.8rem; margin: 1.2rem 0;}
-      .overlayContent h2 {font-size: 1.8rem; margin: 0.2rem 0 1.2rem 0;}
+  .overlayContent {top: 16vh;}
 
   /* ////////////////// TOP LOGO LINE ////////////////// */
   .game {width: 60vw; margin: 0.6rem auto;}

@@ -88,17 +88,6 @@ class GamePage extends Component {
   isFirstGame = () => {
     this.setState({ isFirstGame: false }, () => {
       localStorage.setItem('First Game', this.state.isFirstGame);
-      this.audio = new Audio();
-      // can play ogg or mp3
-      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.ogg';
-        this.audio = new Audio(this.url);
-        }
-      else {
-        this.url = 'https://whovox.com/audio/_sfx/Intro_Collage.mp3';
-        this.audio = new Audio(this.url);
-        }
-      this.audio.play();
     })
   }
 

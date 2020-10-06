@@ -9,7 +9,7 @@ class GameInfo extends Component {
   constructor() {
     super();
     this.clickCategory = this.clickCategory.bind(this);
-    this.state = {checkCount: 0}
+    this.state = {checkCount: -3}
   }
 
   clickCategory = () => {

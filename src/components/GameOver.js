@@ -106,7 +106,7 @@ class GameOver extends Component {
                     <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} maxLength="32" />
                   </div>
                   <div className="button">
-                    <button className="save-button" onClick={this.saveGame}>SAVE GAME</button>
+                    <button className="save-button" id="save-buttonID" onClick={this.saveGame}>SAVE GAME</button>
                   </div>
                 </div>
 

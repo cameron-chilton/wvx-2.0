@@ -7,10 +7,15 @@ class GameFirstDialog extends Component {
   render() {
     return (
       <div className="overlayContent">
-        <p>Press PLAY...</p>
-        <p>Then Press STARTVOX to Start WHOVOX Voice Game...</p>
-        <p><button className="save-button" onClick={ () => {this.props.isFirstGame();} }>PLAY</button></p>
-        <p>TURN SOUND ON!</p>
+        <h1>WHOVOX</h1>
+        <h2>VOICE GUESSING GAME</h2>
+        <h3>TURN SOUND ON!</h3>
+        <ol>
+          <li>Press OK</li>
+          <li>Press STARTVOX</li>
+          <li>Play WHOVOX!</li>
+        </ol>
+        <p><button className="save-button" onClick={ () => {this.props.isFirstGame();} }>OK</button></p>
       </div>
     );
   }

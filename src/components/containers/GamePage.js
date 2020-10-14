@@ -106,8 +106,8 @@ class GamePage extends Component {
 
     return (
       <>
-        {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
         <div className="game">
+          {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
           <div className="topLine">
             <h1>
               <span className="name1">W</span>

@@ -55,22 +55,18 @@ class GamePage extends Component {
       if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
       if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
 
-
       this.audio = new Audio();
+      let gameAudio;
 
       // can play ogg or mp3
       if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.ogg';
-        this.audio = new Audio(this.url);
+        gameAudio = localStorage.getItem(clip, 'audio/' + dir + '/' + gameAudio + '.ogg');
+        this.audio = new Audio(gameAudio);
         }
       else {
-        this.url = 'https://whovox.com/audio/' + dir + '/' + clip + '.mp3';
-        this.audio = new Audio(this.url);
+        gameAudio = localStorage.getItem(clip, 'audio/' + dir + '/' + gameAudio + '.mp3');
+        this.audio = new Audio(gameAudio);
         }
-      //const button = document.getElementById('startvoxBtn');
-      //button.addEventListener('click',function(){
-        //this.audio.play();
-      //});
       this.audio.play();
       interval = setInterval( () => {
         this.props.actions.tickTimer(this.props.whovoxGame);

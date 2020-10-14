@@ -106,15 +106,16 @@ class MockApi {
       if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
 
       this.audio = new Audio();
+      let gameAudio;
 
       // can play ogg or mp3
 				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          this.url = 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.ogg';
-          this.audio = new Audio(this.url);
+          gameAudio = localStorage.setItem(clipArray[i], 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.ogg');
+          this.audio = new Audio(gameAudio);
 					}
 				else {
-          this.url = 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.mp3';
-          this.audio = new Audio(this.url);
+          gameAudio = localStorage.setItem(clipArray[i], 'https://whovox.com/audio/' + dir + '/' + clipArray[i] + '.mp3');
+          this.audio = new Audio(gameAudio);
 					}
     }
 
@@ -130,14 +131,15 @@ class MockApi {
     // loop through and create audio
     for (j = 0; j <= 4; j++) {
       this.audio = new Audio();
+      let gameSfx;
       // can play ogg or mp3
       if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        this.url = 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.ogg';
-        this.audio = new Audio(this.url);
+        gameSfx = localStorage.setItem(sfxArray[j], 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.ogg');
+        this.audio = new Audio(gameSfx);
         }
       else {
-        this.url = 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.mp3';
-        this.audio = new Audio(this.url);
+        gameSfx = localStorage.setItem(sfxArray[j], 'https://whovox.com/audio/_sfx/' + sfxArray[j] + '.mp3');
+        this.audio = new Audio(gameSfx);
         }
     }
 

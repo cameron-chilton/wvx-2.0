@@ -34,26 +34,27 @@ class VoiceChoices extends Component {
       // play right/wrong sounds
       const answeredRight = (voxid === this.props.newGameData[this.props.voxCount].ID);
       this.audio = new Audio();
+      let gameSfx;
       // can play ogg or mp3
         if(answeredRight) {
           if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Right.ogg';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.ogg');
+            this.audio = new Audio(gameSfx);
             }
           else {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Right.mp3';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.mp3');
+            this.audio = new Audio(gameSfx);
             }
           this.audio.play();
         }
         else {
           if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg');
+            this.audio = new Audio(gameSfx);
             }
           else {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3');
+            this.audio = new Audio(gameSfx);
             }
           this.audio.play();
         }

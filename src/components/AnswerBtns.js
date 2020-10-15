@@ -32,13 +32,14 @@ class AnswerBtns extends Component {
           this.props.actions.outOfTime();
           // play wrong sound
           this.audio = new Audio();
+          let gameSfx;
           if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg');
+            this.audio = new Audio(gameSfx);
             }
           else {
-            this.url = 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3';
-            this.audio = new Audio(this.url);
+            gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3');
+            this.audio = new Audio(gameSfx);
             }
           this.audio.play();
           if (this.props.ansCount !== 5) {

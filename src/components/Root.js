@@ -6,10 +6,10 @@ import App from './App';
 
 export default class Root extends Component {
   render() {
-    const { store, history } = this.props;
+    const {store} = this.props;
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <ConnectedRouter>
           <App />
         </ConnectedRouter>
       </Provider>
@@ -19,5 +19,4 @@ export default class Root extends Component {
 
 Root.propTypes = {
   store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
 };

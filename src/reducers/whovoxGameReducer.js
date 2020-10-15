@@ -397,21 +397,6 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
       return newState;
     }
 
-
-    /*
-    case CALCULATE_FUEL_SAVINGS:
-      newState = objectAssign({}, state);
-      newState[action.fieldName] = action.value;
-      newState.necessaryDataIsProvidedToCalculateSavings = necessaryDataIsProvidedToCalculateSavings(newState);
-      newState.dateModified = action.dateModified;
-
-      if (newState.necessaryDataIsProvidedToCalculateSavings) {
-        newState.savings = calculateSavings(newState);
-      }
-
-      return newState;
-    */
-
     default:
       return state;
   }

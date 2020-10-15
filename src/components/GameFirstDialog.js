@@ -1,8 +1,19 @@
 import React, {Component} from "react";
-import {func} from "prop-types";
+import {func, object} from "prop-types";
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../actions/whovoxActions';
 
-// React Component to display the timer
 class GameFirstDialog extends Component {
+
+  constructor() {
+    super();
+    this.startTimer = this.startTimer.bind(this);
+  }
+
+  startTimer = () => {
+    this.props.actions.startTimer();
+  }
 
   render() {
     return (
@@ -11,18 +22,36 @@ class GameFirstDialog extends Component {
         <h2>VOICE GUESSING GAME</h2>
         <h3>TURN SOUND ON!</h3>
         <ol>
-          <li>Press OK</li>
-          <li>Press STARTVOX</li>
-          <li>Play WHOVOX!</li>
+          <li>Press PLAY</li>
+          <li>Pick Who Is Talking</li>
+          <li>Press NEXTVOX for Next Voice</li>
         </ol>
-        <p><button className="save-button" onClick={ () => {this.props.isFirstGame();} }>OK</button></p>
+        <p><button className="save-button" onClick={ () => {this.props.isFirstGame(); this.startTimer();} }>PLAY</button></p>
       </div>
     );
   }
 }
 
 GameFirstDialog.propTypes = {
+  actions: object,
   isFirstGame: func
 };
 
-export default GameFirstDialog;
+function mapStateToProps(state) {
+  return {
+    timerOn: state.whovoxGame.timerOn,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GameFirstDialog);
+
+//export default GameFirstDialog;

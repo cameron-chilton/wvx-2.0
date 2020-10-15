@@ -43,7 +43,7 @@ class Timer extends Component {
   startTimer = () => {
     this.props.voxCount !== 4 ? (
       this.timeout = setTimeout( () => {
-        this.props.actions.startTimer();
+        this.props.actions.startTimer()
       }, 250)
     ) : (
       this.props.actions.startNextGame()

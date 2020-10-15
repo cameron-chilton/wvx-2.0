@@ -63,7 +63,7 @@ div, h1, button {margin: 0; padding: 0;}
     .overlayContent h2 {font-size: 1.72rem; letter-spacing: 0.12rem; color: $color-blue-med-brite; margin: 0.4rem 0 0.6rem 0; text-shadow: 1px 1px 2px#ccc;}
     .overlayContent h3 {font-size: 1.60rem; letter-spacing: 0.08rem; color: $color-green-dark; margin: 1.4rem 0; text-shadow: 1px 1px 2px#ccc;}
     .overlayContent p {margin: 1.4rem 0;}
-    .overlayContent ol {margin: 0.8rem 0 1.4rem 4.0rem; width: 24rem; text-align: left; font-size: 1.5rem; letter-spacing: 0.07rem; line-height: 2.2rem; color: $color-blue-bg;text-shadow: 1px 1px 2px#ccc; }
+    .overlayContent ol {margin: 0.8rem 0 1.4rem -0.6rem; width: inherit; text-align: left; font-size: 1.36rem; letter-spacing: 0.05rem; line-height: 2.2rem; color: $color-blue-bg;text-shadow: 1px 1px 2px#ccc; }
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
 .game {width: 32.0rem; position: relative; margin: 0.6rem auto;}
@@ -319,7 +319,7 @@ and (orientation: portrait) {
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
     .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.25rem auto 0.50rem auto; width: 86vw;}
-    .ansName {display: block; font-size: 1.12rem; letter-spacing: 0.08rem; margin-top: 1.5rem;}
+    .ansName {display: block; font-size: 1.24rem; letter-spacing: 0.1rem; margin-top: 1.5rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
       .ansPic img {width: 72px; height: 72px;}
@@ -405,7 +405,7 @@ and (orientation: landscape) {
   /* ////////////////// VOICE BUTTON STYLES /////////////////// */
   .btn-holder {text-align: center; margin: 0.6rem auto;}
     .btn-holder button {display: block; position: relative; border-radius: 6px; text-align: left; margin: 0.25rem auto 0.25rem auto; width: 58vw;}
-    .ansName {display: block; font-size: 1.04rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
+    .ansName {display: block; font-size: 1.16rem; letter-spacing: 0.08rem; margin-top: 1.4rem;}
     .ansQ {font-size: 2.2rem; margin: -0.76rem 0 0 0.4rem;}
     .ansPic {margin: 0.0rem 0.46rem -0.21rem 0.0rem;}
       .ansPic img {width: 72px; height: 72px;}

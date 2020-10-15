@@ -15,26 +15,28 @@ class HallOfFame extends Component {
     };
     this.myRef = React.createRef() || '';
     this.audio = new Audio();
+    let gameSfx;
     // can play ogg or mp3
     if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-      this.url = 'https://whovox.com/audio/_sfx/Cheer.ogg';
-      this.audio = new Audio(this.url);
+      gameSfx = localStorage.getItem('Cheer', 'https://whovox.com/audio/_sfx/Cheer.ogg');
+      this.audio = new Audio(gameSfx);
       }
     else {
-      this.url = 'https://whovox.com/audio/_sfx/Cheer.mp3';
-      this.audio = new Audio(this.url);
+      gameSfx = localStorage.getItem('Cheer', 'https://whovox.com/audio/_sfx/Cheer.mp3');
+      this.audio = new Audio(gameSfx);
       }
     this.audio.play();
     setTimeout( () => {
       this.audio2 = new Audio();
+      let gameSfx2;
       // can play ogg or mp3
       if (this.audio2.canPlayType('audio/ogg; codecs="vorbis"')) {
-        this.url2 = 'https://whovox.com/audio/_sfx/Answer_Right.ogg';
-        this.audio2 = new Audio(this.url);
+        gameSfx2 = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.ogg');
+        this.audio2 = new Audio(gameSfx2);
         }
       else {
-        this.url2 = 'https://whovox.com/audio/_sfx/Answer_Right.mp3';
-        this.audio2 = new Audio(this.url2);
+        gameSfx2 = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.mp3');
+        this.audio2 = new Audio(gameSfx2);
         }
       this.audio2.play();
   }, 2000);
@@ -53,9 +55,6 @@ class HallOfFame extends Component {
 
   handleScrollToElement() {
       window.scrollTo(0, this.myRef.current.scrollIntoView());
-  }
-
-  componentDidUpdate() {
   }
 
   render() {

@@ -23,14 +23,15 @@ class GameOver extends Component {
   componentDidMount() {
     (this.props.score > 0) && this.nameRef.current.focus();
     this.audio = new Audio();
+    let gameSfx;
     // can play ogg or mp3
     if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-      this.url = 'https://whovox.com/audio/_sfx/Game_Over.ogg';
-      this.audio = new Audio(this.url);
+      gameSfx = localStorage.getItem('Game_Over', 'https://whovox.com/audio/_sfx/Game_Over.ogg');
+      this.audio = new Audio(gameSfx);
       }
     else {
-      this.url = 'https://whovox.com/audio/_sfx/Game_Over.mp3';
-      this.audio = new Audio(this.url);
+      gameSfx = localStorage.getItem('Game_Over', 'https://whovox.com/audio/_sfx/Game_Over.mp3');
+      this.audio = new Audio(gameSfx);
       }
     this.audio.play();
   }

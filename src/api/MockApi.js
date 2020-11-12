@@ -72,6 +72,32 @@ class MockApi {
   ///////////// PRELOAD VOICE & SFX CLIPS ////////////////
 
   static getGameClips(newGameData) {
+/*
+    // INDEXEDDB
+    // Let us open our database
+    const request = window.indexedDB.open("wvxDatabase", 3);
+
+    // Generic error handler for all errors targeted at this database's requests.
+    request.onerror = function(event) {
+      console.error("Indexed DB error: " + event.target.errorCode);
+    };
+
+    // This event is only implemented in recent browsers
+    request.onupgradeneeded = function(event) {
+      // Save the IDBDatabase interface
+      let wvxDB = event.target.result;
+      // Create an objectStore for this database
+      let objectStore = wvxDB.createObjectStore("name", { keyPath: "myKey" });
+    };
+
+    // success block
+    request.onsuccess = function(event) {
+      // Do something with request.result!
+      //console.log('DB onsuccess error: ' + event);
+      let wvxDB = event.target.result;
+      console.log('DB created: ' + wvxDB);
+    };
+  */
 
     const gameClips = Object.values(newGameData);
     // convert object to array

@@ -21,7 +21,6 @@ class GameOver extends Component {
   }
 
   componentDidMount() {
-    (this.props.score > 0) && this.nameRef.current.focus();
     this.audio = new Audio();
     let gameSfx;
     // can play ogg or mp3

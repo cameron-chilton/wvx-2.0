@@ -158,7 +158,7 @@ class GamePage extends Component {
             />
           </div>
           <div className="bottomLinks">
-            <span className="copy">&copy;2020 THINKAGAIN</span>
+            <span className="copy">&copy;2023 THINKAGAIN</span>
             <span className="links">
               <a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a>
               <a href={PRIVACY_POLICY_URL}>PRIVACY POLICY</a>

@@ -133,7 +133,7 @@ div, h1, button {margin: 0; padding: 0;}
   .rightWrong {text-align: right; padding-right: 0.7rem; flex-grow: 1; line-height: 1.3rem;}
 .catChecks {display: flex;}
   .catChecks span.catSpans {flex-grow: 1;}
-  .catChecks span.catSpans input[type=checkbox] {vertical-align: middle; margin: 0.0rem 0.2rem 0.0rem 0.0rem;}
+  .catChecks span.catSpans input[type=checkbox] {vertical-align: middle; margin: 0.0rem 0.2rem 0.0rem 0.0rem; width: 1.1rem; height: 1.1rem;}
   .catLabel {font-size: 0.7rem; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; letter-spacing: 0.03rem; cursor: pointer;}
   .catLabelPulse {transform: scale(1); animation: pulse 1.8s infinite; border-radius: 4px;}
 

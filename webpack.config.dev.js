@@ -1,7 +1,8 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
-import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+
+//let isProd = false;
 
 export default {
   resolve: {
@@ -11,7 +12,12 @@ export default {
       'react-dom': '@hot-loader/react-dom'
     }
   },
-  devtool: 'cheap-module-eval-source-map', // more info:https://webpack.js.org/guides/development/#using-source-maps and https://webpack.js.org/configuration/devtool/
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
+  },
   entry: [
     // must be first entry to properly set public path
     './src/webpack-public-path',
@@ -20,14 +26,20 @@ export default {
     path.resolve(__dirname, 'src/index.js') // Defining path seems necessary for this to work consistently on Windows machines.
   ],
   target: 'web',
-  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    port: 3000
+  },
+  mode: "development",
+  devtool: "source-map",
+  //devtool: 'cheap-module-eval-source-map', // more info:https://webpack.js.org/guides/development/#using-source-maps and https://webpack.js.org/configuration/devtool/
+  //devtool: isProd ? '' : 'source-map',
   plugins: [
-    new HardSourceWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
@@ -55,10 +67,6 @@ export default {
         use: [
           {
             loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/font-woff'
-            }
           }
         ]
       },
@@ -67,10 +75,6 @@ export default {
         use: [
           {
             loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/octet-stream'
-            }
           }
         ]
       },
@@ -79,10 +83,6 @@ export default {
         use: [
           {
             loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'image/svg+xml'
-            }
           }
         ]
       },
@@ -91,9 +91,6 @@ export default {
         use: [
           {
             loader: 'file-loader',
-            options: {
-              name: '[name].[ext]'
-            }
           }
         ]
       },
@@ -103,25 +100,10 @@ export default {
           'style-loader',
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
           }, {
             loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
-              sourceMap: true
-            }
           }, {
             loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, 'src')]
-              },
-              sourceMap: true
-            }
           }
         ]
       }

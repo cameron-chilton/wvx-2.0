@@ -8,10 +8,10 @@ header('Content-type: application/json');
 // PDO connect
 $servername = 'localhost:3306';
 $username = 'root';
-$password = '91*Stanza';
+$password = '22*Gators';
 
 try {
-    $DB = new PDO("mysql:host=$servername;dbname=whovox_db", $username, $password);
+    $DB = new PDO("mysql:host=$servername;dbname=whovox", $username, $password);
     // set the PDO error mode to exception
     $DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //echo "Connected successfully";

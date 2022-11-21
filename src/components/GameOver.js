@@ -10,6 +10,7 @@ class GameOver extends Component {
   constructor() {
     super();
     this.saveGame = this.saveGame.bind(this);
+    this.showHOF = this.showHOF.bind(this);
     this.state = {
       playerName: localStorage.getItem('Player Name') || '',
       playerLocation: localStorage.getItem('Player Location') || '',
@@ -51,6 +52,10 @@ class GameOver extends Component {
     }
   }
 
+  showHOF = () => {
+    this.setState({gameSaved: true});
+  }
+
   saveGame = () => {
     const gameObj = {
       id: this.props.id,
@@ -90,7 +95,7 @@ class GameOver extends Component {
               <div className="inHOF">
                 <h2>THANKS FOR PLAYING!</h2>
                 <p>You scored <span className="bold">{score.toLocaleString()}</span> with <span className="bold">{ansRight}</span> out of <span className="bold">5</span> voices correct.</p>
-                <p>Enter your name and location to save your game and find your place in the Hall of Fame.</p>
+                <p>Save your game and find your place<br/>in the <a href="#" onClick={this.showHOF}>Hall of Fame</a>.</p>
                 <p>Use the flashing checkboxes above to select different categories!</p>
                 <h3><span className="bold"><a href="https://whovox.com">PLAY AGAIN!</a></span></h3>
 
@@ -99,11 +104,24 @@ class GameOver extends Component {
                 <div className="gameOverForm">
                   <div className="field">
                     <label htmlFor="player_name">PLAYER NAME</label>
-                    <input id="player_name" type="text" placeholder="Player Name" value={this.state.playerName} onChange={this.handleName} ref={this.nameRef} maxLength="32" />
+                    <input
+                      id="player_name"
+                      type="text"
+                      placeholder="Player Name"
+                      value={(this.state.playerName != '') ? this.state.playerName : ''}
+                      onChange={this.handleName}
+                      ref={this.nameRef}
+                      maxLength="32"
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="player_location">LOCATION</label>
-                    <input id="player_location" type="text" placeholder="Earth" value={this.state.playerLocation} onChange={this.handleLocation} ref={this.locRef} maxLength="32" />
+                    <input
+                      id="player_location"
+                      type="text"
+                      placeholder="Earth"
+                      value={(this.state.playerLocation != '') ? this.state.playerLocation : ''}
+                      onChange={this.handleLocation} ref={this.locRef} maxLength="32" />
                   </div>
                   <div className="button">
                     <button className="save-button" id="save-buttonID" onClick={this.saveGame}>SAVE GAME</button>
@@ -115,7 +133,7 @@ class GameOver extends Component {
             ) : (
               <div className="tooLow">
                 <h2>THANKS FOR PLAYING!</h2>
-                <p>Your score is too low for the Hall of Fame.</p>
+                <p>Your score is too low for the <a href="#" onClick={this.showHOF}>Hall of Fame</a>.</p>
                 <h3><span className="bold"><a href="https://whovox.com">TRY AGAIN!</a></span></h3>
                 <p>Use the flashing checkboxes above to select different categories!</p>
               </div>

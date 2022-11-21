@@ -90,10 +90,13 @@ class VoiceChoices extends Component {
               'vxBtn'
             )
           }
+          // eslint-disable-next-line react/no-unknown-property
           voxid={voxid}
           onClick={ () => {this.clickAnswer(voxid); this.props.updateBtns();} }
           disabled={!timerOn ? true : false}
+          // eslint-disable-next-line react/no-unknown-property
           newgamedata={newGameData}
+          // eslint-disable-next-line react/no-unknown-property
           anscount={ansCount}
         >{
           (!outOfTime) ? (

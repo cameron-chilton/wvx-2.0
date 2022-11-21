@@ -50,23 +50,23 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 </head>
 
 <body onload='loadFirstVoice("<?php echo $first; ?>", "<?php echo $last; ?>"); getVoiceCount();'>
-<span class="white">
+<span style="color: #fff;">
 <?php
-/*
-	echo 'name: ';
-	echo ucwords($name);
-	echo ', ns: ';
-	echo print_r($ns);
-	echo ', first: ';
-	echo ucwords($first);
-	echo ', last: ';
-	echo ucwords($last);
-	echo ', size: ';
-	echo count($ns);
-*/
+
+	// echo 'name: ';
+	// echo ucwords($name);
+	// echo ', ns: ';
+	// echo print_r($ns);
+	// echo ', first: ';
+	// echo ucwords($first);
+	// echo ', last: ';
+	// echo ucwords($last);
+	// echo ', size: ';
+	// echo count($ns);
+
 ?>
 </span>
-	
+
   <div class="game">
 
     <div class="topLine">
@@ -97,7 +97,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 
         <div id="tmplSrch">
           <h2 id="tmplMsg">VOX SAMPLE</h2>
-          <input id="srchVoicesTxt" type="text" placeholder="Search Voices" maxlength="21" onclick="this.value = '';" onkeypress="isEnterVoiceOf(event);">
+          <input id="srchVoicesTxt" type="text" placeholder="Search Voices" maxlength="24" onclick="this.value = '';" onkeypress="isEnterVoiceOf(event);">
 			<button class="save-button" onClick="searchVoices();">SEARCH</button>
           	<button class="save-button" onClick="loadVoiceRandom();">RANDOM</button>
         </div>
@@ -116,8 +116,12 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
 
       </div>
 
-      <div>
-        <button class="play-button" onclick="location.href='https://whovox.com'">PLAY WHOVOX</button>
+      <div class="play-button-container">
+        <button class="play-button" onclick="location.href='https://whovox.com'" title="Play the voice game WHOVOX">PLAY WHOVOX</button>
+        <div class="click-play box1">Click to play WHOVOX</div>
+        <div class="click-play box2">Free & fun voice recognition game</div>
+        <div class="click-play box3">Test your voice knowledge</div>
+        <div class="click-play box4">1,000s of famous voices</div>
       </div>
 
       <div class="voiceText">
@@ -131,7 +135,7 @@ setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
       <span class="links">
         <a href="https://whovox.com/public/privacy-policy.html">PRIVACY POLICY</a>
       </span>
-      <span class="copy">&copy;2020 THINKAGAIN</span>
+      <span class="copy">&copy;2022 THINKAGAIN</span>
     </div>
 
   </div>
@@ -186,7 +190,7 @@ function loadVoice(nameFirst, nameLast) {
 					// assign dir and type
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".ogg";
 					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".ogg");
-					
+
 					}
 				if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
@@ -310,7 +314,12 @@ var charCode = e.charCode || e.keyCode || e.which;
 function searchVoices() {
 	var srchTxt = $('#srchVoicesTxt').val();
 	var st2 = srchTxt.split(' '), n1 = st2[0], n2 = st2[1] || '', n3 = st2[2];
-  if (n3) { n2 = n2 + ' ' + n3;} // if 2 word last name
+  // if middle initial
+  if (n2.length == 1) {
+    n1 = n1 + ' ' + n2;
+    n2 = n3;
+  }
+  else if (n3) { n2 = n2 + ' ' + n3;} // if 2 word last name
   if (st2 == '') {
     $('#tmplMsg').addClass('errorMsg').text('NO TEXT ENTERED').fadeIn('fast');
     return;
@@ -334,6 +343,22 @@ function searchVoices() {
 }
 
  </script>
+
+<br/>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- whovox single responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8335048929933055"
+     data-ad-slot="5306739925"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<br/>
 
 
 </body>

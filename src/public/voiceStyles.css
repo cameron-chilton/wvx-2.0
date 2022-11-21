@@ -76,7 +76,7 @@ div, h1, button, span {margin: 0; padding: 0;}
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
 .gameInfo {text-align: center;}
-.gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0;}
+.gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0; text-shadow: 1px 1px 3px #aaa;}
 h2#tmplMsg.errorMsg {color: #ff0000;}
 .save-button {
   width: auto;
@@ -102,6 +102,57 @@ input[type=text] {border: 2px solid #2c61bf; padding: 0.4rem; margin-right: 0.4r
 .tmplPlayer {height: 3.8rem;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
+.play-button-container {
+  position: relative;
+}
+  .click-play {
+    background-color: #fffca8;
+    padding: 0.2rem;
+    border: 3px solid #ff9c00;
+    border-radius: 12px;
+    margin: 0;
+    width: auto;
+    color: #1a314d;
+    box-shadow: 1px 1px 4px#777;
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.92rem;
+    line-height: 1rem;
+    position: absolute;
+    z-index: 9999;
+    opacity: 0.0;
+  }
+    .box1 {
+      top: -0.8rem;
+      left: -1.5rem;
+      animation: pulse1 2s ease-in alternate infinite;
+      animation-delay: 1s;
+    }
+    .box2 {
+      top: -0.8rem;
+      right: -1.5rem;
+      animation: pulse1 2s ease-in alternate infinite;
+      animation-delay: 3s;
+    }
+    .box3 {
+      bottom: -0.8rem;
+      right: -1.5rem;
+      animation: pulse1 2s ease-in alternate infinite;
+      animation-delay: 5s;
+    }
+    .box4 {
+      bottom: -0.8rem;
+      left: -1.5rem;
+      animation: pulse1 2s ease-in alternate infinite;
+      animation-delay: 7s;
+    }
+    @keyframes pulse1 {
+      0% {opacity: 0.0;}
+      25% {opacity: 0.4;}
+      50% {opacity: 0.9;}
+      75% {opacity: 0.9;}
+      100% {opacity: 0.9;}
+    }
   .play-button {
     width: 33.2rem;
     padding: 0.3rem 0.5rem;
@@ -150,10 +201,10 @@ input[type=text] {border: 2px solid #2c61bf; padding: 0.4rem; margin-right: 0.4r
   }
     .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.02rem; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.7rem; line-height: 0.7rem;}
     .ansWhosThis a:hover {text-decoration: underline;}
-  .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem;}
+  .tmplCategory {position: absolute; top: 0px; left: 80px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.02rem; text-shadow: 2px 2px 4px #aaa;}
   .voiceText {margin: 1.0rem; font-size: 1.1rem; line-height: 1.7rem;}
     #wikiTxt {margin-top: 1.0rem;}
-    #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 2px 2px 4px #999;}
+    #wikiImg {float: right; margin: 0 0 1.0rem 1.0rem; border: 1px solid #aaa; border-radius: 4px; box-shadow: 1px 1px 2px #999;}
 
 
 /* ################################################ */
@@ -187,8 +238,8 @@ and (orientation: portrait) {
     .topContainer {width: 88vw; padding: 0.3rem;}
 
   /* ////////////////// GAME INFO STYLES /////////////////// */
-  .gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0;}
-  h2#tmplMsg.errorMsg {color: #ff0000;}
+  .gameInfo h2#tmplMsg {font-weight: 900; font-size: 1.9rem; color: #2c61bf; margin: 0.8rem 0 0.8rem 0; text-shadow: 2px 2px 2px #ccc;}
+  h2#tmplMsg.errorMsg {color: #ff0000; text-shadow: 2px 2px 3px #ccc;}
   .save-button {
     padding: 0.4rem;
     margin: 0 0.3rem 0 0;

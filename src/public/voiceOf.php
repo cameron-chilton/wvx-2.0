@@ -1,5 +1,5 @@
 <?php
-setcookie('key', 'value', ['samesite' => 'None', 'secure' => true]);
+setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
 	$first ='';
 	$last = '';
 	// check val from url param

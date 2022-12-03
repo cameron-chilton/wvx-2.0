@@ -6,6 +6,8 @@ import Timer from '../Timer';
 import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
 import GameFirstDialog from '../GameFirstDialog';
+import HallOfFame from '../HallOfFame';
+import StartGameButton from '../StartGameButton';
 import * as actions from '../../actions/whovoxActions';
 import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants/DataURLs';
 
@@ -18,7 +20,9 @@ class GamePage extends Component {
     this.state = {
       voiceCount: '',
       isFirstGame: localStorage.getItem('First Game', false) ? false : true,
+      showHOF: false,
     };
+    this.showHOF = this.showHOF.bind(this);
   }
 
   componentDidMount() {
@@ -81,6 +85,10 @@ class GamePage extends Component {
 
   }
 
+  showHOF = () => {
+    this.setState({showHOF: true});
+  }
+
   isFirstGame = () => {
     this.setState({ isFirstGame: false }, () => {
       localStorage.setItem('First Game', this.state.isFirstGame);
@@ -138,31 +146,38 @@ class GamePage extends Component {
               timerOn={timerOn}
               newGameData={newGameData}
             />
-            <Timer
-              timer={timer}
-              timerOn={timerOn}
-              interval={interval}
-              btnTxt={btnTxt}
-              voxCount={voxCount}
-              score={score}
-              answered={answered}
-            />
-            <AnswerBtns
-              timerOn={timerOn}
-              voiceQuestion={voiceQuestion}
-              answered={answered}
-              newGameData={newGameData}
-              ansCount={ansCount}
-              voxCount={voxCount}
-              outOfTime={outOfTime}
-            />
+            {!this.state.showHOF ?
+              <Timer
+                timer={timer}
+                timerOn={timerOn}
+                interval={interval}
+                btnTxt={btnTxt}
+                voxCount={voxCount}
+                score={score}
+                answered={answered}
+              /> : <StartGameButton/>
+            }
+            {!this.state.showHOF ?
+              <AnswerBtns
+                timerOn={timerOn}
+                voiceQuestion={voiceQuestion}
+                answered={answered}
+                newGameData={newGameData}
+                ansCount={ansCount}
+                voxCount={voxCount}
+                outOfTime={outOfTime}
+              /> : <HallOfFame />
+            }
           </div>
           <div className="bottomLinks">
-            <span className="copy">&copy;2022 THINKAGAIN</span>
-            <span className="links">
-              <a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a>
-              <a href={PRIVACY_POLICY_URL}>PRIVACY POLICY</a>
-            </span>
+            <div className="links">
+              <div><a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a></div>
+              <div>{!timerOn ? <a href="#" className="hofLink" onClick={this.showHOF}>HALL OF FAME</a> : <span className="hofOff">HALL OF FAME</span>}</div>
+            </div>
+            <div className="copy">
+              <div><a href={PRIVACY_POLICY_URL} className="privPolicy">PRIVACY POLICY</a></div>
+              <div className="copyright">&copy;2022 THINKAGAIN</div>
+            </div>
           </div>
         </div>
       </>
@@ -189,6 +204,7 @@ GamePage.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    timerOn: state.whovoxGame.timerOn,
     whovoxGame: state.whovoxGame
   };
 }

@@ -55,10 +55,17 @@ div, h1, button, span {margin: 0; padding: 0;}
       }
       .voiceNum {font-size: 1.4rem; animation: flicker 3.4s infinite;}
       .voiceTxt {font-size: 0.9rem; animation: flicker 2.9s infinite;}
-      .bottomLinks {width: 31rem; margin: 0.9rem auto; height: 3rem;}
-        .links {float: left;}
-          .links a {font-size: 1.3rem; margin-right: 1.9rem; font-family: 'Nunito', sans-serif; color: #00aeff; text-decoration: none; letter-spacing: 0.02rem;}
-        .copy {float: right; color: #2c61bf; font-family: 'Nunito', sans-serif;}
+      .bottomLinks {width: 31rem; margin: 1.2rem auto;}
+        .links {display: flex; align-items: stretch;}
+          .links div:first-child {flex-grow: 50; text-align: left;}
+          .links div:nth-child(2) {flex-grow: 50; text-align: right;}
+            .links a {color: #00aeff; text-decoration: underline; font-weight: 900; font-size: 1.9rem;}
+            .links a:hover {text-decoration: none; color: #ff9c00;}
+        .copy {font-size: 0.8rem; margin-top: 0.64rem; display: flex; display: flex; align-items: stretch;}
+          .copy div:first-child {flex-grow: 50; text-align: left;}
+          .copy div:nth-child(2) {flex-grow: 50; text-align: right;}
+            .privPolicy {color: #00aeff; text-decoration: none; flex-grow: 50;}
+            .copyright {color: #2c61bf; flex-grow: 50;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {

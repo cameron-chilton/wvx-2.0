@@ -70,7 +70,7 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
   <div class="game">
 
     <div class="topLine">
-      <h1>
+      <h1 title="WHOVOX">
         <span class="name1">W</span>
         <span class="name2">H</span>
         <span class="name3">O</span>
@@ -132,12 +132,15 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
 
     </div>
     <div class="bottomLinks">
-      <span class="links">
-        <a href="https://whovox.com/public/privacy-policy.html">PRIVACY POLICY</a>
-      </span>
-      <span class="copy">&copy;2022 THINKAGAIN</span>
+      <div class="links">
+        <div>&nbsp;</div>
+        <div><a href="https://whovox.com/?showHallOfFame=true" class="hofLink">HALL OF FAME</a></div>
+      </div>
+      <div class="copy">
+        <div><a href="https://whovox.com/public/privacy-policy.html" class="privPolicy">PRIVACY POLICY</a></div>
+        <div class="copyright">&copy;2022 THINKAGAIN</div>
+      </div>
     </div>
-
   </div>
 
 

@@ -34,6 +34,12 @@ class Timer extends Component {
     }
   }
 
+  componentDidMount() {
+    this.timeout = setTimeout( () => {
+      this.toggleText();
+    }, 1000);
+  }
+
   toggleText = () => {
     this.interval = setInterval( () => {
       !this.state.toggleTextVal ? this.setState({toggleTextVal: true}) : this.setState({toggleTextVal: false});
@@ -43,7 +49,8 @@ class Timer extends Component {
   startTimer = () => {
     this.props.voxCount !== 4 ? (
       this.timeout = setTimeout( () => {
-        this.props.actions.startTimer()
+        clearInterval(this.interval);
+        this.props.actions.startTimer();
       }, 250)
     ) : (
       this.props.actions.startNextGame()

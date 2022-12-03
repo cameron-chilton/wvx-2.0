@@ -9,9 +9,39 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<link href="https://whovox.com/public/voiceStyles.css" rel="stylesheet" type="text/css" media="screen">
 	<script data-ad-client="ca-pub-8335048929933055" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+
+    $(document).ready(function() {
+
+    var el3 = $('.play-button');
+      setInterval(function() {
+        el3.toggleClass('btnOrange');
+        }, 1000);
+
+    });
+
+    // get voice count
+    function getVoiceCount() {
+      $.ajax({
+        type: 'GET',
+        url: 'https://whovox.com/public/getVoiceCount.php',
+        complete: function(data) {
+          if (data.responseText) {
+            var num = parseInt(data.responseText);
+            $('.voiceNum').text(num.toLocaleString());
+          }
+          else {
+            $('.voiceNum').text('1500+');
+          }
+        }
+      });
+
+    }
+
+  </script>
 </head>
 
-<body>
+<body onload='getVoiceCount();'>
 
 
   <div class="game">
@@ -33,6 +63,8 @@
         <img class="logo-inner3" src="https://whovox.com/imgs/logo-inner3.svg" />
       </div>
       <div class="voiceCount">
+        <div class="voiceNum">--</div>
+        <div class="voiceTxt">VOICES</div>
       </div>
     </div>
 
@@ -45,8 +77,12 @@
         </div>
       </div>
 
-      <div>
-        <button class="play-button" onclick="location.href='https://whovox.com'">PLAY WHOVOX</button>
+      <div class="play-button-container">
+        <button class="play-button" onclick="location.href='https://whovox.com'" title="Play the voice game WHOVOX">PLAY WHOVOX</button>
+        <div class="click-play box1">Click to play WHOVOX</div>
+        <div class="click-play box2">Free & fun voice recognition game</div>
+        <div class="click-play box3">Test your voice knowledge</div>
+        <div class="click-play box4">1,000s of famous voices</div>
       </div>
 
       <div class="voiceText">
@@ -63,12 +99,15 @@
 
     </div>
     <div class="bottomLinks">
-      <span class="links">
-        <a href="https://whovox.com/public/voiceOf.php">VOICE OF?</a>
-      </span>
-      <span class="copy">&copy;2022 THINKAGAIN</span>
+      <div class="links">
+        <div><a href="https://whovox.com/voiceOf.php" class="voiceLink">VOICE OF?</a></div>
+        <div><a href="https://whovox.com/?showHallOfFame=true" class="hofLink">HALL OF FAME</a></div>
+      </div>
+      <div class="copy">
+        <div>&nbsp;</div>
+        <div class="copyright">&copy;2022 THINKAGAIN</div>
+      </div>
     </div>
-
   </div>
 
 
@@ -81,6 +120,18 @@ var el3 = $('.play-button');
     }, 1000);
 
 });
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- whovox single responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8335048929933055"
+     data-ad-slot="5306739925"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 

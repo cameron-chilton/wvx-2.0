@@ -59,6 +59,16 @@ export function checkAnswer(id) {
   };
 }
 
+///////////////// SET IF HALL OF FAME IS SHOWN OR NOT //////////////
+
+export function toggleHallfOfFame() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.IS_FROM_HOF_CLICK,
+    });
+  };
+}
+
 ///////////////// PREP NEXT QUESTION FOR PLAYER //////////////
 
 export function prepNextQuestion() {

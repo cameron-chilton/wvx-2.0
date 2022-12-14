@@ -19,7 +19,7 @@ class GameFirstDialog extends Component {
     return (
       <div className="overlayContent">
         <h1>WHOVOX</h1>
-        <h2>VOICE GUESSING GAME</h2>
+        <h2>VOICE RECOGNITION GAME</h2>
         <h3>TURN SOUND ON!</h3>
         <ol>
           <li>Press PLAY</li>

@@ -11,6 +11,7 @@ class Timer extends Component {
   constructor() {
     super();
     this.startTimer = this.startTimer.bind(this);
+    this.startNextGameHOF = this.startNextGameHOF.bind(this);
     this.state = {
       isAnswered: false,
       toggleTextVal: false,
@@ -56,20 +57,33 @@ class Timer extends Component {
       this.props.actions.startNextGame()
     )
   }
+  startNextGameHOF = () => {
+    if (this.props.showHOF) {
+      this.props.actions.toggleHallfOfFame();
+      this.props.actions.startNextGame();
+    }
+  }
 
   render() {
-    const {timerOn, btnTxt, gameOver, loading, voxCount} = this.props;
+    const {timerOn, btnTxt, gameOver, loading, voxCount, showHOF} = this.props;
     return (
       <div>
-        <button className='play-button' onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true} id="startvoxBtn">
+        {!showHOF ?
+        <><button className="play-button" onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true} id="startvoxBtn">
           {
             !this.state.isAnswered ? (
-              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)
+              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{(voxCount == 0) ? 'CLICK TO PLAY' : btnTxt}</span></>)
             ) : (
               !this.state.toggleTextVal ? <><span className="btnOrange">{btnTxt}</span></> : (!gameOver ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) : <><span className="btnYellow">PLAY AGAIN</span></>)
             )
           }
-        </button>
+        </button></> :
+          <><button className="play-button" onClick={this.startNextGameHOF}>
+            {
+              !this.state.toggleTextVal ? <><span className="btnYellow">START WHOVOX</span></> : <><span className="btnOrange">CLICK TO PLAY</span></>
+            }
+          </button></>
+        }
       </div>
     );
   }
@@ -83,6 +97,7 @@ Timer.propTypes = {
   gameOver: bool,
   loading: bool,
   outOfTime: bool,
+  showHOF: bool,
   voxCount: oneOfType([string,number]),
   btnTxt: oneOfType([string, number]),
   score: oneOfType([string, number]),

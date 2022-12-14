@@ -6,6 +6,7 @@ export default {
     voxCount: 0,
     ansCount: 0,
     btnTxt: 'START GAME',
+    showHOF: false,
     timerOn: false,
     answered: false,
     outOfTime: false,

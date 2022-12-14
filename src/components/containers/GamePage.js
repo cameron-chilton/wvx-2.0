@@ -7,12 +7,11 @@ import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
 import GameFirstDialog from '../GameFirstDialog';
 import HallOfFame from '../HallOfFame';
-import StartGameButton from '../StartGameButton';
+//import StartGameButton from '../StartGameButton';
 import * as actions from '../../actions/whovoxActions';
 import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants/DataURLs';
 
 let interval = null;
-
 class GamePage extends Component {
 
   constructor() {
@@ -20,9 +19,8 @@ class GamePage extends Component {
     this.state = {
       voiceCount: '',
       isFirstGame: localStorage.getItem('First Game', false) ? false : true,
-      showHOF: false,
     };
-    this.showHOF = this.showHOF.bind(this);
+    this.isHOFclick = this.isHOFclick.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +28,7 @@ class GamePage extends Component {
       fetch(GET_VOICE_COUNT)
         .then(response => response.json())
         .then(data => this.setState({voiceCount: data}));
+        this.getQueryVariable();
     }, 1);
   }
 
@@ -85,8 +84,20 @@ class GamePage extends Component {
 
   }
 
-  showHOF = () => {
-    this.setState({showHOF: true});
+  getQueryVariable = () => {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+        if(pair[0] == 'showHallOfFame'){
+          this.props.actions.toggleHallfOfFame();
+          }
+        }
+      return(false);
+}
+
+  isHOFclick = () => {
+    this.props.actions.toggleHallfOfFame();
   }
 
   isFirstGame = () => {
@@ -109,7 +120,8 @@ class GamePage extends Component {
       voiceQuestion,
       answered,
       newGameData,
-      outOfTime
+      outOfTime,
+      showHOF
     } = this.props;
 
     return (
@@ -146,18 +158,17 @@ class GamePage extends Component {
               timerOn={timerOn}
               newGameData={newGameData}
             />
-            {!this.state.showHOF ?
-              <Timer
-                timer={timer}
-                timerOn={timerOn}
-                interval={interval}
-                btnTxt={btnTxt}
-                voxCount={voxCount}
-                score={score}
-                answered={answered}
-              /> : <StartGameButton/>
-            }
-            {!this.state.showHOF ?
+            <Timer
+              timer={timer}
+              timerOn={timerOn}
+              interval={interval}
+              btnTxt={btnTxt}
+              voxCount={voxCount}
+              score={score}
+              answered={answered}
+              showHOF={showHOF}
+            />
+            {!showHOF ?
               <AnswerBtns
                 timerOn={timerOn}
                 voiceQuestion={voiceQuestion}
@@ -171,12 +182,12 @@ class GamePage extends Component {
           </div>
           <div className="bottomLinks">
             <div className="links">
-              <div><a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a></div>
-              <div>{!timerOn ? <a href="#" className="hofLink" onClick={this.showHOF}>HALL OF FAME</a> : <span className="hofOff">HALL OF FAME</span>}</div>
+              <div className="voiceDiv"><a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a></div>
+              <div className="hofDiv">{!timerOn ? <a href="#" className="hofLink" onClick={this.isHOFclick}>HALL OF FAME</a> : <span className="hofOff">HALL OF FAME</span>}</div>
             </div>
             <div className="copy">
               <div><a href={PRIVACY_POLICY_URL} className="privPolicy">PRIVACY POLICY</a></div>
-              <div className="copyright">&copy;2022 THINKAGAIN</div>
+              <div className="copyright">&copy;2023 THINKAGAIN</div>
             </div>
           </div>
         </div>
@@ -200,11 +211,13 @@ GamePage.propTypes = {
   ansWrong: oneOfType([string, number]),
   voiceQuestion: array,
   answered: bool,
+  showHOF: bool,
 };
 
 function mapStateToProps(state) {
   return {
     timerOn: state.whovoxGame.timerOn,
+    showHOF: state.whovoxGame.showHOF,
     whovoxGame: state.whovoxGame
   };
 }

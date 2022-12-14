@@ -66,9 +66,11 @@ class HallOfFame extends Component {
     return (
       <div>
         <div className="hallOfFame">
-          <h3>HALL OF FAME</h3>
+          <div className="hofHead"><h3>HALL OF FAME</h3></div>
           <div className="gameCt">{parseFloat(lastOne.toLocaleString()) + 1 || '--'} Games</div>
         </div>
+        <div>
+          <div className="scrollbox">
           <table className="HOF-table">
             <thead>
               <tr role="row">
@@ -79,9 +81,6 @@ class HallOfFame extends Component {
                 <th scope="col" role="columnheader" className="hd5">DATE</th>
               </tr>
             </thead>
-          </table>
-          <div className="scrollbox">
-            <table className="HOF-table">
               <tbody>
               {
               (tdata !== null) &&
@@ -98,6 +97,7 @@ class HallOfFame extends Component {
               </tbody>
             </table>
           </div>
+        </div>
       </div>
     );
 

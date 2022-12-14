@@ -28,6 +28,7 @@ import {
   START_NEXT_GAME,
   LOAD_NEXT_GAME_ID_SUCCESS,
   LOAD_NEXT_GAME_ID_FAILURE,
+  IS_FROM_HOF_CLICK,
 } from '../constants/actionTypes';
 import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
@@ -117,7 +118,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
             ...state,
             ...rest,
             loading: false,
-            btnTxt: 'STARTVOX',
+            btnTxt: 'START WHOVOX',
           };
         }
 
@@ -309,6 +310,15 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           gameOver: true,
     };
 
+    ////////// SET IS FROM HALL OF FAME CLICK VAR ///////////
+
+    case IS_FROM_HOF_CLICK:
+      return {
+        ...state,
+        showHOF: true,
+        gameOver: true,
+      };
+
     //////////////// START NEXT GAME /////////////////
 
     case START_NEXT_GAME:
@@ -327,6 +337,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         voxCount: 0,
         ansCount: 0,
         btnTxt: 'START GAME',
+        showHOF: false,
         timerOn: false,
         answered: false,
         outOfTime: false,

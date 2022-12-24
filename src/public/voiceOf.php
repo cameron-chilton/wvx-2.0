@@ -110,8 +110,8 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
           <span class="ansWhosThis"><a href="https://en.wikipedia.org/wiki/" target="_blank" rel="noopener noreferrer" id="wikiLink">WHO&#39;S THIS?</a></span>
         </div>
         <div class="tmplPlayer">
-          	<audio id="tmplAudioEl" controls src="">
-			</audio>
+          	<audio controls style="width:100%;" id="tmplAudioEl">
+            </audio>
         </div>
 
       </div>
@@ -138,7 +138,7 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
       </div>
       <div class="copy">
         <div><a href="https://whovox.com/public/privacy-policy.html" class="privPolicy">PRIVACY POLICY</a></div>
-        <div class="copyright">&copy;2022 THINKAGAIN</div>
+        <div class="copyright">&copy;2023 THINKAGAIN</div>
       </div>
     </div>
   </div>
@@ -187,15 +187,22 @@ function loadVoice(nameFirst, nameLast) {
 			if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
 			if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
 			if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
-			// can play ogg or wav
+			// can play ogg or mp3
 			if (tmplClip.canPlayType) {
 				if ( "" != tmplClip.canPlayType('audio/ogg; codecs="vorbis"')) {
+          console.log('ogg');
 					// assign dir and type
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".ogg";
 					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".ogg");
-
 					}
 				if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
+          console.log('mp3');
+					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
+					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".mp3");
+					}
+				}
+        if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
+          console.log('mp3');
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
 					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".mp3");
 					}

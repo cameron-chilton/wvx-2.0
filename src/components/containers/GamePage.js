@@ -7,7 +7,6 @@ import GameInfo from '../GameInfo';
 import AnswerBtns from '../AnswerBtns';
 import GameFirstDialog from '../GameFirstDialog';
 import HallOfFame from '../HallOfFame';
-//import StartGameButton from '../StartGameButton';
 import * as actions from '../../actions/whovoxActions';
 import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants/DataURLs';
 

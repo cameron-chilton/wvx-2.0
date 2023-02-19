@@ -33,17 +33,15 @@ body {
   background: radial-gradient($color-blue-bg2, $color-blue-bg 76%);
   margin: 0;
   padding: 0;
-  height: 99vh;
-  width: 99vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
-div.App { display: flex; align-items: center;}
-div, h1, button, p {margin: 0; padding: 0;}
+div.App {display: flex; align-items: center; justify-content: center; width: 99%;}
+div, h1, button, p, a, span {margin: 0; padding: 0;}
 .bold {font-weight: 900;}
 .toUpper {text-transform: uppercase;}
+
+.game {position: relative; display: flex; flex-direction: column; margin: 3vh auto 1vh auto; width: 95%; min-width: 21rem; max-width: 30rem; }
 
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
     .overlayContent {
@@ -53,7 +51,7 @@ div, h1, button, p {margin: 0; padding: 0;}
       left: 59%;
       transform: translate(-60%, 0);
       background-color: $color-yellow-lite;
-      padding: 1.0rem;
+      padding: 1rem;
       border: 8px solid $color-orange;
       border-radius: 24px;
       color: $color-blue-bg;
@@ -69,9 +67,8 @@ div, h1, button, p {margin: 0; padding: 0;}
     .overlayContent ol {margin: 0.8rem 0 1.4rem 1.0rem; width: inherit; text-align: left; font-size: 2.2vh; letter-spacing: 0.05rem; line-height: 3.8vh; color: $color-blue-bg;text-shadow: 1px 1px 2px#ccc; }
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-.game {display: flex; flex-direction: column; align-items: center; margin: 0 auto; position: relative; }
-    .topLine {display: flex; flex-wrap: nowrap; margin: 0 auto -0.6vh auto;}
-      .topLine h1 {font-size: 8.8vh; line-height: 6.7vh; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900;}
+    .topLine {display: flex; flex-wrap: nowrap; margin: 0 auto -0.6vh auto; justify-content: center; width: 95%;}
+      .topLine h1 {font-size: 6.9vh; line-height: 6.7vh; letter-spacing: 0.2rem; color: $color-blue-med-brite; text-shadow: 0px 0px 6px #707055; font-weight: 900;}
       .name1 {animation: flicker 2.0s infinite;}
       .name2 {animation: flicker 2.4s infinite;}
       .name3 {animation: flicker 2.8s infinite;}
@@ -80,8 +77,8 @@ div, h1, button, p {margin: 0; padding: 0;}
       .name6 {animation: flicker 2.4s infinite;}
       .earLogo {width: 3.8vh; height: 4.1vh; position: relative; margin: 0 0.4vh 0 -0.3vh;}
         .earLogo img {position: absolute;}
-        .logo-dot {top: 4.6vh; left: 0.9vh; width: 2.08vh; animation: flicker 3.6s infinite;}
-        .logo-outer {top: -0.77vh; left: 0.22vh; width: 5.23vh; animation: flicker 3.6s infinite;}
+        .logo-dot {top: 4.6vh; left: 0.9vh; width: 2.08vh; animation: flicker2 3.6s infinite;}
+        .logo-outer {top: -0.77vh; left: 0.22vh; width: 5.23vh; animation: flicker2 3.6s infinite;}
         .logo-inner1 {top: 1.76vh; left: 1.17vh; width: 1.56vh; animation: flicker2 1.8s infinite;}
         .logo-inner2 {top: 0.9vh; left: 1.63vh; width: 1.98vh; animation: flicker2 2.4s infinite;}
         .logo-inner3 {top: 0.1vh; left: 1.89vh; width: 2.62vh; animation: flicker2 3.0s infinite;}
@@ -91,16 +88,16 @@ div, h1, button, p {margin: 0; padding: 0;}
           100% {opacity: 1.0;}
         }
         @keyframes flicker2 {
-          0%   {opacity: 1.0;}
-          50%  {opacity: 0.40;}
-          100% {opacity: 1.0;}
+          0%   {opacity: 0.7;}
+          50%  {opacity: 0.4;}
+          100% {opacity: 0.7;}
         }
       .voiceCount {
         letter-spacing: 0.06rem;
         color: $color-blue-med-brite;
         font-weight: 900;
-        line-height: 2.2vh;
-        padding: 2.0vh 0 0 1.1vw;
+        line-height: 1.9vh;
+        padding: 1.7vh 0 0 0.3vw;
         text-shadow: 0px 0px 2px #707055;
         text-align: left;
       }
@@ -108,18 +105,18 @@ div, h1, button, p {margin: 0; padding: 0;}
       .voiceTxt {font-size: 1.7vh; animation: flicker 2.9s infinite;}
 
   /* ///////////////////// BOTTOM LINKS ////////////////// */
-  .bottomLinks {margin: 1.0vh 0; display: flex; flex-direction: column; width: 96%;}
+  .bottomLinks {margin: 1.0vh; display: flex; flex-direction: column;}
     .links {flex: 1; display: flex;}
       div.voiceDiv {flex: 1;}
       div.hofDiv {flex: 1; text-align: right;}
-        .links a {color: $color-blue-brite; text-decoration: underline; font-weight: 900; font-size: 3.2vh;}
-        .links a:hover {text-decoration: none; color: $color-orange;}
-        .hofOff {color: $color-blue-brite; font-weight: 900; font-size: 3.2vh;}
-    .copy {font-family: $nunito; font-size: 1.8vh; margin-top: 0.64rem; display: flex; display: flex; align-items: stretch;}
+        .voiceLink, .hofLink, .privPolicy {color: $color-blue-brite; text-decoration: underline; font-weight: 900; font-size: 2.2vh;}
+        .voiceLink:hover, .hofLink:hover, .privPolicy:hover {text-decoration: none; color: $color-orange;}
+        .hofOff {color: $color-blue-brite; font-weight: 900; font-size: 2vh; text-decoration: none;}
+    .copy {font-family: $nunito; font-size: 1.3vh; margin-top: 0.64rem; display: flex; display: flex; align-items: stretch;}
       .copy div:first-child {flex-grow: 1;}
       .copy div:nth-child(2) {flex-grow: 1; justify-content: right;}
-        .privPolicy {color: $color-blue-brite; text-decoration: none; flex-grow: 1;}
-        .copyright {color: $color-blue-med; flex-grow: 1; text-align: right;}
+        .privPolicy {font-size: 1.6vh; flex-grow: 1; text-decoration: none;}
+        .copyright {color: $color-blue-med; flex-grow: 1; text-align: right; padding-top: 0.4vh;}
 
   /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
   .topContainer {
@@ -130,24 +127,21 @@ div, h1, button, p {margin: 0; padding: 0;}
     color: $color-blue-bg;
     background-image: url(../imgs/bg-boxes.png);
     box-shadow: 0px 0px 6px 0px #666 inset;
-    min-height: 27rem;
-    min-width: 15rem;
-    max-width: 95vw;
-    width: 96%;
+    min-width: 15vw;
+    flex: 1 1 0;
   }
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
 .gameInfo {display: flex; flex-wrap: nowrap; align-items: stretch; align-content: flex-start;}
-  .catCount {text-align: left; padding-left: 0.7rem; flex-grow: 1; font-size: 2vh;}
-  .scoreBox {text-align: center; flex-grow: 3;}
-    .scoreNum {font-weight: 900; font-size: 5.2vh; line-height: 4.4vh;}
+  .catCount {padding-left: 0.7rem; flex-grow: 1; font-size: 1.7vh; text-align: left;}
+  .scoreBox {text-align: center; flex-grow: 3; padding-top: 0.8vh;}
+    .scoreNum {font-weight: 900; font-size: 5.8vh; line-height: 4.8vh;}
     .scoreTxt {font-weight: 700; font-size: 1.8vh;}
-  .rightWrong {text-align: right; padding-right: 0.7rem; flex-grow: 1; font-size: 2vh;}
-.catTable {width: 75%; margin: 0.3rem auto;}
-  .first {padding: 0.1rem 0.1rem 0.1rem 2rem;}
-  .second {padding: 0.1rem;}
-  input[type=checkbox] {vertical-align: middle; margin: 0 0.2rem 0 0; width: 2.2vh; height: 2.2vh;}
-  .catLabel {font-size: 1.5vh; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; letter-spacing: 0.03rem; cursor: pointer;}
+  .rightWrong {padding-right: 0.7rem; flex-grow: 1; font-size: 1.7vh; text-align: right;}
+    .first {padding: 0 0.4rem; }
+    .second {padding: 0 0.4rem;}
+  input[type=checkbox] {vertical-align: middle; margin: 0.2rem; width: 2.2vh; height: 2.2vh;}
+  .catLabel {font-size: 1.4vh; font-weight: 700; margin: 0 0.2rem 0.2rem 0.1rem; letter-spacing: 0.03rem; cursor: pointer;}
   .catLabelPulse {transform: scale(1); animation: pulse 1.8s infinite; border-radius: 4px;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
@@ -161,7 +155,7 @@ div, h1, button, p {margin: 0; padding: 0;}
     background-image: linear-gradient($color-blue-med, $color-blue-bg);
     font-family: $nunito;
     font-weight: 900;
-    font-size: 3.4vh;
+    font-size: 3.2vh;
     letter-spacing: 0.2rem;
     box-shadow: 0px 3px 8px #444;
     cursor: pointer;
@@ -230,14 +224,14 @@ div, h1, button, p {margin: 0; padding: 0;}
   .btn-holder .vxBtn,
   .btn-holder .vxBtnSel,
   .btn-holder .vxBtnRight {border-radius: 6px; text-align: left; margin: 0.14rem 0.6rem; height: 9.0vh; display: flex; align-items: center; position: relative;}
-  .ansName { font-family: $nunito; font-weight: 900; font-size: 2.3vh; letter-spacing: 0.06rem; margin-left: 0.3rem}
+  .ansName { font-family: $nunito; font-weight: 900; font-size: 2.2vh; letter-spacing: 0.06rem; margin-left: 0.3rem}
   .vxBtn {background-image: linear-gradient($color-blue-lite, $color-blue-lite2); border: 1px solid $color-blue-med2; cursor: pointer;}
     .vxBtn .ansName {color: $color-blue-bg2; text-shadow: 1px 1px 2px #bbb;}
   .vxBtnSel {background-image: linear-gradient($color-blue-med-lite, $color-blue-med2); border: 1px solid $color-blue-med;}
     .vxBtnSel .ansName {color: $color-blue-bg; text-shadow: 1px 1px 2px #aaa;}
   .vxBtnRight {background-image: linear-gradient($color-green, $color-green-med); border: 1px solid $color-green-dark;}
     .vxBtnRight .ansName {color: $color-green-darkest; text-shadow: 1px 1px 2px #bbb;}
-  .ansQ {font-size: 4.7vh; margin: 0 0 0 0.6rem; display: inline-block; color: $color-blue-bg2;}
+  .ansQ {font-size: 4.1vh; margin: 0 0 0 0.6rem; display: inline-block; color: $color-blue-bg2;}
   .ansPic {padding: 0.3rem 0.3rem 0 0.3rem; display: block;}
     .ansPic img {border-radius: 6px; width: 7.6vh; height: 7.6vh; border: 1px solid #aaa;}
   .ansWhosThis {
@@ -249,16 +243,18 @@ div, h1, button, p {margin: 0; padding: 0;}
     border-radius: 4px;
     border: 1px solid #9fb1bf;
     box-shadow: 0px 0px 2px #999;
+    padding: 0.1rem;
   }
-    .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.04rem; font-family: $nunito; font-weight: 900; font-size: 1.3vh;}
+    .ansWhosThis a {text-decoration: none; color: #4747cc; text-shadow: 0px 0px 1px #aaa; letter-spacing: 0.04rem; font-family: $nunito; font-weight: 900; font-size: 1.2vh;}
     .ansWhosThis a:hover {text-decoration: underline;}
 
 /* ////////////////// GAME OVER STYLES ///////////////////*/
+.tooLow {min-height: 45.8vh;}
 .tooLow, .inHOF {text-align: center;}
-.inHOF p, .tooLow p {font-size: 2.6vh; line-height: 2.9vh; margin: 0.7rem 1.2rem; font-weight: 700;}
-.inHOF h2, .tooLow h2 {font-size: 3.9vh; color: $color-blue-med; font-weight: 900; margin: 1rem 0 1rem 0;}
-.inHOF h3, .tooLow h3 {font-size: 3.4vh; color: $color-blue-med-brite;}
-.gameOverForm label {display: block; font-size: 1.3vh; letter-spacing: 0.02rem; font-weight: 900;}
+.inHOF p, .tooLow p {font-size: 2.6vh; line-height: 3.0h; margin: 0.7rem 1.2rem; font-weight: 700;}
+.inHOF h2, .tooLow h2 {font-size: 3.6vh; color: $color-blue-med; font-weight: 900; margin: 1rem 0 1rem 0;}
+.inHOF h3, .tooLow h3 {font-size: 3.2vh; color: $color-blue-med-brite;}
+.gameOverForm label {display: block; font-size: 1.6vh; letter-spacing: 0.02rem; font-weight: 900;}
 .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
 .gameOverForm .button {margin: 1.2rem 0;}
 .save-button {
@@ -276,25 +272,26 @@ div, h1, button, p {margin: 0; padding: 0;}
   cursor: pointer;
 }
 .save-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med); box-shadow: 2px 2px 7px #111; border: 6px solid $color-blue-med2;}
-.inHOF input[type=text] {border: 2px solid $color-blue-med; padding: 0.4rem; font-family: $nunito; font-weight: 700; font-size: 1.1rem; border-radius: 4px; width: 10rem;}
-.errorMsg {font-size: 0.9rem; line-height: 0.9rem; color: $color-red; margin: 0.4rem 0.1rem;}
+.inHOF input[type=text] {border: 2px solid $color-blue-med; padding: 0.3rem; font-family: $nunito; font-weight: 700; font-size: 1.2rem; border-radius: 4px; width: 22vw;}
+.errorMsg {font-size: 1.1rem; line-height: 0.9rem; color: $color-red; margin: 0.4rem 0.1rem;}
 
 /* ////////////////// HOF STYLES ///////////////////*/
+.scrollbox {overflow-y: auto; overflow-x: hidden; height: 42.65vh; margin: 0; padding: 0;}
 .hallOfFame {display: flex;}
   .hofHead { flex: 1;}
-    .hallOfFame h3 {font-weight: 900; margin: 0.7rem 0 0.5rem 0.9rem; font-size: 2.9vh;}
+    .hallOfFame h3 {font-weight: 900; margin: 0.7rem 0 0.5rem 0.9rem; font-size: 2.6vh;}
   .gameCt {margin: 0.7rem 1.0rem 0 0; font-weight: 700; font-size: 2.5vh; text-align: right; flex: 1;}
   .HOF-table {border-spacing: 0px; margin: 0 0 0 0.2rem; width: 99%; padding: 0;}
   .HOF-table tbody tr:nth-child(odd) {background: #d7e2ec}
 
-    .HOF-table th {font-size: 1.3vh; letter-spacing: 0.02rem; font-weight: 900; padding: 0.2rem;}
+    .HOF-table th {font-size: 1.2vh; letter-spacing: 0.02rem; font-weight: 900; padding: 0.2rem;}
     .HOF-table .hd1 {text-align: center;}
     .HOF-table .hd2 {text-align: center;}
     .HOF-table .hd3 {text-align: left;}
     .HOF-table .hd4 {text-align: left;}
     .HOF-table .hd5 {text-align: left;}
 
-    .HOF-table td {font-size: 1.5vh; letter-spacing: 0.02rem; padding: 0.2rem; font-weight: 700;}
+    .HOF-table td {font-size: 1.4vh; letter-spacing: 0.02rem; padding: 0.2rem; font-weight: 700;}
     .HOF-table .col1 {text-align: center;}
     .HOF-table .col2 {text-align: center;}
     .HOF-table .col3 {text-align: left;}
@@ -319,7 +316,6 @@ div, h1, button, p {margin: 0; padding: 0;}
       100% {transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);}
     }
     .HOF-regname {overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 7.3rem; display: block; }
-  .scrollbox {overflow-y: auto; overflow-x: hidden; height: 36vh; width: inherit; margin: 0 auto;}
 
 /* ################################################ */
 /* ################################################ */
@@ -329,21 +325,17 @@ div, h1, button, p {margin: 0; padding: 0;}
 
 @media only screen
 and (min-device-width: 0.1rem)
-and (max-device-width: 30rem)
+and (max-device-width: 40rem)
 and (orientation: portrait) {
 
   body {
     height: 99vh;
     width: 99vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
-  div.App { display: flex; align-items: center; }
+  div.App {display: flex; flex-direction: column;}
+  .game { width: 95%; max-width: 95vw; }
 
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-
 .overlayContent h1 {font-size: 4.8vh;}
 .overlayContent h2 {font-size: 3.0vh; line-height: 4vh;}
 .overlayContent h3 {font-size: 2.6vh;}
@@ -351,7 +343,7 @@ and (orientation: portrait) {
 .overlayContent ol {font-size: 2.0vh; }
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-  .topLine h1 {font-size: 6.1vh; line-height: 6.7vh; margin-bottom: -0.8vh;}
+  .topLine h1 {margin-bottom: -0.6vh;}
   .earLogo {width: 3.8vh; height: 4.1vh; position: relative; margin: 0 0.4vh 0 -0.3vh;}
     .earLogo img {position: absolute;}
     .logo-dot {top: 4.1vh; left: 1.1vh; width: 1.68vh;}
@@ -359,45 +351,45 @@ and (orientation: portrait) {
     .logo-inner1 {top: 1.55vh; left: 1.06vh; width: 1.55vh;}
     .logo-inner2 {top: 0.899vh; left: 1.51vh; width: 1.76vh;}
     .logo-inner3 {top: 0.32vh; left: 1.78vh; width: 2.21vh;}
-  .voiceCount {line-height: 1.8vh; padding: 2.1vh 0 0 1.1vw;}
+  .voiceCount {line-height: 1.8vh; padding: 1.6vh 0 0 0;}
   .voiceNum {font-size: 1.8vh;}
   .voiceTxt {font-size: 1.2vh;}
 
 /* ///////////////////// BOTTOM LINKS ////////////////// */
-  .links a {font-size: 2.6vh;}
-  .hofOff {font-size: 2.6vh;}
-  .copy {font-size: 1.5vh;}
+  .voiceLink, .hofLink, .privPolicy {font-size: 2vh;}
+  .hofOff {font-size: 2vh;}
+  .privPolicy {font-size: 1.6vh;}
+  .copy {font-size: 1.2vh;}
 
 /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-.topContainer {width: 96%;}
+.topContainer {width: 99%; max-width: 40rem;}
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
-.catCount {font-size: 1.7vh;}
-.scoreNum {font-size: 4.3vh; line-height: 4.4vh;}
-.scoreTxt {font-size: 1.2vh;}
-.rightWrong {font-size: 1.7vh;}
-.catTable {width: 95%; margin: 0.3rem auto;}
-  .first {padding-left: 2rem;}
-  .catLabel {font-size: 1.6vh;}
+.catCount {font-size: 1.6vh;}
+.scoreNum {font-size: 4.9vh; line-height: 4.7vh;}
+.scoreTxt {font-size: 1.6vh;}
+.rightWrong {font-size: 1.6vh;}
+  .catLabel {font-size: 1.4vh;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
-.play-button {border: 0.8vh solid $color-blue-brite;font-size: 2.9vh;}
+.play-button {border: 0.8vh solid $color-blue-brite; font-size: 2.9vh; padding: 0.8vh 1vh;}
 .click-play {font-size: 0.92rem; line-height: 1rem;}
 .play-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med);}
 .play-button:disabled {border: 0.8vh solid $color-blue-brite;}
 .play-button:focus, .play-button:active {border: 0.8vh solid $color-blue-brite;}
 
 /* ////////////////// VOICE BUTTON STYLES /////////////////// */
-.ansName {font-size: 2.0vh;}
+.btn-holder { width: 100%;}
+.ansName {font-size: 1.9vh;}
 .ansQ {font-size: 4.2vh;}
 .ansWhosThis a {font-size: 1.1vh;}
 
 /* ////////////////// GAME OVER STYLES ///////////////////*/
 .tooLow, .inHOF {text-align: center;}
-.inHOF p, .tooLow p {font-size: 1.9vh; line-height: 2.6vh; margin: 1rem 0.5rem;}
-.inHOF h2, .tooLow h2 {font-size: 2.9vh;}
+.inHOF p, .tooLow p {font-size: 2.8vh; line-height: 3.4h; margin: 1rem 0.5rem;}
+.inHOF h2, .tooLow h2 {font-size: 3.4vh;}
 .inHOF h3, .tooLow h3 {font-size: 2.9vh; margin: 0.6rem;}
-.gameOverForm label {display: block; font-size: 1.4vh; letter-spacing: 0.02rem; font-weight: 900;}
+.gameOverForm label {display: block; font-size: 1.6vh; letter-spacing: 0.02rem; font-weight: 900;}
 .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
 .gameOverForm .button {margin: 1.2rem 0;}
 .save-button {font-size: 2.2vh;}
@@ -405,11 +397,13 @@ and (orientation: portrait) {
 .errorMsg {font-size: 1.2vh;}
 
 /* ////////////////// HOF STYLES ///////////////////*/
-.hallOfFame h3 {font-weight: 900; margin: 0.7rem 0 0.5rem 0.9rem; font-size: 2.3vh;}
+.hallOfFame h3 {font-weight: 900; margin: 0.7rem 0 0.5rem 0.9rem; font-size: 2vh;}
 .gameCt {margin: 1rem 1.0rem 0 0; font-weight: 700; font-size: 1.8vh; text-align: right; flex: 1;}
-.HOF-table td {font-size: 1.4vh;}
-.HOF-table .col5 {font-size: 1.4vh;}
-.scrollbox {height: 33vh;}
+.inHOF p {font-size: 2.3vh;}
+.HOF-table {width: auto;}
+.HOF-table td {font-size: 1.2vh;}
+.HOF-date {font-size: 1.2vh; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 14vw;}
+.scrollbox {height: 44vh;}
 
 /* ########## END PORTRAIT ########## */
 }
@@ -426,15 +420,10 @@ and (max-device-width: 60rem)
 and (orientation: landscape) {
 
   body {
-    height: 99vh;
-    width: 99vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
+    width: 100vw;
   }
-  div.App { display: flex; align-items: center; }
-
+  div.App {display: flex; align-items: center; justify-content: center;}
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
 .overlayContent h1 {font-size: 8.8vh; margin: 0.4rem 0 1.0rem 0;}
 .overlayContent h2 {font-size: 4.5vh; line-height: 5vh; letter-spacing: 0.12rem; color: $color-blue-med-brite; margin: 0.4rem 0 0.6rem 0; text-shadow: 1px 1px 2px#ccc;}
@@ -443,24 +432,22 @@ and (orientation: landscape) {
 .overlayContent ol {margin: 0.8rem 0 1.4rem 1.0rem;font-size: 3.2vh; line-height: 4.8vh;}
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
-  .game {margin-top: 23vh;}
-  .topLine h1 {font-size: 11vh; line-height: 9.5vh; margin-bottom: -0.8vh;}
+  .topLine h1 {font-size: 12vh; line-height: 9.5vh; margin-bottom: -0.6vh;}
   .earLogo {width: 3.8vh; height: 4.1vh; position: relative; margin: 0 0.4vh 0 -0.3vh;}
     .logo-dot {top: 6.09vh; left: 1.3vh; width: 2.28vh;}
     .logo-outer {top: -0.36vh; left: 0.53vh; width: 5.92vh;}
     .logo-inner1 {top: 2.55vh; left: 1.36vh; width: 1.55vh;}
     .logo-inner2 {top: 1.49vh; left: 1.71vh; width: 2.26vh;}
     .logo-inner3 {top: 0.72vh; left: 2.18vh; width: 2.61vh;}
-  .voiceCount {line-height: 2.8vh; padding: 2.1vh 0 0 1.1vw;}
+  .voiceCount {line-height: 3.1vh; padding: 2.1vh 0 0 1.1vw;}
   .voiceNum {font-size: 3.4vh;}
   .voiceTxt {font-size: 2.6vh;}
 
-/* ///////////////////// GAME CONTAINER STYLES ////////////////// */
-.topContainer {width: 38vw; min-height: 22rem;}
-
 /* ///////////////////// BOTTOM LINKS ////////////////// */
-  .links a {font-size: 3.3vh;}
+  .voiceLink, .hofLink, .privPolicy {font-size: 3.3vh;}
+  .privPolicy {font-size: 2.3vh;}
   .hofOff {font-size: 3.3vh;}
+  .copyright { padding-top: 0;}
   .copy {font-size: 2.3vh;}
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
@@ -468,14 +455,11 @@ and (orientation: landscape) {
 .scoreNum {font-size: 7.8vh; line-height: 5.4vh;}
 .scoreTxt {font-size: 2.3vh;}
 .rightWrong {font-size: 2.9vh;}
-.catTable {width: 75%; margin: 0.3rem auto;}
-  .first {padding: 0.1rem 0.1rem 0.1rem 2rem;}
-  .second {padding: 0.1rem;}
   input[type=checkbox] {vertical-align: middle; margin: 0 0.2rem 0 0; width: 2.8vh; height: 2.8vh;}
   .catLabel {font-size: 2.6vh;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
-.play-button {border: 0.8vh solid $color-blue-brite; font-size: 3.8vh;}
+.play-button {border: 0.8vh solid $color-blue-brite; font-size: 4.1vh; padding: 1.2vh;}
 .click-play {font-size: 0.92rem; line-height: 1rem;}
 .play-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med);}
 .play-button:disabled {border: 0.8vh solid $color-blue-brite;}

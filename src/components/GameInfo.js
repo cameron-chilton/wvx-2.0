@@ -59,6 +59,14 @@ class GameInfo extends Component {
             <div className="catCount">
               <div>VOX <span className="bold">{voxCount + 1}</span> OF <span className="bold">5</span></div>
               <div className="toUpper">{category}</div>
+              <div className="first">
+                <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onClick={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
+                <label htmlFor="MoviesTvChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MOVIES/TV</span></label>
+              </div>
+              <div className="second">
+                <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onClick={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
+                <label htmlFor="MusicArtsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MUSIC/ARTS</span></label>
+              </div>
             </div>
             <div className="scoreBox">
               <div className="scoreNum">{score.toLocaleString()}</div>
@@ -67,32 +75,16 @@ class GameInfo extends Component {
             <div className="rightWrong">
               <div>RIGHT: <span className="bold">{ansRight}</span></div>
               <div>WRONG: <span className="bold">{ansWrong}</span></div>
+              <div className="first">
+                <label htmlFor="NewsPolChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>NEWS</span></label>
+                <input type="checkbox" id="NewsPolChk" value="News/Politics" onClick={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
+              </div>
+              <div className="second">
+                <label htmlFor="SportsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>SPORTS</span></label>
+                <input type="checkbox" id="SportsChk" value="Sports" onClick={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
+              </div>
             </div>
         </div>
-        <table className="catTable">
-          <tbody>
-            <tr>
-              <td className="first">
-                <input type="checkbox" id="MoviesTvChk" value="Movies/TV" onClick={this.clickCategory} checked={movTvChecked} disabled={!gameOver ? true : false} />
-                <label htmlFor="MoviesTvChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MOVIES/TV</span></label>
-              </td>
-              <td className="second">
-                <input type="checkbox" id="MusicArtsChk" value="Music/Arts" onClick={this.clickCategory} checked={musArtsChecked} disabled={!gameOver ? true : false} />
-                <label htmlFor="MusicArtsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>MUSIC/ARTS</span></label>
-              </td>
-            </tr>
-            <tr>
-              <td className="first">
-                <input type="checkbox" id="NewsPolChk" value="News/Politics" onClick={this.clickCategory} checked={newsPolChecked} disabled={!gameOver ? true : false} />
-                <label htmlFor="NewsPolChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>NEWS/POLITICS</span></label>
-              </td>
-              <td className="second">
-                <input type="checkbox" id="SportsChk" value="Sports" onClick={this.clickCategory} checked={sportsChecked} disabled={!gameOver ? true : false} />
-                <label htmlFor="SportsChk" className="catLabel"><span className={gameOver ? 'catLabelPulse' : ''}>SPORTS</span></label>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </>
     );
   }

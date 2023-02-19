@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getStore from '../index';
+import whovoxUtils from '../utils/whovox-utils';
 
 export const instance = axios.create({
   baseURL: window.apiUrl ? window.apiUrl : "https://whovox.com/php/",
@@ -69,111 +70,84 @@ class MockApi {
     });
   }
 
-  ///////////// PRELOAD VOICE & SFX CLIPS ////////////////
+  ///////////// NEW: INDEXED DB PRELOAD VOICE & SFX CLIPS ////////////////
 
-  static getGameClips(newGameData) {
-/*
-    // INDEXEDDB
-    // Let us open our database
-    const request = window.indexedDB.open("wvxDatabase", 3);
+  static async getGameClips (newGameData) {
 
-    // Generic error handler for all errors targeted at this database's requests.
-    request.onerror = function(event) {
-      console.error("Indexed DB error: " + event.target.errorCode);
-    };
+    return new Promise(resolve => {
 
-    // This event is only implemented in recent browsers
-    request.onupgradeneeded = function(event) {
-      // Save the IDBDatabase interface
-      let wvxDB = event.target.result;
-      // Create an objectStore for this database
-      let objectStore = wvxDB.createObjectStore("name", { keyPath: "myKey" });
-    };
+      // load sfx files
+      const Answer_Right = 'Answer_Right';
+      const Answer_Wrong = 'Answer_Wrong';
+      const Game_Over = 'Game_Over';
+      const Intro_Collage = 'Intro_Collage';
+      const Cheer = 'Cheer';
+      const sfxArray = [Answer_Right, Answer_Wrong, Game_Over, Intro_Collage, Cheer]
+      let j;
+      // loop through and create audio
+      for (j = 0; j <= 4; j++) {
+        this.audio = new Audio();
+        let gameSfx;
+        // can play ogg or mp3
+        if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          gameSfx = localStorage.setItem(sfxArray[j], 'audio/_sfx/' + sfxArray[j] + '.ogg');
+          this.audio = new Audio(gameSfx);
+          }
+        else {
+          gameSfx = localStorage.setItem(sfxArray[j], 'audio/_sfx/' + sfxArray[j] + '.mp3');
+          this.audio = new Audio(gameSfx);
+          }
+      }
 
-    // success block
-    request.onsuccess = function(event) {
-      // Do something with request.result!
-      //console.log('DB onsuccess error: ' + event);
-      let wvxDB = event.target.result;
-      console.log('DB created: ' + wvxDB);
-    };
-  */
+      // convert newGameData object to array
+      const gameClips = Object.values(newGameData);
+      const allClips = gameClips[0];
 
-    const gameClips = Object.values(newGameData);
-    // convert object to array
-    const allClips = gameClips[0];
-    // each clip name in separate var
-    const clip0 = allClips[0].CLIP_NAME;
-    const clip1 = allClips[1].CLIP_NAME;
-    const clip2 = allClips[2].CLIP_NAME;
-    const clip3 = allClips[3].CLIP_NAME;
-    const clip4 = allClips[4].CLIP_NAME;
-    // put clips into array
-    const clipArray = [clip0, clip1, clip2, clip3, clip4];
-    let i;
-    // loop through and create audio
-    for (i = 0; i <= 4; i++) {
+      // each clip name in separate var
+      const clip0 = {id: allClips[0].ID, clipname: allClips[0].CLIP_NAME};
+      const clip1 = {id: allClips[1].ID, clipname: allClips[1].CLIP_NAME};
+      const clip2 = {id: allClips[2].ID, clipname: allClips[2].CLIP_NAME};
+      const clip3 = {id: allClips[3].ID, clipname: allClips[3].CLIP_NAME};
+      const clip4 = {id: allClips[4].ID, clipname: allClips[4].CLIP_NAME};
 
-      const nmFrst = clipArray[i].substr(0,1) || '';
-      let dir;
+      // put clips into array
+      const clipArray = [clip0, clip1, clip2, clip3, clip4];
 
-      if(nmFrst == 'A' || nmFrst == 'B') {dir = 'AB';}
-      if(nmFrst == 'C' || nmFrst == 'D') {dir = 'CD';}
-      if(nmFrst == 'E' || nmFrst == 'F') {dir = 'EF';}
-      if(nmFrst == 'G' || nmFrst == 'H') {dir = 'GH';}
-      if(nmFrst == 'I' || nmFrst == 'J') {dir = 'IJ';}
-      if(nmFrst == 'K' || nmFrst == 'L') {dir = 'KL';}
-      if(nmFrst == 'M' || nmFrst == 'N') {dir = 'MN';}
-      if(nmFrst == 'O' || nmFrst == 'P') {dir = 'OP';}
-      if(nmFrst == 'Q' || nmFrst == 'R') {dir = 'QR';}
-      if(nmFrst == 'S' || nmFrst == 'T') {dir = 'ST';}
-      if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
-      if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
-      if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
+      // array of blobs to return
+      let audioBlobs = [];
+      // loop and get dir
+      for (let i = 0; i <= 4; i++) {
+        const nmFrst = clipArray[i].clipname.substr(0,1) || '';
+        let dir;
+        if(nmFrst == 'A' || nmFrst == 'B') {dir = 'AB';}
+        if(nmFrst == 'C' || nmFrst == 'D') {dir = 'CD';}
+        if(nmFrst == 'E' || nmFrst == 'F') {dir = 'EF';}
+        if(nmFrst == 'G' || nmFrst == 'H') {dir = 'GH';}
+        if(nmFrst == 'I' || nmFrst == 'J') {dir = 'IJ';}
+        if(nmFrst == 'K' || nmFrst == 'L') {dir = 'KL';}
+        if(nmFrst == 'M' || nmFrst == 'N') {dir = 'MN';}
+        if(nmFrst == 'O' || nmFrst == 'P') {dir = 'OP';}
+        if(nmFrst == 'Q' || nmFrst == 'R') {dir = 'QR';}
+        if(nmFrst == 'S' || nmFrst == 'T') {dir = 'ST';}
+        if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
+        if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
+        if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
+        // push to audioBlobs array
+        whovoxUtils.fetchAudio(dir, clipArray[i]).then(response => {
+          audioBlobs.push(response);
+          if (audioBlobs.length == 5) {
+            let isLoaded = whovoxUtils.putInDB(audioBlobs);
+            resolve(isLoaded);
+          }
+        })
+      }
 
-      this.audio = new Audio();
-      let gameAudio;
+    });
 
-      // can play ogg or mp3
-				if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-          gameAudio = localStorage.setItem(clipArray[i], 'audio/' + dir + '/' + clipArray[i] + '.ogg');
-          this.audio = new Audio(gameAudio);
-					}
-				else {
-          gameAudio = localStorage.setItem(clipArray[i], 'audio/' + dir + '/' + clipArray[i] + '.mp3');
-          this.audio = new Audio(gameAudio);
-					}
-    }
-
-    // load sfx files
-    const Answer_Right = 'Answer_Right';
-    const Answer_Wrong = 'Answer_Wrong';
-    const Game_Over = 'Game_Over';
-    const Intro_Collage = 'Intro_Collage';
-    const Cheer = 'Cheer';
-
-    const sfxArray = [Answer_Right, Answer_Wrong, Game_Over, Intro_Collage, Cheer]
-    let j;
-    // loop through and create audio
-    for (j = 0; j <= 4; j++) {
-      this.audio = new Audio();
-      let gameSfx;
-      // can play ogg or mp3
-      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        gameSfx = localStorage.setItem(sfxArray[j], 'audio/_sfx/' + sfxArray[j] + '.ogg');
-        this.audio = new Audio(gameSfx);
-        }
-      else {
-        this.audio = new Audio(gameSfx);
-        }
-    }
-
-    return clipArray, sfxArray;
 
   }
 
   ///////////// GET FIRST VOICE QUESTION ////////////////
-
   static loadVoiceQuestion(newGameData) {
     const gameAnswers = Object.values(newGameData);
     //console.log('loadVoiceQuestion gameAnswers:' + JSON.stringify(gameAnswers));
@@ -209,9 +183,7 @@ class MockApi {
     });
   }
 
-
 ///////////// GET NEXT QUESTION AFTER 0 ////////////////
-
   static getNextQuestion(newGameData, ansCount) {
     const gameAnswers = Object.values(newGameData);
     //console.log('getNextQuestion gameAnswers:' + JSON.stringify(gameAnswers));
@@ -246,7 +218,6 @@ class MockApi {
   }
 
   //////////////////// SAVE GAME DATA ///////////////////////
-
   static saveFinishedGame(gameData) {
     //console.log('saveFinishedGame gameData:' + JSON.stringify(gameData));
     const id = gameData.id;

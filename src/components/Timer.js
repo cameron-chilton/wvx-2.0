@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {string, bool, object, number, oneOfType} from "prop-types";
+import {string, bool, object, number, oneOfType, func} from "prop-types";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -48,15 +48,17 @@ class Timer extends Component {
   }
 
   startTimer = () => {
+    this.props.timerClicked();
     this.props.voxCount !== 4 ? (
       this.timeout = setTimeout( () => {
         clearInterval(this.interval);
         this.props.actions.startTimer();
-      }, 250)
+      }, 1000)
     ) : (
       this.props.actions.startNextGame()
     )
   }
+
   startNextGameHOF = () => {
     if (this.props.showHOF) {
       this.props.actions.toggleHallfOfFame();
@@ -69,12 +71,17 @@ class Timer extends Component {
     return (
       <div>
         {!showHOF ?
-        <><button className="play-button" onClick={!timerOn ? this.startTimer : undefined} disabled={loading && true} id="startvoxBtn">
+        <><button
+          id="startvoxBtn"
+          className="play-button"
+          disabled={loading && true}
+          onClick={ () => {!timerOn ? this.startTimer() : undefined} }
+        >
           {
             !this.state.isAnswered ? (
-              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{(voxCount == 0) ? 'CLICK TO PLAY' : btnTxt}</span></>)
+              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)
             ) : (
-              !this.state.toggleTextVal ? <><span className="btnOrange">{btnTxt}</span></> : (!gameOver ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) : <><span className="btnYellow">PLAY AGAIN</span></>)
+              !this.state.toggleTextVal ? <><span className="btnOrange">{btnTxt}</span></> : ((!gameOver && !loading) ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) : (gameOver && !loading) ? <><span className="btnYellow">PLAY AGAIN</span></> : <><span className="btnYellow">{btnTxt}</span></>)
             )
           }
         </button></> :
@@ -98,6 +105,7 @@ Timer.propTypes = {
   loading: bool,
   outOfTime: bool,
   showHOF: bool,
+  timerClicked: func,
   voxCount: oneOfType([string,number]),
   btnTxt: oneOfType([string, number]),
   score: oneOfType([string, number]),

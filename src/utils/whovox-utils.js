@@ -1,3 +1,8 @@
+import axios from 'axios';
+export const instance = axios.create({
+  baseURL: window.apiUrl ? window.apiUrl : "http://localhost:3000", // or https://whovox.com/ or http://localhost:3000
+});
+
 const whovoxUtils = {
 
     // Given an array of numbers and a max...
@@ -84,7 +89,93 @@ const whovoxUtils = {
               return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
           }
       );
-    }
+    },
+
+    // INDEXEDDB GET AUDIO TO PUT
+
+    putInDB: async (audioBlobs) => {
+      return new Promise( function(resolve, reject) {
+
+      // Open database
+      const request = indexedDB.open('wvxDB', 1);
+
+      // Generic error handler for all errors targeted at this DBs requests.
+      request.onerror = function(event) {
+        //console.error("Indexed DB error: " + event.target.errorCode);
+        reject.error("Indexed DB error: " + event.target.errorCode);
+      };
+
+      // This event is only implemented in recent browsers
+      request.onupgradeneeded = function(event) {
+
+        // Save the IDBDatabase interface
+        let wvxDB = event.target.result;
+        // Create an objectStore for this database
+        let objectStore = wvxDB.createObjectStore('clips', { keyPath: 'id' });
+        // create index for clip and id
+        objectStore.createIndex('id', ['id'], { unique: true });
+
+      };
+
+        // success block
+        request.onsuccess = event => {
+
+          // do something with request.result
+          let wvxDB = event.target.result;
+          // 1: transaction
+          const transaction = wvxDB.transaction('clips', 'readwrite');
+          // 2: transaction store
+          const DBstore = transaction.objectStore('clips');
+          // 3 loop through and add clips to db store
+          for (let i = 0; i <= 4; i++) {
+            DBstore.put({
+              id: audioBlobs[i].id || '',
+              dir: audioBlobs[i].dir,
+              ext: audioBlobs[i].ext,
+              clipname: audioBlobs[i].clipname,
+              audio: audioBlobs[i].audio
+            });
+          }
+          // complete
+          transaction.oncomplete = function () {
+            resolve(true);
+            wvxDB.close();
+          };
+
+        };
+      })
+    },
+
+    fetchAudio: async (dir, clip) => {
+      let audio = new Audio();
+      let ext;
+      //console.log('fetch dir: ' + dir + ' clip: ' + clip.clipname);
+      // can play ogg or mp3
+      if (audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+        ext = '.ogg';
+        }
+      else {
+        ext = '.mp3';
+      }
+      return new Promise((res, rej) => {
+        instance.get('audio/' + dir + '/' + clip.clipname + ext)
+          .then(function(resp) {
+            //console.log('fetchAudio clipName: ' + clip.clipname);
+            let retObj = {
+              id: clip.id,
+              dir: dir,
+              ext: ext,
+              clipname: clip.clipname,
+              audio: resp.data
+            }
+            res(retObj)
+          })
+          .catch(function(error) {
+            rej(error)
+          })
+      })
+
+    },
 
   };
 

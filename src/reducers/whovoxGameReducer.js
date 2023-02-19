@@ -18,6 +18,9 @@ import {
   LOAD_VOICES,
   LOAD_VOICES_SUCCESS,
   LOAD_VOICES_FAILURE,
+  LOAD_CLIPS,
+  LOAD_CLIPS_SUCCESS,
+  LOAD_CLIPS_FAILURE,
   SHUFFLE_CHOICES,
   LOAD_VOICES_ALL_GAME,
   LOAD_VOICES_ALL_GAME_SUCCESS,
@@ -79,7 +82,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
           newGameData: action.newGameData
         };
 
-        /////////////////// LOAD GAME DATA /////////////////////////
+      /////////////////// LOAD GAME DATA /////////////////////////
 
         case NEW_GAME_LOAD:
           return {
@@ -97,6 +100,29 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         }
 
         case LOAD_GAME_FAILURE:
+          return {
+            ...state,
+            error: action.error
+          };
+
+        /////////////////// LOAD GAME CLIPS /////////////////////////
+
+        case LOAD_CLIPS:
+          return {
+             ...state,
+             loading: true,
+             btnTxt: 'LOADING...',
+          };
+
+        case LOAD_CLIPS_SUCCESS: {
+          return {
+            ...state,
+            loading: false,
+            btnTxt: '',
+          };
+        }
+
+        case LOAD_CLIPS_FAILURE:
           return {
             ...state,
             error: action.error

@@ -11,6 +11,9 @@ import * as actions from '../../actions/whovoxActions';
 import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants/DataURLs';
 
 let interval = null;
+let url = '';
+let audio = new Audio();
+
 class GamePage extends Component {
 
   constructor() {
@@ -33,67 +36,91 @@ class GamePage extends Component {
 
   componentDidUpdate() {
 
-    // timer start
-    if ( (this.props.whovoxGame.timerOn) && (interval === null) ) {
+      // timer start
+      if ( (this.props.whovoxGame.timerOn) && (interval === null)  ) {
 
-      // get clip from newGameData
-      const clip3 = this.props.whovoxGame.newGameData || {};
-      const clip2 = clip3[this.props.whovoxGame.voxCount] || '';
-      const clip = clip2.CLIP_NAME || '';
-      const nmFrst = clip.substr(0,1);
-      let dir;
+        // play audio, get clip ID from newGameData
+        const clip3 = this.props.whovoxGame.newGameData || {};
+        const clip2 = clip3[this.props.whovoxGame.voxCount] || '';
+        const clipID = clip2.ID || '';
 
-      if(nmFrst == 'A' || nmFrst == 'B') {dir = 'AB';}
-      if(nmFrst == 'C' || nmFrst == 'D') {dir = 'CD';}
-      if(nmFrst == 'E' || nmFrst == 'F') {dir = 'EF';}
-      if(nmFrst == 'G' || nmFrst == 'H') {dir = 'GH';}
-      if(nmFrst == 'I' || nmFrst == 'J') {dir = 'IJ';}
-      if(nmFrst == 'K' || nmFrst == 'L') {dir = 'KL';}
-      if(nmFrst == 'M' || nmFrst == 'N') {dir = 'MN';}
-      if(nmFrst == 'O' || nmFrst == 'P') {dir = 'OP';}
-      if(nmFrst == 'Q' || nmFrst == 'R') {dir = 'QR';}
-      if(nmFrst == 'S' || nmFrst == 'T') {dir = 'ST';}
-      if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
-      if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
-      if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
+        // open the database
+        let indexedDB = window.indexedDB;
+        const open = indexedDB.open('wvxDB', 1);
 
-      this.audio = new Audio();
-      let gameAudio;
+        // this event is only implemented in recent browsers
+        open.onupgradeneeded = function () {
+            const wvxDB = open.result;
+            const store = wvxDB.createObjectStore('clips', { keyPath: 'id' });
+            console.log(store);
+        };
 
-      // can play ogg or mp3
-      if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
-        gameAudio = localStorage.getItem(clip, 'audio/' + dir + '/' + gameAudio + '.ogg');
-        this.audio = new Audio(gameAudio);
+        // success
+        open.onsuccess = function() {
+          const db = open.result;
+          const transaction = db.transaction('clips', 'readwrite');
+          const store = transaction.objectStore('clips');
+          const gid = store.get(clipID);
+          gid.onsuccess = function(event) {
+            const voiceQuestion = event.target.result;
+            url = ('audio/' + voiceQuestion.dir + '/' + voiceQuestion.clipname + voiceQuestion.ext);
+            audio = new Audio(url);
+            audio.play();
+            // if(!audio.paused){ //check audio is playing
+            //   audio.play();
+            //  }
+          }
+          // close db
+          transaction.oncomplete = function () {
+            db.close();
+          };
         }
-      else {
-        gameAudio = localStorage.getItem(clip, 'audio/' + dir + '/' + gameAudio + '.mp3');
-        this.audio = new Audio(gameAudio);
-        }
-      this.audio.play();
-      interval = setInterval( () => {
-        this.props.actions.tickTimer(this.props.whovoxGame);
-      });
-    }
-    // timer stop
+        // set timer interval
+        interval = setInterval( () => {
+          this.props.actions.tickTimer(this.props.whovoxGame);
+        });
+      }
+    // timer & audio stop
     if ( (!this.props.whovoxGame.timerOn) && (interval !== null) ) {
-      this.audio.pause();
+      audio.pause();
       clearInterval(interval);
       interval = null;
     }
 
   }
 
+  timerClicked = () => {
+    console.log('timerClicked...');
+    const ua = navigator.userAgent.toLowerCase();
+    //console.log('ua: ' + ua);
+    let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+    let isSafariiOS = ua.indexOf("mobile") > -1;
+    if (isSafariiOS) {
+      console.log('isSafari iOS hit');
+      url = '';
+      audio.autoplay = true;
+      audio.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+      audio.play();
+    }
+    else if (isSafari && this.props.whovoxGame.voxCount == 0 && this.props.whovoxGame.ansCount == 0) {
+      console.log('isSafari mac hit');
+      url = '';
+      audio = new Audio(url);
+      audio.play();
+    }
+  }
+
   getQueryVariable = () => {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split("=");
+    let query = window.location.search.substring(1);
+    let vars = query.split("&");
+    for (let i = 0; i < vars.length; i++) {
+      let pair = vars[i].split("=");
         if(pair[0] == 'showHallOfFame'){
           this.props.actions.toggleHallfOfFame();
           }
         }
       return(false);
-}
+  }
 
   isHOFclick = () => {
     this.props.actions.toggleHallfOfFame();
@@ -161,6 +188,7 @@ class GamePage extends Component {
               timer={timer}
               timerOn={timerOn}
               interval={interval}
+              timerClicked={this.timerClicked}
               btnTxt={btnTxt}
               voxCount={voxCount}
               score={score}
@@ -181,7 +209,8 @@ class GamePage extends Component {
           </div>
           <div className="bottomLinks">
             <div className="links">
-              <div className="voiceDiv"><a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a></div>
+              <div className="voiceDiv"><a href={VOICE_OF_URL} className="voiceLink">VOICE OF?</a>
+            </div>
               <div className="hofDiv">{!timerOn ? <a href="#" className="hofLink" onClick={this.isHOFclick}>HALL OF FAME</a> : <span className="hofOff">HALL OF FAME</span>}</div>
             </div>
             <div className="copy">

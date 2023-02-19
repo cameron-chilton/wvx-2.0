@@ -6,6 +6,7 @@ import * as actions from '../actions/whovoxActions';
 import VoiceChoiceContent from './VoiceChoiceContent';
 import VoiceChoiceWhosThis from './VoiceChoiceWhosThis';
 
+let audio2 = new Audio();
 class VoiceChoices extends Component {
 
   constructor() {
@@ -27,36 +28,70 @@ class VoiceChoices extends Component {
   }
 
   clickAnswer = (voxid) => {
+
     this.props.actions.clickAnswer();
     this.setState({clickedBtn: true});
+    // check user agent
+    const ua = navigator.userAgent.toLowerCase();
+    let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+    let isSafariiOS = ua.indexOf("mobile") > -1;
+
     setTimeout( () => {
       this.props.actions.checkAnswer(voxid);
       // play right/wrong sounds
       const answeredRight = (voxid === this.props.newGameData[this.props.voxCount].ID);
-      this.audio = new Audio();
+      //this.audio = new Audio();
       let gameSfx;
       // can play ogg or mp3
         if(answeredRight) {
-          if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          if (audio2.canPlayType('audio/ogg; codecs="vorbis"')) {
             gameSfx = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.ogg');
-            this.audio = new Audio(gameSfx);
+            audio2 = new Audio(gameSfx);
+            audio2.play();
             }
           else {
             gameSfx = localStorage.getItem('Answer_Right', 'https://whovox.com/audio/_sfx/Answer_Right.mp3');
-            this.audio = new Audio(gameSfx);
+            audio2 = new Audio(gameSfx);
+            if (isSafariiOS) {
+              console.log('VC sSafari iOS hit');
+              audio2.autoplay = true;
+              audio2.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+              audio2.play();
             }
-          this.audio.play();
+            else if (isSafari) {
+              console.log('VC isSafari mac hit');
+              audio2 = new Audio(gameSfx);
+              audio2.play();
+            }
+            else {
+              audio2.play();
+            }
+          }
         }
         else {
-          if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          if (audio2.canPlayType('audio/ogg; codecs="vorbis"')) {
             gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.ogg');
-            this.audio = new Audio(gameSfx);
+            audio2 = new Audio(gameSfx);
+            audio2.play();
             }
           else {
             gameSfx = localStorage.getItem('Answer_Wrong', 'https://whovox.com/audio/_sfx/Answer_Wrong.mp3');
-            this.audio = new Audio(gameSfx);
+            audio2 = new Audio(gameSfx);
+            if (isSafariiOS) {
+              console.log('VC sSafari iOS hit');
+              audio2.autoplay = true;
+              audio2.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+              audio2.play();
             }
-          this.audio.play();
+            else if (isSafari) {
+              console.log('VC isSafari mac hit');
+              audio2 = new Audio(gameSfx);
+              audio2.play();
+            }
+            else {
+              audio2.play();
+            }
+          }
         }
       this.setState({showRightAnswer: true});
       if (this.props.ansCount <= 4) {

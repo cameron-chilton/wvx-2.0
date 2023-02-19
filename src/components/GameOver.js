@@ -100,8 +100,8 @@ class GameOver extends Component {
               <div className="inHOF">
                 <h2>THANKS FOR PLAYING!</h2>
                 <p>You scored <span className="bold">{score.toLocaleString()}</span> with <span className="bold">{ansRight}</span> out of <span className="bold">5</span> voices correct.</p>
-                <p>Save your game and find your place<br/>in the <a href="#" onClick={this.showHOF}>Hall of Fame</a>.</p>
-                <p>Use the flashing checkboxes above<br/>to select different categories!</p>
+                <p>Save your game and find your place in the <a href="#" onClick={this.showHOF}>Hall of Fame</a>.</p>
+                <p>Use the flashing checkboxes above to select different categories!</p>
 
                 {!this.state.isValid && <div className="errorMsg">Name and Location is required to save game.</div>}
 
@@ -139,7 +139,7 @@ class GameOver extends Component {
                 <h2>THANKS FOR PLAYING!</h2>
                 <p>Your score is too low<br/>for the <a href="#" onClick={this.showHOF}>Hall of Fame</a>.</p>
                 <h3><span className="bold"><a href="#" onClick={this.tryAgain}>TRY AGAIN!</a></span></h3>
-                <p>Use the flashing checkboxes above<br/>to select different categories!</p>
+                <p>Use the flashing checkboxes above to select different categories!</p>
               </div>
             )
 

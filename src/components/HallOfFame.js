@@ -88,8 +88,8 @@ class HallOfFame extends Component {
                   <tr key={number} ref={(gameID.id == tdata[number].id) ? this.myRef : ''}>
                     <td className="col1"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{number + 1}</span></td>
                     <td className="col2"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{parseFloat(tdata[number].score).toLocaleString('en')}</span></td>
-                    <td className="col3"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'}>{tdata[number].name}</span></td>
-                    <td className="col4"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'}>{tdata[number].location}</span></td>
+                    <td className="col3"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'} title={tdata[number].name}>{tdata[number].name}</span></td>
+                    <td className="col4"><span className={(gameID.id == tdata[number].id) ? 'HOF-nameloc' : 'HOF-regname'} title={tdata[number].location}>{tdata[number].location}</span></td>
                     <td className="col5"><span className={(gameID.id == tdata[number].id) ? 'HOF-highlight' : ''}>{whovoxUtils.mysqlDate(tdata[number].date)}</span></td>
                   </tr>
                 )

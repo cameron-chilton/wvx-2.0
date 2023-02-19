@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getStore from '../index';
+import whovoxUtils from '../utils/whovox-utils';
 
 export const instance = axios.create({
   baseURL: window.apiUrl ? window.apiUrl : "https://whovox.com/php/",
@@ -69,9 +70,86 @@ class MockApi {
     });
   }
 
+  ///////////// NEW: INDEXED DB PRELOAD VOICE & SFX CLIPS ////////////////
+
+  static async getGameClips (newGameData) {
+
+    return new Promise(resolve => {
+
+      // load sfx files
+      const Answer_Right = 'Answer_Right';
+      const Answer_Wrong = 'Answer_Wrong';
+      const Game_Over = 'Game_Over';
+      const Intro_Collage = 'Intro_Collage';
+      const Cheer = 'Cheer';
+      const sfxArray = [Answer_Right, Answer_Wrong, Game_Over, Intro_Collage, Cheer]
+      let j;
+      // loop through and create audio
+      for (j = 0; j <= 4; j++) {
+        this.audio = new Audio();
+        let gameSfx;
+        // can play ogg or mp3
+        if (this.audio.canPlayType('audio/ogg; codecs="vorbis"')) {
+          gameSfx = localStorage.setItem(sfxArray[j], 'audio/_sfx/' + sfxArray[j] + '.ogg');
+          this.audio = new Audio(gameSfx);
+          }
+        else {
+          gameSfx = localStorage.setItem(sfxArray[j], 'audio/_sfx/' + sfxArray[j] + '.mp3');
+          this.audio = new Audio(gameSfx);
+          }
+      }
+
+      // convert newGameData object to array
+      const gameClips = Object.values(newGameData);
+      const allClips = gameClips[0];
+
+      // each clip name in separate var
+      const clip0 = {id: allClips[0].ID, clipname: allClips[0].CLIP_NAME};
+      const clip1 = {id: allClips[1].ID, clipname: allClips[1].CLIP_NAME};
+      const clip2 = {id: allClips[2].ID, clipname: allClips[2].CLIP_NAME};
+      const clip3 = {id: allClips[3].ID, clipname: allClips[3].CLIP_NAME};
+      const clip4 = {id: allClips[4].ID, clipname: allClips[4].CLIP_NAME};
+
+      // put clips into array
+      const clipArray = [clip0, clip1, clip2, clip3, clip4];
+
+      // array of blobs to return
+      let audioBlobs = [];
+      // loop and get dir
+      for (let i = 0; i <= 4; i++) {
+        const nmFrst = clipArray[i].clipname.substr(0,1) || '';
+        let dir;
+        if(nmFrst == 'A' || nmFrst == 'B') {dir = 'AB';}
+        if(nmFrst == 'C' || nmFrst == 'D') {dir = 'CD';}
+        if(nmFrst == 'E' || nmFrst == 'F') {dir = 'EF';}
+        if(nmFrst == 'G' || nmFrst == 'H') {dir = 'GH';}
+        if(nmFrst == 'I' || nmFrst == 'J') {dir = 'IJ';}
+        if(nmFrst == 'K' || nmFrst == 'L') {dir = 'KL';}
+        if(nmFrst == 'M' || nmFrst == 'N') {dir = 'MN';}
+        if(nmFrst == 'O' || nmFrst == 'P') {dir = 'OP';}
+        if(nmFrst == 'Q' || nmFrst == 'R') {dir = 'QR';}
+        if(nmFrst == 'S' || nmFrst == 'T') {dir = 'ST';}
+        if(nmFrst == 'U' || nmFrst == 'V') {dir = 'UV';}
+        if(nmFrst == 'W' || nmFrst == 'X') {dir = 'WX';}
+        if(nmFrst == 'Y' || nmFrst == 'Z') {dir = 'YZ';}
+        // push to audioBlobs array
+        whovoxUtils.fetchAudio(dir, clipArray[i]).then(response => {
+          audioBlobs.push(response);
+          if (audioBlobs.length == 5) {
+            let isLoaded = whovoxUtils.putInDB(audioBlobs);
+            resolve(isLoaded);
+          }
+        })
+      }
+
+    });
+
+
+  }
+
   ///////////// PRELOAD VOICE & SFX CLIPS ////////////////
 
-  static getGameClips(newGameData) {
+  static getGameClipsOLD(newGameData) {
 
     const gameClips = Object.values(newGameData);
     // convert object to array

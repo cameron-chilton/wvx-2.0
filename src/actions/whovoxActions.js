@@ -30,6 +30,16 @@ export function tickTimer() {
   };
 }
 
+//////////////// CLICK START BUTTON, INCREMENT VOX COUNT ////////////////
+
+export function incrementVoxCount() {
+  return function (dispatch) {
+    return dispatch({
+      type: types.INCREMENT_VOX_COUNT
+    });
+  };
+}
+
 //////////////// NO ANSWER, OUT OF TIME ////////////////
 
 export function outOfTime() {

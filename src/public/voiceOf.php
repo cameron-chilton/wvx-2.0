@@ -101,17 +101,18 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
 			<button class="save-button" onClick="searchVoices();">SEARCH</button>
           	<button class="save-button" onClick="loadVoiceRandom();">RANDOM</button>
         </div>
-        <div class="vxBtn" id="vxOfBox">
-          <span class="tmplCategory"></span>
-          <span class="ansPic"><img src="https://whovox.com/public/imgs/noVox.png" id="tmplPic" /></span>
-          <span class="ansName">
-            <span id="vx1stNm">-</span>&nbsp;<span id="vxLstNm">-</span>
-          </span>
-          <span class="ansWhosThis"><a href="https://en.wikipedia.org/wiki/" target="_blank" rel="noopener noreferrer" id="wikiLink">WHO&#39;S THIS?</a></span>
+        <div class="btn-holder">
+          <div class="vxBtn" id="vxOfBox">
+            <span class="tmplCategory"></span>
+            <span class="ansPic"><img src="https://whovox.com/public/imgs/noVox.png" id="tmplPic" /></span>
+            <span class="ansName">
+              <span id="vx1stNm">-</span>&nbsp;<span id="vxLstNm">-</span>
+            </span>
+            <span class="ansWhosThis"><a href="https://en.wikipedia.org/wiki/" target="_blank" rel="noopener noreferrer" id="wikiLink">WHO&#39;S THIS?</a></span>
+          </div>
         </div>
         <div class="tmplPlayer">
-          	<audio controls style="width:100%;" id="tmplAudioEl">
-            </audio>
+          	<audio controls id="tmplAudioEl" style="width: 99%;"></audio>
         </div>
 
       </div>
@@ -193,18 +194,12 @@ function loadVoice(nameFirst, nameLast) {
           console.log('ogg');
 					// assign dir and type
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".ogg";
-					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".ogg");
+					tmplClip.setAttribute('src', 'https://whovox.com/audio/' + dir + '/' + vox + '.ogg');
 					}
-				if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
+				else {
           console.log('mp3');
 					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
-					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".mp3");
-					}
-				}
-        if ( "" != tmplClip.canPlayType('audio/mp3; codecs="mp3"')) {
-          console.log('mp3');
-					//tmplClip.src = "https://whovox.com/audio/" + dir + "/" + vox + ".mp3";
-					tmplClip.setAttribute('src', "https://whovox.com/audio/" + dir + "/" + vox + ".mp3");
+					tmplClip.setAttribute('src', 'https://whovox.com/audio/' + dir + '/' + vox + '.mp3');
 					}
 				}
 				else {alert("No Audio Support");}

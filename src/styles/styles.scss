@@ -60,11 +60,11 @@ div, h1, button, p, a, span {margin: 0; padding: 0;}
       width: 80%;
     }
     .overlayContent h1, h2, h3, ol {font-weight: 900;}
-    .overlayContent h1 {font-size: 6.8vh; letter-spacing: 0.18rem; color: $color-blue-med; margin: 1.4rem 0 1.0rem 0; text-shadow: 1px 1px 5px#aaa;}
-    .overlayContent h2 {font-size: 4.0vh; line-height: 5vh; letter-spacing: 0.12rem; color: $color-blue-med-brite; margin: 0.4rem 0 0.6rem 0; text-shadow: 1px 1px 2px#ccc;}
-    .overlayContent h3 {font-size: 3.6vh; letter-spacing: 0.08rem; color: $color-green-dark; margin: 1.4rem 0; text-shadow: 1px 1px 2px#ccc;}
-    .overlayContent p {margin: 1.4rem 0;}
-    .overlayContent ol {margin: 0.8rem 0 1.4rem 1.0rem; width: inherit; text-align: left; font-size: 2.2vh; letter-spacing: 0.05rem; line-height: 3.8vh; color: $color-blue-bg;text-shadow: 1px 1px 2px#ccc; }
+    .overlayContent h1 {font-size: 6.3vh; letter-spacing: 0.1rem; color: $color-blue-med; margin: 0.5rem 0 0.5rem 0; text-shadow: 1px 1px 5px#aaa;}
+    .overlayContent h2 {font-size: 3.8vh; line-height: 4.1vh; letter-spacing: 0.12rem; color: $color-blue-med-brite; margin: 0.4rem 0 0.6rem 0; text-shadow: 1px 1px 2px#ccc;}
+    .overlayContent h3 {font-size: 3.1vh; letter-spacing: 0.08rem; color: $color-green-dark; margin: 0.6rem 0; text-shadow: 1px 1px 2px#ccc;}
+    .overlayContent p {margin: 1.0rem 0;}
+    .overlayContent ol {margin: 0.8rem 0 0.8rem 1.0rem; width: inherit; text-align: left; font-size: 2.2vh; letter-spacing: 0.05rem; line-height: 3.8vh; color: $color-blue-bg;text-shadow: 1px 1px 2px#ccc; }
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
     .topLine {display: flex; flex-wrap: nowrap; margin: 0 auto -0.6vh auto; justify-content: center; width: 95%;}
@@ -155,7 +155,7 @@ div, h1, button, p, a, span {margin: 0; padding: 0;}
     background-image: linear-gradient($color-blue-med, $color-blue-bg);
     font-family: $nunito;
     font-weight: 900;
-    font-size: 3.2vh;
+    font-size: 3.6vh;
     letter-spacing: 0.2rem;
     box-shadow: 0px 3px 8px #444;
     cursor: pointer;
@@ -226,6 +226,7 @@ div, h1, button, p, a, span {margin: 0; padding: 0;}
   .btn-holder .vxBtnRight {border-radius: 6px; text-align: left; margin: 0.14rem 0.6rem; height: 9.0vh; display: flex; align-items: center; position: relative;}
   .ansName { font-family: $nunito; font-weight: 900; font-size: 2.2vh; letter-spacing: 0.06rem; margin-left: 0.3rem}
   .vxBtn {background-image: linear-gradient($color-blue-lite, $color-blue-lite2); border: 1px solid $color-blue-med2; cursor: pointer;}
+  .vxBtn:hover:not([disabled]) {background-image: linear-gradient($color-blue-lite, $color-blue-med-lite); border: 1px solid $color-blue-med;}
     .vxBtn .ansName {color: $color-blue-bg2; text-shadow: 1px 1px 2px #bbb;}
   .vxBtnSel {background-image: linear-gradient($color-blue-med-lite, $color-blue-med2); border: 1px solid $color-blue-med;}
     .vxBtnSel .ansName {color: $color-blue-bg; text-shadow: 1px 1px 2px #aaa;}

@@ -31,6 +31,7 @@ class VoiceChoices extends Component {
 
     this.props.actions.clickAnswer();
     this.setState({clickedBtn: true});
+
     // check user agent
     const ua = navigator.userAgent.toLowerCase();
     let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;

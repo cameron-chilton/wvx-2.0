@@ -58,7 +58,7 @@ class AnswerBtns extends Component {
   updateBtns = () => {
     setTimeout( () => {
       this.setState({showRightAnswer: true});
-    }, 1300);
+    }, 1500);
   }
   render() {
 

@@ -13,15 +13,13 @@ import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants
 let interval = null;
 let url = '';
 let audio = new Audio();
-audio.muted = true;
-audio.src = '';
+
 class GamePage extends Component {
 
   constructor() {
     super();
     this.state = {
       voiceCount: '',
-      isAudioPlaying: true,
       isFirstGame: localStorage.getItem('First Game', false) ? false : true,
     };
     this.isHOFclick = this.isHOFclick.bind(this);
@@ -34,17 +32,16 @@ class GamePage extends Component {
         .then(data => this.setState({voiceCount: data}));
         this.getQueryVariable();
     }, 1);
-    // custom event listener add
-    document.body.addEventListener('canplay', this.handleAudioPlaying.bind(this));
-  }
-
-  componentWillUnmount() {
-    // custom event listener remove
-    document.body.removeEventListener('canplay', this.handleAudioPlaying.bind(this));
   }
 
   componentDidUpdate() {
-    // timer start if timerOn and clipPlaying true
+
+    if(this.props.whovoxGame.clipPlaying && (interval === null)) {
+      this.props.actions.startTimer();
+      console.log('audio playing');
+    }
+
+    // timer start
     if ( (this.props.whovoxGame.timerOn) && (interval === null)  ) {
       // set timer interval
       interval = setInterval( () => {
@@ -56,39 +53,50 @@ class GamePage extends Component {
       audio.pause();
       clearInterval(interval);
       interval = null;
+      this.props.actions.clipPlayingFalse();
     }
 
   }
 
-  // starts timer when audio begins
-  handleAudioPlaying = (e) => {
-    console.log('handleAudioPlaying')
-    console.log({e});
-    let isPlayingE = false;
-    if (e && e.type == 'canplay') {
-      isPlayingE = true;
-    }
-    console.log('is canplay: ' + isPlayingE);
-    if (isPlayingE && e) {
-      console.log('playing true');
-      this.props.actions.startTimer();
-    }
-  };
+  timerClicked = () => {
 
-  timerClicked = (e) => {
     console.log('timerClicked...');
-    console.log({e})
-    this.props.actions.incrementVoxCount();
+
+    //this.props.voxCount !== 4 ? this.props.actions.startTimer() : this.props.actions.startNextGame();
+
     // play audio, get clip ID from newGameData
     const clip3 = this.props.whovoxGame.newGameData || {};
-    const clip2 = clip3[this.props.voxCount] || '';
+    const clip2 = clip3[this.props.whovoxGame.voxCount] || '';
     const clipID = clip2.ID || '';
-    this.playIDBaudio(clipID);
+    let isPlaying = this.playIDBaudio(clipID);
+    let isResolved = this.MakeQueryablePromise(isPlaying);
+    if (isResolved) {
+      console.log('timerClicked isResolved: ' + isResolved);
+      this.props.actions.clipPlayingTrue();
+      this.componentDidUpdate();
+      //this.props.actions.startTimer();
+    }
+
   }
 
-async playIDBaudio(clipID) {
+  MakeQueryablePromise(promise) {
+    // Don't create a wrapper for promises that can already be queried.
+    if (promise.isResolved) return promise;
+    let isResolved = false;
+    let isRejected = false;
+    // Observe the promise, saving the fulfillment in a closure scope.
+    let result = promise.then(
+       function(v) { isResolved = true; return v; },
+       function(e) { isRejected = true; throw e; });
+    result.isFulfilled = function() { return isResolved || isRejected; };
+    result.isResolved = function() { return isResolved; }
+    result.isRejected = function() { return isRejected; }
+    return result;
+}
 
-  return new Promise( function(resolve, reject) {
+  async playIDBaudio(clipID) {
+
+    return new Promise( function(resolve, reject) {
       // open the database
       let indexedDB = window.indexedDB;
       const open = indexedDB.open('wvxDB', 1);
@@ -115,31 +123,9 @@ async playIDBaudio(clipID) {
         gid.onsuccess = function(event) {
           const voiceQuestion = event.target.result;
           url = ('audio/' + voiceQuestion.dir + '/' + voiceQuestion.clipname + voiceQuestion.ext);
-
-          // safari ios special audio play code
-          const ua = navigator.userAgent.toLowerCase();
-          //console.log('ua: ' + ua);
-          let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
-          let isSafariiOS = ua.indexOf("mobile") > -1;
-          if (isSafariiOS) {
-            console.log('isSafari iOS hit');
-            url = '';
-            audio.autoplay = true;
-            audio.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
-            audio.play();
-          }
-          else if (isSafari) {
-            console.log('isSafari mac hit');
-            audio = new Audio(url);
-            audio.play();
-            document.body.dispatchEvent(new CustomEvent('canplay', audio));
-          }
-          else {
-            console.log('default play');
-            audio = new Audio(url);
-            audio.play();
-            document.body.dispatchEvent(new CustomEvent('canplay', audio));
-          }
+          audio = new Audio(url);
+          audio.play();
+          //this.props.voxCount !== 4 ? this.props.actions.startTimer() : this.props.actions.startNextGame();
         }
         // close db
         transaction.oncomplete = function () {
@@ -147,7 +133,28 @@ async playIDBaudio(clipID) {
           db.close();
         };
       }
+
+      // safari ios special audio play code
+      const ua = navigator.userAgent.toLowerCase();
+      //console.log('ua: ' + ua);
+      let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+      let isSafariiOS = ua.indexOf("mobile") > -1;
+      if (isSafariiOS) {
+        console.log('isSafari iOS hit');
+        url = '';
+        audio.autoplay = true;
+        audio.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+        audio.play();
+      }
+      else if (isSafari && this.props.whovoxGame.voxCount == 0 && this.props.whovoxGame.ansCount == 0) {
+        console.log('isSafari mac hit');
+        url = '';
+        audio = new Audio(url);
+        audio.play();
+      }
+
     })
+
   }
 
   getQueryVariable = () => {
@@ -193,7 +200,7 @@ async playIDBaudio(clipID) {
     return (
       <>
         <div className="game">
-          {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} timerClicked={this.timerClicked} />}
+          {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
           <div className="topLine">
             <h1>
               <span className="name1">W</span>
@@ -273,6 +280,7 @@ GamePage.propTypes = {
   timer: number,
   timerOn: bool,
   outOfTime: bool,
+  clipPlaying: bool,
   btnTxt: oneOfType([string, number]),
   score: oneOfType([string, number]),
   ansRight: oneOfType([string, number]),
@@ -288,6 +296,7 @@ function mapStateToProps(state) {
     showHOF: state.whovoxGame.showHOF,
     whovoxGame: state.whovoxGame,
     voxCount: state.whovoxGame.voxCount,
+    clipPlaying: state.whovoxGame.clipPlaying,
   };
 }
 

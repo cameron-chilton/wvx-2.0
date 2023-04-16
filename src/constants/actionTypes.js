@@ -29,6 +29,7 @@ export const STOP_TIMER = 'STOP_TIMER';
 export const TICK_TIMER = 'TICK_TIMER';
 export const ZERO_TIMER = 'ZERO_TIMER';
 export const OUT_OF_TIME = 'OUT_OF_TIME';
+export const INCREMENT_VOX_COUNT = 'INCREMENT_VOX_COUNT';
 
 // BUTTON GAMEPLAY ACTIONS
 export const CLICK_ANSWER = 'CLICK_ANSWER';

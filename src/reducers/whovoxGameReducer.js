@@ -32,6 +32,7 @@ import {
   LOAD_NEXT_GAME_ID_SUCCESS,
   LOAD_NEXT_GAME_ID_FAILURE,
   IS_FROM_HOF_CLICK,
+  INCREMENT_VOX_COUNT
 } from '../constants/actionTypes';
 import utils from '../utils/math-utils';
 import whovoxUtils from '../utils/whovox-utils';
@@ -170,13 +171,13 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
     case START_TIMER:
       newState = objectAssign({}, state);
       newState.voiceQuestion = (state.ansCount === 0) ? state.voiceQuestion : state.nextQuestion;
-      (state.voxCount !== 4) ? (
+      (state.voxCount <= 4) ? (
         newState = {
           ...state,
           timerOn: true,
           offset: action.offset,
           btnTxt: state.timer,
-          voxCount: (state.score === 0) ? (0) : (state.voxCount + 1),
+          //voxCount: (state.score === 0) ? (0) : (state.voxCount + 1),
           timer: 10000,
           voiceQuestion: newState.voiceQuestion,
           outOfTime: false,
@@ -221,6 +222,7 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ansWrong: state.ansWrong + 1,
         ansCount: state.ansCount + 1,
         answered: true,
+        clipPlaying: false,
       };
 
     ////////// TIMER IS TICKED EACH MS ///////////
@@ -343,6 +345,14 @@ export default function whovoxGameReducer(state=initialState.whovoxGame, action)
         ...state,
         showHOF: true,
         gameOver: true,
+      };
+
+    ////////// SET IS VOICE CLIP CURRENTLY PLAYING ///////////
+
+    case INCREMENT_VOX_COUNT:
+      return {
+        ...state,
+        voxCount: (state.score === 0) ? (0) : (state.voxCount + 1),
       };
 
     //////////////// START NEXT GAME /////////////////

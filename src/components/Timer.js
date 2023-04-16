@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {string, bool, object, number, oneOfType, func} from "prop-types";
+import React, {Component} from 'react';
+import {string, bool, object, number, oneOfType, func} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
@@ -10,7 +10,7 @@ class Timer extends Component {
 
   constructor() {
     super();
-    this.startTimer = this.startTimer.bind(this);
+    this.clickTimer = this.clickTimer.bind(this);
     this.startNextGameHOF = this.startNextGameHOF.bind(this);
     this.state = {
       isAnswered: false,
@@ -28,10 +28,12 @@ class Timer extends Component {
     }
     // alternate button text after answer is shown
     if ((this.props.answered || this.props.outOfTime) && !this.state.isAnswered) {
+      clearTimeout(this.timeout);
+      clearInterval(this.interval);
       this.setState({isAnswered: true});
       this.timeout = setTimeout( () => {
         this.toggleText();
-      }, 2300);
+      }, 2400);
     }
   }
 
@@ -47,13 +49,12 @@ class Timer extends Component {
     }, 1300);
   }
 
-  startTimer = () => {
-    this.props.timerClicked();
+  clickTimer = (e) => {
     this.props.voxCount !== 4 ? (
       this.timeout = setTimeout( () => {
-        clearInterval(this.interval);
-        this.props.actions.startTimer();
-      }, 1000)
+          clearInterval(this.interval);
+          this.props.timerClicked(e);
+      }, 200)
     ) : (
       this.props.actions.startNextGame()
     )
@@ -75,13 +76,19 @@ class Timer extends Component {
           id="startvoxBtn"
           className="play-button"
           disabled={loading && true}
-          onClick={ () => {!timerOn ? this.startTimer() : undefined} }
+          onClick={ (e) => {!timerOn ? this.clickTimer(e) : undefined} }
         >
           {
             !this.state.isAnswered ? (
-              typeof btnTxt == 'number' ? <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> : (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)
+              typeof btnTxt == 'number' ?
+                <><span className={(btnTxt > 6600) ? 'btnGreen' : (btnTxt > 3300) ? 'btnYellow' : 'btnRed'}>{whovoxUtils.formatTime(btnTxt)}</span></> :
+                (!this.state.toggleTextVal ? <><span className="btnYellow">{btnTxt}</span></> : <><span className="btnOrange">{btnTxt}</span></>)
             ) : (
-              !this.state.toggleTextVal ? <><span className="btnOrange">{btnTxt}</span></> : ((!gameOver && !loading) ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) : (gameOver && !loading) ? <><span className="btnYellow">PLAY AGAIN</span></> : <><span className="btnYellow">{btnTxt}</span></>)
+              !this.state.toggleTextVal ?
+                <><span className="btnOrange">{btnTxt}</span></> : (
+                  (!gameOver && !loading) ? (<><span className="btnYellow">{'VOX ' + (voxCount + 1) + ' OF 5'}</span></>) :
+                  (gameOver && !loading) ? <><span className="btnYellow">PLAY AGAIN</span></> : <><span className="btnYellow">{btnTxt}</span></>
+                  )
             )
           }
         </button></> :

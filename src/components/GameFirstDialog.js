@@ -1,18 +1,19 @@
-import React, {Component} from "react";
-import {func, object} from "prop-types";
+import React, {Component} from 'react';
+import {func, object} from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../actions/whovoxActions';
-
 class GameFirstDialog extends Component {
 
   constructor() {
     super();
-    this.startTimer = this.startTimer.bind(this);
+    this.clickTimer = this.clickTimer.bind(this);
   }
 
-  startTimer = () => {
-    this.props.actions.startTimer();
+  clickTimer = () => {
+      this.timeout = setTimeout( () => {
+          this.props.timerClicked();
+      }, 200)
   }
 
   render() {
@@ -26,7 +27,7 @@ class GameFirstDialog extends Component {
           <li>Pick Who Is Talking</li>
           <li>Press NEXTVOX for Next Voice</li>
         </ol>
-        <p><button className="save-button" onClick={ () => {this.props.isFirstGame(); this.startTimer();} }>PLAY</button></p>
+        <p><button className="save-button" onClick={ () => {this.props.isFirstGame(); this.clickTimer();} }>PLAY</button></p>
       </div>
     );
   }
@@ -34,7 +35,8 @@ class GameFirstDialog extends Component {
 
 GameFirstDialog.propTypes = {
   actions: object,
-  isFirstGame: func
+  isFirstGame: func,
+  timerClicked: func,
 };
 
 function mapStateToProps(state) {

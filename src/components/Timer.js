@@ -72,12 +72,13 @@ class Timer extends Component {
     return (
       <div>
         {!showHOF ?
-        <><button
-          id="startvoxBtn"
-          className="play-button"
-          disabled={loading && true}
-          onClick={ (e) => {!timerOn ? this.clickTimer(e) : undefined} }
-        >
+        <>
+          <button
+            id="startvoxBtn"
+            className="play-button"
+            disabled={loading && true}
+            onClick={ (e) => {!timerOn ? this.clickTimer(e) : undefined} }
+          >
           {
             !this.state.isAnswered ? (
               typeof btnTxt == 'number' ?
@@ -91,7 +92,8 @@ class Timer extends Component {
                   )
             )
           }
-        </button></> :
+        </button>
+        </> :
           <><button className="play-button" onClick={this.startNextGameHOF}>
             {
               !this.state.toggleTextVal ? <><span className="btnYellow">START WHOVOX</span></> : <><span className="btnOrange">CLICK TO PLAY</span></>

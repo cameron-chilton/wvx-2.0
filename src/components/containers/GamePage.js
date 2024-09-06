@@ -13,15 +13,13 @@ import {VOICE_OF_URL, PRIVACY_POLICY_URL, GET_VOICE_COUNT} from '../../constants
 let interval = null;
 let url = '';
 let audio = new Audio();
-audio.muted = true;
-audio.src = '';
+
 class GamePage extends Component {
 
   constructor() {
     super();
     this.state = {
       voiceCount: '',
-      isAudioPlaying: true,
       isFirstGame: localStorage.getItem('First Game', false) ? false : true,
     };
     this.isHOFclick = this.isHOFclick.bind(this);
@@ -35,15 +33,16 @@ class GamePage extends Component {
         this.getQueryVariable();
     }, 1);
     // custom event listener add
-    document.body.addEventListener('canplay', this.handleAudioPlaying.bind(this));
+    document.body.addEventListener('canplaythrough', this.handleAudioPlaying.bind(this));
   }
 
   componentWillUnmount() {
     // custom event listener remove
-    document.body.removeEventListener('canplay', this.handleAudioPlaying.bind(this));
+    document.body.removeEventListener('canplaythrough', this.handleAudioPlaying.bind(this));
   }
 
   componentDidUpdate() {
+
     // timer start if timerOn and clipPlaying true
     if ( (this.props.whovoxGame.timerOn) && (interval === null)  ) {
       // set timer interval
@@ -62,22 +61,21 @@ class GamePage extends Component {
 
   // starts timer when audio begins
   handleAudioPlaying = (e) => {
-    console.log('handleAudioPlaying')
-    console.log({e});
     let isPlayingE = false;
-    if (e && e.type == 'canplay') {
+    if (e && e.type == 'canplaythrough') {
       isPlayingE = true;
     }
-    console.log('is canplay: ' + isPlayingE);
+    //console.log('is canplaythrough: ' + isPlayingE);
     if (isPlayingE && e) {
       console.log('playing true');
       this.props.actions.startTimer();
+      console.log({audio})
     }
   };
 
-  timerClicked = (e) => {
+  timerClicked = () => {
     console.log('timerClicked...');
-    console.log({e})
+    //console.log({e})
     this.props.actions.incrementVoxCount();
     // play audio, get clip ID from newGameData
     const clip3 = this.props.whovoxGame.newGameData || {};
@@ -108,37 +106,44 @@ async playIDBaudio(clipID) {
 
       // success
       open.onsuccess = function() {
+
         const db = open.result;
         const transaction = db.transaction('clips', 'readwrite');
         const store = transaction.objectStore('clips');
         const gid = store.get(clipID);
+
         gid.onsuccess = function(event) {
+
           const voiceQuestion = event.target.result;
           url = ('audio/' + voiceQuestion.dir + '/' + voiceQuestion.clipname + voiceQuestion.ext);
-
           // safari ios special audio play code
           const ua = navigator.userAgent.toLowerCase();
-          //console.log('ua: ' + ua);
           let isSafari = ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
           let isSafariiOS = ua.indexOf("mobile") > -1;
+
           if (isSafariiOS) {
             console.log('isSafari iOS hit');
-            url = '';
+            //audio = new Audio(url);
+            audio.src = url;
+            //audio.load();
             audio.autoplay = true;
-            audio.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+            audio.muted = false;
+            audio.loop = false;
+            audio.playsInline = true;
             audio.play();
+            document.body.dispatchEvent(new CustomEvent('canplaythrough', audio));
           }
           else if (isSafari) {
             console.log('isSafari mac hit');
             audio = new Audio(url);
             audio.play();
-            document.body.dispatchEvent(new CustomEvent('canplay', audio));
+            document.body.dispatchEvent(new CustomEvent('canplaythrough', audio));
           }
           else {
             console.log('default play');
             audio = new Audio(url);
             audio.play();
-            document.body.dispatchEvent(new CustomEvent('canplay', audio));
+            document.body.dispatchEvent(new CustomEvent('canplaythrough', audio));
           }
         }
         // close db
@@ -193,7 +198,7 @@ async playIDBaudio(clipID) {
     return (
       <>
         <div className="game">
-          {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} timerClicked={this.timerClicked} />}
+          {this.state.isFirstGame && <GameFirstDialog isFirstGame={this.isFirstGame} />}
           <div className="topLine">
             <h1>
               <span className="name1">W</span>

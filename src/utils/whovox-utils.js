@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const instance = axios.create({
-  baseURL: window.apiUrl ? window.apiUrl : "http://localhost:3000", // or https://whovox.com/ or http://localhost:3000
+  baseURL: window.apiUrl ? window.apiUrl : "http://192.168.1.153:3000", // or https://whovox.com/ or http://localhost:3000 or for safari http://192.168.1.153:3000
 });
 
 const whovoxUtils = {

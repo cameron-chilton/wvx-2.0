@@ -109,9 +109,9 @@ div, h1, button, p, a, span {margin: 0; padding: 0;}
     .links {flex: 1; display: flex;}
       div.voiceDiv {flex: 1;}
       div.hofDiv {flex: 1; text-align: right;}
-        .voiceLink, .hofLink, .privPolicy {color: $color-blue-brite; text-decoration: underline; font-weight: 900; font-size: 2.2vh;}
+        .voiceLink, .hofLink, .privPolicy {color: $color-blue-brite; text-decoration: underline; font-weight: 900; font-size: 2.6vh;}
         .voiceLink:hover, .hofLink:hover, .privPolicy:hover {text-decoration: none; color: $color-orange;}
-        .hofOff {color: $color-blue-brite; font-weight: 900; font-size: 2vh; text-decoration: none;}
+        .hofOff {color: $color-blue-brite; font-weight: 900; font-size: 2.6vh; text-decoration: none;}
     .copy {font-family: $nunito; font-size: 1.3vh; margin-top: 0.64rem; display: flex; display: flex; align-items: stretch;}
       .copy div:first-child {flex-grow: 1;}
       .copy div:nth-child(2) {flex-grow: 1; justify-content: right;}
@@ -267,7 +267,7 @@ div, h1, button, p, a, span {margin: 0; padding: 0;}
   background-image: linear-gradient($color-blue-med, $color-blue-bg);
   font-family: $nunito;
   font-weight: 900;
-  font-size: 2.6vh;
+  font-size: 3.3vh;
   letter-spacing: 0.1rem;
   box-shadow: 2px 2px 7px #bbb;
   cursor: pointer;
@@ -337,11 +337,11 @@ and (orientation: portrait) {
   .game { width: 95%; max-width: 95vw; }
 
 /* ///////////////////// FIRST OVERLAY STYLES ////////////////// */
-.overlayContent h1 {font-size: 4.8vh;}
-.overlayContent h2 {font-size: 3.0vh; line-height: 4vh;}
-.overlayContent h3 {font-size: 2.6vh;}
+.overlayContent h1 {font-size: 5.8vh;}
+.overlayContent h2 {font-size: 4vh; line-height: 4.7vh;}
+.overlayContent h3 {font-size: 3.5vh;}
 .overlayContent p {margin: 1.4rem 0;}
-.overlayContent ol {font-size: 2.0vh; }
+.overlayContent ol {font-size: 2.9vh; line-height: 4.7vh; }
 
 /* ////////////////// TOP LOGO LINE ////////////////// */
   .topLine h1 {margin-bottom: -0.6vh;}
@@ -357,23 +357,23 @@ and (orientation: portrait) {
   .voiceTxt {font-size: 1.2vh;}
 
 /* ///////////////////// BOTTOM LINKS ////////////////// */
-  .voiceLink, .hofLink, .privPolicy {font-size: 2vh;}
+  .voiceLink, .hofLink, .privPolicy {font-size: 2.6vh;}
   .hofOff {font-size: 2vh;}
   .privPolicy {font-size: 1.6vh;}
-  .copy {font-size: 1.2vh;}
+  .copy {font-size: 1.5vh;}
 
 /* ///////////////////// GAME CONTAINER STYLES ////////////////// */
 .topContainer {width: 99%; max-width: 40rem;}
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
 .catCount {font-size: 1.6vh;}
-.scoreNum {font-size: 4.9vh; line-height: 4.7vh;}
-.scoreTxt {font-size: 1.6vh;}
+.scoreNum {font-size: 6.3vh; line-height: 6.4vh;}
+.scoreTxt {font-size: 2.1vh;}
 .rightWrong {font-size: 1.6vh;}
-  .catLabel {font-size: 1.4vh;}
+  .catLabel {font-size: 1.7vh;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
-.play-button {border: 0.8vh solid $color-blue-brite; font-size: 2.9vh; padding: 0.8vh 1vh;}
+.play-button {border: 0.8vh solid $color-blue-brite; font-size: 3.7vh; padding: 0.8vh 1vh;}
 .click-play {font-size: 0.92rem; line-height: 1rem;}
 .play-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med);}
 .play-button:disabled {border: 0.8vh solid $color-blue-brite;}
@@ -381,28 +381,28 @@ and (orientation: portrait) {
 
 /* ////////////////// VOICE BUTTON STYLES /////////////////// */
 .btn-holder { width: 100%;}
-.ansName {font-size: 1.9vh;}
+.ansName {font-size: 2.2vh;}
 .ansQ {font-size: 4.2vh;}
-.ansWhosThis a {font-size: 1.1vh;}
+.ansWhosThis a {font-size: 1.5vh;}
 
 /* ////////////////// GAME OVER STYLES ///////////////////*/
 .tooLow, .inHOF {text-align: center;}
-.inHOF p, .tooLow p {font-size: 2.8vh; line-height: 3.4h; margin: 1rem 0.5rem;}
+.inHOF p, .tooLow p {font-size: 3.2vh; line-height: 3.4h; margin: 1rem 0.5rem;}
 .inHOF h2, .tooLow h2 {font-size: 3.4vh;}
-.inHOF h3, .tooLow h3 {font-size: 2.9vh; margin: 0.6rem;}
+.inHOF h3, .tooLow h3 {font-size: 3.1vh; margin: 0.6rem;}
 .gameOverForm label {display: block; font-size: 1.6vh; letter-spacing: 0.02rem; font-weight: 900;}
 .gameOverForm .field {display: inline-block; text-align: left; margin: 0 0.4rem 0 0.4rem;}
 .gameOverForm .button {margin: 1.2rem 0;}
-.save-button {font-size: 2.2vh;}
-.inHOF input[type=text] {font-size: 1.5vh;}
+.save-button {font-size: 3.8vh;}
+.inHOF input[type=text] {font-size: 1.9vh;}
 .errorMsg {font-size: 1.2vh;}
 
 /* ////////////////// HOF STYLES ///////////////////*/
 .hallOfFame h3 {font-weight: 900; margin: 0.7rem 0 0.5rem 0.9rem; font-size: 2vh;}
 .gameCt {margin: 1rem 1.0rem 0 0; font-weight: 700; font-size: 1.8vh; text-align: right; flex: 1;}
 .inHOF p {font-size: 2.3vh;}
-.HOF-table {width: auto;}
-.HOF-table td {font-size: 1.2vh;}
+.HOF-table {width: 93vw;}
+.HOF-table td {font-size: 1.4vh;}
 .HOF-date {font-size: 1.2vh; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 14vw;}
 .scrollbox {height: 44vh;}
 
@@ -445,7 +445,7 @@ and (orientation: landscape) {
   .voiceTxt {font-size: 2.6vh;}
 
 /* ///////////////////// BOTTOM LINKS ////////////////// */
-  .voiceLink, .hofLink, .privPolicy {font-size: 3.3vh;}
+  .voiceLink, .hofLink, .privPolicy {font-size: 3.9vh;}
   .privPolicy {font-size: 2.3vh;}
   .hofOff {font-size: 3.3vh;}
   .copyright { padding-top: 0;}
@@ -453,14 +453,14 @@ and (orientation: landscape) {
 
 /* ////////////////// GAME INFO STYLES /////////////////// */
 .catCount {font-size: 2.9vh;}
-.scoreNum {font-size: 7.8vh; line-height: 5.4vh;}
-.scoreTxt {font-size: 2.3vh;}
+.scoreNum {font-size: 10.5vh; line-height: 10.4vh;}
+.scoreTxt {font-size: 3.3vh;}
 .rightWrong {font-size: 2.9vh;}
-  input[type=checkbox] {vertical-align: middle; margin: 0 0.2rem 0 0; width: 2.8vh; height: 2.8vh;}
+  input[type=checkbox] {vertical-align: middle; margin: 0 0.2rem 0 0; width: 1.4vh; height: 1.4vh;}
   .catLabel {font-size: 2.6vh;}
 
 /* ////////////////// START BUTTON STYLES /////////////////// */
-.play-button {border: 0.8vh solid $color-blue-brite; font-size: 4.1vh; padding: 1.2vh;}
+.play-button {border: 0.8vh solid $color-blue-brite; font-size: 5.1vh; padding: 1.2vh;}
 .click-play {font-size: 0.92rem; line-height: 1rem;}
 .play-button:hover {background-image: linear-gradient($color-blue-bg, $color-blue-med);}
 .play-button:disabled {border: 0.8vh solid $color-blue-brite;}
@@ -470,9 +470,9 @@ and (orientation: landscape) {
 .btn-holder .vxBtn,
   .btn-holder .vxBtnSel,
   .btn-holder .vxBtnRight {border-radius: 6px; text-align: left; margin: 0.14rem 0.6rem; height: 10.6vh;}
-.ansName {font-size: 2.7vh;}
+.ansName {font-size: 3.2vh;}
 .ansQ {font-size: 5.2vh;}
-.ansWhosThis a {font-size: 1.6vh;}
+.ansWhosThis a {font-size: 1.9vh;}
 .ansPic {padding: 0.3rem 0.3rem 0 0.3rem;}
   .ansPic img {border-radius: 6px; width: 8.6vh; height: 8.6vh; border: 1px solid #aaa;}
 

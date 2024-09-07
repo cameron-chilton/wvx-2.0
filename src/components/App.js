@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default */
-import React from "react";
+import React from 'react';
 import {func} from 'prop-types';
 import {connect} from 'react-redux';
 //import { NavLink, Route, Switch } from 'react-router-dom';

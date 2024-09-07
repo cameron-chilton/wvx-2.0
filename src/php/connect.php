@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-type: application/json');
 
 // PDO connect
-$servername = 'localhost:3306';
+$servername = '127.0.0.1:3306';
 $username = 'u465391481_whovoxAdmin';
 $password = '91*Stanza';
 

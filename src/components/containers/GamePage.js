@@ -260,7 +260,7 @@ async playIDBaudio(clipID) {
             </div>
             <div className="copy">
               <div><a href={PRIVACY_POLICY_URL} className="privPolicy">PRIVACY POLICY</a></div>
-              <div className="copyright">&copy;2023 THINKAGAIN</div>
+              <div className="copyright">&copy;2024 THINKAGAIN</div>
             </div>
           </div>
         </div>

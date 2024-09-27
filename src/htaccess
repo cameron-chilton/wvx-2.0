@@ -1,0 +1,25 @@
+RewriteEngine On
+
+RewriteCond %{HTTPS} !on
+
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+#RewriteCond $1 !=blog
+
+RewriteRule ^([^/]*)\.html$ /public/voiceOf.php?name=$1 [N]
+RewriteRule ^([^/]*)\.HTML$ /public/voiceOf.php?name=$1 [N]
+RewriteRule ^([^/]*)\.htm$ /public/voiceOf.php?name=$1 [L]
+
+RewriteRule ^([^/]*)/([^/]*)\.html$ /public/voiceOf.php?name=$1 [N]
+RewriteRule ^([^/]*)/([^/]*)\.HTML$ /public/voiceOf.php?name=$1 [N]
+RewriteRule ^([^/]*)/([^/]*)\.htm$ /public/voiceOf.php?name=$1 [L]
+
+# These two lines redirect the root to index.html.
+RewriteRule ^$ /index.html [R=301,L]
+RewriteRule ^/$ /index.html [R=301,L]
+
+# no file extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ /public/voiceOf.php?name=$1 [N]
+
+ErrorDocument 404 https://whovox.com/public/voiceOf.php

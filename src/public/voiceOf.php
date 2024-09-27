@@ -53,16 +53,16 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
 <span style="color: #fff;">
 <?php
 
-	// echo 'name: ';
-	// echo ucwords($name);
-	// echo ', ns: ';
-	// echo print_r($ns);
-	// echo ', first: ';
-	// echo ucwords($first);
-	// echo ', last: ';
-	// echo ucwords($last);
-	// echo ', size: ';
-	// echo count($ns);
+	 //echo 'name: ';
+	 //echo ucwords($name);
+	 //echo ', ns: ';
+	 //echo print_r($ns);
+	 //echo ', first: ';
+	 //echo ucwords($first);
+	 //echo ', last: ';
+	 //echo ucwords($last);
+	 //echo ', size: ';
+	 //echo count($ns);
 
 ?>
 </span>
@@ -118,7 +118,7 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
       </div>
 
       <div class="play-button-container">
-        <button class="play-button" onclick="location.href='https://whovox.com'" title="Play the voice game WHOVOX">PLAY WHOVOX</button>
+          <button class="play-button" onclick="location.href='../'" title="Play the voice game WHOVOX">PLAY WHOVOX</button>
         <div class="click-play box1">Click to play WHOVOX</div>
         <div class="click-play box2">Free & fun voice recognition game</div>
         <div class="click-play box3">Test your voice knowledge</div>
@@ -139,7 +139,7 @@ setcookie('key', 'value', ['SameSite' => 'None', 'secure' => true]);
       </div>
       <div class="copy">
         <div><a href="https://whovox.com/public/privacy-policy.html" class="privPolicy">PRIVACY POLICY</a></div>
-        <div class="copyright">&copy;2023 THINKAGAIN</div>
+        <div class="copyright">&copy;2024 THINKAGAIN</div>
       </div>
     </div>
   </div>
@@ -261,6 +261,9 @@ function loadFirstVoice (first, last) {
 			}
 		});
 	}
+  else if(first == 'Index') {
+    window.location.href = 'https://whovox.com/index.html'
+  }
 	else { loadVoiceRandom(); }
 
 }

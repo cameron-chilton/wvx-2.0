@@ -55,7 +55,7 @@ class MockApi {
           .then( (response) => {
             if (response.data) {
               const retObj = {newGameData: response.data} // put returned data into parent object
-              //console.log(JSON.stringify(retObj));
+              console.log(JSON.stringify(retObj));
               resolve(retObj);
             } else {
               reject();
